@@ -21,8 +21,8 @@
 % \setcounter{secnumdepth}{2}
 \usepackage{underscore}
 \usepackage{caratula}
-\usepackage{url}
-
+%\usepackage{url}
+\usepackage{hyperref}
 
 % ******************************************************** %
 %              TEMPLATE DE INFORME ORGA2 v0.1              %
@@ -149,11 +149,25 @@ Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible 
 \section{Problema 2: Alta Frecuencia}
 \subsection{Descripci\'on de la problem\'atica}
 
-Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor tiempo continuo posible. Para poder utilizar este enlace, se debe pagar por minuto. El precio var\'ia acorde a la frecuencia ofrecida. No todas las frecuencias funcionan a todo horario, es decir existe un horario acotado donde cada frecuencia este activa. Los datos del precio y horario de cada frecuencia son dados. Se desea optimizar este problema acorde al presupuesto gastado, es decir gastar el menor dinero posible, transmitiendo informaci\'on siempre que haya alguna frecuencia activa. Se debe contar con una complejidad de \textit{O(n.log(n))}.
+Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor tiempo continuo posible. Para poder utilizar este enlace, se debe pagar por minuto. El precio var\'ia acorde a la frecuencia ofrecida. No todas las frecuencias funcionan a todo horario, es decir existe un horario acotado donde cada frecuencia est\'a activa. Los datos del precio y horario de cada frecuencia son dados. Se desea optimizar este problema acorde al presupuesto gastado, es decir gastar el menor dinero posible, transmitiendo informaci\'on siempre que haya alguna frecuencia activa. Se debe contar con una complejidad de \textit{O(n.log(n))}.
 
 \textcolor{blue}{Aca poner ejemplitos de cual es la solucion optima cuando hay varias senales y cuando tenes que camibar de senial porque se prendio una mas barata.}
 
 \subsection{Resoluci\'on propuesta y justificaci\'on}
+
+%Analizar minuto a minuto cual es el mas barato es fuerza bruta?? -> Esto es cant de minutos x n
+
+%Fijarse cual es el primer minuto que se tiene senial y cual es el ultimo
+%Pagar siempre el mas barato en toda la frecuencia que haya
+%revisar los baches que hayan quedado entre el minimo y el maximo, contratando desde el mas barato al mas caro
+% ESTO ES N**2
+
+%divide & conquer
+%Fijarse cual es el primer minuto que se tiene senial y cual es el ultimo
+%Ir dividiendo estos tiempos hasta casos base... 
+%para mi el caso base es donde todas las frecuencias que hay pertenecen a ese intervalo fijo, porque sino no llegarias nunca a un caso base. Y cuando tenes un intervalo donde todas las frecuencias son parejas, ahi elegis la mas barata
+%o el caso base es cuando llegas a intervalos de 1 minuto??? cosa que ahi tenes que determinar uno solo?
+
 \subsection{An\'alisis de la complejidad}
 \subsection{C\'odigo fuente}
 \subsection{Experimentaci\'on}
@@ -164,7 +178,51 @@ Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor t
 
 \section{Problema 3: El se\~nor de los caballos}
 \subsection{Descripci\'on de la problem\'atica}
+
+En este problema, se presenta un tablero de ajedrez de taman\~o $nxn$ el cual cuenta con cierta cantidad de caballos ubicados cada uno en una posici\'on en el tablero sin respetar ninguna norma. Lo que se quiere lograr es \emph{cubrir} todo el tablero. Un casillero se considera cubierto si hay un caballo en \'el o bien, si es una posici\'on en la cual alg\'un caballo existente puede moverse con un s\'olo movimiento. Para lograr este cometido, puede ser necesario agregar nuevas fichas \emph{caballo} al tablero. No existe un l\'imite en la cantidad de caballos para agregar, pero lo que se busca es dar una soluci\'on con la m\'inima cantidad de caballos posibles.\\
+
+
+En la figura \ref{caballito} se pueden ver todas las casillas que est\'an cubiertas por un s\'olo caballo.
+
+
+ \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.3]{imagenes/ej3/caballito.png}
+ 	\caption{Casillas que \emph{cubre} un caballo}
+ 	\label{caballito}	
+ %	\href{http://www.fide.com/component/handbook/?id=124\&view=article}{Fuente}
+   \end{center}
+ \end{figure}
+
+
+A continuaci\'on se pueden apreciar dos soluciones al problema de cubrir el tablero.
+
+ \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.3]{imagenes/ej3/optimaCreo.png}
+ 	\caption{Soluci\'on 1}
+% 	\label{optima_creo}	
+   \end{center}
+ \end{figure}
+ 
+\newpage 
+ 
+ 
+ \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.3]{imagenes/ej3/con5mas.png}
+ 	\caption{Soluci\'on 2}
+ %	\label{con5mas}	
+   \end{center}
+ \end{figure}
+
+En la soluci\'on 1 se necesitaron 20 caballos, en cambio en la dos 25; es decir 5 caballos m\'as. Por lo tanto podemos establecer que la soluci\'on 2 no es la \'optima y este caso no es lo que buscamos resolver. Por otro lado, la figura 1 \textcolor{red}{es \'optima? Despu\'es sabremos...}
+
 \subsection{Resoluci\'on propuesta y justificaci\'on}
+
+%re jodido esto amigooooo
+%se ahcen todas las combinaciones y se va guardando la que tenga menor cantidad de caballos?
+
 \subsection{An\'alisis de la complejidad}
 \subsection{C\'odigo fuente}
 \subsection{Experimentaci\'on}
@@ -192,7 +250,7 @@ Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor t
 
 
 
-
+%Habra que insertar el enunciado???
 % %\section{Enunciado y solucion} 
 % %\input{enunciado}
 
