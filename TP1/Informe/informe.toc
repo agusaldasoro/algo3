@@ -1,0 +1,19 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Problema 1: ZombieLand}{3}
+\contentsline {subsection}{\numberline {1.1}Descripci\'on de la problem\'atica}{3}
+\contentsline {subsection}{\numberline {1.2}Resoluci\'on propuesta y justificaci\'on}{3}
+\contentsline {subsection}{\numberline {1.3}An\'alisis de la complejidad}{3}
+\contentsline {subsection}{\numberline {1.4}C\'odigo fuente}{4}
+\contentsline {subsection}{\numberline {1.5}Experimentaci\'on}{4}
+\contentsline {section}{\numberline {2}Problema 2: Alta Frecuencia}{5}
+\contentsline {subsection}{\numberline {2.1}Descripci\'on de la problem\'atica}{5}
+\contentsline {subsection}{\numberline {2.2}Resoluci\'on propuesta y justificaci\'on}{5}
+\contentsline {subsection}{\numberline {2.3}An\'alisis de la complejidad}{5}
+\contentsline {subsection}{\numberline {2.4}C\'odigo fuente}{5}
+\contentsline {subsection}{\numberline {2.5}Experimentaci\'on}{5}
+\contentsline {section}{\numberline {3}Problema 3: El se\~nor de los caballos}{6}
+\contentsline {subsection}{\numberline {3.1}Descripci\'on de la problem\'atica}{6}
+\contentsline {subsection}{\numberline {3.2}Resoluci\'on propuesta y justificaci\'on}{6}
+\contentsline {subsection}{\numberline {3.3}An\'alisis de la complejidad}{6}
+\contentsline {subsection}{\numberline {3.4}C\'odigo fuente}{6}
+\contentsline {subsection}{\numberline {3.5}Experimentaci\'on}{6}

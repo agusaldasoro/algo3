@@ -1,0 +1,203 @@
+\documentclass[a4paper]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{charter}   % tipografia
+\usepackage{graphicx}
+%\usepackage{makeidx}
+\usepackage{paralist} %itemize inline
+\usepackage[ruled,vlined]{algorithm2e}
+%\usepackage{float}
+%\usepackage{amsmath, amsthm, amssymb}
+%\usepackage{amsfonts}
+%\usepackage{sectsty}
+%\usepackage{charter}
+%\usepackage{wrapfig}
+%\usepackage{listings}
+%\lstset{language=C}
+
+
+\input{codesnippet}
+\input{page.layout}
+% \setcounter{secnumdepth}{2}
+\usepackage{underscore}
+\usepackage{caratula}
+\usepackage{url}
+
+
+% ******************************************************** %
+%              TEMPLATE DE INFORME ORGA2 v0.1              %
+% ******************************************************** %
+% ******************************************************** %
+%                                                          %
+% ALGUNOS PAQUETES REQUERIDOS (EN UBUNTU):                 %
+% ========================================
+%                                                          %
+% texlive-latex-base                                       %
+% texlive-latex-recommended                                %
+% texlive-fonts-recommended                                %
+% texlive-latex-extra?                                     %
+% texlive-lang-spanish (en ubuntu 13.10)                   %
+% ******************************************************** %
+
+
+
+\begin{document}
+
+
+\thispagestyle{empty}
+\materia{Algoritmos y Estructuras de Datos III}
+\submateria{Primer Cuatrimestre de 2015}
+\titulo{Trabajo Práctico I}
+%\subtitulo{subtitulo del trabajo}
+\integrante{Noriega Francisco}{XXX/XX}{mail}
+\integrante{Ezequiel}{XXX/XX}{mail}
+\integrante{Brian}{XXX/XX}{mail}
+\integrante{Aldasoro Agustina}{86/13}{agusaldasoro@gmail.com}
+
+
+\maketitle
+\newpage
+
+\thispagestyle{empty}
+\vfill
+\begin{abstract}
+Habi\'endonos sido dado una serie de tres problem\'aticas a resolver, se plantean sus respectivas soluciones acorde a los requisitos pedidos. Se adjunta una descripci\'on de cada problema y su soluci\'on, conjunto a su an\'alisis de correctitud y de complejidad sumado a su experimentaci\'on. El lenguaje elegido para llevar a cabo el trabajo es C++.
+\end{abstract}
+
+\thispagestyle{empty}
+\vspace{3cm}
+\tableofcontents
+\newpage
+
+
+%\normalsize
+\newpage
+
+\section{Problema 1: ZombieLand}
+\subsection{Descripci\'on de la problem\'atica}
+
+Dado un mapa con n ciudades, en cada una de ellas se encuentra una determinada cantidad de Zombies y una determinada cantidad de soldados (ambas tambi\'en dadas). El objetivo del problema es exterminar a la invasi\'on zombie, para ello es necesario un enfrentamiento \textit{zombies vs soldados} por cada ciudad. Con el fin de que este enfrentamiento sea positivo, es decir se logre matar a todos los zombies de una ciudad, es necesario que la cantidad de zombies no sea diez veces m\'as grande que la cantidad de soldados.
+
+Como los soldados se encuentran atrincherados, se puede optar entre llevar a cabo un enfrentamiento o no (ya que no se desea provocar un ataque donde ya se sabe que se va a perder). Los soldados acuartelados no pueden moverse de la ciudad en la que est\'an, pero s\'i se cuenta con una dotaci\'on de soldados extra que se la puede ubicar en cualquiera de las n ciudades acorde a lo deseado. La cantidad de soldados extra es ilimitada, m\'as los recursos para trasladarlos no lo son. El traslado de cada soldado extra a una ciudad tiene un costo espec\'ifico que var\'ia acorde a la ciudad elegida. Siempre que sea econ\'omicamente posible, se puede trasladar una cantidad de soldados indistinta por ciudad.\\
+
+Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible salvar a las n ciudades. Lo que se desea en este problema es maximizar la cantidad de ciudades salvadas, siempre y cuando se cumpla con el presupuesto. Es decir, se deben dar las cantidades de soldados necesarias para cada ciudad de modo que la cantidad de ciudades salvadas sea la \'optima.  El algoritmo debe tener una complejidad temporal de $O(n.log(n))$, siendo $n$ la cantidad de ciudades del pa\'is.\\
+
+\textcolor{blue}{Aca se podr\'ia poner unos dibujitos de soluciones \'optimas como para que quede m\'as lindo}
+
+
+
+
+\subsection{Resoluci\'on propuesta y justificaci\'on}
+
+%primero contar por ciudad cuanto cuesta salvarla
+%hacer un algoritmo goloso tipo el de la mochila
+%da la complejidad eso?
+
+
+\subsection{An\'alisis de la complejidad}
+
+ \begin{codesnippet}
+ \begin{verbatim}
+
+ struct Pepe {
+
+     ...
+
+ };
+
+ \end{verbatim}
+ \end{codesnippet}
+
+\newpage
+
+\subsection{C\'odigo fuente}
+
+\begin{algorithm}[h!]
+\NoCaptionOfAlgo
+\caption{Ejemplo de Algoritmo}
+\For{cada fila de la imagen}{
+	\For{cada columna de la imagen}{
+		\eIf{es una fila de rojos y verdes}{
+			\eIf{es un p\'ixel rojo}{
+				canal verde $\leftarrow$ canal verde del p\'ixel de arriba\\
+				canal azul $\leftarrow$ canal azul del p\'ixel de arriba a la izquierda			
+			}{
+				//Pixel Verde\\
+				canal rojo $\leftarrow$ canal rojo del p\'ixel de la derecha\\
+				canal azul $\leftarrow$ canal azul del p\'ixel de arriba			
+			}
+		}{
+			//Fila de azules y verdes \\
+			\eIf{es un p\'ixel verde}{
+				canal rojo $\leftarrow$ canal rojo del p\'ixel de arriba\\
+				canal azul $\leftarrow$ canal azul del p\'ixel de la izquierda			
+			}{
+				//P\'ixel Azul\\
+				canal rojo $\leftarrow$ canal rojo del p\'ixel de abajo a la derecha\\
+				canal verde $\leftarrow$ canal verde del p\'ixel de la derecha			
+			}
+		}
+	}
+}
+\end{algorithm}
+
+
+\subsection{Experimentaci\'on}
+
+\newpage
+
+\section{Problema 2: Alta Frecuencia}
+\subsection{Descripci\'on de la problem\'atica}
+
+Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor tiempo continuo posible. Para poder utilizar este enlace, se debe pagar por minuto. El precio var\'ia acorde a la frecuencia ofrecida. No todas las frecuencias funcionan a todo horario, es decir existe un horario acotado donde cada frecuencia este activa. Los datos del precio y horario de cada frecuencia son dados. Se desea optimizar este problema acorde al presupuesto gastado, es decir gastar el menor dinero posible, transmitiendo informaci\'on siempre que haya alguna frecuencia activa. Se debe contar con una complejidad de \textit{O(n.log(n))}.
+
+\textcolor{blue}{Aca poner ejemplitos de cual es la solucion optima cuando hay varias senales y cuando tenes que camibar de senial porque se prendio una mas barata.}
+
+\subsection{Resoluci\'on propuesta y justificaci\'on}
+\subsection{An\'alisis de la complejidad}
+\subsection{C\'odigo fuente}
+\subsection{Experimentaci\'on}
+
+
+
+\newpage
+
+\section{Problema 3: El se\~nor de los caballos}
+\subsection{Descripci\'on de la problem\'atica}
+\subsection{Resoluci\'on propuesta y justificaci\'on}
+\subsection{An\'alisis de la complejidad}
+\subsection{C\'odigo fuente}
+\subsection{Experimentaci\'on}
+
+
+% \section{Objetivos generales}
+
+% El objetivo de este Trabajo Práctico es ...
+
+
+% \section{Contexto}
+
+% \begin{figure}
+%   \begin{center}
+% 	\includegraphics[scale=0.66]{imagenes/logouba.jpg}
+% 	\caption{Descripcion de la figura}
+% 	\label{nombreparareferenciar}
+%   \end{center}
+% \end{figure}
+
+
+% \paragraph{\textbf{Titulo del parrafo} } Bla bla bla bla.
+% Esto se muestra en la figura~\ref{nombreparareferenciar}.
+
+
+
+
+
+% %\section{Enunciado y solucion} 
+% %\input{enunciado}
+
+% \section{Conclusiones y trabajo futuro}
+
+
+\end{document}
+
