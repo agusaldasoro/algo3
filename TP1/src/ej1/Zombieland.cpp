@@ -6,26 +6,17 @@ int main(int argc, char const *argv[])
 	int presupuesto;
 	std::vector<ciudad> pais;
 
-//EJEMPLO//////////////////
-	cantCiudades = 3;
-	presupuesto = 8;
-	ciudad c1;
-	ciudad c3;
-	ciudad c2;
-	c1.zombies = 47;
-	c1.soldados = 2;
-	c1.costo = 4;
-	c2.zombies = 15;
-	c2.soldados = 1;
-	c2.costo = 4;
-	c3.zombies = 15;
-	c3.soldados = 1;
-	c3.costo = 3;
-	pais.push_back(c1);
-	pais.push_back(c2);
-	pais.push_back(c3);
-//////////////////////////
-	//leer
+	std::cin >> cantCiudades;
+	std::cin >> presupuesto;
+	for (int i = 0; i < cantCiudades; ++i)
+	{
+		ciudad alguna;
+		std::cin >> alguna.zombies;
+		std::cin >> alguna.soldados;
+		std::cin >> alguna.costo;
+		pais.push_back(alguna);
+	}
+
 	int salvadas = 0;
 	std::vector<ciudad2> res = zombieland(cantCiudades, presupuesto, pais, salvadas);
 	std::vector<int> entregados(cantCiudades);
