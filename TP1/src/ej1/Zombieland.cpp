@@ -73,10 +73,10 @@ void minHeapify(std::vector<ciudad2>& arreglo){
 		j=i;
 		while (2*j+1<arreglo.size()) {
 			k=2*j+1;
-			if (2*j+2<arreglo.size() && arreglo[2*j+2].costoTotal < arreglo[k].costoTotal) {
+			if (2*j+2<arreglo.size() && arreglo[2*j+2].costoTotal > arreglo[k].costoTotal) {
 				k=2*j+2;
 			}
-			if (arreglo[j].costoTotal > arreglo[k].costoTotal) {
+			if (arreglo[j].costoTotal < arreglo[k].costoTotal) {
 				std::swap(arreglo[k], arreglo[j]);
 				j = k;
 			} else {
@@ -96,10 +96,10 @@ void heapSort(std::vector<ciudad2>& arreglo){
 		j = 0;
 		while (2*j+1<i) {
 			k = 2*j+1;
-			if (2*j+2<i && arreglo[2*j+2].costoTotal < arreglo[k].costoTotal) {
+			if (2*j+2<i && arreglo[2*j+2].costoTotal > arreglo[k].costoTotal) {
 				k=2*j+2;
 			}
-			if (arreglo[j].costoTotal > arreglo[k].costoTotal) {
+			if (arreglo[j].costoTotal < arreglo[k].costoTotal) {
 				std::swap(arreglo[k], arreglo[j]);
 				j = k;
 			} else {
