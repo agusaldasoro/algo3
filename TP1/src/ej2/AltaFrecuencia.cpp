@@ -2,30 +2,34 @@
 
 int main(int argc, char const *argv[])
 {
-	int cantFrec;
-	std::vector<frecuencia> frecuencias;
-	std::cin >> cantFrec;
-	for (int i = 0; i < cantFrec; ++i)
-	{
-		frecuencia actual;
-		actual.id = i;
-		std::cin >> actual.costo;
-		std::cin >> actual.principio;
-		std::cin >> actual.fin;
-		frecuencias.push_back(actual);
+	while(true){
+		if(std::cin.eof())
+			break;
+		int cantFrec;
+		std::vector<frecuencia> frecuencias;
+		std::cin >> cantFrec;
+		for (int i = 0; i < cantFrec; ++i)
+		{
+			frecuencia actual;
+			actual.id = i;
+			std::cin >> actual.costo;
+			std::cin >> actual.principio;
+			std::cin >> actual.fin;
+			frecuencias.push_back(actual);
+		}
+		std::list<frecuencia> optimas = altaFrecuencia(frecuencias);
+		std::list<frecuencia>::iterator iter;
+		int costoTotal = 0;
+		for (iter = optimas.begin(); iter != optimas.end(); iter++)
+		{
+			costoTotal += (iter->fin - iter->principio) * iter->costo;
+		}
+		std::cout << costoTotal << std::endl;
+		for (iter = optimas.begin(); iter != optimas.end(); iter++){
+			std::cout << iter->principio << " " << iter->fin << " " << iter->id << std::endl;
+		}
+		std::cout << "-1" << std::endl;
 	}
-	std::list<frecuencia> optimas = altaFrecuencia(frecuencias);
-	std::list<frecuencia>::iterator iter;
-	int costoTotal = 0;
-	for (iter = optimas.begin(); iter != optimas.end(); iter++)
-	{
-		costoTotal += (iter->fin - iter->principio) * iter->costo;
-	}
-	std::cout << costoTotal << std::endl;
-	for (iter = optimas.begin(); iter != optimas.end(); iter++){
-		std::cout << iter->principio << " " << iter->fin << " " << iter->id << std::endl;
-	}
-	std::cout << "-1" << std::endl;
 	return 0;
 }
 
@@ -47,7 +51,6 @@ std::list<frecuencia> divideAndConquer(std::list<frecuencia> frecuencias){
 		for (int i = 0; i < sizeF; ++i)
 		{
 			barata.push_back(frecuencias.front());
-			//ojo con la referencia de front!! quizas splice...
 			frecuencias.pop_front();
 		}
 		sizeF = frecuencias.size();
@@ -85,6 +88,9 @@ std::list<frecuencia> conquer(std::list<frecuencia> barata, std::list<frecuencia
 					iterCara->principio = iterBarata->fin;
 					res.push_back(*iterBarata);
 					iterBarata++;
+//no se si es necesario... pero quizas si, si el intervalo queda "negativo" no sirve mas
+//					if(iterCara->principio >= iterCara->fin)
+//						iterCara++;
 				}
 			}
 			else{
@@ -94,7 +100,8 @@ std::list<frecuencia> conquer(std::list<frecuencia> barata, std::list<frecuencia
 					iterBarata++;
 				}
 				else
-					res.push_back(*iterBarata);
+//					este push creo que no va, si la cara esta incluida en la barata solo quiero pasar a la siguiente cara
+//					res.push_back(*iterBarata);
 					iterCara++;
 			}
 		}
@@ -102,6 +109,10 @@ std::list<frecuencia> conquer(std::list<frecuencia> barata, std::list<frecuencia
 			res.push_back(*iterCara);
 			iterCara++;
 		}
+	}
+	while(iterBarata != barata.end()){
+		res.push_back(*iterBarata);
+		iterBarata++;
 	}
 	return res;
 }

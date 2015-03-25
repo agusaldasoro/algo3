@@ -2,34 +2,38 @@
 
 int main(int argc, char const *argv[])
 {
-	int cantCiudades;
-	int presupuesto;
-	std::vector<ciudad> pais;
+	while(true){
+		if(std::cin.eof())
+			break;
+		int cantCiudades;
+		int presupuesto;
+		std::vector<ciudad> pais;
 
-	std::cin >> cantCiudades;
-	std::cin >> presupuesto;
-	for (int i = 0; i < cantCiudades; ++i)
-	{
-		ciudad alguna;
-		std::cin >> alguna.zombies;
-		std::cin >> alguna.soldados;
-		std::cin >> alguna.costo;
-		pais.push_back(alguna);
-	}
+		std::cin >> cantCiudades;
+		std::cin >> presupuesto;
+		for (int i = 0; i < cantCiudades; ++i)
+		{
+			ciudad alguna;
+			std::cin >> alguna.zombies;
+			std::cin >> alguna.soldados;
+			std::cin >> alguna.costo;
+			pais.push_back(alguna);
+		}
 
-	int salvadas = 0;
-	std::vector<ciudad2> res = zombieland(cantCiudades, presupuesto, pais, salvadas);
-	std::vector<int> entregados(cantCiudades);
-	for (int i = 0; i < cantCiudades; ++i)
-	{
-		entregados[res[i].numCiudad] = res[i].soldadosNecesarios;
+		int salvadas = 0;
+		std::vector<ciudad2> res = zombieland(cantCiudades, presupuesto, pais, salvadas);
+		std::vector<int> entregados(cantCiudades);
+		for (int i = 0; i < cantCiudades; ++i)
+		{
+			entregados[res[i].numCiudad] = res[i].soldadosNecesarios;
+		}
+		std::cout << salvadas << " ";
+		for (int i = 0; i < cantCiudades; ++i)
+		{
+		std::cout << entregados[i] << " ";
+		}
+		std::cout << std::endl;
 	}
-	std::cout << salvadas << " ";
-	for (int i = 0; i < cantCiudades; ++i)
-	{
-	std::cout << entregados[i] << " ";
-	}
-	std::cout << std::endl;
 	return 0;
 }
 
