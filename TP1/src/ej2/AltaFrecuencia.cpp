@@ -3,8 +3,8 @@
 int main(int argc, char const *argv[])
 {
 	int cantFrec;
-	std::cin >> cantFrec;
 	std::vector<frecuencia> frecuencias;
+	std::cin >> cantFrec;
 	for (int i = 0; i < cantFrec; ++i)
 	{
 		frecuencia actual;
@@ -14,24 +14,35 @@ int main(int argc, char const *argv[])
 		std::cin >> actual.fin;
 		frecuencias.push_back(actual);
 	}
-	altaFrecuencia(frecuencias);
+	std::list<frecuencia> optimas = altaFrecuencia(frecuencias);
+	std::list<frecuencia>::iterator iter;
+	int costoTotal = 0;
+	for (iter = optimas.begin(); iter != optimas.end(); iter++)
+	{
+		costoTotal += (iter->fin - iter->principio) * iter->costo;
+	}
+	std::cout << costoTotal << std::endl;
+	for (iter = optimas.begin(); iter != optimas.end(); iter++){
+		std::cout << iter->principio << " " << iter->fin << " " << iter->id << std::endl;
+	}
+	std::cout << "-1" << std::endl;
 	return 0;
 }
 
-void altaFrecuencia(std::vector<frecuencia>& frecuencias){
+std::list<frecuencia> altaFrecuencia(std::vector<frecuencia>& frecuencias){
 	heapSort(frecuencias);
 	std::list<frecuencia> optima;
 	for (int i = 0; i < frecuencias.size(); ++i)
 	{
-		optima.push_back(frecuencias[i]);
+		optima.push_front(frecuencias[i]);
 	}
-	std::list<frecuencia> res = divideAndConquer(optima);
+	return divideAndConquer(optima);
 }
 
 std::list<frecuencia> divideAndConquer(std::list<frecuencia> frecuencias){
 	if (frecuencias.size() > 1)
 	{
-		list<frecuencias> barata, cara;
+		std::list<frecuencia> barata, cara;
 		int sizeF = frecuencias.size()/2;
 		for (int i = 0; i < sizeF; ++i)
 		{
@@ -49,16 +60,50 @@ std::list<frecuencia> divideAndConquer(std::list<frecuencia> frecuencias){
 		cara = divideAndConquer(cara);
 		return conquer(barata, cara);
 	}
-	else
+	else{
 		return frecuencias;
+	}
 }
 
 std::list<frecuencia> conquer(std::list<frecuencia> barata, std::list<frecuencia> cara){
-	std::list<frecuencia>::iterator iterCara, iterBarata;
-	for (iterCara = cara.begin(); iterCara.next() != NULL; iterCara++)
-	{
-		
+	std::list<frecuencia>::iterator iterCara = cara.begin(), iterBarata = barata.begin();
+	std::list<frecuencia> res;
+	while(iterCara != cara.end()){
+		if(iterBarata != barata.end()){
+			if(iterCara->principio < iterBarata->principio){
+				if(iterCara->fin <= iterBarata->principio){
+					res.push_back(*iterCara);
+					iterCara++;
+				}
+				else{
+					frecuencia antes;
+					antes.id = iterCara->id;
+					antes.costo = iterCara->costo;
+					antes.principio = iterCara->principio;
+					antes.fin = iterBarata->principio;
+					res.push_back(antes);
+					iterCara->principio = iterBarata->fin;
+					res.push_back(*iterBarata);
+					iterBarata++;
+				}
+			}
+			else{
+				if(iterCara->fin > iterBarata->fin){
+					iterCara->principio = iterBarata->fin;
+					res.push_back(*iterBarata);
+					iterBarata++;
+				}
+				else
+					res.push_back(*iterBarata);
+					iterCara++;
+			}
+		}
+		else{
+			res.push_back(*iterCara);
+			iterCara++;
+		}
 	}
+	return res;
 }
 
 void minHeapify(std::vector<frecuencia>& arreglo){
