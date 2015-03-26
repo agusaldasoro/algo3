@@ -49,10 +49,10 @@
 \submateria{Primer Cuatrimestre de 2015}
 \titulo{Trabajo Práctico I}
 %\subtitulo{subtitulo del trabajo}
-\integrante{Noriega Francisco}{XXX/XX}{mail}
-\integrante{Ezequiel}{XXX/XX}{mail}
-\integrante{Brian}{XXX/XX}{mail}
 \integrante{Aldasoro Agustina}{86/13}{agusaldasoro@gmail.com}
+\integrante{Noriega Francisco}{XXX/XX}{mail}
+\integrante{Zimenspitz Ezequiel}{155/13}{ezeqzim@gmail.com}
+\integrante{Zuker Brian}{XXX/XX}{mail}
 
 
 \maketitle
@@ -74,16 +74,16 @@ Habi\'endonos sido dado una serie de tres problem\'aticas a resolver, se plantea
 \newpage
 
 \section{Problema 1: ZombieLand}
+
 \subsection{Descripci\'on de la problem\'atica}
 
-Dado un mapa con n ciudades, en cada una de ellas se encuentra una determinada cantidad de Zombies y una determinada cantidad de soldados (ambas tambi\'en dadas). El objetivo del problema es exterminar a la invasi\'on zombie, para ello es necesario un enfrentamiento \textit{zombies vs soldados} por cada ciudad. Con el fin de que este enfrentamiento sea positivo, es decir se logre matar a todos los zombies de una ciudad, es necesario que la cantidad de zombies no sea diez veces m\'as grande que la cantidad de soldados.
+Dado un mapa con n ciudades, en cada una de ellas se encuentra una determinada cantidad de Zombies y una determinada cantidad de soldados (ambas tambi\'en dadas). El objetivo del problema es exterminar a la invasi\'on zombie, para ello es necesario un enfrentamiento \textit{zombies vs soldados} por cada ciudad. Con el fin de que este enfrentamiento sea positivo, es decir se logre matar a todos los zombies de una ciudad, es necesario que la cantidad de zombies sea, a lo sumo, diez veces m\'as grande que la cantidad de soldados.
 
 Como los soldados se encuentran atrincherados, se puede optar entre llevar a cabo un enfrentamiento o no (ya que no se desea provocar un ataque donde ya se sabe que se va a perder). Los soldados acuartelados no pueden moverse de la ciudad en la que est\'an, pero s\'i se cuenta con una dotaci\'on de soldados extra que se la puede ubicar en cualquiera de las n ciudades acorde a lo deseado. La cantidad de soldados extra es ilimitada, m\'as los recursos para trasladarlos no lo son. El traslado de cada soldado extra a una ciudad tiene un costo espec\'ifico que var\'ia acorde a la ciudad elegida. Siempre que sea econ\'omicamente posible, se puede trasladar una cantidad de soldados indistinta por ciudad.\\
 
 Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible salvar a las n ciudades. Lo que se desea en este problema es maximizar la cantidad de ciudades salvadas, siempre y cuando se cumpla con el presupuesto. Es decir, se deben dar las cantidades de soldados necesarias para cada ciudad de modo que la cantidad de ciudades salvadas sea la \'optima.  El algoritmo debe tener una complejidad temporal de $O(n.log(n))$, siendo $n$ la cantidad de ciudades del pa\'is.\\
 
 \textcolor{blue}{Aca se podr\'ia poner unos dibujitos de soluciones \'optimas como para que quede m\'as lindo}
-
 
 
 
@@ -149,7 +149,7 @@ Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible 
 \section{Problema 2: Alta Frecuencia}
 \subsection{Descripci\'on de la problem\'atica}
 
-Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor tiempo continuo posible. Para poder utilizar este enlace, se debe pagar por minuto. El precio var\'ia acorde a la frecuencia ofrecida. No todas las frecuencias funcionan a todo horario, es decir existe un horario acotado donde cada frecuencia est\'a activa. Los datos del precio y horario de cada frecuencia son dados. Se desea optimizar este problema acorde al presupuesto gastado, es decir gastar el menor dinero posible, transmitiendo informaci\'on siempre que haya alguna frecuencia activa. Se debe contar con una complejidad de \textit{O(n.log(n))}.
+Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor tiempo continuo posible. Para poder utilizar este enlace, se debe pagar por minuto. El precio var\'ia acorde a la frecuencia ofrecida. No todas las frecuencias funcionan a todo horario, es decir existe un horario acotado donde cada frecuencia est\'a activa. Los datos del precio y horario de cada frecuencia son dados. Se desea optimizar este problema acorde al presupuesto gastado; es decir gastar el menor dinero posible, transmitiendo informaci\'on siempre que haya alguna frecuencia activa. Se debe contar con una complejidad de \textit{O(n.log(n))}.
 
 \textcolor{blue}{Aca poner ejemplitos de cual es la solucion optima cuando hay varias senales y cuando tenes que camibar de senial porque se prendio una mas barata.}
 
