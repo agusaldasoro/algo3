@@ -3,12 +3,16 @@
 #include <math.h>
 #include <list>
 #include <iterator>
+#include <algorithm>
 
 struct frecuencia{
 	int id;
 	int costo;
 	int principio;
 	int fin;
+	bool operator< (const frecuencia& otro) const{
+		return costo < otro.costo;
+	}
 };
 
 std::list<frecuencia> altaFrecuencia(std::vector<frecuencia>& frecuencias);

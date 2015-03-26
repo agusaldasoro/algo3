@@ -34,11 +34,11 @@ int main(int argc, char const *argv[])
 }
 
 std::list<frecuencia> altaFrecuencia(std::vector<frecuencia>& frecuencias){
-	heapSort(frecuencias);
+	sort_heap(frecuencias.begin(), frecuencias.end());
 	std::list<frecuencia> optima;
 	for (int i = 0; i < frecuencias.size(); ++i)
 	{
-		optima.push_front(frecuencias[i]);
+		optima.push_back(frecuencias[i]);
 	}
 	return divideAndConquer(optima);
 }
@@ -88,9 +88,6 @@ std::list<frecuencia> conquer(std::list<frecuencia> barata, std::list<frecuencia
 					iterCara->principio = iterBarata->fin;
 					res.push_back(*iterBarata);
 					iterBarata++;
-//no se si es necesario... pero quizas si, si el intervalo queda "negativo" no sirve mas
-//					if(iterCara->principio >= iterCara->fin)
-//						iterCara++;
 				}
 			}
 			else{
@@ -100,8 +97,6 @@ std::list<frecuencia> conquer(std::list<frecuencia> barata, std::list<frecuencia
 					iterBarata++;
 				}
 				else
-//					este push creo que no va, si la cara esta incluida en la barata solo quiero pasar a la siguiente cara
-//					res.push_back(*iterBarata);
 					iterCara++;
 			}
 		}
@@ -115,48 +110,4 @@ std::list<frecuencia> conquer(std::list<frecuencia> barata, std::list<frecuencia
 		iterBarata++;
 	}
 	return res;
-}
-
-void minHeapify(std::vector<frecuencia>& arreglo){
-	int i = arreglo.size()-1;
-	int j, k;
-	while (i>=0) {
-		j=i;
-		while (2*j+1<arreglo.size()) {
-			k=2*j+1;
-			if (2*j+2<arreglo.size() && arreglo[2*j+2].costo < arreglo[k].costo) {
-				k=2*j+2;
-			}
-			if (arreglo[j].costo > arreglo[k].costo) {
-				std::swap(arreglo[k], arreglo[j]);
-				j = k;
-			} else {
-				j = arreglo.size();
-			}
-		}
-		i--;
-	}
-}
-
-void heapSort(std::vector<frecuencia>& arreglo){
-	int i = arreglo.size()-1;
-	int j, k;
-	minHeapify(arreglo);
-	while (i>0) {
-		std::swap(arreglo[i], arreglo[0]);
-		j = 0;
-		while (2*j+1<i) {
-			k = 2*j+1;
-			if (2*j+2<i && arreglo[2*j+2].costo < arreglo[k].costo) {
-				k=2*j+2;
-			}
-			if (arreglo[j].costo > arreglo[k].costo) {
-				std::swap(arreglo[k], arreglo[j]);
-				j = k;
-			} else {
-				j = arreglo.size();
-			}
-		}
-		i--;
-	}
 }

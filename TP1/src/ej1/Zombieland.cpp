@@ -19,7 +19,7 @@ int main(int argc, char const *argv[])
 			std::cin >> alguna.costo;
 			pais.push_back(alguna);
 		}
-
+		
 		int salvadas = 0;
 		std::vector<ciudad2> res = zombieland(cantCiudades, presupuesto, pais, salvadas);
 		std::vector<int> entregados(cantCiudades);
@@ -52,7 +52,7 @@ const std::vector<ciudad2> zombieland(int cantCiudades, int presupuesto, const s
 		actual.costoTotal = actual.soldadosNecesarios * pais[i].costo;
 		datos.push_back(actual);
 	}
-	heapSort(datos);
+	std::sort_heap(datos.begin(), datos.end());
 	for (int i = 0; i < cantCiudades; ++i)
 	{
 		int dif = presupuesto - datos[i].costoTotal;
@@ -64,48 +64,4 @@ const std::vector<ciudad2> zombieland(int cantCiudades, int presupuesto, const s
 			datos[i].soldadosNecesarios = 0;
 	}
 	return datos;
-}
-
-void minHeapify(std::vector<ciudad2>& arreglo){
-	int i = arreglo.size()-1;
-	int j, k;
-	while (i>=0) {
-		j=i;
-		while (2*j+1<arreglo.size()) {
-			k=2*j+1;
-			if (2*j+2<arreglo.size() && arreglo[2*j+2].costoTotal > arreglo[k].costoTotal) {
-				k=2*j+2;
-			}
-			if (arreglo[j].costoTotal < arreglo[k].costoTotal) {
-				std::swap(arreglo[k], arreglo[j]);
-				j = k;
-			} else {
-				j = arreglo.size();
-			}
-		}
-		i--;
-	}
-}
-
-void heapSort(std::vector<ciudad2>& arreglo){
-	int i = arreglo.size()-1;
-	int j, k;
-	minHeapify(arreglo);
-	while (i>0) {
-		std::swap(arreglo[i], arreglo[0]);
-		j = 0;
-		while (2*j+1<i) {
-			k = 2*j+1;
-			if (2*j+2<i && arreglo[2*j+2].costoTotal > arreglo[k].costoTotal) {
-				k=2*j+2;
-			}
-			if (arreglo[j].costoTotal < arreglo[k].costoTotal) {
-				std::swap(arreglo[k], arreglo[j]);
-				j = k;
-			} else {
-				j = arreglo.size();
-			}
-		}
-		i--;
-	}
 }
