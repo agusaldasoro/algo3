@@ -3,6 +3,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage{charter}   % tipografia
 \usepackage{graphicx}
+
+%%%%%%%LO AGREGUE%%%%%%%%%%
+\usepackage{hyperref}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %\usepackage{makeidx}
 \usepackage{paralist} %itemize inline
 \usepackage[ruled,vlined]{algorithm2e}
@@ -79,9 +84,9 @@ Habi\'endonos sido dado una serie de tres problem\'aticas a resolver, se plantea
 
 Dado un mapa con n ciudades, en cada una de ellas se encuentra una determinada cantidad de Zombies y una determinada cantidad de soldados (ambas tambi\'en dadas). El objetivo del problema es exterminar a la invasi\'on zombie, para ello es necesario un enfrentamiento \textit{zombies vs soldados} por cada ciudad. Con el fin de que este enfrentamiento sea positivo, es decir se logre matar a todos los zombies de una ciudad, es necesario que la cantidad de zombies sea, a lo sumo, diez veces m\'as grande que la cantidad de soldados.
 
-Como los soldados se encuentran atrincherados, se puede optar entre llevar a cabo un enfrentamiento o no (ya que no se desea provocar un ataque donde ya se sabe que se va a perder). Los soldados acuartelados no pueden moverse de la ciudad en la que est\'an, pero s\'i se cuenta con una dotaci\'on de soldados extra que se la puede ubicar en cualquiera de las n ciudades acorde a lo deseado. La cantidad de soldados extra es ilimitada, m\'as los recursos para trasladarlos no lo son. El traslado de cada soldado extra a una ciudad tiene un costo espec\'ifico que var\'ia acorde a la ciudad elegida. Siempre que sea econ\'omicamente posible, se puede trasladar una cantidad de soldados indistinta por ciudad.\\
+Como los soldados se encuentran atrincherados, se puede optar entre llevar a cabo un enfrentamiento o no (ya que no se desea provocar un ataque donde ya se sabe que se va a perder). Los soldados acuartelados no pueden moverse de la ciudad en la que est\'an, pero s\'i se cuenta con una dotaci\'on de soldados extra que se la puede ubicar en cualquiera de las n ciudades acorde a lo deseado. La cantidad de soldados extra es ilimitada, mas los recursos para trasladarlos no lo son. El traslado de cada soldado extra a una ciudad tiene un costo espec\'ifico que var\'ia acorde a la ciudad elegida. Siempre que sea econ\'omicamente posible, se puede trasladar una cantidad de soldados indistinta por ciudad.
 
-Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible salvar a las n ciudades. Lo que se desea en este problema es maximizar la cantidad de ciudades salvadas, siempre y cuando se cumpla con el presupuesto. Es decir, se deben dar las cantidades de soldados necesarias para cada ciudad de modo que la cantidad de ciudades salvadas sea la \'optima.  El algoritmo debe tener una complejidad temporal de $O(n.log(n))$, siendo $n$ la cantidad de ciudades del pa\'is.\\
+Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible salvar a las n ciudades. Lo que se desea en este problema es maximizar la cantidad de ciudades salvadas, respetando el presupuesto. Es decir, se deben dar las cantidades de soldados necesarias para cada ciudad de modo que la cantidad de ciudades salvadas sea la \'optima.  El algoritmo debe tener una complejidad temporal de $O(n.log(n))$, siendo $n$ la cantidad de ciudades del pa\'is.\\
 
 \textcolor{blue}{Aca se podr\'ia poner unos dibujitos de soluciones \'optimas como para que quede m\'as lindo}
 
@@ -89,24 +94,45 @@ Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible 
 
 \subsection{Resoluci\'on propuesta y justificaci\'on}
 
-%primero contar por ciudad cuanto cuesta salvarla
-%hacer un algoritmo goloso tipo el de la mochila
-%da la complejidad eso?
+Para la resoluci\'on del problema decidimos utilizar un algoritmo goloso, el mismo tomar\'a una decisi\'on \'optima para cada instante, sin revisar si ser\'a la mejor a nivel global.
 
+El algoritmo simplemente calcula cu\'anto ser\'ia el costo de salvar a cada ciudad:
+	\begin{codesnippet}
+	\begin{verbatim}
+		soldados_necesarios = redondeo_hacia_arriba((zombies - (soldados x 10)) /10)
+		costo_total = costo_unitario * soldados_necesarios
+	\end{verbatim}
+	\end{codesnippet}
+
+Ordena las ciudades de menor a mayor en base al costo de salvarla, y luego, secuencialmente, env\'ia los ej\'ercitos requeridos, respetando este orden, hasta que el pa\'is se queda sin presupuesto.
+
+El algortimo resuelve el problema salvando la mayor cantidad de ciudades posibles porque
+\textcolor{blue}{INSERT FORMAL DEMO}
 
 \subsection{An\'alisis de la complejidad}
+La complejidad de nuestra soluci\'on es $O(n.log(n))$, siendo $n$ la cantidad de ciudades del pa\'is.\\
 
- \begin{codesnippet}
- \begin{verbatim}
+El c\'odigo presenta un primer ciclo for que calcula el costo de salvar a cada ciudad y las agrega mediante push_back() a un vector. El ciclo recorre linealmente todas las ciudades y tiene complejidad $O(n)$. La funci\'on \href{http://www.cplusplus.com/reference/vector/vector/push_back/}{push_back()} tiene costo $O(1)$ amortizado, lo que implica que cuando no precisa redimensionar el vector cuesta esto, y cuando lo hace, toma tiempo lineal en la cantidad de elementos. Como insertamos durante todo el ciclo tomamos el costo amortizado y la complejidad nos da $O(n)$
 
- struct Pepe {
+Le sigue ordenar el arreglo con estos datos, para ello usamos \href{(http://www.cplusplus.com/reference/algorithm/sort_heap/?kw=sort_heap)}{heapsort} de la librer\'a de $C$ cuya complejidad es $O(n.log(n))$.
 
-     ...
+Finalmente se realiza otro ciclo for que salva las ciudades que pueda, mientras dure el presupuesto y deja en 0 soldados enviados a las ciudades que no pueden ser salvadas por optar por salvar a la mayor cantidad de ciudades posibles. Este ciclo recorre linealmente todas las ciudades y tiene complejidad $O(n)$.
 
- };
+\textcolor{blue}{La complejidad de como escribir la salida no me parece relevante... habr\'ia que preguntarlo}
 
- \end{verbatim}
- \end{codesnippet}
+Como cada paso de los mencionados son secuenciales, las complejidades se suman, obteniendo $O(n)$ + $O(n.log(n))$ + $O(n)$ que es igual a $O(n.log(n))$ por propiedades de $O$.
+
+%	\begin{codesnippet}
+%	\begin{verbatim}
+%
+%		struct Pepe {
+%
+%			...
+%
+%		};
+%
+%	\end{verbatim}
+%	\end{codesnippet}
 
 \newpage
 
@@ -149,7 +175,7 @@ Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible 
 \section{Problema 2: Alta Frecuencia}
 \subsection{Descripci\'on de la problem\'atica}
 
-Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor tiempo continuo posible. Para poder utilizar este enlace, se debe pagar por minuto. El precio var\'ia acorde a la frecuencia ofrecida. No todas las frecuencias funcionan a todo horario, es decir existe un horario acotado donde cada frecuencia est\'a activa. Los datos del precio y horario de cada frecuencia son dados. Se desea optimizar este problema acorde al presupuesto gastado; es decir gastar el menor dinero posible, transmitiendo informaci\'on siempre que haya alguna frecuencia activa. Se debe contar con una complejidad de \textit{O(n.log(n))}.
+Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor tiempo posible. Los enlaces tienen asociadas distintas frecuencias, con un costo por minuto y un intervalo de tiempo (sin cortes) en el cual funcionan. Se utilizan durante minutos enteros, y es posible cambiar de una frecuencia a otra instant\'anemente (del minuto 1 al 4 uso la frecuencia A y del 4 al 6 la B. Los datos del precio y e intervalo de tiempo de cada frecuencia son dados. Se desea optimizar este problema para transmitir todo el tiempo que tenga al menos una frecuencia abierta, pero gastando la menor cantidad de dinero. Se debe contar con una complejidad de $O(n.log(n))$.
 
 \textcolor{blue}{Aca poner ejemplitos de cual es la solucion optima cuando hay varias senales y cuando tenes que camibar de senial porque se prendio una mas barata.}
 
@@ -179,7 +205,7 @@ Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor t
 \section{Problema 3: El se\~nor de los caballos}
 \subsection{Descripci\'on de la problem\'atica}
 
-En este problema, se presenta un tablero de ajedrez de taman\~o $nxn$ el cual cuenta con cierta cantidad de caballos ubicados cada uno en una posici\'on en el tablero sin respetar ninguna norma. Lo que se quiere lograr es \emph{cubrir} todo el tablero. Un casillero se considera cubierto si hay un caballo en \'el o bien, si es una posici\'on en la cual alg\'un caballo existente puede moverse con un s\'olo movimiento. Para lograr este cometido, puede ser necesario agregar nuevas fichas \emph{caballo} al tablero. No existe un l\'imite en la cantidad de caballos para agregar, pero lo que se busca es dar una soluci\'on con la m\'inima cantidad de caballos posibles.\\
+En este problema, se presenta un tablero de ajedrez de tama\~no $nxn$, el cual cuenta con alguna cantidad de caballos ubicados en una posici\'on aleatoria del tablero. Lo que se quiere lograr es \emph{cubrir} todo el tablero. Un casillero se considera cubierto si hay un caballo en \'el o bien, si es una posici\'on en la cual alg\'un caballo existente puede moverse con un s\'olo movimiento. Para lograr este cometido, puede ser necesario agregar nuevas fichas \emph{caballo} al tablero. No existe un l\'imite en la cantidad de caballos para agregar, pero lo que se busca es dar una soluci\'on con la m\'inima cantidad de caballos posibles.\\
 
 
 En la figura \ref{caballito} se pueden ver todas las casillas que est\'an cubiertas por un s\'olo caballo.
