@@ -1,9 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
-#include <list>
+#include <vector>
 #include <iterator>
 #include <algorithm>
+
+using namespace std;
 
 struct frecuencia{
 	int id;
@@ -15,8 +17,8 @@ struct frecuencia{
 	}
 };
 
-std::list<frecuencia> altaFrecuencia(std::vector<frecuencia>& frecuencias);
-std::list<frecuencia> divideAndConquer(std::list<frecuencia> frecuencias);
-std::list<frecuencia> conquer(std::list<frecuencia> barata, std::list<frecuencia> cara);
-void heapSort(std::vector<frecuencia>& arreglo);
-void minHeapify(std::vector<frecuencia>& arreglo);
+vector<frecuencia> altaFrecuencia(vector<frecuencia>& frecuencias);
+vector<frecuencia> divideAndConquer(vector<frecuencia>& frecuencias, int comienzo, int final);
+vector<frecuencia> conquer(vector<frecuencia> barata, vector<frecuencia> cara);
+void heapSort(vector<frecuencia>& arreglo);
+void minHeapify(vector<frecuencia>& arreglo);
