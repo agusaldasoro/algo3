@@ -11,11 +11,11 @@ typedef vector<Vec> Tablero;
 typedef pair<int, int> Coord;
 
 // Prototipado de funciones
-bool resolver(Tablero& p, int nsubs, int fila, int col);
+bool resolver(Tablero& p, int nsubs);
 void mostrar(const Tablero& m);
 int check(const Tablero& c, int n);
 bool algunRepetido(const Vec &v);
-
+bool resolverAux(Tablero& p, Tablero& aux, int n);
 /**
  * La función main toma el tablero por std input:
  * recibe primero el tamaño de bloque (si se le pasa n se
@@ -40,9 +40,9 @@ int main()
 			for(int j = 0; j < n2; ++j)
 				cin >> p[i][j];
 
-		bool sol = resolver(p,n, 0 ,0);
+		bool sol = resolver(p, n);
 		if(!sol){
-			cout << "El tablero no tene solucion...";
+			cout << "El tablero no tiene solucion...";
 		} else {
 			mostrar(p);
 		}
@@ -61,34 +61,53 @@ int main()
  * adecuados sobre los cuales se hará la recurrencia.
  */
 
-bool resolver(Tablero& p, int n, int fila, int col)
+bool resolver(Tablero& p, int n)
 {
-	int n2 = p.size();
-	cout << fila << col<< endl;
-	if(p[fila][col] == 0){
-		p[fila][col]++;
-		while(check(p,n) == 2){
-			cout << "fila " <<fila << "col " << col << "valor " << p[fila][col] << endl;
-			p[fila][col]++;
-		}
-		if (p[fila][col] > n2){
-			mostrar(p);
-			cout << "flasheo";
-			return false;
-		}
-	}
-//	else{
-	if(col < n2 - 1)
-		resolver(p,n,fila, col+1);
-	else if(col == n2 - 1){
-		if(fila < n2 - 1){
-			resolver(p, n, fila+1, 0);
-		}
-	}
-//	}
-	return check(p,n) == 1;
+	Tablero aux = p;
+	return resolverAux(p, aux, n);
 }
 
+bool completar(Tablero&p, int n, int fila, int col){
+	int valor = p[fila][col];
+	int n2 = n*n;
+	if(valor == n2){
+		p[fila][col] = 0;
+		return false;
+	}
+	valor++;
+	for (int i = valor; i <= n2; ++i){
+		p[fila][col] = i;
+		int sirve = check(p,n);
+		if(sirve == 0 || sirve == 1){return true;}
+	}
+	p[fila][col] = 0;
+	return false;
+}
+
+bool resolverAux(Tablero& p, Tablero& aux, int n){
+	int n2 = n*n;
+	bool sirve = true;
+	for (int i = 0; i < n2; ++i){
+		for (int j = 0; j < n2; ++j){
+			if(aux[i][j] == 0){
+				sirve = completar(p, n, i, j);
+			}
+			if(!sirve){
+				if(j==0){
+					if(i==0){return false;}
+					j = n2-2;
+					i--;
+				}
+				else{
+					j-=2;
+				}
+			}
+		}
+	}
+	if(check(p,n) == 1)
+		return true;
+	return false;
+}
 
 /**
  * Recibe un tablero y lo muestra por pantalla
