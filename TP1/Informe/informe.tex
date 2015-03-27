@@ -254,18 +254,13 @@ Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor t
 
 \subsection{Resoluci\'on propuesta y justificaci\'on}
 
-%Analizar minuto a minuto cual es el mas barato es fuerza bruta?? -> Esto es cant de minutos x n
+El algoritmo que utilizamos pertenece a la familia de \emph{Divide \& Conquer}.\\
 
-%Fijarse cual es el primer minuto que se tiene senial y cual es el ultimo
-%Pagar siempre el mas barato en toda la frecuencia que haya
-%revisar los baches que hayan quedado entre el minimo y el maximo, contratando desde el mas barato al mas caro
-% ESTO ES N**2
+Todas las frecuencias se encuentran almacenadas en un vector. Primero se las ordena en orden creciente respecto del costo, es decir en la primera posición se almacena la màs barata y en la última, la más cara. Se va a proseguir mediante el divide dentro de este vector.\\
 
-%divide & conquer
-%Fijarse cual es el primer minuto que se tiene senial y cual es el ultimo
-%Ir dividiendo estos tiempos hasta casos base... 
-%para mi el caso base es donde todas las frecuencias que hay pertenecen a ese intervalo fijo, porque sino no llegarias nunca a un caso base. Y cuando tenes un intervalo donde todas las frecuencias son parejas, ahi elegis la mas barata
-%o el caso base es cuando llegas a intervalos de 1 minuto??? cosa que ahi tenes que determinar uno solo?
+Se prosigue de acuerdo a las características de Divide \& Conquer. De modo recursivo, se divide al vector pasado por parámetro por la mitad creando dos nuevos a los cuales se les aplica nuestro algoritmo de merge. El caso base se da cuando el vector tiene un sólo elemento, para lo cual se devuelve el vector tal cual entró.\\
+
+Nuestro algoritmo de Merge se encarga de elegir entre las frecuencias de dos arreglos pasados como parámetro, de modo que devuelve un sólo vector indicando los intervalos ocupados por las frecuencias elegidas. Dado el enunciado del problema, para elegir que frecuencia utilizar en determinado de tiempo se debe priorizar el precio más barato emitiendo señal siempre que sea posible. Gracias a que en el primer llamado de nuestra  
 
 \subsection{An\'alisis de la complejidad}
 \subsection{C\'odigo fuente}
