@@ -101,7 +101,9 @@ Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible 
 \newpage
 \subsection{Resoluci\'on propuesta y justificaci\'on}
 
-Para la resoluci\'on del problema decidimos utilizar un algoritmo goloso\textcolor{red}{¿?}, el mismo tomar\'a una decisi\'on \'optima para cada instante, sin revisar si ser\'a la mejor a nivel global.\\
+\textcolor{red}{Ver que habla mucho sobre vectores y dijo que no mezclaramos implementacion con algoritmo}\\
+
+Para la resoluci\'on del problema decidimos utilizar un algoritmo goloso, el mismo tomar\'a una decisi\'on \'optima para cada instante, sin revisar si ser\'a la mejor a nivel global.\\
 
 Como primera instancia, el algoritmo simplemente calcula, para cada ciudad, cu\'anto ser\'ia el costo de salvarla. Para ello, primero se calcula la cantidad de soldados extra necesarios y luego se multiplica por el costo de traslado de cada unidad:\\
 
@@ -122,6 +124,10 @@ Luego de haber obtenido una magnitud con la cual se pueden comparar las ciudades
  
  Por la forma en que fue construido el vector, cuando se encuentre una ciudad i que el costo de salvarla excede del presupuesto_actual las dem\'as ciudades j $\in$ [i+1, n-1] tampoco podr\'an ser salvadas. De todos modos, nuestro algoritmo realiza el mismo c\'alculo para todas las posiciones del vector.\\
  
+Como en este vector las ciudades no aparecen en orden creciente por su n\'umero, debemos reordenarlas. Debido a que el \emph{id} de cada ciudad va a ser \'unico y va a encontrarse en el intervalo [0, n-1], se lo recorre secuencialmente colocando cada ciudad en la posici\'on de su \textit{id} dentro de un nuevo vector \emph{respuesta} . \textcolor{red}{Ver que este parrafo me aprece que no quedo muy claro...} \\
+ 
+ 
+ 
 
 El algortimo resuelve el problema salvando la mayor cantidad de ciudades posibles porque
 \textcolor{red}{INSERT FORMAL DEMO}
@@ -131,14 +137,8 @@ El algortimo resuelve el problema salvando la mayor cantidad de ciudades posible
 La complejidad de nuestra soluci\'on es $O(n.log(n))$, siendo \emph{n} la cantidad de ciudades del pa\'is.\\
 
 
-%\begin{algorithm}[h!]
-%\caption{Ejemplo de Algoritmo}
-%\For{cada ciudad pasada por par\'ametro}{
-%	Armo un struct y la agrego al vector \textit{ciudades} mediante \textit{push_back()}
-%}
-%\end{algorithm}
 
-\textcolor{red}{El costo de guardar todas las ciudades pasadas por par\'ametro en el vector no va??}\\
+Como primera instancia, el algoritmo almacena las ciudades con sus caracter\'isticas (pasadas como par\'ametro) dentro de un vector para luego poder utilizarlas de un modo pr\'actico. Como esto lo realiza secuencialmente, tiene un costo lineal \textbf{\textit{O(n)}}. \textcolor{red}{Esto habia que ponerlo aca asi? o directamente nada? o solo nombrarlo?}\\
 
 \begin{algorithm}[h!]
 \caption{zombieland}
@@ -151,8 +151,11 @@ Ordena al vector \emph{datos} mediante \textit{sort_heap()}\\
 	Calcular si puede ser salvada.\\
 	Indicarle cantidad de soldados extras enviados y cambios en el presupuesto_actual.
 }
+\For{\emph{cada} ciudad \emph{en vector} datos}{
+	Insertar en el vector \emph{respuesta}[ciudad.id] la ciudad actual. 
+}
 \end{algorithm}
-
+\textcolor{red}{En el codigo, yo pondria este reordenamiento dentro de zombieland, ya que hay que considerarlo para medir tiempos.}\\
 
 El c\'odigo presenta un \textbf{primer ciclo \emph{for}} que calcula el costo de salvar a cada ciudad y las agrega mediante push_back() a un vector. El ciclo recorre linealmente todas las ciudades por lo que tiene complejidad $O(n)$. 
 
@@ -162,13 +165,15 @@ Por lo tanto, la complejidad total del primer ciclo for nos da \textbf{\textit{O
 
 Le sigue \textbf{ordenar el vector} con estos datos, para ello usamos \href{http://www.cplusplus.com/reference/algorithm/sort_heap/?kw=sort_heap}{sort\_heap()} \footnote{http://www.cplusplus.com/reference/algorithm/sort_heap/?kw=sort_heap} de la librer\'ia de \emph{C} cuya complejidad es \textbf{\textit{O(n.log(n)})}.\\
 
-Finalmente se realiza un \textbf{\'ultimo ciclo \emph{for}} que salva las ciudades que pueda, mientras dure el presupuesto y deja en \emph{0 soldados enviados} a las ciudades que no pueden ser salvadas. Estos c\'alculos aritm\'eticos y asignaciones son todos de complejidad constante O(1). Este ciclo recorre linealmente todas las ciudades por lo tanto, lo hace con complejidad\textbf{\textit{O(n)}}.\\
+A continuaci\'on, se realiza un \textbf{\'ultimo ciclo \emph{for}} que salva las ciudades que pueda, mientras dure el presupuesto y deja en \emph{0 soldados enviados} a las ciudades que no pueden ser salvadas. Estos c\'alculos aritm\'eticos y asignaciones son todos de complejidad constante O(1). Este ciclo recorre linealmente todas las ciudades por lo tanto, lo hace con complejidad \textbf{\textit{O(n)}}.\\
 
-\textcolor{red}{La complejidad de como escribir la salida no me parece relevante... habr\'ia que preguntarlo}\\
+Finalmente, se debe \textbf{reordenar el vector} obtenido hasta ahora para que quede en orden creciente respecto de su \textit{id}. Como esto se hace recorriendo secuencialmente el primer vector, asign\'andole uno a uno los elementos al nuevo vector \emph{respuesta} indexados; s\'olo hace una pasada lineal con costo \textbf{\textit{O(n)}}.\\
+
+
 
 Como cada paso de los mencionados son secuenciales, las complejidades se suman, obteniendo:
 
- $O(n)$ + $O(n.log(n))$ + $O(n)$ que es igual a \textit{\textbf{O(n.log(n))}} por propiedades de $O$.
+ $O(n)$ + $O(n.log(n))$ + $O(n)$ + $O(n)$ que es igual a \textit{\textbf{O(n.log(n))}} por propiedades de $O$.
 
 
 \newpage
@@ -248,7 +253,7 @@ sort_heap(datos.begin(), datos.end());\\
 \section{Problema 2: Alta Frecuencia}
 \subsection{Descripci\'on de la problem\'atica}
 
-Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor tiempo posible. Los enlaces tienen asociadas distintas frecuencias, con un costo por minuto y un intervalo de tiempo (sin cortes) en el cual funcionan. Se utilizan durante minutos enteros, y es posible cambiar de una frecuencia a otra instant\'anemente (del minuto 1 al 4 uso la frecuencia A y del 4 al 6 la B. Los datos del precio y e intervalo de tiempo de cada frecuencia son dados. Se desea optimizar este problema para transmitir todo el tiempo que tenga al menos una frecuencia abierta, pero gastando la menor cantidad de dinero. Se debe contar con una complejidad de $O(n.log(n))$.
+Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor tiempo posible. Los enlaces tienen asociadas distintas frecuencias, con un costo por minuto y un intervalo de tiempo (sin cortes) en el cual funcionan. Se utilizan durante minutos enteros, y es posible cambiar de una frecuencia a otra instant\'anemente (del minuto 1 al 4 uso la frecuencia A y del 4 al 6 la B). Los datos del precio y e intervalo de tiempo de cada frecuencia son dados. Se desea optimizar este problema para transmitir todo el tiempo que tenga al menos una frecuencia abierta, pero gastando la menor cantidad de dinero. Se debe contar con una complejidad de $O(n.log(n))$.
 
 \textcolor{red}{Aca poner ejemplitos de cual es la solucion optima cuando hay varias senales y cuando tenes que camibar de senial porque se prendio una mas barata.}
 
@@ -256,11 +261,23 @@ Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor t
 
 El algoritmo que utilizamos pertenece a la familia de \emph{Divide \& Conquer}.\\
 
-Todas las frecuencias se encuentran almacenadas en un vector. Primero se las ordena en orden creciente respecto del costo, es decir en la primera posición se almacena la màs barata y en la última, la más cara. Se va a proseguir mediante el divide dentro de este vector.\\
+\textcolor{red}{Aca pasa lo mismo de la implementacion porque hablamos mucho de vector y bla...}\\
+
+Todas las frecuencias se encuentran almacenadas en un vector. Primero se las ordena en orden creciente respecto del costo, es decir en la primera posición se almacena la m\'as barata y en la última, la más cara. Una vez que contamos con este ordenamiento inicial, se va a proseguir mediante el \emph{divide} dentro de este vector.\\
 
 Se prosigue de acuerdo a las características de Divide \& Conquer. De modo recursivo, se divide al vector pasado por parámetro por la mitad creando dos nuevos a los cuales se les aplica nuestro algoritmo de merge. El caso base se da cuando el vector tiene un sólo elemento, para lo cual se devuelve el vector tal cual entró.\\
 
-Nuestro algoritmo de Merge se encarga de elegir entre las frecuencias de dos arreglos pasados como parámetro, de modo que devuelve un sólo vector indicando los intervalos ocupados por las frecuencias elegidas. Dado el enunciado del problema, para elegir que frecuencia utilizar en determinado de tiempo se debe priorizar el precio más barato emitiendo señal siempre que sea posible. Gracias a que en el primer llamado de nuestra  
+Nuestro algoritmo de Merge se encarga de elegir entre las frecuencias de dos arreglos pasados como parámetro, de modo que devuelve un sólo vector indicando los intervalos ocupados por las frecuencias elegidas. 
+
+Dado el enunciado del problema, para elegir qu\'e frecuencia utilizar en determinado intervalo de tiempo se debe priorizar el precio más barato emitiendo señal siempre que sea posible. Gracias a que en el primer llamado de nuestra funci\'on estas se encontraban en orden creciente respecto del costo, en cada paso de \emph{merge} de los dos arreglos de entrada con intervalos se van a priorizar los de la izquierda. Es decir que en cada paso, todos los intervalos pertenecientes al vector de la izquierda (como son los de menor precio) van a pertencer al vector resultado. Mientras que s\'olo los intervalos que completen tiempo sin se\~nal pertenecientes al vector de la derecha van a ser colocados en el vector resultado. \textcolor{red}{Que alguien lea esto para ver si se entiende, para mi si :)}\\
+
+Una vez terminado este paso recursivo, vamos a contar con el conjunto de intervalos que completen la mayor cantidad de tiempo con el costo m\'as bajo. Si no hay dos frecuencias con el mismo costo, esta soluci\'on (\'optima) es \'unica, en caso contrario podr\'ia existir m\'as de una soluci\'on \'optima. \\
+
+
+Este algoritmo resuelve lo propuesto dando una soluci\'on \'optima porque...\\ 
+
+
+
 
 \subsection{An\'alisis de la complejidad}
 \subsection{C\'odigo fuente}
