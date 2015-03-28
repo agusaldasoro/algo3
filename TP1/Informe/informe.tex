@@ -231,6 +231,8 @@ sort_heap(datos.begin(), datos.end());\\
 \textbf{return} datos;
 \end{algorithm}
 
+\textcolor{red}{No segui poniendo el algoritmo, por si le tenemos que hacer algun cambio.}
+
 \newpage
 \subsection{Experimentaci\'on}
 
@@ -253,9 +255,29 @@ sort_heap(datos.begin(), datos.end());\\
 \section{Problema 2: Alta Frecuencia}
 \subsection{Descripci\'on de la problem\'atica}
 
-Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor tiempo posible. Los enlaces tienen asociadas distintas frecuencias, con un costo por minuto y un intervalo de tiempo (sin cortes) en el cual funcionan. Se utilizan durante minutos enteros, y es posible cambiar de una frecuencia a otra instant\'anemente (del minuto 1 al 4 uso la frecuencia A y del 4 al 6 la B). Los datos del precio y e intervalo de tiempo de cada frecuencia son dados. Se desea optimizar este problema para transmitir todo el tiempo que tenga al menos una frecuencia abierta, pero gastando la menor cantidad de dinero. Se debe contar con una complejidad de $O(n.log(n))$.
+Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor tiempo posible. Los enlaces tienen asociadas distintas frecuencias, con un costo por minuto y un intervalo de tiempo (sin cortes) en el cual funcionan. Se utilizan durante minutos enteros, y es posible cambiar de una frecuencia a otra instant\'anemente (del minuto 1 al 4 uso la frecuencia A y del 4 al 6 la B). Los datos del precio y e intervalo de tiempo de cada frecuencia son dados. Se desea optimizar este problema para transmitir todo el tiempo que tenga al menos una frecuencia abierta, pero gastando la menor cantidad de dinero. Se debe contar con una complejidad de $O(n.log(n))$.\\
 
-\textcolor{red}{Aca poner ejemplitos de cual es la solucion optima cuando hay varias senales y cuando tenes que camibar de senial porque se prendio una mas barata.}
+A continuaci\'on se muestran dos casos particulares de este problema. En ambos se ofrecen tres frecuencias, con distintos costos cada una. Se puede ver recuadrado en violeta cu\'al es la elecci\'on que debe hacerse por intervalo de tiempo.
+
+
+ \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.45]{imagenes/ej2/ejemplo1.png}
+ 	\caption{Ejemplo 1}
+% 	\label{caballito}	
+   \end{center}
+ \end{figure}
+
+ \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.45]{imagenes/ej2/ejemplo2.png}
+ 	\caption{Ejemplo 1}
+% 	\label{caballito}	
+   \end{center}
+ \end{figure}
+
+
+\newpage
 
 \subsection{Resoluci\'on propuesta y justificaci\'on}
 
@@ -279,7 +301,15 @@ Este algoritmo resuelve lo propuesto dando una soluci\'on \'optima porque...\\
 
 
 
+\newpage
+
 \subsection{An\'alisis de la complejidad}
+
+Primero consideramos que nos encontramos en un caso donde la soluci\'on \'optima es \'unica. Si contamos con la oferta de \emph{n} frecuencias, podemos asegurar que la cantidad de intervalos que va a contener la salida es de, a lo sumo, \emph{2n-1}. Esta cota superior est\'a dada porque, si consideramos agregar de a una las distintas frecuencias (empezando por las de menor costo), lo m\'aximo que puede agregar son dos intervalos (o cubrir huecos de otros que no llegaron a llenar dos). \textcolor{red}{Aca viene Eze y explica bien todo esto :D}.
+
+Por lo tanto, al hacer nuestro algoritmo de Divide \& Conquer vamos a contar con, a lo sumo, 2n-1 intervalos. Esto nos otorga una complejidad de \emph{O(n.log(n))} por el Teorema de ??????.
+
+
 \subsection{C\'odigo fuente}
 \subsection{Experimentaci\'on}
 
