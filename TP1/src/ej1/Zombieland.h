@@ -3,19 +3,21 @@
 #include <math.h>
 #include <algorithm>
 
+using namespace std;
+
 struct ciudad{
-	int zombies;
-	int soldados;
-	int costo;
+	long int zombies;
+	long int soldados;
+	long int costo;
 };
 
 struct ciudad2{
-	int numCiudad;
-	int soldadosNecesarios;
-	int costoTotal;
+	long int numCiudad;
+	long int soldadosNecesarios;
+	long int costoTotal;
 	bool operator< (const ciudad2& otro) const{
 		return costoTotal < otro.costoTotal;
 	}
 };
 
-const std::vector<ciudad2> zombieland(int cantCiudades, int presupuesto, const std::vector<ciudad>& pais, int& salvadas);
+const std::vector<ciudad2> zombieland(long int cantCiudades, long int presupuesto, const std::vector<ciudad>& pais, long int& salvadas);

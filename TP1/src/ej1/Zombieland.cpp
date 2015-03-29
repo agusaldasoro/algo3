@@ -2,44 +2,44 @@
 
 int main(int argc, char const *argv[])
 {
-	while(true){
-		if(std::cin.eof())
-			break;
-		int cantCiudades;
-		int presupuesto;
-		std::vector<ciudad> pais;
+//	while(true){
+//		if(cin.eof())
+//			break;
+		long int cantCiudades;
+		long int presupuesto;
+		vector<ciudad> pais;
 
-		std::cin >> cantCiudades;
-		std::cin >> presupuesto;
+		cin >> cantCiudades;
+		cin >> presupuesto;
 		for (int i = 0; i < cantCiudades; ++i)
 		{
 			ciudad alguna;
-			std::cin >> alguna.zombies;
-			std::cin >> alguna.soldados;
-			std::cin >> alguna.costo;
+			cin >> alguna.zombies;
+			cin >> alguna.soldados;
+			cin >> alguna.costo;
 			pais.push_back(alguna);
 		}
 		
-		int salvadas = 0;
-		std::vector<ciudad2> res = zombieland(cantCiudades, presupuesto, pais, salvadas);
-		std::vector<int> entregados(cantCiudades);
+		long int salvadas = 0;
+		vector<ciudad2> res = zombieland(cantCiudades, presupuesto, pais, salvadas);
+		vector<long int> entregados(cantCiudades);
 		for (int i = 0; i < cantCiudades; ++i)
 		{
 			entregados[res[i].numCiudad] = res[i].soldadosNecesarios;
 		}
-		std::cout << salvadas << " ";
+		cout << salvadas << " ";
 		for (int i = 0; i < cantCiudades; ++i)
 		{
-		std::cout << entregados[i] << " ";
+		cout << entregados[i] << " ";
 		}
-		std::cout << std::endl;
-	}
+		cout << endl;
+//	}
 	return 0;
 }
 
-const std::vector<ciudad2> zombieland(int cantCiudades, int presupuesto, const std::vector<ciudad>& pais, int& salvadas){
+const vector<ciudad2> zombieland(long int cantCiudades, long int presupuesto, const vector<ciudad>& pais, long int& salvadas){
 	salvadas = 0;
-	std::vector<ciudad2> datos;
+	vector<ciudad2> datos;
 	for (int i = 0; i < cantCiudades; ++i)
 	{
 		ciudad2 actual;
@@ -52,10 +52,11 @@ const std::vector<ciudad2> zombieland(int cantCiudades, int presupuesto, const s
 		actual.costoTotal = actual.soldadosNecesarios * pais[i].costo;
 		datos.push_back(actual);
 	}
-	std::sort_heap(datos.begin(), datos.end());
+	sort(datos.begin(), datos.end());
+	long int dif;
 	for (int i = 0; i < cantCiudades; ++i)
 	{
-		int dif = presupuesto - datos[i].costoTotal;
+		dif = presupuesto - datos[i].costoTotal;
 		if (dif>=0){
 			salvadas++;
 			presupuesto = dif;
