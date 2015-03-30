@@ -1,23 +1,13 @@
 #include "SenorCaballos.h"
 
-typedef vector<casillero> Vec;
-typedef vector<Vec> Tablero;
-
-long int dimension, cantCaballos;
-
-vector<coordenadas> senorCaballos(Tablero& t);
-void senorCaballosAux(Tablero& t, vector<coordenadas>& caballos, vector<coordenadas>& solucion);
-//void senorCaballosAux(Tablero& t, Tablero& aux, vector<coordenadas>& solucion);
-void atacame(Tablero& t, int fila, int col, int ataco);
-coordenadas ocupaLaLibre(Tablero& t, int fila, int col);
-int chequeo(const Tablero& t);
-void imprimir(const Tablero& tablero);
+long int dimension;
 
 int main(int argc, char const *argv[])
 {
 //	while(true){
 //		if(cin.eof())
 //			break;
+		long int cantCaballos;
 		cin >> dimension;
 		cin >> cantCaballos;
 
@@ -60,7 +50,7 @@ vector<coordenadas> senorCaballos(Tablero& t){
 //guardamos las casillas libres y les ponemos un caballo
 	for(int i = 0; i < dimension; ++i){
 		for (int j = 0; j < dimension; ++j){
-			if(!t[i][j].esCaballo && t[i][j].ataques == 0){
+			if(!t[i][j].esCaballo/* && t[i][j].ataques == 0*/){
 				coordenadas aca;
 				aca.fila = i;
  				aca.col = j;
