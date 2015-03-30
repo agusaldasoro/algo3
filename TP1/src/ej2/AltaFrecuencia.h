@@ -8,17 +8,15 @@
 using namespace std;
 
 struct frecuencia{
-	int id;
-	int costo;
-	int principio;
-	int fin;
+	long int id;
+	long int costo;
+	long int principio;
+	long int fin;
 	bool operator< (const frecuencia& otro) const{
 		return costo < otro.costo;
 	}
 };
 
 vector<frecuencia> altaFrecuencia(vector<frecuencia>& frecuencias);
-vector<frecuencia> divideAndConquer(vector<frecuencia>& frecuencias, int comienzo, int final);
+vector<frecuencia> divideAndConquer(vector<frecuencia>& frecuencias, long int comienzo, long int final);
 vector<frecuencia> conquer(vector<frecuencia> barata, vector<frecuencia> cara);
-void heapSort(vector<frecuencia>& arreglo);
-void minHeapify(vector<frecuencia>& arreglo);
