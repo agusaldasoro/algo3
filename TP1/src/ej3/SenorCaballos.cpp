@@ -79,13 +79,15 @@ vector<coordenadas> senorCaballos(Tablero& t){
 //FUNCION MAGICA COMO EL CONQUER DEL EJ2
 void senorCaballosAux(Tablero& t, vector<coordenadas>& caballos, vector<coordenadas>& solucion){
 	for(int i = caballos.size()-1; i >= 0; --i){
+//		imprimir(t);
+//		cout << "--------------------------------" << endl;
 		coordenadas aca = caballos[i];
 		atacame(t, aca.fila, aca.col, -1);
 		t[aca.fila][aca.col].esCaballo = false;
 		int libres = chequeo(t);
 //si hay dos libres, swapeo, si hay 1 o mas de 2, restauro, sino ya lo elimine
 		if(libres == 2 || (libres == 1 || libres > 2)){
-			if(libres == 2)
+			if(libres == 2 && !t[aca.fila][aca.col].esCaballo && t[aca.fila][aca.col].ataques == 0)
 				aca = ocupaLaLibre(t, aca.fila, aca.col);
 			t[aca.fila][aca.col].esCaballo = true;
 			atacame(t, aca.fila, aca.col, 1);
