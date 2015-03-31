@@ -14,6 +14,17 @@ struct frecuencia{
 	long int fin;
 	bool operator< (const frecuencia& otro) const{
 		return costo < otro.costo;
+/*		if (costo < otro.costo)
+			return true;
+		else if (costo == otro.costo){
+			if (principio < otro.principio)
+				return true;
+			else if (principio == otro.principio)
+				return fin > otro.fin;
+			else
+				return false;
+		}else
+			return false;*/
 	}
 };
 
@@ -40,12 +51,6 @@ int main(int argc, char const *argv[])
 			cin >> actual.fin;
 			if(actual.fin > actual.principio)
 				frecuencias.push_back(actual);
-			// else{
-				// long int aux = actual.principio;
-				// actual.principio = actual.fin;
-				// actual.fin = aux;
-				// frecuencias.push_back(actual);
-			// }
 		}
 		vector<frecuencia> optimas = altaFrecuencia(frecuencias);
 		vector<frecuencia>::iterator iter;
@@ -86,24 +91,22 @@ vector<frecuencia> divideAndConquer(vector<frecuencia>& frecuencias, long int co
 vector<frecuencia> conquer(vector<frecuencia> barata, vector<frecuencia> cara){
 	vector<frecuencia>::iterator iterCara = cara.begin(), iterBarata = barata.begin();
 	// cout << "barata: " << endl;
-	// for (vector<frecuencia>::iterator itB = barata.begin(); itB != barata.end(); ++itB)
-	// {
+	// for (vector<frecuencia>::iterator itB = barata.begin(); itB != barata.end(); ++itB){
 	// 	cout << '\t' << itB->id + 1 << " principio " << itB->principio << " fin " << itB->fin << endl;
 	// }
 	// cout << "cara: " << endl;
-	// for (vector<frecuencia>::iterator itB = cara.begin(); itB != cara.end(); ++itB)
-	// {
+	// for (vector<frecuencia>::iterator itB = cara.begin(); itB != cara.end(); ++itB){
 	// 	cout << '\t' << itB->id + 1 << " principio " << itB->principio << " fin " << itB->fin << endl;
 	// }
 	vector<frecuencia> res;
 	while(iterCara != cara.end()){
 		if(iterBarata != barata.end()){
-			if(iterCara->principio < iterBarata->principio){
-				if(iterCara->fin <= iterBarata->principio){
-					res.push_back(*iterCara);
+			if(iterCara->principio < iterBarata->principio){ //la cara empieza antes
+				if(iterCara->fin <= iterBarata->principio){ //la cara termina antes de que empiece la barata
+					res.push_back(*iterCara);				//meto la cara entera
 					iterCara++;
 				}
-				else{
+				else{ //la cara empieza antes y termina despues del principio de la barata
 					frecuencia antes;
 					antes.id = iterCara->id;
 					antes.costo = iterCara->costo;
@@ -113,9 +116,10 @@ vector<frecuencia> conquer(vector<frecuencia> barata, vector<frecuencia> cara){
 					iterCara->principio = iterBarata->fin;
 				}
 			}
-			else{
-				if(iterCara->fin > iterBarata->fin){
-					iterCara->principio = iterBarata->fin;
+			else{ //la barata empieza antes (o igual) que la cara
+				if(iterCara->fin > iterBarata->fin){ //la cara termina despues que la barata
+					if (iterCara->principio < iterBarata->fin) //este if es nuevo
+						iterCara->principio = iterBarata->fin;
 					res.push_back(*iterBarata);
 					iterBarata++;
 				}
