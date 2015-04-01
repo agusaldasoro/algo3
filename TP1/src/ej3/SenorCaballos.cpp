@@ -36,6 +36,70 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
+int senorCaballos(Tablero& t){
+//calculamos casillas atacadas
+	for (int i = 0; i < dimension; ++i){
+		for (int j = 0; j < dimension; ++j){
+			if(t[i][j].esCaballo){
+				atacame(t, i, j, 1);
+			}
+		}
+	}
+	int solucion = senorCaballosAux(t, 0, 0, 0);
+	return solucion;
+}
+
+int senorCaballosAux(Tablero& t, int i, int j, int agregados){
+	if(chequeo(t)){
+		return agregados;
+	}
+//	cout << i << " " << j << " " << agregados << endl;
+	int agregadosCon, agregadosSin;
+	if(i<dimension){
+		if(t[i][j].esCaballo){
+			j++;
+			if(j==dimension){
+				j=0; i++;
+			}
+			return senorCaballosAux(t, i, j, agregados);
+//			agregadosSin = senorCaballosAux2(t, i, j, agregados);
+//			agregadosCon = agregados;
+		}
+		else{
+			//agrego
+			t[i][j].esCaballo = true;
+			atacame(t, i, j, 1);
+			agregados++;
+			if(j<dimension)
+				agregadosCon = senorCaballosAux(t, i, j+1, agregados);
+			else
+				agregadosCon = senorCaballosAux(t, i+1, 0, agregados);
+			//no lo agrego
+			t[i][j].esCaballo = false;
+			atacame(t, i, j, -1);
+			agregados--;
+			if(j<dimension)
+				agregadosSin = senorCaballosAux(t, i, j+1, agregados);
+			else
+				agregadosSin = senorCaballosAux(t, i+1, 0, agregados);
+		}
+		if(agregadosCon==-1 && agregadosSin == -1)
+			return -1;
+		if(agregadosCon==-1)
+			return agregadosSin;
+		if(agregadosSin==-1)
+			return agregadosCon;
+		if(agregadosCon < agregadosSin){
+			return agregadosCon;
+		}
+		else{
+			return agregadosSin;
+		}
+	}
+	else
+		return -1;
+}
+/*
 vector<coordenadas> senorCaballos(Tablero& t){
 //calculamos casillas atacadas
 	for (int i = 0; i < dimension; ++i){
@@ -50,7 +114,7 @@ vector<coordenadas> senorCaballos(Tablero& t){
 //guardamos las casillas libres y les ponemos un caballo
 	for(int i = 0; i < dimension; ++i){
 		for (int j = 0; j < dimension; ++j){
-			if(!t[i][j].esCaballo/* && t[i][j].ataques == 0*/){
+			if(!t[i][j].esCaballo){// && t[i][j].ataques == 0){
 				coordenadas aca;
 				aca.fila = i;
  				aca.col = j;
@@ -65,7 +129,10 @@ vector<coordenadas> senorCaballos(Tablero& t){
 	senorCaballosAux(t, posibles, solucion);
 	return solucion;
 }
+*/
 
+
+/*
 //FUNCION MAGICA COMO EL CONQUER DEL EJ2
 void senorCaballosAux(Tablero& t, vector<coordenadas>& caballos, vector<coordenadas>& solucion){
 	for(int i = caballos.size()-1; i >= 0; --i){
@@ -85,6 +152,7 @@ void senorCaballosAux(Tablero& t, vector<coordenadas>& caballos, vector<coordena
 		}
 	}
 }
+*/
 
 //ataco = 1 ataca, ataco = -1 desataca
 void atacame(Tablero& t, int fila, int col, int ataco){
@@ -151,6 +219,18 @@ coordenadas ocupaLaLibre(Tablero& t, int fila, int col){
 	return res;
 }
 
+bool chequeo(const Tablero& t){
+	for (int i = 0; i < dimension; ++i){
+		for (int j = 0; j < dimension; ++j){
+			if(!t[i][j].esCaballo && t[i][j].ataques == 0){
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+/*
 int chequeo(const Tablero& t){
 	int res = 0;
 	for (int i = 0; i < dimension; ++i){
@@ -162,7 +242,7 @@ int chequeo(const Tablero& t){
 	}
 	return res;
 }
-
+*/
 void imprimir(const Tablero& tablero){
 	for (int i = 0; i < dimension; ++i){
 		for (int j = 0; j < dimension; ++j){
