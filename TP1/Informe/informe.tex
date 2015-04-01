@@ -73,7 +73,7 @@
 \thispagestyle{empty}
 \vfill
 \begin{abstract}
-Habi\'endonos sido dado una serie de tres problem\'aticas a resolver, se plantean sus respectivas soluciones acorde a los requisitos pedidos. Se adjunta una descripci\'on de cada problema y su soluci\'on, conjunto a su an\'alisis de correctitud y de complejidad sumado a su experimentaci\'on. El lenguaje elegido para llevar a cabo el trabajo es C++.
+Habi\'endonos sido dado una serie de tres problem\'aticas a resolver, se plantean sus respectivas soluciones acorde a los requisitos pedidos. Se adjunta una descripci\'on de cada problema y su soluci\'on, conjunto a su an\'alisis de correctitud y de complejidad sumado a su experimentaci\'on. El lenguaje elegido para llevar a cabo el trabajo es C++. \textcolor{red}{Poner aca instrucciones de compilaci\'on.}
 \end{abstract}
 
 \thispagestyle{empty}
@@ -163,7 +163,7 @@ El c\'alculo de salvar a cada ciudad coincide con el descripto en la secci\'on a
 
 Por lo tanto, la complejidad total del primer ciclo for nos da \textbf{\textit{O(n)}}.\\
 
-Le sigue \textbf{ordenar el vector} con estos datos, para ello usamos \href{http://www.cplusplus.com/reference/algorithm/sort_heap/?kw=sort_heap}{sort\_heap()} \footnote{http://www.cplusplus.com/reference/algorithm/sort_heap/?kw=sort_heap} de la librer\'ia de \emph{C} cuya complejidad es \textbf{\textit{O(n.log(n)})}.\\
+Le sigue \textbf{ordenar el vector} con estos datos, para ello usamos \href{http://www.cplusplus.com/reference/algorithm/sort/}{sort()} \footnote{http://www.cplusplus.com/reference/algorithm/sort/} \textcolor{red}{es este??}de la librer\'ia de \emph{C} cuya complejidad es \textbf{\textit{O(n.log(n)})}.\\
 
 A continuaci\'on, se realiza un \textbf{\'ultimo ciclo \emph{for}} que salva las ciudades que pueda, mientras dure el presupuesto y deja en \emph{0 soldados enviados} a las ciudades que no pueden ser salvadas. Estos c\'alculos aritm\'eticos y asignaciones son todos de complejidad constante O(1). Este ciclo recorre linealmente todas las ciudades por lo tanto, lo hace con complejidad \textbf{\textit{O(n)}}.\\
 
@@ -239,19 +239,10 @@ sort_heap(datos.begin(), datos.end());\\
 \textcolor{red}{Ver bien como generar ciudades aleatorias}
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
 -Comparar tiempos para ciudades de tama\~no 10, 100, 1000, 10000 y 100000 generando aleatoriamente varias de cada una y scar promedio. Hacer lo que hicieron en clase\\
-\newpage
-\subsubsection{Comparar pa\'ises de a dos}
 
-Consideramos 10\textcolor{red}{??} casos, donde para cada uno tomamos dos paises (A y B) con la misma cantidad de ciudades \textcolor{red}{para cada par de paises, cantidades distintas de ciudades (100, 500, 1000, ... (hasta donde nos de la compu jajaj))}. Estos casos los vamos a armar de tal forma que A tenga ya todas sus ciudades salvadas al momento de ser ingresada, en cambio B tiene una relaci\'on de cantidad soldados/zombies aleatoria. Corremos el algoritmo para todos los pares de paises.\\
-
-Dado a que nuestro algoritmo no establece ning\'un control de filtro sobre casos donde las ciudades ya esten salvadas al momento de ser recibidas como par\'ametro, consideramos que para cada par de ciudades los tiempos de c\'omputo no van a diferir mucho.\\
-
-\textcolor{red}{Aca va el gr\'afico donde muestra la diferencia entre cada par. Y ver si lo dibujamos linealizado como mostraron en clase tambien.}\\
-
-\textcolor{red}{Aca hay que escribir si coincidi\'o con lo que creiamos o no y dar una peque\~na explicaci\'on de porque pasa eso}
 
 \newpage
-\subsubsection{Modificaci\'on en el algoritmo}
+\subsubsection{Modificaci\'on del algoritmo}
 
 Decidimos hacer una modificaci\'on dentro del algoritmo. Creemos que esta misma va a generar una mejora en la cantidad de tiempo.\\
 
@@ -263,6 +254,16 @@ Experimentamos 10 casos distintos de tama\~no 1000\textcolor{red}{(?} y para cad
 
 \textcolor{red}{Aca va el gr\'afico de eso que acabo de explicar arriba.}
 
+\newpage
+\subsubsection{Comparar pa\'ises de a dos}
+
+Consideramos 10\textcolor{red}{??} casos, donde para cada uno tomamos dos paises (A y B) con la misma cantidad de ciudades \textcolor{red}{para cada par de paises, cantidades distintas de ciudades (100, 500, 1000, ... (hasta donde nos de la compu jajaj))}. Estos casos los vamos a armar de tal forma que A tenga ya todas sus ciudades salvadas al momento de ser ingresada, en cambio B tiene una relaci\'on de cantidad soldados/zombies aleatoria. Corremos el algoritmo para todos los pares de paises.\\
+
+Dado a que nuestro algoritmo no establece ning\'un control de filtro sobre casos donde las ciudades ya esten salvadas al momento de ser recibidas como par\'ametro, consideramos que para cada par de ciudades los tiempos de c\'omputo no van a diferir mucho.\\
+
+\textcolor{red}{Aca va el gr\'afico donde muestra la diferencia entre cada par. Y ver si lo dibujamos linealizado como mostraron en clase tambien.}\\
+
+\textcolor{red}{Aca hay que escribir si coincidi\'o con lo que creiamos o no y dar una peque\~na explicaci\'on de porque pasa eso}
 
 
 %\noindent Experimentos que se pueden hacer:
@@ -344,6 +345,21 @@ Por lo tanto, al hacer nuestro algoritmo de Divide \& Conquer vamos a contar con
 
 
 \newpage
+\subsubsection{Modificaci\'on del algoritmo}
+Debido a que nuestro algoritmo no considera como caso espec\'ifico el ordenar distintas frecuencias con el mismo valor, al momento de elegir intervalos se podr\'ian realizar cortes innecesario. Es decir, no siempre se elige la cantidad m\'inima posible en estos casos.\\
+
+Como consideramos que esto puede tardar un tiempo no despreciable, modificamos el operador $<$ para frecuencias, de modo que cuando tiene dos frecuencias del mismo valor ingrese primero la que tenga el comienzo antes y, en caso de comenzar en simult\'aneo, ingrese primero la frecuencia de mayor tama\~no.\\
+
+\textcolor{red}{Aca poner el codigo que se deberia modificar.}\\
+
+\textcolor{red}{Aca va el grafico de esto}\\
+
+\textcolor{red}{Comentar si paso lo que esperabamos o no.}
+
+
+\newpage
+
+
 
 \section{Problema 3: El se\~nor de los caballos}
 \subsection{Descripci\'on de la problem\'atica}

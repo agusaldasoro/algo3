@@ -13,8 +13,8 @@ struct frecuencia{
 	long int principio;
 	long int fin;
 	bool operator< (const frecuencia& otro) const{
-		return costo < otro.costo;
-/*		if (costo < otro.costo)
+//		return costo < otro.costo;
+		if (costo < otro.costo)
 			return true;
 		else if (costo == otro.costo){
 			if (principio < otro.principio)
@@ -24,7 +24,7 @@ struct frecuencia{
 			else
 				return false;
 		}else
-			return false;*/
+			return false;
 	}
 };
 
@@ -62,10 +62,10 @@ int main(int argc, char const *argv[])
 //			cout << "acumulado "<< costoTotal << endl;
 		}
 		cout << costoTotal << endl;
-		for (iter = optimas.begin(); iter != optimas.end(); iter++){
+	/*	for (iter = optimas.begin(); iter != optimas.end(); iter++){
 			cout << iter->principio << " " << iter->fin << " " << iter->id + 1 << endl;
 		}
-		cout << "-1" << endl;
+		cout << "-1" << endl;*/
 //	}
 	return 0;
 }
