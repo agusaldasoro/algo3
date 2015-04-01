@@ -236,19 +236,44 @@ sort_heap(datos.begin(), datos.end());\\
 \newpage
 \subsection{Experimentaci\'on}
 
-\noindent Experimentos que se pueden hacer:
-
--Muchas ciudades con pocos soldados para mandar, pero presupuesto bajo. Hipotesis: realmente es la cantidad optima, sin importar la que elija.
-
--Una cantidad muy grande de ciudades y todas salvadas ya al ser ingresadas VS la misma cantidad de ciudades pero ahora hay un presupuesto grande y hay que elegir. Hipotesis: ambas deberian tardar tiempos similares.
-
--Mejorar el algortimo para que cuadno encuentra uan ciudad que no puede salvar, ya no recorra mas. Y comparar tiempos del ejemplo anterior. Hipotesis: el tiempo en el primer caso deberia ser notoriamente inferior.
-
--Comparar tiempos para ciudades de tama\~no 10, 100, 1000, 10000 y 100000 generando aleatoriamente diez de cada una y scar promedio.\\
-
-
-
 \textcolor{red}{Ver bien como generar ciudades aleatorias}
+\subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
+-Comparar tiempos para ciudades de tama\~no 10, 100, 1000, 10000 y 100000 generando aleatoriamente varias de cada una y scar promedio. Hacer lo que hicieron en clase\\
+\newpage
+\subsubsection{Comparar pa\'ises de a dos}
+
+Consideramos 10\textcolor{red}{??} casos, donde para cada uno tomamos dos paises (A y B) con la misma cantidad de ciudades \textcolor{red}{para cada par de paises, cantidades distintas de ciudades (100, 500, 1000, ... (hasta donde nos de la compu jajaj))}. Estos casos los vamos a armar de tal forma que A tenga ya todas sus ciudades salvadas al momento de ser ingresada, en cambio B tiene una relaci\'on de cantidad soldados/zombies aleatoria. Corremos el algoritmo para todos los pares de paises.\\
+
+Dado a que nuestro algoritmo no establece ning\'un control de filtro sobre casos donde las ciudades ya esten salvadas al momento de ser recibidas como par\'ametro, consideramos que para cada par de ciudades los tiempos de c\'omputo no van a diferir mucho.\\
+
+\textcolor{red}{Aca va el gr\'afico donde muestra la diferencia entre cada par. Y ver si lo dibujamos linealizado como mostraron en clase tambien.}\\
+
+\textcolor{red}{Aca hay que escribir si coincidi\'o con lo que creiamos o no y dar una peque\~na explicaci\'on de porque pasa eso}
+
+\newpage
+\subsubsection{Modificaci\'on en el algoritmo}
+
+Decidimos hacer una modificaci\'on dentro del algoritmo. Creemos que esta misma va a generar una mejora en la cantidad de tiempo.\\
+
+La misma consiste en: modificar el \'ultimo \emph{ciclo for} para que cuando encuentre la primer ciudad que no pueda salvar deje de iterar ya que las restantes tampoco podr\'an ser salvadas (esto ocurre porque est\'an ordenadas por costo).\\
+
+Consideramos que saliendo antes del ciclo, el tiempo de c\'omputo para un mismo pa\'is deber\'ia ser menor que con el algoritmo original.\\
+
+Experimentamos 10 casos distintos de tama\~no 1000\textcolor{red}{(?} y para cada uno comparamos sus tiempos de ejecuci\'on entre el algoritmo original y el modificado.
+
+\textcolor{red}{Aca va el gr\'afico de eso que acabo de explicar arriba.}
+
+
+
+%\noindent Experimentos que se pueden hacer:
+%-Muchas ciudades con pocos soldados para mandar, pero presupuesto bajo. Hipotesis: realmente es la cantidad optima, sin importar la que elija.
+
+
+
+
+
+
+
 
 \newpage
 
@@ -271,7 +296,7 @@ A continuaci\'on se muestran dos casos particulares de este problema. En ambos s
  \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.45]{imagenes/ej2/ejemplo2.png}
- 	\caption{Ejemplo 1}
+ 	\caption{Ejemplo 2}
 % 	\label{caballito}	
    \end{center}
  \end{figure}
@@ -309,10 +334,13 @@ Primero consideramos que nos encontramos en un caso donde la soluci\'on \'optima
 
 Por lo tanto, al hacer nuestro algoritmo de Divide \& Conquer vamos a contar con, a lo sumo, 2n-1 intervalos. Esto nos otorga una complejidad de \emph{O(n.log(n))} por el Teorema de ??????.
 
-
+\newpage
 \subsection{C\'odigo fuente}
+\newpage
 \subsection{Experimentaci\'on}
 
+\subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
+-Comparar tiempos para 10, 100, 1000, 10000 y 100000 intervalos generando aleatoriamente varios de cada una y scar promedio. Hacer lo que hicieron en clase\\
 
 
 \newpage
@@ -335,38 +363,23 @@ En la figura \ref{caballito} se pueden ver todas las casillas que est\'an cubier
  \end{figure}
 
 
-A continuaci\'on se pueden apreciar dos soluciones al problema de cubrir el tablero.
 
- \begin{figure}[h!]
-   \begin{center}
- 	\includegraphics[scale=0.3]{imagenes/ej3/optimaCreo.png}
- 	\caption{Soluci\'on 1}
-% 	\label{optima_creo}	
-   \end{center}
- \end{figure}
- 
-\newpage 
- 
- 
- \begin{figure}[h!]
-   \begin{center}
- 	\includegraphics[scale=0.3]{imagenes/ej3/con5mas.png}
- 	\caption{Soluci\'on 2}
- %	\label{con5mas}	
-   \end{center}
- \end{figure}
-
-En la soluci\'on 1 se necesitaron 20 caballos, en cambio en la dos 25; es decir 5 caballos m\'as. Por lo tanto podemos establecer que la soluci\'on 2 no es la \'optima y este caso no es lo que buscamos resolver. Por otro lado, la figura 1 \textcolor{red}{es \'optima? Despu\'es sabremos...}
-
+\newpage
 \subsection{Resoluci\'on propuesta y justificaci\'on}
 
 %re jodido esto amigooooo
 %se ahcen todas las combinaciones y se va guardando la que tenga menor cantidad de caballos?
-
+\newpage
 \subsection{An\'alisis de la complejidad}
+\newpage
 \subsection{C\'odigo fuente}
+\newpage
 \subsection{Experimentaci\'on}
 
+
+\subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
+-Hacer lo que hicieron en clase\\
+\newpage
 
 % \section{Objetivos generales}
 
