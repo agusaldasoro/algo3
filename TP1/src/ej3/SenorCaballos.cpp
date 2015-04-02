@@ -1,9 +1,14 @@
 #include "SenorCaballos.h"
+#include <chrono>
+//Hay que compilarlo con el flag -std=c++11
 
 long int dimension;
 
 int main(int argc, char const *argv[])
 {
+
+	chrono::time_point<chrono::system_clock> start, end; //LINEA NUEVA
+
 //	while(true){
 //		if(cin.eof())
 //			break;
@@ -27,12 +32,21 @@ int main(int argc, char const *argv[])
 			cin >> col;
 			tablero[fila-1][col-1].esCaballo = true;
 		}
+		
+		start = chrono::system_clock::now(); //LINEA NUEVA
+
 		vector<coordenadas> sol = senorCaballos(tablero);
+
+		end = chrono::system_clock::now(); //LINEA NUEVA
+
 		cout << sol.size() << endl;
 		for (int i = 0; i < sol.size(); ++i){
 			cout << sol[i].fila+1 << " " << sol[i].col+1 << endl;
 		}
 //	}
+
+		chrono::duration<double> elapsed_seconds = end-start; //LINEA NUEVA
+		cout << "Tiempo: " << elapsed_seconds.count() << endl; //LINEA NUEVA
 	return 0;
 }
 

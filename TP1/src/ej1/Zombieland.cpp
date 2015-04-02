@@ -1,7 +1,14 @@
 #include "Zombieland.h"
+#include <chrono>
+//Hay que compilarlo con el flag -std=c++11
+
+
 
 int main(int argc, char const *argv[])
 {
+
+	chrono::time_point<chrono::system_clock> start, end; //LINEA NUEVA
+
 //	while(true){
 //		if(cin.eof())
 //			break;
@@ -21,18 +28,28 @@ int main(int argc, char const *argv[])
 		}
 		
 		long int salvadas = 0;
+
+		start = chrono::system_clock::now(); //LINEA NUEVA
+		
+
 		vector<ciudad2> res = zombieland(cantCiudades, presupuesto, pais, salvadas);
 		vector<long int> entregados(cantCiudades);
 		for (int i = 0; i < cantCiudades; ++i)
 		{
 			entregados[res[i].numCiudad] = res[i].soldadosNecesarios;
 		}
+
+		end = chrono::system_clock::now(); //LINEA NUEVA
+
 		cout << salvadas << " ";
 		for (int i = 0; i < cantCiudades; ++i)
 		{
 		cout << entregados[i] << " ";
 		}
 		cout << endl;
+
+		chrono::duration<double> elapsed_seconds = end-start; //LINEA NUEVA
+		cout << "Tiempo: " << elapsed_seconds.count() << endl; //LINEA NUEVA
 //	}
 	return 0;
 }

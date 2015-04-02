@@ -4,6 +4,10 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <chrono>
+//Hay que compilarlo con el flag -std=c++11
+
+
 
 using namespace std;
 
@@ -36,6 +40,9 @@ vector<frecuencia> conquer(vector<frecuencia> barata, vector<frecuencia> cara);
 
 int main(int argc, char const *argv[])
 {
+
+	chrono::time_point<chrono::system_clock> start, end; //LINEA NUEVA
+
 //	while(true){
 //		if(cin.eof())
 //			break;
@@ -52,7 +59,14 @@ int main(int argc, char const *argv[])
 			if(actual.fin > actual.principio)
 				frecuencias.push_back(actual);
 		}
+
+		start = chrono::system_clock::now(); //LINEA NUEVA
+		
+
 		vector<frecuencia> optimas = altaFrecuencia(frecuencias);
+
+		end = chrono::system_clock::now(); //LINEA NUEVA
+
 		vector<frecuencia>::iterator iter;
 		long int costoTotal = 0;
 		for (iter = optimas.begin(); iter != optimas.end(); iter++)
@@ -67,6 +81,9 @@ int main(int argc, char const *argv[])
 		}
 		cout << "-1" << endl;*/
 //	}
+
+		chrono::duration<double> elapsed_seconds = end-start; //LINEA NUEVA
+		cout << "Tiempo: " << elapsed_seconds.count() << endl; //LINEA NUEVA
 	return 0;
 }
 
