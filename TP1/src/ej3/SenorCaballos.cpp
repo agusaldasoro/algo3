@@ -6,9 +6,7 @@ long int dimension;
 
 int main(int argc, char const *argv[])
 {
-
 	chrono::time_point<chrono::system_clock> start, end; //LINEA NUEVA
-
 //	while(true){
 //		if(cin.eof())
 //			break;
@@ -34,23 +32,26 @@ int main(int argc, char const *argv[])
 		}
 		
 		start = chrono::system_clock::now(); //LINEA NUEVA
-
 		vector<coordenadas> sol = senorCaballos(tablero);
-
+//		int sol = senorCaballos(tablero);
 		end = chrono::system_clock::now(); //LINEA NUEVA
-
+//		cout << sol << endl;
 		cout << sol.size() << endl;
 		for (int i = 0; i < sol.size(); ++i){
 			cout << sol[i].fila+1 << " " << sol[i].col+1 << endl;
 		}
-//	}
-
+//	}	
+		for (int i = 0; i < sol.size(); ++i){
+			tablero[sol[i].fila][sol[i].col].esCaballo = true;
+			atacame(tablero, sol[i].fila, sol[i].col, 1);
+		}
+		imprimir(tablero);
 		chrono::duration<double> elapsed_seconds = end-start; //LINEA NUEVA
 		cout << "Tiempo: " << elapsed_seconds.count() << endl; //LINEA NUEVA
 	return 0;
 }
 
-int senorCaballos(Tablero& t){
+vector<coordenadas> senorCaballos(Tablero& t){
 //calculamos casillas atacadas
 	for (int i = 0; i < dimension; ++i){
 		for (int j = 0; j < dimension; ++j){
@@ -59,15 +60,19 @@ int senorCaballos(Tablero& t){
 			}
 		}
 	}
-	int solucion = senorCaballosAux(t, 0, 0, 0);
-	return solucion;
+	vector<coordenadas> optimo(dimension*dimension);
+	vector<coordenadas> agregados;
+	senorCaballosAux(t, 0, 0, agregados, optimo);
+	return optimo;
 }
 
-int senorCaballosAux(Tablero& t, int i, int j, int agregados){
+int senorCaballosAux(Tablero& t, int i, int j, vector<coordenadas>& agregados, vector<coordenadas>& optimo){
 	if(chequeo(t)){
-		return agregados;
+		if(agregados.size() < optimo.size())
+			optimo.assign(agregados.begin(),agregados.end()); //ACA COPIAMOS EL VECTOR
+		return agregados.size();
 	}
-//	cout << i << " " << j << " " << agregados << endl;
+	// cheque = false
 	int agregadosCon, agregadosSin;
 	if(i<dimension){
 		if(t[i][j].esCaballo){
@@ -75,34 +80,44 @@ int senorCaballosAux(Tablero& t, int i, int j, int agregados){
 			if(j==dimension){
 				j=0; i++;
 			}
-			return senorCaballosAux(t, i, j, agregados);
-//			agregadosSin = senorCaballosAux2(t, i, j, agregados);
-//			agregadosCon = agregados;
+			return senorCaballosAux(t, i, j, agregados, optimo);
 		}
 		else{
 			//agrego
+			if(agregados.size() == optimo.size()-1)
+				return -1;
 			t[i][j].esCaballo = true;
 			atacame(t, i, j, 1);
-			agregados++;
-			if(j<dimension)
-				agregadosCon = senorCaballosAux(t, i, j+1, agregados);
+			coordenadas aca;
+			aca.fila = i; aca.col = j;
+			agregados.push_back(aca);
+			if(j<dimension-1)
+				agregadosCon = senorCaballosAux(t, i, j+1, agregados, optimo);
 			else
-				agregadosCon = senorCaballosAux(t, i+1, 0, agregados);
+				agregadosCon = senorCaballosAux(t, i+1, 0, agregados, optimo);
 			//no lo agrego
 			t[i][j].esCaballo = false;
 			atacame(t, i, j, -1);
-			agregados--;
-			if(j<dimension)
-				agregadosSin = senorCaballosAux(t, i, j+1, agregados);
+			agregados.pop_back();
+			if(j<dimension-1)
+				agregadosSin = senorCaballosAux(t, i, j+1, agregados, optimo);
 			else
-				agregadosSin = senorCaballosAux(t, i+1, 0, agregados);
+				agregadosSin = senorCaballosAux(t, i+1, 0, agregados, optimo);
 		}
+//		if(agregadosSin > optimo.size() && agregadosCon > optimo.size())
+//		 	return -1;
 		if(agregadosCon==-1 && agregadosSin == -1)
 			return -1;
 		if(agregadosCon==-1)
 			return agregadosSin;
 		if(agregadosSin==-1)
 			return agregadosCon;
+//		if(agregadosCon > optimo.size()){
+//			return agregadosSin;
+//		}
+//		if(agregadosSin > optimo.size()){
+//			return agregadosCon;
+//		}
 		if(agregadosCon < agregadosSin){
 			return agregadosCon;
 		}
