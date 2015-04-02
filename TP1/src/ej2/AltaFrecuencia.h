@@ -4,6 +4,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <chrono>
 
 using namespace std;
 
@@ -13,7 +14,18 @@ struct frecuencia{
 	long int principio;
 	long int fin;
 	bool operator< (const frecuencia& otro) const{
-		return costo < otro.costo;
+//		return costo < otro.costo;
+		if (costo < otro.costo)
+			return true;
+		else if (costo == otro.costo){
+			if (principio < otro.principio)
+				return true;
+			else if (principio == otro.principio)
+				return fin > otro.fin;
+			else
+				return false;
+		}else
+			return false;
 	}
 };
 

@@ -1,48 +1,8 @@
-#include <iostream>
-#include <vector>
-#include <math.h>
-#include <vector>
-#include <iterator>
-#include <algorithm>
-#include <chrono>
 //Hay que compilarlo con el flag -std=c++11
+#include "AltaFrecuencia.h"
 
-
-
-using namespace std;
-
-struct frecuencia{
-	long int id;
-	long int costo;
-	long int principio;
-	long int fin;
-	bool operator< (const frecuencia& otro) const{
-//		return costo < otro.costo;
-		if (costo < otro.costo)
-			return true;
-		else if (costo == otro.costo){
-			if (principio < otro.principio)
-				return true;
-			else if (principio == otro.principio)
-				return fin > otro.fin;
-			else
-				return false;
-		}else
-			return false;
-	}
-};
-
-vector<frecuencia> altaFrecuencia(vector<frecuencia>& frecuencias);
-vector<frecuencia> divideAndConquer(vector<frecuencia>& frecuencias, long int comienzo, long int final);
-vector<frecuencia> conquer(vector<frecuencia> barata, vector<frecuencia> cara);
-
-//#include "AltaFrecuencia.h"
-
-int main(int argc, char const *argv[])
-{
-
+int main(int argc, char const *argv[]){
 	chrono::time_point<chrono::system_clock> start, end; //LINEA NUEVA
-
 //	while(true){
 //		if(cin.eof())
 //			break;
@@ -59,31 +19,22 @@ int main(int argc, char const *argv[])
 			if(actual.fin > actual.principio)
 				frecuencias.push_back(actual);
 		}
-
 		start = chrono::system_clock::now(); //LINEA NUEVA
-		
-
 		vector<frecuencia> optimas = altaFrecuencia(frecuencias);
-
 		end = chrono::system_clock::now(); //LINEA NUEVA
-
 		vector<frecuencia>::iterator iter;
 		long int costoTotal = 0;
-		for (iter = optimas.begin(); iter != optimas.end(); iter++)
-		{
+		for (iter = optimas.begin(); iter != optimas.end(); iter++){
 			costoTotal += (iter->fin - iter->principio) * iter->costo;
-//			cout << "parcial " << (iter->fin - iter->principio) * iter->costo << " costo por minuto " << iter->costo << endl;
-//			cout << "acumulado "<< costoTotal << endl;
 		}
 		cout << costoTotal << endl;
-	/*	for (iter = optimas.begin(); iter != optimas.end(); iter++){
+		for (iter = optimas.begin(); iter != optimas.end(); iter++){
 			cout << iter->principio << " " << iter->fin << " " << iter->id + 1 << endl;
 		}
-		cout << "-1" << endl;*/
+		cout << "-1" << endl;
 //	}
-
-		chrono::duration<double> elapsed_seconds = end-start; //LINEA NUEVA
-		cout << "Tiempo: " << elapsed_seconds.count() << endl; //LINEA NUEVA
+	chrono::duration<double> elapsed_seconds = end-start; //LINEA NUEVA
+	cout << "Tiempo: " << elapsed_seconds.count() << endl; //LINEA NUEVA
 	return 0;
 }
 
