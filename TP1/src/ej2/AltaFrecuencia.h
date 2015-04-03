@@ -14,18 +14,12 @@ struct frecuencia{
 	long int principio;
 	long int fin;
 	bool operator< (const frecuencia& otro) const{
-//		return costo < otro.costo;
-		if (costo < otro.costo)
-			return true;
-		else if (costo == otro.costo){
-			if (principio < otro.principio)
-				return true;
-			else if (principio == otro.principio)
+		if(costo == otro.costo){
+			if(principio == otro.principio)
 				return fin > otro.fin;
-			else
-				return false;
-		}else
-			return false;
+			return principio < otro.principio;
+		}
+		return costo < otro.costo;
 	}
 };
 

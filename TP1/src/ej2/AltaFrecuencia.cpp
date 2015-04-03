@@ -1,38 +1,34 @@
 //Hay que compilarlo con el flag -std=c++11
-#include "AltaFrecuencia.h"
+//#include "AltaFrecuencia.h"
 
 int main(int argc, char const *argv[]){
 	chrono::time_point<chrono::system_clock> start, end; //LINEA NUEVA
-//	while(true){
-//		if(cin.eof())
-//			break;
-		long int cantFrec;
-		vector<frecuencia> frecuencias;
-		cin >> cantFrec;
-		for (int i = 0; i < cantFrec; ++i)
-		{
-			frecuencia actual;
-			actual.id = i;
-			cin >> actual.costo;
-			cin >> actual.principio;
-			cin >> actual.fin;
-			if(actual.fin > actual.principio)
-				frecuencias.push_back(actual);
-		}
-		start = chrono::system_clock::now(); //LINEA NUEVA
-		vector<frecuencia> optimas = altaFrecuencia(frecuencias);
-		end = chrono::system_clock::now(); //LINEA NUEVA
-		vector<frecuencia>::iterator iter;
-		long int costoTotal = 0;
-		for (iter = optimas.begin(); iter != optimas.end(); iter++){
-			costoTotal += (iter->fin - iter->principio) * iter->costo;
-		}
-		cout << costoTotal << endl;
-		for (iter = optimas.begin(); iter != optimas.end(); iter++){
-			cout << iter->principio << " " << iter->fin << " " << iter->id + 1 << endl;
-		}
-		cout << "-1" << endl;
-//	}
+	long int cantFrec;
+	vector<frecuencia> frecuencias;
+	cin >> cantFrec;
+	for (int i = 0; i < cantFrec; ++i){
+		frecuencia actual;
+		actual.id = i;
+		cin >> actual.costo;
+		cin >> actual.principio;
+		cin >> actual.fin;
+		if(actual.fin > actual.principio)
+			frecuencias.push_back(actual);
+	}
+	start = chrono::system_clock::now(); //LINEA NUEVA
+	vector<frecuencia> optimas = altaFrecuencia(frecuencias);
+	vector<frecuencia>::iterator iter;
+	long int costoTotal = 0;
+	for (iter = optimas.begin(); iter != optimas.end(); iter++){
+		costoTotal += (iter->fin - iter->principio) * iter->costo;
+	}
+	//MOVI EL CHRONO DE LUGAR, ES PARTE DEL EJERCICIO HACER ESTE CALCULO :p
+	end = chrono::system_clock::now(); //LINEA NUEVA
+	cout << costoTotal << endl;
+	for (iter = optimas.begin(); iter != optimas.end(); iter++){
+		cout << iter->principio << " " << iter->fin << " " << iter->id + 1 << endl;
+	}
+	cout << "-1" << endl;
 	chrono::duration<double> elapsed_seconds = end-start; //LINEA NUEVA
 	cout << "Tiempo: " << elapsed_seconds.count() << endl; //LINEA NUEVA
 	return 0;
@@ -58,14 +54,6 @@ vector<frecuencia> divideAndConquer(vector<frecuencia>& frecuencias, long int co
 
 vector<frecuencia> conquer(vector<frecuencia> barata, vector<frecuencia> cara){
 	vector<frecuencia>::iterator iterCara = cara.begin(), iterBarata = barata.begin();
-	// cout << "barata: " << endl;
-	// for (vector<frecuencia>::iterator itB = barata.begin(); itB != barata.end(); ++itB){
-	// 	cout << '\t' << itB->id + 1 << " principio " << itB->principio << " fin " << itB->fin << endl;
-	// }
-	// cout << "cara: " << endl;
-	// for (vector<frecuencia>::iterator itB = cara.begin(); itB != cara.end(); ++itB){
-	// 	cout << '\t' << itB->id + 1 << " principio " << itB->principio << " fin " << itB->fin << endl;
-	// }
 	vector<frecuencia> res;
 	while(iterCara != cara.end()){
 		if(iterBarata != barata.end()){
@@ -105,10 +93,5 @@ vector<frecuencia> conquer(vector<frecuencia> barata, vector<frecuencia> cara){
 		res.push_back(*iterBarata);
 		iterBarata++;
 	}
-	// cout << "res: " << endl;
-	// for (vector<frecuencia>::iterator itB = res.begin(); itB != res.end(); ++itB)
-	// {
-	// 	cout << '\t' << itB->id + 1 << " principio " << itB->principio << " fin " << itB->fin << endl;
-	// }
 	return res;
 }
