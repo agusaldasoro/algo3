@@ -33,3 +33,4 @@ coordenadas ocupaLaLibre(Tablero& t, int fila, int col);
 bool chequeo(const Tablero& t);
 //int chequeo(const Tablero& t);
 void imprimir(const Tablero& tablero);
+bool sirveAgregar(const Tablero& t, int fila, int col);

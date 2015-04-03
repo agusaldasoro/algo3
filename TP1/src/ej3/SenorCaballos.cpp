@@ -33,11 +33,11 @@ int main(int argc, char const *argv[]){
 	for (int i = 0; i < sol.size(); ++i){
 		cout << sol[i].fila+1 << " " << sol[i].col+1 << endl;
 	}
-//	for (int i = 0; i < sol.size(); ++i){
-//		tablero[sol[i].fila][sol[i].col].esCaballo = true;
-//		atacame(tablero, sol[i].fila, sol[i].col, 1);
-//	}
-//	imprimir(tablero);
+	for (int i = 0; i < sol.size(); ++i){
+		tablero[sol[i].fila][sol[i].col].esCaballo = true;
+		atacame(tablero, sol[i].fila, sol[i].col, 1);
+	}
+	imprimir(tablero);
 	chrono::duration<double> elapsed_seconds = end-start; //LINEA NUEVA
 	cout << "Tiempo: " << elapsed_seconds.count() << endl; //LINEA NUEVA
 	return 0;
@@ -76,7 +76,10 @@ int senorCaballosAux(Tablero& t, int i, int j, vector<coordenadas>& agregados, v
 		else{
 			if(agregados.size() == optimo.size()-1)
 				return -1;
+			if(!sirveAgregar(t, i, j))
+				return -1;
 			//no lo agrego
+
 			if(j<dimension-1)
 				agregadosSin = senorCaballosAux(t, i, j+1, agregados, optimo);
 			else
@@ -144,4 +147,32 @@ void imprimir(const Tablero& tablero){
 		}
 		cout << endl << endl;
 	}
+}
+
+bool sirveAgregar(const Tablero& t, int fila, int col){
+	if(col-2 >= 0){
+		if(fila-1 >= 0 && t[fila-1][col-2].ataques == 0 && !(t[fila-1][col-2].esCaballo))
+			return true;
+		if(fila+1 < dimension && t[fila+1][col-2].ataques == 0 && !(t[fila+1][col-2].esCaballo))
+			return true;
+	}
+	if(col+2 < dimension){
+		if(fila-1 >= 0 && t[fila-1][col+2].ataques == 0 && !(t[fila-1][col+2].esCaballo))
+			return true;
+		if(fila+1 < dimension && t[fila+1][col+2].ataques == 0 && !(t[fila+1][col+2].esCaballo)) 
+			return true;
+	}
+	if(fila-2 >= 0){
+		if(col-1 >= 0 && t[fila-2][col-1].ataques == 0 && !(t[fila-2][col-1].esCaballo)) 
+			return true;
+		if(col+1 < dimension && t[fila-2][col+1].ataques == 0 && !(t[fila-2][col+1].esCaballo))
+			return true;
+	}
+	if(fila+2 < dimension){
+		if(col-1 >= 0 && t[fila+2][col-1].ataques == 0 && !(t[fila+2][col-1].esCaballo)) 
+			return true;
+		if(col+1 < dimension && t[fila+2][col+1].ataques == 0 && !(t[fila+2][col+1].esCaballo)) 
+			return true;
+	}
+	return false;
 }
