@@ -74,6 +74,7 @@ int senorCaballosAux(Tablero& t, int i, int j, vector<coordenadas>& agregados, v
 	int siAgrego, siNoAgrego;
 	if(i<dimension){
 //	si hay un caballo preubicado, salteo el espacio
+//	si la posicion esta atacada y de agregar un caballo no cubre ninguna previamente cubierta, no es lo que busco
 		if(t[i][j].esCaballo || (!sirveAgregar(t, i, j) && t[i][j].ataques > 0)){
 			j++;
 			if(j==dimension){
@@ -84,7 +85,6 @@ int senorCaballosAux(Tablero& t, int i, int j, vector<coordenadas>& agregados, v
 //	sino backtracking
 		else{
 //		si tengo un optimo de k caballos, y llegue a una subsolucion de k-1 caballos que aun no cubre todo el tablero, no es lo que busco
-//		si la posicion esta atacada y de agregar un caballo no cubre ninguna previamente cubierta, no es lo que busco
 			if(agregados.size() >= optimo.size()-1)
 				return -1;
 //		PRUEBO SIN AGREGAR UN CABALLO
