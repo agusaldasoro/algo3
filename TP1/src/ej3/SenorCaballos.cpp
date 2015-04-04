@@ -65,51 +65,62 @@ vector<coordenadas> senorCaballos(Tablero& t){
 }
 
 int senorCaballosAux(Tablero& t, int i, int j, vector<coordenadas>& agregados, vector<coordenadas>& optimo){
+//si el tablero esta cubierto, dadas las podas será una solución optima, la guardamos y retornamos cuantos caballos agregamos
 	if(chequeo(t)){
 		optimo.assign(agregados.begin(),agregados.end());
-		return agregados.size();
+		return optimo.size();
 	}
-	// chequeo = false
+//sino si estoy dentro del tablero
 	int siAgrego, siNoAgrego;
 	if(i<dimension){
-		if(t[i][j].esCaballo){
+//	si hay un caballo preubicado, salteo el espacio
+		if(t[i][j].esCaballo || (!sirveAgregar(t, i, j) && t[i][j].ataques > 0)){
 			j++;
 			if(j==dimension){
 				j=0; i++;
 			}
 			return senorCaballosAux(t, i, j, agregados, optimo);
 		}
+//	sino backtracking
 		else{
-			if(agregados.size() == optimo.size()-1 || (!sirveAgregar(t, i, j) && t[i][j].ataques > 0))
+//		si tengo un optimo de k caballos, y llegue a una subsolucion de k-1 caballos que aun no cubre todo el tablero, no es lo que busco
+//		si la posicion esta atacada y de agregar un caballo no cubre ninguna previamente cubierta, no es lo que busco
+			if(agregados.size() >= optimo.size()-1)
 				return -1;
-			//no lo agrego
+//		PRUEBO SIN AGREGAR UN CABALLO
+//		si no termine la fila
 			if(j<dimension-1)
 				siNoAgrego = senorCaballosAux(t, i, j+1, agregados, optimo);
+//		si tengo que cambiar de fila
 			else
 				siNoAgrego = senorCaballosAux(t, i+1, 0, agregados, optimo);
-			//agrego
+//		PRUEBO AGREGANDO UN CABALLO
 			t[i][j].esCaballo = true;
 			atacame(t, i, j, 1);
 			coordenadas aca;
 			aca.fila = i; aca.col = j;
+//		lo agrego a la posible solucion
 			agregados.push_back(aca);
+//		si no termine la fila
 			if(j<dimension-1)
 				siAgrego = senorCaballosAux(t, i, j+1, agregados, optimo);
+//		si tengo que cambiar de fila
 			else
 				siAgrego = senorCaballosAux(t, i+1, 0, agregados, optimo);
-			//restauro
+//		RESTAURO el tablero y el vector con los caballos agregados
 			t[i][j].esCaballo = false;
 			atacame(t, i, j, -1);
 			agregados.pop_back();
 		}
+//	si no tienen solucion agregando y sin agregar, devuelvo que no hay solucion
 		if(siAgrego == -1 && siNoAgrego == -1)
 			return -1;
 		if(siNoAgrego==-1 || siAgrego < siNoAgrego)
 			return siAgrego;
 		return siNoAgrego;
 	}
-	else
-		return -1;
+//sino devuelvo que no hay solucion
+	return -1;
 }
 
 //ataco = 1 ataca, ataco = -1 desataca
