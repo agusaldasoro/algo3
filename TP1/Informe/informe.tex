@@ -62,9 +62,9 @@
 \titulo{Trabajo Práctico I}
 %\subtitulo{subtitulo del trabajo}
 \integrante{Aldasoro Agustina}{86/13}{agusaldasoro@gmail.com}
-\integrante{Noriega Francisco}{XXX/XX}{mail}
+\integrante{Noriega Francisco}{660/12}{frannoriega.92@gmail.com}
 \integrante{Zimenspitz Ezequiel}{155/13}{ezeqzim@gmail.com}
-\integrante{Zuker Brian}{XXX/XX}{mail}
+\integrante{Zuker Brian}{441/13}{brianzuker@gmail.com}
 
 
 \maketitle
@@ -73,7 +73,15 @@
 \thispagestyle{empty}
 \vfill
 \begin{abstract}
-Habi\'endonos sido dado una serie de tres problem\'aticas a resolver, se plantean sus respectivas soluciones acorde a los requisitos pedidos. Se adjunta una descripci\'on de cada problema y su soluci\'on, conjunto a su an\'alisis de correctitud y de complejidad sumado a su experimentaci\'on. El lenguaje elegido para llevar a cabo el trabajo es C++. \textcolor{red}{Poner aca instrucciones de compilaci\'on.}
+Habi\'endonos sido dado una serie de tres problem\'aticas a resolver, se plantean sus respectivas soluciones acorde a los requisitos pedidos. Se adjunta una descripci\'on de cada problema y su soluci\'on, conjunto a su an\'alisis de correctitud y de complejidad sumado a su experimentaci\'on. El lenguaje elegido para llevar a cabo el trabajo es C++.
+
+Estos son los comandos para compilar cada ejercicio (el flag se utiliz\'o para la librer\'ia <chrono> para medir tiempos de ejecucion):\\
+	g++ -o main Zombieland.cpp -std=c++11\\
+	g++ -o main AltaFrecuencia.cpp -std=c++11\\
+	g++ -o main SenorCaballos.cpp -std=c++11
+	
+Dentro de cada .cpp est\'a el comando para compilar cada ejercicio desde la carpeta donde se encuentran los mismos.
+
 \end{abstract}
 
 \thispagestyle{empty}
@@ -89,9 +97,9 @@ Habi\'endonos sido dado una serie de tres problem\'aticas a resolver, se plantea
 
 \subsection{Descripci\'on de la problem\'atica}
 
-Dado un mapa con \emph{n} ciudades, en cada una de ellas se encuentra una determinada cantidad de Zombies y una determinada cantidad de Soldados (ambas tambi\'en dadas). El objetivo del problema es exterminar a la invasi\'on zombie, para ello es necesario un enfrentamiento \textit{zombies vs soldados} por cada ciudad. Con el fin de que este enfrentamiento sea positivo, es decir se logre matar a todos los zombies de una ciudad, es necesario que la cantidad de zombies sea, a lo sumo, diez veces m\'as grande que la cantidad de soldados.\\
+En un pa\'is con \emph{n} ciudades, se encuentran una determinada cantidad de Zombies y de Soldados por cada una de ellas. El objetivo del problema es exterminar la invasi\'on zombie, para ello es necesario un enfrentamiento \textit{zombies vs soldados} por cada ciudad. Para que el combate sea positivo en una ciudad, es decir se logre matar a todos los zombies de la misma, es necesario que la cantidad de zombies sea, a lo sumo, diez veces m\'as grande que la cantidad de soldados.\\
 
-Como los soldados se encuentran atrincherados, se puede optar entre llevar a cabo un enfrentamiento o no (ya que no se desea provocar un ataque donde ya se sabe que se va a perder). Los soldados acuartelados no pueden moverse de la ciudad en la que est\'an, pero s\'i se cuenta con una dotaci\'on de soldados extra que se la puede ubicar en cualquiera de las \emph{n} ciudades acorde a lo deseado. La cantidad de soldados extra es ilimitada, mas los recursos para trasladarlos no lo son. El traslado de cada soldado extra a una ciudad tiene un costo espec\'ifico que var\'ia acorde a la ciudad elegida. Siempre que sea econ\'omicamente posible, se puede trasladar una cantidad de soldados indistinta por ciudad.\\
+Se sabe de antemano cu\'antos zombies y cu\'antos soldados se encuentran atrincherados en cada ciudad (o sea que cada ciudad sabe cuando iniciar el combate para no ser infectados). Los soldados acuartelados no pueden moverse de la ciudad en la que est\'an, pero s\'i se cuenta con una dotaci\'on de soldados extra que se la puede ubicar en cualquiera de las \emph{n} ciudades para salvarla. La cantidad de soldados extra es ilimitada, mas los recursos para trasladarlos no lo son. El costo del traslado depende de cada ciudad. Siempre que se respete el presupuesto del pa\'is, se pueden trasladar todos los soldados necesarios para salvar a cada ciudad.\\
 
 Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible salvar a las n ciudades. Lo que se desea en este problema es maximizar la cantidad de ciudades salvadas, respetando el presupuesto. Es decir, se deben establecer las cantidades de soldados extras enviados a cada ciudad de modo que la cantidad de ciudades salvadas sea la \'optima y gastando un monto por debajo del presupuesto.  El algoritmo debe tener una complejidad temporal de $O(n.log(n))$, siendo $n$ la cantidad de ciudades del pa\'is.\\
 
@@ -103,7 +111,7 @@ Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible 
 
 \textcolor{red}{Ver que habla mucho sobre vectores y dijo que no mezclaramos implementacion con algoritmo}\\
 
-Para la resoluci\'on del problema decidimos utilizar un algoritmo goloso, el mismo tomar\'a una decisi\'on \'optima para cada instante, sin revisar si ser\'a la mejor a nivel global.\\
+Para la resoluci\'on del problema decidimos utilizar un algoritmo goloso, que salvar\'a en cada paso a la ciudad que m\'as le convenga en ese momento, es decir, la que permita maximar la cantidad de ciudades salvadas.\\
 
 Como primera instancia, el algoritmo simplemente calcula, para cada ciudad, cu\'anto ser\'ia el costo de salvarla. Para ello, primero se calcula la cantidad de soldados extra necesarios y luego se multiplica por el costo de traslado de cada unidad:\\
 
@@ -116,13 +124,14 @@ Como primera instancia, el algoritmo simplemente calcula, para cada ciudad, cu\'
 	\end{verbatim}
 	\end{codesnippet}
 
-Luego de haber obtenido una magnitud con la cual se pueden comparar las ciudades entre s\'i, se ordenan las ciudades de menor a mayor en base al costo de salvarla para ser recorridas secuencialmente y enviar los ej\'ercitos requeridos hasta que alcance el presupuesto.\\
+Luego de haber obtenido una magnitud con la cual se pueden comparar las ciudades entre s\'i, se ordenan las ciudades de menor a mayor en base al costo de salvarla para ser recorridas secuencialmente y enviar los ej\'ercitos requeridos hasta que se agote el presupuesto.\\
 
- Como las ciudades van a estar almacenadas en un vector, en la posicion \textit{vec}$_0$ se va a encontrar la ciudad que es m\'as barata de salvar y en la posici\'on \textit{vec}$_{n-1}$ la m\'as cara. En este vector se van a encontrar todas las ciudades pasadas por par\'ametro, sin importar que una ciudad ya este salvada al ser ingresada.\\
+Notar que si alguna ciudad no requiere soldados extras para ser salvada, entonces ser\'an las primeras en ser salvadas dado que el costo_total ser\'a igual a 0.\\
  
- Se recorre este vector secuencialmente, de modo que para cada posici\'on i $\in$ [0,n-1] se va a comparar el costo de salvar la ciudad \emph{i} contra el presupuesto restante en esa instancia (presupuesto_actual). Si es una compra factible, se resta el costo_total del presupuesto_actual y se envian las tropas necesarias a la ciudad \emph{i}; en caso contrario se le asigna \emph{0} a las tropas extras enviadas a la ciudad \emph{i}. \\
- 
- Por la forma en que fue construido el vector, cuando se encuentre una ciudad i que el costo de salvarla excede del presupuesto_actual las dem\'as ciudades j $\in$ [i+1, n-1] tampoco podr\'an ser salvadas. De todos modos, nuestro algoritmo realiza el mismo c\'alculo para todas las posiciones del vector.\\
+Se recorren secuencialmente las ciudades ordenadas por el costo_total, de modo que para cada una se va a comparar el costo de salvarla contra el presupuesto restante en ese momento (presupuesto_actual). Si es factible el salvataje, se resta el costo_total del presupuesto_actual y se env\'ian las tropas necesarias a la ciudad; en caso contrario se la marca como ciudad perdida.\\
+
+Vale aclarar que el orden impuesto a las ciudades implica que cuando no se pueda salvar a una ciudad, no se puede salvar a ninguna otra.
+Por la forma en que fue construido el vector, cuando se encuentre una ciudad i que el costo de salvarla excede del presupuesto_actual las dem\'as ciudades j $\in$ [i+1, n-1] tampoco podr\'an ser salvadas. De todos modos, nuestro algoritmo realiza el mismo c\'alculo para todas las posiciones del vector.\\
  
 Como en este vector las ciudades no aparecen en orden creciente por su n\'umero, debemos reordenarlas. Debido a que el \emph{id} de cada ciudad va a ser \'unico y va a encontrarse en el intervalo [0, n-1], se lo recorre secuencialmente colocando cada ciudad en la posici\'on de su \textit{id} dentro de un nuevo vector \emph{respuesta} . \textcolor{red}{Ver que este parrafo me aprece que no quedo muy claro...} \\
  
