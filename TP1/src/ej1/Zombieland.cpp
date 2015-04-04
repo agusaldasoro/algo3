@@ -54,7 +54,7 @@ const vector<ciudad2> zombieland(long int cantCiudades, long int presupuesto, co
 	}
 //Ordenamos el vector de menor a mayor costo para salvarlas
 	sort(datos.begin(), datos.end());
-	long int dif;
+	long int dif = presupuesto;
 //Vemos cuantas salvamos respetando el presupuesto
 	int i = 0;
 	while(i<cantCiudades && dif >= 0){
