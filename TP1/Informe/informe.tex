@@ -130,59 +130,57 @@ Notar que si alguna ciudad no requiere soldados extras para ser salvada, entonce
  
 Se recorren secuencialmente las ciudades ordenadas por el costo_total, de modo que para cada una se va a comparar el costo de salvarla contra el presupuesto restante en ese momento (presupuesto_actual). Si es factible el salvataje, se resta el costo_total del presupuesto_actual y se env\'ian las tropas necesarias a la ciudad; en caso contrario se la marca como ciudad perdida.\\
 
-Vale aclarar que el orden impuesto a las ciudades implica que cuando no se pueda salvar a una ciudad, no se puede salvar a ninguna otra.
-Por la forma en que fue construido el vector, cuando se encuentre una ciudad i que el costo de salvarla excede del presupuesto_actual las dem\'as ciudades j $\in$ [i+1, n-1] tampoco podr\'an ser salvadas. De todos modos, nuestro algoritmo realiza el mismo c\'alculo para todas las posiciones del vector.\\
+Vale aclarar que el orden impuesto a las ciudades implica que cuando no se pueda salvar a una ciudad, no se puede salvar a ninguna otra.\\
  
-Como en este vector las ciudades no aparecen en orden creciente por su n\'umero, debemos reordenarlas. Debido a que el \emph{id} de cada ciudad va a ser \'unico y va a encontrarse en el intervalo [0, n-1], se lo recorre secuencialmente colocando cada ciudad en la posici\'on de su \textit{id} dentro de un nuevo vector \emph{respuesta} . \textcolor{red}{Ver que este parrafo me aprece que no quedo muy claro...} \\
- 
- 
- 
+Como en este vector las ciudades no aparecen en orden creciente por su n\'umero, debemos reordenarlas. Debido a que el \emph{id} de cada ciudad va a ser \'unico y va a encontrarse en el intervalo [0, n-1], se lo recorre secuencialmente colocando cada ciudad en la posici\'on de su \textit{id} dentro de un nuevo vector \emph{respuesta} . \textcolor{red}{Ver que este parrafo me aprece que no quedo muy claro...} \textcolor{blue}{es necesario este p\'arrafo? habla del stdout... no me parece necesario en absoluto... yo lo sacar\'ia}\\
 
 El algortimo resuelve el problema salvando la mayor cantidad de ciudades posibles porque
-\textcolor{red}{INSERT FORMAL DEMO}
+\textcolor{red}{FRAN NORIEGA -- INSERT FORMAL DEMO}
 
 \newpage
 \subsection{An\'alisis de la complejidad}
 La complejidad de nuestra soluci\'on es $O(n.log(n))$, siendo \emph{n} la cantidad de ciudades del pa\'is.\\
 
-
-
-Como primera instancia, el algoritmo almacena las ciudades con sus caracter\'isticas (pasadas como par\'ametro) dentro de un vector para luego poder utilizarlas de un modo pr\'actico. Como esto lo realiza secuencialmente, tiene un costo lineal \textbf{\textit{O(n)}}. \textcolor{red}{Esto habia que ponerlo aca asi? o directamente nada? o solo nombrarlo?}\\
+En primera instancia, guardamos los datos de las ciudades pasadas por stdin en structs y los dejamos dentro de un vector, para luego poder utilizarlas de un modo pr\'actico. Como esto se realiza secuencialmente, tiene costo lineal \textbf{\textit{O(n)}}.
 
 \begin{algorithm}[h!]
 \caption{zombieland}
-\For{\emph{cada} ciudad \emph{en vector} pa\'is}{
-	Calcular la cantidad de soldados extra necesarios y el costo de esto.\\
+\For{\emph{each} ciudad $\in$ pa\'is}{
+	Calcular la cantidad de soldados extra necesarios y el costo de salvarla.\\
 	Almacenar esta informaci\'on en un vector \emph{datos} mediante \textit{push_back()}
 }
-Ordena al vector \emph{datos} mediante \textit{sort_heap()}\\
-\For{\emph{cada} ciudad \emph{en vector} datos}{
-	Calcular si puede ser salvada.\\
-	Indicarle cantidad de soldados extras enviados y cambios en el presupuesto_actual.
+Ordena al vector \emph{datos} mediante \textit{sort()}\\
+\While{pueda salvar}{
+	\If{puede ser salvada}{
+		Indicar cantidad de soldados extras enviados y actualizar el presupuesto_actual
+	}
 }
-\For{\emph{cada} ciudad \emph{en vector} datos}{
+\textcolor{blue}{es necesario este cacho? habla del stdout... no me parece necesario en absoluto... yo lo sacar\'ia}\\
+\For{\emph{each} ciudad \emph{en vector} datos}{
 	Insertar en el vector \emph{respuesta}[ciudad.id] la ciudad actual. 
 }
 \end{algorithm}
 \textcolor{red}{En el codigo, yo pondria este reordenamiento dentro de zombieland, ya que hay que considerarlo para medir tiempos.}\\
+\textcolor{blue}{A mi no me parece que sea necesario para medir tiempos... o sea, arrancar de la instancia pasada por parametro, salvo que la limemos y usemos avls, heaps, etc. no me parece necesario contarlas. lo mismo para escribir, la respuesta est\'a, en el ej2 tenemos que calcular un pedazo de respuesta post algoritmo y lo hacemos y lo consideramos, el std out extra porque deber\'iamos considerarlo? es algo que nos piden para visualizar, si las cosas andan mal, porque pueden llegar a estar mal}\\
 
 El c\'odigo presenta un \textbf{primer ciclo \emph{for}} que calcula el costo de salvar a cada ciudad y las agrega mediante push_back() a un vector. El ciclo recorre linealmente todas las ciudades por lo que tiene complejidad $O(n)$. 
 
-El c\'alculo de salvar a cada ciudad coincide con el descripto en la secci\'on anterior, el cual por ser operaciones aritm\'eticas es $O(1)$. Armar el nuevo struct para insertar dentro del vector \emph{datos} tambi\'en posee un costo constante $O(1)$. La funci\'on \href{http://www.cplusplus.com/reference/vector/vector/push_back/}{push\_back()} \footnote{http://www.cplusplus.com/reference/vector/vector/push_back/} tiene costo $O(1)$ amortizado, lo que implica que cuando no precisa redimensionar el vector cuesta esto, y cuando lo hace, toma tiempo lineal en la cantidad de elementos. Como insertamos durante todo el ciclo tomamos el costo amortizado $O(1)$. 
-
+El c\'alculo de salvar a cada ciudad coincide con el descripto en la secci\'on anterior, el cual por ser operaciones aritm\'eticas es $O(1)$. Armar el nuevo struct para insertar dentro del vector \emph{datos} tambi\'en posee un costo constante $O(1)$. La funci\'on \href{http://www.cplusplus.com/reference/vector/vector/push_back/}{push\_back()} \footnote{http://www.cplusplus.com/reference/vector/vector/push_back/} tiene costo $O(1)$ amortizado, lo que implica que cuando no precisa redimensionar el vector cuesta esto, y cuando lo hace, toma tiempo lineal en la cantidad de elementos. Como insertamos durante todo el ciclo tomamos el costo amortizado $O(1)$.
 Por lo tanto, la complejidad total del primer ciclo for nos da \textbf{\textit{O(n)}}.\\
 
-Le sigue \textbf{ordenar el vector} con estos datos, para ello usamos \href{http://www.cplusplus.com/reference/algorithm/sort/}{sort()} \footnote{http://www.cplusplus.com/reference/algorithm/sort/} \textcolor{red}{es este??}de la librer\'ia de \emph{C} cuya complejidad es \textbf{\textit{O(n.log(n)})}.\\
+Le sigue \textbf{ordenar el vector} con estos datos, para ello usamos \href{http://www.cplusplus.com/reference/algorithm/sort/}{sort()} \footnote{http://www.cplusplus.com/reference/algorithm/sort/} cuya complejidad es \textbf{\textit{O(n.log(n)})}.\\
 
-A continuaci\'on, se realiza un \textbf{\'ultimo ciclo \emph{for}} que salva las ciudades que pueda, mientras dure el presupuesto y deja en \emph{0 soldados enviados} a las ciudades que no pueden ser salvadas. Estos c\'alculos aritm\'eticos y asignaciones son todos de complejidad constante O(1). Este ciclo recorre linealmente todas las ciudades por lo tanto, lo hace con complejidad \textbf{\textit{O(n)}}.\\
+A continuaci\'on, se realizan dos \textbf{\'ultimo ciclos \emph{while}} el primero salva todas las ciudades que pueda, mientras dure el presupuesto y el segundo deja en \emph{0 soldados enviados} a las ciudades que no pueden ser salvadas. Estos c\'alculos aritm\'eticos y asignaciones son todos de complejidad constante $O(1)$. El primer ciclo toma $O(ciudades\_salvadas)$ y el segundo $O(n-ciudades\_salvadas)$ dando como resultado un recorrido lineal sobre todas las ciudades, por lo tanto lo hace con complejidad \textbf{\textit{O(n)}}.\\
+
+\textcolor{blue}{Para mi no va...}\\
 
 Finalmente, se debe \textbf{reordenar el vector} obtenido hasta ahora para que quede en orden creciente respecto de su \textit{id}. Como esto se hace recorriendo secuencialmente el primer vector, asign\'andole uno a uno los elementos al nuevo vector \emph{respuesta} indexados; s\'olo hace una pasada lineal con costo \textbf{\textit{O(n)}}.\\
 
+Como cada paso de los mencionados son secuenciales, las complejidades se suman, obteniendo:\\
 
-
-Como cada paso de los mencionados son secuenciales, las complejidades se suman, obteniendo:
-
- $O(n)$ + $O(n.log(n))$ + $O(n)$ + $O(n)$ que es igual a \textit{\textbf{O(n.log(n))}} por propiedades de $O$.
+$O(n)$ + $O(n.log(n))$ + $O(n)$ 
+% + $O(n)$
+ que es igual a \textit{\textbf{O(n.log(n))}} por propiedades de $O$.
 
 
 \newpage

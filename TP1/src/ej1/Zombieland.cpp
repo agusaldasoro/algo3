@@ -19,8 +19,8 @@ int main(int argc, char const *argv[]){
 	start = chrono::system_clock::now();
 //Aplicamos el algoritmo
 	vector<ciudad2> res = zombieland(cantCiudades, presupuesto, pais, salvadas);
-	vector<long int> entregados(cantCiudades);
 	end = chrono::system_clock::now();
+	vector<long int> entregados(cantCiudades);
 //Stdout pedido
 	for (int i = 0; i < cantCiudades; ++i){
 		entregados[res[i].numCiudad] = res[i].soldadosNecesarios;
@@ -58,7 +58,6 @@ const vector<ciudad2> zombieland(long int cantCiudades, long int presupuesto, co
 //Vemos cuantas salvamos respetando el presupuesto
 	int i = 0;
 	while(i<cantCiudades && dif >= 0){
-//	for(int i = 0; i < cantCiudades; ++i){
 		dif = presupuesto - datos[i].costoTotal;
 		if (dif>=0){
 			salvadas++;
@@ -71,14 +70,5 @@ const vector<ciudad2> zombieland(long int cantCiudades, long int presupuesto, co
 		datos[i].soldadosNecesarios = 0;
 		++i;
 	}
-//si no se puede salvar, seteamos los soldados necesarios en 0 para imprimir una respuesta correcta
-/*		else{
-			for(int j = i; j < cantCiudades; ++j){
-				datos[j].soldadosNecesarios = 0;
-			}
-			i = cantCiudades;
-		}
-
-	}
-*/	return datos;
+	return datos;
 }
