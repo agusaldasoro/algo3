@@ -56,14 +56,23 @@ const vector<ciudad2> zombieland(long int cantCiudades, long int presupuesto, co
 	sort(datos.begin(), datos.end());
 	long int dif;
 //Vemos cuantas salvamos respetando el presupuesto
-	for(int i = 0; i < cantCiudades; ++i){
+	int i = 0;
+	while(i<cantCiudades && dif >= 0){
+//	for(int i = 0; i < cantCiudades; ++i){
 		dif = presupuesto - datos[i].costoTotal;
 		if (dif>=0){
 			salvadas++;
 			presupuesto = dif;
+			++i;
 		}
+	}
+//Las que sobran no se salvan, seteamos los soldados necesarios en 0 para imprimir una respuesta correcta
+	while(i<cantCiudades){
+		datos[i].soldadosNecesarios = 0;
+		++i;
+	}
 //si no se puede salvar, seteamos los soldados necesarios en 0 para imprimir una respuesta correcta
-		else{
+/*		else{
 			for(int j = i; j < cantCiudades; ++j){
 				datos[j].soldadosNecesarios = 0;
 			}
@@ -71,5 +80,5 @@ const vector<ciudad2> zombieland(long int cantCiudades, long int presupuesto, co
 		}
 
 	}
-	return datos;
+*/	return datos;
 }
