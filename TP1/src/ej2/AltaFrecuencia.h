@@ -24,5 +24,5 @@ struct frecuencia{
 };
 
 vector<frecuencia> altaFrecuencia(vector<frecuencia>& frecuencias);
-vector<frecuencia> divideAndConquer(vector<frecuencia>& frecuencias, long int comienzo, long int final);
+vector<frecuencia> divide(vector<frecuencia>& frecuencias, long int comienzo, long int final);
 vector<frecuencia> conquer(vector<frecuencia> barata, vector<frecuencia> cara);
