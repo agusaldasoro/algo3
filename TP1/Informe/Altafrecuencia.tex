@@ -51,9 +51,9 @@ divide(conjuntoDeFrecuencias F){
 
 En palabras, si hay una sola frecuencia, la devolvemos, pues es trivial que su intervalo de duraci\'on es el m\'as barato y el de mayor extensi\'on temporal.\\
 
-Si no, intervalosA ser\'a el conjunto de intervalos en la que funcionar\'a cada frecuencia, de modo que el costo de contratar el servicio con este cronograma sea m\'inimo en el costo y m\'aximo en la cantidad de tiempo de uso. E intervalosB ser\'a un conjunto con las mismas carater\'isticas, con la diferencia de que el A ser\'a el m\'as \'optimo de la mitad m\'as barata y el B el m\'as \'optimo de la mitad m\'as cara. Esto resulta de haber ordenado las frecuencias por su costo antes de comenzas con este tramo de algoritmo.
+Si no, intervalosA ser\'a el conjunto de intervalos en la que funcionar\'a cada frecuencia, de modo que el costo de contratar el servicio con este cronograma sea m\'inimo en el costo y m\'aximo en la cantidad de tiempo de uso. E intervalosB ser\'a un conjunto con las mismas carater\'isticas, con la diferencia de que el A ser\'a el m\'as \'optimo de la mitad m\'as barata y el B el m\'as \'optimo de la mitad m\'as cara. Esto resulta de haber ordenado las frecuencias por su costo antes de comenzas con este tramo de algoritmo.\textcolor{red}{No se si este parrafo se entiende mucho}\\
 
-Al hacer conquer(intervalosA, intervalosB) se obtiene el conjunto de intervalos con las caracter\'isticas mencionadas pero de todas las frecuencias.\\
+Al hacer conquer(intervalosA, intervalosB) se obtiene el conjunto de intervalos con las caracter\'isticas mencionadas pero de todas las frecuencias.\textcolor{red}{No habria que explicar mas aca?}\\
 
 %Nuestro algoritmo de Merge (\emph{conquer}) se encarga de elegir entre las frecuencias de dos arreglos pasados como parámetro, de modo que devuelve un sólo vector indicando los intervalos ocupados por las frecuencias elegidas. 
 
@@ -164,7 +164,6 @@ Reemplazando en la ecuaci\'on, \emph{T(n)=2T(n/2)+O(n)} que es la misma ecuaci\'
 \subsection{Experimentaci\'on}
 
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
--Comparar tiempos para 10, 100, 1000, 10000 y 100000 intervalos generando aleatoriamente varios de cada una y scar promedio. Hacer lo que hicieron en clase\\
 
 
 \newpage

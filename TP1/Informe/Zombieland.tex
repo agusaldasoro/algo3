@@ -4,7 +4,7 @@
 
 En un pa\'is con \emph{n} ciudades, se encuentran una determinada cantidad de Zombies y de Soldados por cada una de ellas. El objetivo del problema es exterminar la invasi\'on zombie, para ello es necesario un enfrentamiento \textit{zombies vs soldados} por cada ciudad. Para que el combate sea positivo en una ciudad, es decir se logre matar a todos los zombies de la misma, es necesario que la cantidad de zombies sea, a lo sumo, diez veces m\'as grande que la cantidad de soldados.\\
 
-Se sabe de antemano cu\'antos zombies y cu\'antos soldados se encuentran atrincherados en cada ciudad (o sea que cada ciudad sabe cuando iniciar el combate para no ser infectados). Los soldados acuartelados no pueden moverse de la ciudad en la que est\'an, pero s\'i se cuenta con una dotaci\'on de soldados extra que se la puede ubicar en cualquiera de las \emph{n} ciudades para salvarla. La cantidad de soldados extra es ilimitada, mas los recursos para trasladarlos no lo son. El costo del traslado depende de cada ciudad. Siempre que se respete el presupuesto del pa\'is, se pueden trasladar todos los soldados necesarios para salvar a cada ciudad.\\
+Se sabe de antemano cu\'antos zombies y cu\'antos soldados se encuentran atrincherados en cada ciudad. Los soldados acuartelados no pueden moverse de la ciudad en la que est\'an, pero s\'i se cuenta con una dotaci\'on de soldados extra que se la puede ubicar en cualquiera de las \emph{n} ciudades para salvarla. La cantidad de soldados extra es ilimitada, mas los recursos para trasladarlos no lo son. El costo del traslado depende de cada ciudad. Siempre que se respete el presupuesto del pa\'is, se pueden trasladar todos los soldados necesarios para salvar a cada ciudad.\\
 
 Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible salvar a las n ciudades. Lo que se desea en este problema es maximizar la cantidad de ciudades salvadas, respetando el presupuesto. Es decir, se deben establecer las cantidades de soldados extras enviados a cada ciudad de modo que la cantidad de ciudades salvadas sea la \'optima y gastando un monto por debajo del presupuesto.  El algoritmo debe tener una complejidad temporal de $O(n.log(n))$, siendo $n$ la cantidad de ciudades del pa\'is.\\
 
@@ -33,9 +33,9 @@ Notar que si alguna ciudad no requiere soldados extras para ser salvada, entonce
  
 Se recorren secuencialmente las ciudades ordenadas por el costo_total, de modo que para cada una se va a comparar el costo de salvarla contra el presupuesto restante en ese momento (presupuesto_actual). Si es factible el salvataje, se resta el costo_total del presupuesto_actual y se env\'ian las tropas necesarias a la ciudad; en caso contrario se la marca como ciudad perdida.\\
 
-Vale aclarar que el orden impuesto a las ciudades implica que cuando no se pueda salvar a una ciudad, no se puede salvar a ninguna otra.\\
+Vale aclarar que el orden impuesto a las ciudades implica que cuando ya no se pueda salvar a una ciudad, no se podr\'a salvar a ninguna otra de las restantes.\\
  
-Como en este vector las ciudades no aparecen en orden creciente por su n\'umero, debemos reordenarlas. Debido a que el \emph{id} de cada ciudad va a ser \'unico y va a encontrarse en el intervalo [0, n-1], se lo recorre secuencialmente colocando cada ciudad en la posici\'on de su \textit{id} dentro de un nuevo vector \emph{respuesta} . \textcolor{red}{Ver que este parrafo me aprece que no quedo muy claro...} \textcolor{blue}{es necesario este p\'arrafo? habla del stdout... no me parece necesario en absoluto... yo lo sacar\'ia}\\
+%Como en este vector las ciudades no aparecen en orden creciente por su n\'umero, debemos reordenarlas. Debido a que el \emph{id} de cada ciudad va a ser \'unico y va a encontrarse en el intervalo [0, n-1], se lo recorre secuencialmente colocando cada ciudad en la posici\'on de su \textit{id} dentro de un nuevo vector \emph{respuesta} . \textcolor{red}{Ver que este parrafo me aprece que no quedo muy claro...} \textcolor{blue}{es necesario este p\'arrafo? habla del stdout... no me parece necesario en absoluto... yo lo sacar\'ia}\\
 
 El algortimo resuelve el problema salvando la mayor cantidad de ciudades posibles porque
 \textcolor{red}{FRAN NORIEGA -- INSERT FORMAL DEMO}
@@ -66,6 +66,8 @@ Ordena al vector \emph{datos} mediante \textit{sort()}\\
 \textcolor{red}{En el codigo, yo pondria este reordenamiento dentro de zombieland, ya que hay que considerarlo para medir tiempos.}\\
 \textcolor{blue}{A mi no me parece que sea necesario para medir tiempos... o sea, arrancar de la instancia pasada por parametro, salvo que la limemos y usemos avls, heaps, etc. no me parece necesario contarlas. lo mismo para escribir, la respuesta est\'a, en el ej2 tenemos que calcular un pedazo de respuesta post algoritmo y lo hacemos y lo consideramos, el std out extra porque deber\'iamos considerarlo? es algo que nos piden para visualizar, si las cosas andan mal, porque pueden llegar a estar mal}\\
 
+\textcolor{red}{Dijo el ayudante que eso si habia que ponerlo....}
+
 El c\'odigo presenta un \textbf{primer ciclo \emph{for}} que calcula el costo de salvar a cada ciudad y las agrega mediante push_back() a un vector. El ciclo recorre linealmente todas las ciudades por lo que tiene complejidad $O(n)$. 
 
 El c\'alculo de salvar a cada ciudad coincide con el descripto en la secci\'on anterior, el cual por ser operaciones aritm\'eticas es $O(1)$. Armar el nuevo struct para insertar dentro del vector \emph{datos} tambi\'en posee un costo constante $O(1)$. La funci\'on \href{http://www.cplusplus.com/reference/vector/vector/push_back/}{push\_back()} \footnote{http://www.cplusplus.com/reference/vector/vector/push_back/} tiene costo $O(1)$ amortizado, lo que implica que cuando no precisa redimensionar el vector cuesta esto, y cuando lo hace, toma tiempo lineal en la cantidad de elementos. Como insertamos durante todo el ciclo tomamos el costo amortizado $O(1)$.
@@ -75,7 +77,7 @@ Le sigue \textbf{ordenar el vector} con estos datos, para ello usamos \href{http
 
 A continuaci\'on, se realizan dos \textbf{\'ultimo ciclos \emph{while}} el primero salva todas las ciudades que pueda, mientras dure el presupuesto y el segundo deja en \emph{0 soldados enviados} a las ciudades que no pueden ser salvadas. Estos c\'alculos aritm\'eticos y asignaciones son todos de complejidad constante $O(1)$. El primer ciclo toma $O(ciudades\_salvadas)$ y el segundo $O(n-ciudades\_salvadas)$ dando como resultado un recorrido lineal sobre todas las ciudades, por lo tanto lo hace con complejidad \textbf{\textit{O(n)}}.\\
 
-\textcolor{blue}{Para mi no va...}\\
+\textcolor{blue}{Para mi no va...}\textcolor{red}{Dijo que siiiiii}\\
 
 Finalmente, se debe \textbf{reordenar el vector} obtenido hasta ahora para que quede en orden creciente respecto de su \textit{id}. Como esto se hace recorriendo secuencialmente el primer vector, asign\'andole uno a uno los elementos al nuevo vector \emph{respuesta} indexados; s\'olo hace una pasada lineal con costo \textbf{\textit{O(n)}}.\\
 
@@ -114,7 +116,7 @@ struct ciudad2{
 	\end{codesnippet}
 
 \textcolor{red}{Poner como leemos y escribimos?? y el main? CREO QUE SI...}
-\textcolor{blue}{no se, se puede dejar como apendice esto no? directamente lo imprimimos del sublime, toda la paja pasar todos los algoritmos a latex, con el main y las funciones extras y bla bla bla}
+\textcolor{blue}{no se, se puede dejar como apendice esto no? directamente lo imprimimos del sublime, toda la paja pasar todos los algoritmos a latex, con el main y las funciones extras y bla bla bla}\textcolor{red}{Pero hay una seccion que se llama codigo fuente.... algo hay que poner ahi. Y ademas, el sublime no imprime con colores. Y ademas, tiene que quedar en el pdf!}
 
 
 \begin{algorithm}[h!]
@@ -147,35 +149,37 @@ sort_heap(datos.begin(), datos.end());\\
 \newpage
 \subsection{Experimentaci\'on}
 
-\textcolor{red}{Ver bien como generar ciudades aleatorias}
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
--Comparar tiempos para ciudades de tama\~no 10, 100, 1000, 10000 y 100000 generando aleatoriamente varias de cada una y scar promedio. Hacer lo que hicieron en clase\\
 
-\textcolor{blue}{QUE ES ESTO??? MODIFIQUE EL ALGORITMO PARA QUE HAGA EXACTAMENTE ESTO ANTES DE LEERLO... ESTO NO ES UNA EXPERIMENTACIOOOOON, es una chamuyada asquerosa y sin sentido!}
+
+
+ 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+%\subsubsection{Modificaci\'on del algoritmo}
+
+%Decidimos hacer una modificaci\'on dentro del algoritmo. Creemos que esta misma va a generar una mejora en la cantidad de tiempo.\\
+
+%La misma consiste en: modificar el \'ultimo \emph{ciclo for} para que cuando encuentre la primer ciudad que no pueda salvar deje de iterar ya que las restantes tampoco podr\'an ser salvadas (esto ocurre porque est\'an ordenadas por costo).\\
+
+%Consideramos que saliendo antes del ciclo, el tiempo de c\'omputo para un mismo pa\'is deber\'ia ser menor que con el algoritmo original.\\
+
+%Experimentamos 10 casos distintos de tama\~no 1000\textcolor{red}{(?} y para cada uno comparamos sus tiempos de ejecuci\'on entre el algoritmo original y el modificado.
+
+%\textcolor{red}{Aca va el gr\'afico de eso que acabo de explicar arriba.}
 
 %\newpage
-\subsubsection{Modificaci\'on del algoritmo}
+%\subsubsection{Comparar pa\'ises de a dos}
 
-Decidimos hacer una modificaci\'on dentro del algoritmo. Creemos que esta misma va a generar una mejora en la cantidad de tiempo.\\
+%Consideramos 10\textcolor{red}{??} casos, donde para cada uno tomamos dos paises (A y B) con la misma cantidad de ciudades \textcolor{red}{para cada par de paises, cantidades distintas de ciudades (100, 500, 1000, ... (hasta donde nos de la compu jajaj))}. Estos casos los vamos a armar de tal forma que A tenga ya todas sus ciudades salvadas al momento de ser ingresada, en cambio B tiene una relaci\'on de cantidad soldados/zombies aleatoria. Corremos el algoritmo para todos los pares de paises.\\
 
-La misma consiste en: modificar el \'ultimo \emph{ciclo for} para que cuando encuentre la primer ciudad que no pueda salvar deje de iterar ya que las restantes tampoco podr\'an ser salvadas (esto ocurre porque est\'an ordenadas por costo).\\
+%Dado a que nuestro algoritmo no establece ning\'un control de filtro sobre casos donde las ciudades ya esten salvadas al momento de ser recibidas como par\'ametro, consideramos que para cada par de ciudades los tiempos de c\'omputo no van a diferir mucho.\\
 
-Consideramos que saliendo antes del ciclo, el tiempo de c\'omputo para un mismo pa\'is deber\'ia ser menor que con el algoritmo original.\\
+%\textcolor{red}{Aca va el gr\'afico donde muestra la diferencia entre cada par. Y ver si lo dibujamos linealizado como mostraron en clase tambien.}\\
 
-Experimentamos 10 casos distintos de tama\~no 1000\textcolor{red}{(?} y para cada uno comparamos sus tiempos de ejecuci\'on entre el algoritmo original y el modificado.
-
-\textcolor{red}{Aca va el gr\'afico de eso que acabo de explicar arriba.}
-
-%\newpage
-\subsubsection{Comparar pa\'ises de a dos}
-
-Consideramos 10\textcolor{red}{??} casos, donde para cada uno tomamos dos paises (A y B) con la misma cantidad de ciudades \textcolor{red}{para cada par de paises, cantidades distintas de ciudades (100, 500, 1000, ... (hasta donde nos de la compu jajaj))}. Estos casos los vamos a armar de tal forma que A tenga ya todas sus ciudades salvadas al momento de ser ingresada, en cambio B tiene una relaci\'on de cantidad soldados/zombies aleatoria. Corremos el algoritmo para todos los pares de paises.\\
-
-Dado a que nuestro algoritmo no establece ning\'un control de filtro sobre casos donde las ciudades ya esten salvadas al momento de ser recibidas como par\'ametro, consideramos que para cada par de ciudades los tiempos de c\'omputo no van a diferir mucho.\\
-
-\textcolor{red}{Aca va el gr\'afico donde muestra la diferencia entre cada par. Y ver si lo dibujamos linealizado como mostraron en clase tambien.}\\
-
-\textcolor{red}{Aca hay que escribir si coincidi\'o con lo que creiamos o no y dar una peque\~na explicaci\'on de porque pasa eso}
+%\textcolor{red}{Aca hay que escribir si coincidi\'o con lo que creiamos o no y dar una peque\~na explicaci\'on de porque pasa eso}
 
 
 %\noindent Experimentos que se pueden hacer:
