@@ -37,8 +37,20 @@ Vale aclarar que el orden impuesto a las ciudades implica que cuando ya no se pu
  
 %Como en este vector las ciudades no aparecen en orden creciente por su n\'umero, debemos reordenarlas. Debido a que el \emph{id} de cada ciudad va a ser \'unico y va a encontrarse en el intervalo [0, n-1], se lo recorre secuencialmente colocando cada ciudad en la posici\'on de su \textit{id} dentro de un nuevo vector \emph{respuesta} . \textcolor{red}{Ver que este parrafo me aprece que no quedo muy claro...} \textcolor{blue}{es necesario este p\'arrafo? habla del stdout... no me parece necesario en absoluto... yo lo sacar\'ia}\\
 
-El algortimo resuelve el problema salvando la mayor cantidad de ciudades posibles porque
-\textcolor{red}{FRAN NORIEGA -- INSERT FORMAL DEMO}
+A continuación demostraremos que el algoritmo resuelve efectivamente el problema planteado.\\
+
+\textbf{Teorema}\\
+El algoritmo resuelve el problema planteado, salvando la mayor cantidad de ciudades posibles.\\
+
+\textbf{Demostraci\'on}\\
+Para demostrar el teorema enunciado, supondremos que nuestro algoritmo no devuelve una solución óptima, y tomaremos la solución óptima con más ciudades salvadas en común.
+Sean $C_{k}$ las ciudades de la solución óptima y $D_{k}$ las ciudades de la solución dada por el algoritmo, y supondremos que están ordenadas de menor a mayor, según el costo de ser salvadas.
+Sea $C_{j}$ la primer ciudad distinta a las ciudades de $D$, de modo que $C_{i}$ = $D_{i}$ $\forall i, i < j$.\\
+
+Entonces, hasta $C_{i-1}$, el costo total por salvar dichas ciudades es el mismo al de $D$ hasta $D_{i-1}$. Pero ya que el algoritmo elige siempre la ciudad que (pudiendo salvarse) cueste lo menor posible, eso significa que $C_{i}$ tiene un costo igual o mayor al de $D_{i}$, con lo cual si en $C$ reemplazamos $C_{i}$ por $D_{i}$, seguimos teniendo presupuesto (en particular, mayor que el que se tenía) y se salvan la misma cantidad de ciudades, por lo que debe ser óptimo.\\
+Pero esta nueva solución, es una solución óptima que tiene más ciudades en común que $C$, por lo que es absurdo, ya que $C$ era la solución óptima que más ciudades en común tenía con $D$.\\
+El absurdo proviene de suponer que $D$ no es óptimo y que por lo tanto la solución óptima con más ciudades salvadas en común con $D$, no es $D$.
+Así, $D$ debe ser óptimo, en el sentido de que debe tener la mayor cantidad ciudades que pueden ser salvadas, para el presupuesto y costos para cada ciudad dados.
 
 \newpage
 \subsection{An\'alisis de la complejidad}
