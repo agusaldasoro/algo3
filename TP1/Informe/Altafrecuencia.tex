@@ -146,13 +146,107 @@ Este \'ultimo paso abusa del invariante: todos los intervalos del conjunto inter
 
 \subsection{An\'alisis de la complejidad}
 
-Para realizar este análisis primero es necesario calcular cu\'antos intervalos puede llegar a haber en el conjunto soluci\'on (desde ahora 'CS'), este valor es, en el peor caso, \emph{2n-1}, siendo n el n\'umero de frecuencias.\\
+Para realizar este análisis primero es necesario calcular cu\'antos intervalos contendr\'a, como m\'aximo, el conjunto soluci\'on (desde ahora ``\emph{CS}''). Este valor ser\'a $2n-1$, siendo $n$ la cantidad de frecuencias dadas como par\'ametro.
 
-Esto se deduce de analizar las posibles entradas para el algoritmo, supongamos n=1. El intervalo de la frecuencia ser\'a el \'unico elemento del CS y verifica $2n-1=2x1-1=1$.\\
+Esto se deduce de analizar las posibles entradas para el algoritmo. Primero vamos a analizar el caso donde no existan dos frecuencias pasadas como par\'ametro con el mismo valor. De este modo la soluci\'on \'optima al problema va a ser \'unica. \\
 
-Si ahora tomamos n=2, entonces dado una frecuencia (la m\'as barata), la otra (m\'as cara) puede que se solape o no. Si no lo hace, entonces el CS tendr\'a ambos intervalos incluidos. Si se solapa, 1) est\'a inclu \'ido, con lo cual el CS ser\'a contendr\'a solo a la primer frecuencia; 2) arranca o termina mientras la otra est\'a disponible, dejando al CS con \'unicamente el pedazo de intervalo que no se solapa y el otro entero; o bien 3) arranca y termina antes y despu\'es de que arranque y termina el primero, logrando que el CS tenga un primer intervalo de la segunda frecuencia, hasta que arranca la primera, que entra por completo y luego un segundo intervalo de la segunda frecuencia que empieza cuando termina la primera. Esto se extiende para todo n con los mismos resultados, solo que puede agregarse un 4) completar un gap.\\
 
-Hasta el caso 3) se ve claramente que el m\'aximo n\'umero de intervalos es el propuesto (agregar un intervalo a izquierda y uno a derecha). Para el caso 4) hay que tener en cuenta que el paso anterior fue un caso de no solapamiento, es decir que si intercambiara la frecuencia que completa gaps con la no solapada, entonces entrar\'ia en el caso 2) o en el caso 3), verificando que a lo sumo se llega a \emph{2n-1} intervalos.\\
+Supongamos \textbf{n=1}. El intervalo de la frecuencia pasada como par\'ametro ser\'a el \'unico elemento del \emph{CS} y verifica $2n-1$ $=$ $2$.$1-1$ $=$ $1$.\\
+
+Luego, tomamos \textbf{n=2}. De este modo, ambas pueden solaparse o ser disjuntas. Llamamos $1$ a la frecuencia m\'as barata y $2$ a la m\'as cara, $1$ va a estar incluida completa en \emph{CS} y $2$ puede formar dos intervalos, uno o ninguno. A continuaci\'on, se adjuntan cada uno de los casos, indicando en naranja los intervalos que pertenecer\'an a \emph{CS}.\\
+
+La frecuencia $2$ no forma ning\'un intervalo:
+
+ \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.45]{imagenes/ej2/secuencias/Paso1/Caso0.png}
+% 	\caption{}
+% 	\label{caballito}	
+   \end{center}
+ \end{figure}
+
+La frecuencia $2$ forma un intervalo:
+
+ \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.45]{imagenes/ej2/secuencias/Paso1/Caso1.png}
+% 	\caption{}
+% 	\label{caballito}	
+   \end{center}
+ \end{figure}
+ 
+
+ 
+La frecuencia $2$ forma dos intervalos: 
+ 
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.45]{imagenes/ej2/secuencias/Paso1/Caso2.png}
+% 	\caption{}
+% 	\label{caballito}	
+   \end{center}
+ \end{figure}
+ 
+
+\newpage 
+
+Es decir, para n=2 la cantidad m\'axima de intervalos posibles es $3$ intervalos, lo cual tambi\'en cumple $2n-1$ $=$ $2$.$2-1$ $=$ $3$.\\
+ 
+%, entonces dado una frecuencia (la m\'as barata), la otra (m\'as cara) puede que se solape o no. Si no lo hace, entonces el CS tendr\'a ambos intervalos incluidos. Si se solapa, 1) est\'a inclu \'ido, con lo cual el CS ser\'a contendr\'a solo a la primer frecuencia; 2) arranca o termina mientras la otra est\'a disponible, dejando al CS con \'unicamente el pedazo de intervalo que no se solapa y el otro entero; o bien 3) arranca y termina antes y despu\'es de que arranque y termina el primero, logrando que el CS tenga un primer intervalo de la segunda frecuencia, hasta que arranca la primera, que entra por completo y luego un segundo intervalo de la segunda frecuencia que empieza cuando termina la primera. Esto se extiende para todo n con los mismos resultados, solo que puede agregarse un 4) completar un gap.\\
+
+Al momento de tomar \textbf{n=3}, lo hacemos considerando las frecuencias $1$, $2$ y $3$. Partimos del caso anterior al que le a\~nadimos la frecuencia $3$. Es decir, vamos a contar con a lo sumo $3$ intervalos. La distribuci\'on de los intervalos se va a dar de la siguiente manera:\\
+
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.45]{imagenes/ej2/secuencias/salida2.png}
+% 	\caption{}
+% 	\label{caballito}	
+   \end{center}
+ \end{figure}
+
+Podemos observar que de las cuatro distribuciones distintas que pueden ocurrir, en s\'olo una los intervalos son completamente disjuntos, esto es en el caso donde se a\~nadi\'o el intervalo $2$ completo. En los dem\'as casos, si bien pueden ser uno, dos o tres intervalos distintos al unirlos conforman un intervalo continuo, por lo cual entre ellos no va a haber gaps, es decir s\'olo se podr\'an a\~nadir intervalos en los bordes. Por este motivo, a estos casos los tomamos an\'alogos al caso de $n=2$ donde se agregar\'an a lo sumo dos intervalos, lo cual conforma en el caso m\'aximo 3 intervalos pre-existentes y 2 nuevos, dando un total de 5. Esto cumple lo planteado $2n-1$ $=$ $2$.$3-1$ $=$ $5$.\\
+
+Ahora debemos considerar por separado, el caso donde contamos con dos intervalos pre-existentes totalmente disjuntos.\\
+
+El \'unico caso donde se adicionan tres intervalos es el siguiente:\\
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.45]{imagenes/ej2/secuencias/Paso2/Caso3.png}
+% 	\caption{}
+% 	\label{caballito}	
+   \end{center}
+ \end{figure}
+\newpage
+
+Los casos donde se adicionan dos intervalos son los mostrados a continuaci\'on:
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.45]{imagenes/ej2/secuencias/Paso2/todos2.png}
+% 	\caption{}
+% 	\label{caballito}	
+   \end{center}
+ \end{figure}
+
+
+Los siguientes son los casos donde al agregar la frecuencia $3$ s\'olo se adiciona un intervalo:
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.2]{imagenes/ej2/secuencias/Paso2/todos1.png}
+% 	\caption{}
+% 	\label{caballito}	
+   \end{center}
+ \end{figure}
+
+Por consiguiente, el m\'aximo de intervalos que se pueden a\~nadirse son tres, considerando siempre s\'olo dos pre-existentes, lo cual da un total de 5 que cumple: $2n-1$ $=$ $2$.$3-1$ $=$ $5$.\\
+
+%Hasta el caso 3) se ve claramente que el m\'aximo n\'umero de intervalos es el propuesto (agregar un intervalo a izquierda y uno a derecha). Para el caso 4) hay que tener en cuenta que el paso anterior fue un caso de no solapamiento, es decir que si intercambiara la frecuencia que completa gaps con la no solapada, entonces entrar\'ia en el caso 2) o en el caso 3), verificando que a lo sumo se llega a \emph{2n-1} intervalos.\\
+
+\textcolor{red}{Extender la validez a n!!}\\
+
+
+Partimos de la hip\'otesis de que los costos de las frecuencias eran todos distintos, lo cual nos asegura una soluci\'on \'unica con una cantidad \'unica de intervalos. Ahora, si consideramos que pueden existir dos (o m\'as) frecuencias, llamemos \emph{A} y \emph{B}, con el mismo precio podemos asumir indistintamente que \emph{A$<$B} o \emph{A$>$B} lo cual podr\'ia devolver intervalos distintos, pero siempre su cantidad va a estar acotada por lo mismo probado anteriormente: $2n-1$.\\
+
+Una vez que ya acotamos la cantidad final de intervalos por $2n-1$, podemos proceder al an\'alisis de complejidad del algoritmo de Divide \& Conquer.
 
 El algoritmo divide tiene complejidad \emph{T(n)=2T(n/2)+O(conquer)}. Donde conquer va a recorrer, en el peor caso, dos vectores cuyas longitudes suman n, y aplicar operaciones que toman $O(1)$ para cada una de ellas. El vector que va construyendo con el CS tambi\'en toma $O(n)$. Estas complejidades se suman y por propiedades de O se obtiene $O(n)$.\\
 
@@ -163,19 +257,5 @@ Reemplazando en la ecuaci\'on, \emph{T(n)=2T(n/2)+O(n)} que es la misma ecuaci\'
 \newpage
 \subsection{Experimentaci\'on}
 
-\subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
+\subsubsection*{Constrastaci\'on Emp\'irica de la complejidad}
 
-
-\newpage
-\subsubsection{Modificaci\'on del algoritmo}
-Debido a que nuestro algoritmo no considera como caso espec\'ifico el ordenar distintas frecuencias con el mismo valor, al momento de elegir intervalos se podr\'ian realizar cortes innecesarios. Es decir, no siempre se elige la cantidad m\'inima posible en estos casos.\\
-
-Como consideramos que esto puede tardar un tiempo no despreciable, modificamos el operador $<$ para frecuencias, de modo que cuando tiene dos frecuencias del mismo valor ingrese primero la que tenga el comienzo antes y, en caso de comenzar en simult\'aneo, ingrese primero la frecuencia de mayor tama\~no.\\
-
-\textcolor{blue}{Buena justificacion! me gusta :)}\\
-
-\textcolor{red}{Aca poner el codigo que se deberia modificar.}\\
-
-\textcolor{red}{Aca va el grafico de esto}\\
-
-\textcolor{red}{Comentar si paso lo que esperabamos o no.}
