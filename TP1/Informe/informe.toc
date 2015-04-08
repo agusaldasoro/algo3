@@ -4,16 +4,16 @@
 \contentsline {subsection}{\numberline {1.2}Resoluci\'on propuesta y justificaci\'on}{4}{subsection.1.2}
 \contentsline {subsection}{\numberline {1.3}An\'alisis de la complejidad}{5}{subsection.1.3}
 \contentsline {subsection}{\numberline {1.4}C\'odigo fuente}{7}{subsection.1.4}
-\contentsline {subsection}{\numberline {1.5}Experimentaci\'on}{8}{subsection.1.5}
-\contentsline {section}{\numberline {2}Problema 2: Alta Frecuencia}{9}{section.2}
-\contentsline {subsection}{\numberline {2.1}Descripci\'on de la problem\'atica}{9}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Resoluci\'on propuesta y justificaci\'on}{10}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}An\'alisis de la complejidad}{11}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}C\'odigo fuente}{15}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Experimentaci\'on}{16}{subsection.2.5}
-\contentsline {section}{\numberline {3}Problema 3: El se\~nor de los caballos}{17}{section.3}
-\contentsline {subsection}{\numberline {3.1}Descripci\'on de la problem\'atica}{17}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Resoluci\'on propuesta y justificaci\'on}{18}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}An\'alisis de la complejidad}{19}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}C\'odigo fuente}{20}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}Experimentaci\'on}{21}{subsection.3.5}
+\contentsline {subsection}{\numberline {1.5}Experimentaci\'on}{9}{subsection.1.5}
+\contentsline {section}{\numberline {2}Problema 2: Alta Frecuencia}{10}{section.2}
+\contentsline {subsection}{\numberline {2.1}Descripci\'on de la problem\'atica}{10}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Resoluci\'on propuesta y justificaci\'on}{11}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}An\'alisis de la complejidad}{12}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}C\'odigo fuente}{16}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Experimentaci\'on}{19}{subsection.2.5}
+\contentsline {section}{\numberline {3}Problema 3: El se\~nor de los caballos}{20}{section.3}
+\contentsline {subsection}{\numberline {3.1}Descripci\'on de la problem\'atica}{20}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Resoluci\'on propuesta y justificaci\'on}{21}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}An\'alisis de la complejidad}{22}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}C\'odigo fuente}{23}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Experimentaci\'on}{24}{subsection.3.5}
