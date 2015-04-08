@@ -176,7 +176,7 @@ La frecuencia $2$ forma un intervalo:
  \end{figure}
  
 
- 
+ \newpage
 La frecuencia $2$ forma dos intervalos: 
  
   \begin{figure}[h!]
@@ -188,7 +188,6 @@ La frecuencia $2$ forma dos intervalos:
  \end{figure}
  
 
-\newpage 
 
 Es decir, para n=2 la cantidad m\'axima de intervalos posibles es $3$ intervalos, lo cual tambi\'en cumple $2n-1$ $=$ $2$.$2-1$ $=$ $3$.\\
  
@@ -237,7 +236,7 @@ Los siguientes son los casos donde al agregar la frecuencia $3$ s\'olo se adicio
    \end{center}
  \end{figure}
 
-Por consiguiente, el m\'aximo de intervalos que se pueden a\~nadirse son tres, considerando siempre s\'olo dos pre-existentes, lo cual da un total de 5 que cumple: $2n-1$ $=$ $2$.$3-1$ $=$ $5$.\\
+Por consiguiente, el m\'aximo de intervalos que pueden a\~nadirse son tres, considerando siempre s\'olo dos pre-existentes, lo cual da un total de 5 que cumple: $2n-1$ $=$ $2$.$3-1$ $=$ $5$.\\
 
 %Hasta el caso 3) se ve claramente que el m\'aximo n\'umero de intervalos es el propuesto (agregar un intervalo a izquierda y uno a derecha). Para el caso 4) hay que tener en cuenta que el paso anterior fue un caso de no solapamiento, es decir que si intercambiara la frecuencia que completa gaps con la no solapada, entonces entrar\'ia en el caso 2) o en el caso 3), verificando que a lo sumo se llega a \emph{2n-1} intervalos.\\
 
@@ -246,11 +245,11 @@ Por consiguiente, el m\'aximo de intervalos que se pueden a\~nadirse son tres, c
 
 Partimos de la hip\'otesis de que los costos de las frecuencias eran todos distintos, lo cual nos asegura una soluci\'on \'unica con una cantidad \'unica de intervalos. Ahora, si consideramos que pueden existir dos (o m\'as) frecuencias, llamemos \emph{A} y \emph{B}, con el mismo precio podemos asumir indistintamente que \emph{A$<$B} o \emph{A$>$B} lo cual podr\'ia devolver intervalos distintos, pero siempre su cantidad va a estar acotada por lo mismo probado anteriormente: $2n-1$.\\
 
-Una vez que ya acotamos la cantidad final de intervalos por $2n-1$, podemos proceder al an\'alisis de complejidad del algoritmo de Divide \& Conquer.
+Una vez que ya acotamos la cantidad final de intervalos por $2n-1$, podemos proceder al an\'alisis de complejidad del algoritmo de Divide \& Conquer.\\
 
-El algoritmo divide tiene complejidad \emph{T(n)=2T(n/2)+O(conquer)}. Donde conquer va a recorrer, en el peor caso, dos vectores cuyas longitudes suman n, y aplicar operaciones que toman $O(1)$ para cada una de ellas. El vector que va construyendo con el CS tambi\'en toma $O(n)$. Estas complejidades se suman y por propiedades de O se obtiene $O(n)$.\\
+El algoritmo divide tiene complejidad \emph{T(n)=2T(n/2)+O(conquer)}. Donde conquer va a recorrer, en el peor caso, dos vectores cuyas longitudes son $(2n-1)/2$ cada uno, y aplicar operaciones que toman $O(1)$ para cada una de ellas. El vector que va construyendo con el CS toma $O(2n-1)$ que es igual a $O(n)$. Estas complejidades se suman y por propiedades de O se obtiene $O(n)$.\\
 
-Reemplazando en la ecuaci\'on, \emph{T(n)=2T(n/2)+O(n)} que es la misma ecuaci\'on de recurrencia que MergeSort, que por Teorema Maestro se deduce que tiene complejidad $O(n.log(n))$, como pretend\'iamos.
+Reemplazando en la ecuaci\'on, \emph{T(n)=2T(n/2)+O(n)} vemos que es la misma ecuaci\'on de recurrencia que el algortimo de MergeSort, que por Teorema Maestro se deduce tiene complejidad $O(n.log(n))$, como pretend\'iamos.
 
 \newpage
 \subsection{C\'odigo fuente}
