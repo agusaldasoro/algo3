@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.3.27)  7 APR 2015 15:26
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.4.23)  7 APR 2015 23:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **informe.tex
 (./informe.tex
 LaTeX2e <2011/06/27>
-Babel <3.9h> and hyphenation patterns for 7 languages loaded.
+Babel <3.9h> and hyphenation patterns for 78 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
@@ -1383,6 +1383,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 247--248
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 249--250
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 251--252
 
  []
@@ -1784,32 +1789,29 @@ Package babel Info: Redefining spanish shorthand "!
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 48.
 [21])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 136.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 136.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 137.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 137.
  (./informe.aux
 LaTeX Info: Redefining \. on input line 24.
 LaTeX Info: Redefining \% on input line 24.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 136.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 136.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 137.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 137.
 Package rerunfilecheck Info: File `informe.out' has not changed.
 (rerunfilecheck)             Checksum: 4488740DF42C145A08FF5F76EDE50D49;1360.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 136.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 137.
  ) 
 Here is how much of TeX's memory you used:
- 8106 strings out of 494925
- 116182 string characters out of 6178544
- 229686 words of memory out of 5000000
- 11133 multiletter control sequences out of 15000+600000
+ 8106 strings out of 493304
+ 116182 string characters out of 6139871
+ 233682 words of memory out of 5000000
+ 11367 multiletter control sequences out of 15000+600000
  33652 words of font info for 56 fonts, out of 8000000 for 9000
- 62 hyphenation exceptions out of 8191
+ 957 hyphenation exceptions out of 8191
  29i,13n,43p,1405b,435s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-
@@ -1826,7 +1828,7 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on informe.pdf (21 pages, 633705 bytes).
+Output written on informe.pdf (21 pages, 633839 bytes).
 PDF statistics:
  304 PDF objects out of 1000 (max. 8388607)
  244 compressed objects within 3 object streams
