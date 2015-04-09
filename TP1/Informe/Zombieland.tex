@@ -8,8 +8,60 @@ Se sabe de antemano cu\'antos zombies y cu\'antos soldados se encuentran atrinch
 
 Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible salvar a las n ciudades. Lo que se desea en este problema es maximizar la cantidad de ciudades salvadas, respetando el presupuesto. Es decir, se deben establecer las cantidades de soldados extras enviados a cada ciudad de modo que la cantidad de ciudades salvadas sea la \'optima y gastando un monto por debajo del presupuesto.  El algoritmo debe tener una complejidad temporal de $O(n.log(n))$, siendo $n$ la cantidad de ciudades del pa\'is.\\
 
-\textcolor{red}{Aca se podr\'ia poner unos dibujitos de soluciones \'optimas como para que quede m\'as lindo}
+A continuaci\'on se presenta un ejemplo sobre c\'omo resolver el problema, dado un caso espec\'ifico.\\
 
+Se nos presenta un pa\'is con cuatro ciudades (A, B, C y D), el cual tiene un presupuesto a gastar de 100\$. Las ciudades est\'an caracterizadas de la siguiente manera:
+
+
+ \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.6]{imagenes/ej1/ciudades.png}
+ %	\caption{Casillas que \emph{cubre} un caballo}
+   \end{center}
+ \end{figure} 
+
+\newpage
+ En la siguiente tabla se muestran las diferentes elecciones que se pueden realizar al contratar soldados extra, teniendo en cuenta el presupuesto inicial, indicando cu\'antas ciudades son salvadas.
+
+\begin{table}[htb]
+\centering
+\begin{tabular}[c]{|l|l|l|l|l|l|l|}
+
+		\hline
+		Casos &\multicolumn{4}{|c|}{Cantidad de Soldados}& Presupuesto Gastado & Ciudades salvadas\\
+		&\multicolumn{4}{|c|}{extra por ciudad}& &  \\
+		\cline{2-5}
+		&  A  &  B  &  C  &  D  & & \\
+		\hline
+		Caso 1& 1 & 0 & 0 & 0 & 45\$ & A y B \\
+		\hline
+	    Caso 2& 2 & 0 & 0 & 0 & 90\$ & A y B \\
+		\hline
+		Caso 3& 1 & 0 & 1 & 0 & 65\$ & A y B \\
+		\hline
+		\textbf{Caso 4}& \textbf{1} &\textbf{ 0} & \textbf{2} & \textbf{0} & \textbf{85\$} & \textbf{A, B y C} \\
+		\hline
+		Caso 5& 0 & 1 & 0 & 0 & 100\$ & B \\
+		\hline		
+		Caso 6& 0 & 0 & 1 & 0 & 20\$ & B \\
+		\hline
+		Caso 7& 0 & 0 & 2 & 0 & 40\$ & B y C \\
+		\hline
+		Caso 8& 0 & 0 & 1 & 1 & 100\$ & B y D \\
+		\hline
+		Caso 9& 0 & 0 & 0 & 1 & 80\$ & B y D \\
+		\hline
+		Caso 10& 0 & 0 & 0 & 0 & 0\$ & B \\
+		\hline
+		
+	\end{tabular}
+%\caption{Tabla muy sencilla.}
+%\label{tabla:sencilla2}
+\end{table}
+
+Se puede observar que la ciudad B siempre se encuentra en el conjunto de Ciudades Salvadas, esto se debe a que al momento de ser ingresada la cantidad de zombies es menor (o igual) a diez veces la cantidad de soldados. 
+
+En este ejemplo la soluci\'on buscada (la \'optima) es la del \emph{Caso 4}, si bien esta no es la que menor presupuesto gasta, es la que logra salvar la mayor cantidad de ciudades (3).
 
 \newpage
 \subsection{Resoluci\'on propuesta y justificaci\'on}
@@ -219,7 +271,7 @@ const vector<ciudad>& pais, long int& salvadas){
 \newpage
 \subsection{Experimentaci\'on}
 
-\subsubsection*{Constrastaci\'on Emp\'irica de la complejidad}
+\subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
 
 
 

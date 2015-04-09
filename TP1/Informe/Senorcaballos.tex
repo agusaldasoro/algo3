@@ -1,7 +1,7 @@
 \section{Problema 3: El se\~nor de los caballos}
 \subsection{Descripci\'on de la problem\'atica}
 
-En este problema, se presenta un tablero de ajedrez de tama\~no $nxn$, el cual cuenta con alguna cantidad de caballos ubicados en una posici\'on aleatoria del tablero. Lo que se quiere lograr es \emph{cubrir} todo el tablero. Un casillero se considera cubierto si hay un caballo en \'el o bien, si es una posici\'on en la cual alg\'un caballo existente puede moverse con un s\'olo movimiento. Para lograr este cometido, puede ser necesario agregar nuevas fichas \emph{caballo} al tablero. No existe un l\'imite en la cantidad de caballos para agregar, pero lo que se busca es dar una soluci\'on agregando la menor cantidad de caballos posibles.\\
+En este problema, se presenta un tablero de ajedrez de tama\~no $nxn$, el cual cuenta con \emph{cierta} cantidad de caballos ubicados en una posici\'on aleatoria del tablero. Lo que se quiere lograr es \emph{cubrir} todo el tablero. Un casillero se considera cubierto si hay un caballo en \'el o bien, si es una posici\'on en la cual alg\'un caballo existente puede moverse con un s\'olo movimiento. Para lograr este cometido, puede ser necesario agregar nuevas fichas \emph{caballo} al tablero. No existe un l\'imite en la cantidad de caballos para agregar, pero lo que se busca es dar una soluci\'on agregando la menor cantidad de caballos posibles.\\
 
  \begin{figure}[h!]
    \begin{center}
@@ -10,57 +10,334 @@ En este problema, se presenta un tablero de ajedrez de tama\~no $nxn$, el cual c
    \end{center}
  \end{figure}
 
- \begin{figure}[h!]
-   \begin{center}
- 	\includegraphics[width=.4\linewidth]{imagenes/ej3/6x6init.png}
- 	\caption{As\'i se ve un tablero en un posible estado inicial}
-   \end{center}
- \end{figure}
 
- \begin{figure}[h!]
-   \begin{center}
- 	\includegraphics[width=.4\linewidth]{imagenes/ej3/6x6optima.png}
- 	\caption{Y esta ser\'ia una de las soluciones \'optimas donde se el agregan 4 caballos}
-   \end{center}
- \end{figure}
+ 
+
+\begin{figure}[h!] 
+\centering
+\begin{minipage}[t]{.45\textwidth}
+\begin{center}
+\includegraphics[width=.8\linewidth]{imagenes/ej3/6x6init.png} % primera imagen colocada a la izquierda
+	\caption{As\'i se ve un tablero dado un posible estado inicial}
+\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.45\textwidth}
+\begin{center}
+\includegraphics[width=.8\linewidth]{imagenes/ej3/6x6optima.png} % segunda imagen colocada a la derecha 
+\caption{Una de las soluciones \'optimas donde se le agregan 4 caballos}
+\end{center}
+\end{minipage}
+\hfill
+%\caption{figure 1 & 2}
+\end{figure}
 
 \newpage
 
 \subsection{Resoluci\'on propuesta y justificaci\'on}
-Para la resoluci\'on de este ejercicio, se ped\'ia un algoritmo de backtracking. O sea que el algortimo debe, a partir de una subsoluci\'on del problema, fijarse si es soluci\'on y hacer algo  al respecto con ella, o bien si es una subsoluci\'on v\'alida, para cada elemento que se pueda agregar a la subsoluci\'on, agregarselo y repetir el proceso, o en el \'ultimo caso, si se llega a una soluci\'on no v\'alida, volver hacia atr\'as y tomar una decisi\'on adecuada. Esto implica que el algortimo debe revisar un extenso \'arbol de posibilidades, donde una decisi\'on es agregar o no un caballo en la posici\'on $i, j$ del tablero para todo $i, j$ dentro del rango del mismo. Posterior a esto se ped\'ia pensar e implementar una serie de podas y estrategias para no recorrer todo el \'arbol, sino mirarlo inteligentemente y as\'i reducir los tiempos de ejecuci\'on.\\
+Para la resoluci\'on de este ejercicio, se ped\'ia un algoritmo de \emph{Backtracking}.\\
+
+
+Bajo el contexto de un algoritmo de Backtracking se divisan a las distintas estrategias para resolver un determinado problema como distintos caminos desde la raiz hasta una hoja dentro de un \'arbol de decisiones. En nuestro caso, cada camino va a representar cada una de las distribuciones posibles de fichas \emph{caballo} en las casillas marcadas como \emph{vac\'ias} al comienzo de la ejecuci\'on. 
+
+La primer rama que recorremos es la que ubica caballos en todas las posiciones vac\'ias \textcolor{red}{Es cierto esto, no? jaj}. Esta decisi\'on claramente va a completar el tablero, pero lo m\'as probable es que no sea la soluci\'on con cantidad de fichas \'optimas. Por este motivo, nuestro algoritmo va a recorrer secuencialmente cada uno de los dem\'as caminos. 
+
+Cuando llegamos al final de cada camino (una hoja) no tenemos asegurado haber \emph{cubierto} el tablero, es decir no todas las ramas van a ser soluci\'on. Pero si lo es, debemos comparar con las soluciones encontradas anteriormente, acumulando siempre la que utiliz\'o una menor cantidad de fichas.
+
+
+Habiendo recorrido todo el \'arbol, nos aseguramos de haber encontrado la soluci\'on \'optima al problema.
+
+
+
+
+
+%Para la resoluci\'on de este ejercicio, se ped\'ia un algoritmo de backtracking. O sea que el algortimo debe, a partir de una subsoluci\'on del problema, fijarse si es soluci\'on y hacer algo  al respecto con ella, o bien si es una subsoluci\'on v\'alida, para cada elemento que se pueda agregar a la subsoluci\'on, agregarselo y repetir el proceso, o en el \'ultimo caso, si se llega a una soluci\'on no v\'alida, volver hacia atr\'as y tomar una decisi\'on adecuada. 
+
+Esto implica que el algortimo debe revisar un extenso \'arbol de posibilidades, donde una decisi\'on es agregar o no un caballo en la posici\'on $i, j$ del tablero para todo $i, j$ dentro del rango del mismo. \\
+
+Posterior a esto se ped\'ia pensar e implementar una serie de podas y estrategias para no recorrer todo el \'arbol, sino mirarlo inteligentemente y as\'i reducir los tiempos de ejecuci\'on.\\
 
 El algortimo es muy sencillo, pregunta cu\'antos caballos hace falta agregar para cubrir el tablero si en la posici\'on $i, j$ agrega un caballo (recursivamente llena todo el tablero) y lo compara con la respuesta de no agregarlo, qued\'andose siempre con la soluci\'on que menos caballos extra le lleva.\\
 
 El algoritmo resuelve el ejercicio planteado porque recorre todo el \'arbol de soluciones y se queda con alguna de las m\'as \'optimas.\\
 
-\textcolor{blue}{Como que no pude cerrar la idea... AYUDA}
+\textcolor{red}{Continuara...}
 
 \newpage
 
 \subsection{An\'alisis de la complejidad}
+
+
 Para analizar la complejidad de este algoritmo, hay que tener en cuenta dos situaciones.\\
 
-Sea n = dimensi\'on del tablero\\
+\textbf{Primera Situaci\'on: }
 
-Si el tablero viene cubierto por los caballos preubicados, entonces el algoritmo chequea esto y devuelve que est\'a completo en tiempo $O(n^{2})$, es decir, recorrer la matriz donde est\'a almacenado el tablero, posici\'on por posici\'on.\\
+El tablero pasado como par\'ametro de entrada se encuentra cubierto completamente con las fichas existentes.\\
 
-Si no empieza a trabajar con el backtracking. El primer approach para la resoluci\'on del ejercicio fue aplicar "fuerza bruta", d\'andonos una complejidad de $O(2^{n^{2} - k})$ siendo k la cantidad de caballos preubicados. Esto es para cada posici\'on sin caballos, ver que pasa si tomo alguna de las dos posibles decisiones, o lo que es lo mismo, recorrer por completo el \'arbol de soluciones y devolver la de m\'as \'optima.\\
-
-Para disminuir los tiempos de ejecuci\'on (en otra secci\'on se hablar\'a sobre esto) se pidi\'o realizar podas al \'arbol y estrategias de recorrido (determinar si vale la pena o no seguir revisando alguna rama).\\
-
-Ninguna poda/estrategia disminuye la complejidad te\'orica exponencial del primer approach, dado que el algoritmo realiza las mismas preguntas para cada posici\'on del tablero, ¿qu\'e pasa si lo dejo sin caballo? ¿qu\'e pasa si le pongo un caballo?. No obstante, los tiempos de ejecuci\'on se ven radicalmente afectados, esto sucede porque se poda el \'arbol de soluciones posibles que se analizan, es decir, en el primer approach, se revisan todas las ramas, sin excepci\'on, y aplicando podas descartamos muchas de estas que ya sabemos que no nos llevar\'an a un resultado que nos interese.\\
+Nuestro algoritmo s\'olo debe chequear que el tablero este cubierto. Lo realiza en tiempo $O(n^{2})$ (siendo n la dimensi\'on del tablero), dado que debe recorrer la matriz donde est\'a almacenado el tablero, posici\'on por posici\'on.\\
 
 
-La primera poda fue la m\'as intuitiva, si tenemos una soluci\'on con k caballos extra agregados,  y analizando otra rama llegamos a tener que necesitar agregar un caballo a una subsoluci\'on de k-1 caballos (o sea que tendr\'ia por lo menos k caballos), entonces no nos interesa seguir revis\'andola, pues tenemos una soluci\'on que es igual o m\'as \'optima con k caballos.\\
 
-La segunda estrategia fue plantear si en alg\'un momento sab\'iamos que no deb\'iamos agregar un caballo en un determinado casillero. Entonces, salteamos las k posiciones de los caballos preubicados y adem\'as salteamos aquellas posiciones que, estando atacadas, si le pusieramos un caballo, estar\'ian atancando a casilleros que ya est\'an siendo cubiertos por otros caballos.\\
+\textbf{Segunda Situaci\'on: }
+
+El tablero pasado como par\'ametro de entrada \emph{no} se encuentra cubierto completamente con las fichas existentes.\\
+
+Es en este caso donde se comienza a trabajar con el \emph{Backtracking}. La primer resoluci\'on llevada a cabo fue aplicar ``fuerza bruta''. Esto consisti\'o en recorrer por completo el \'arbol de soluciones y devolver una que fuera \'optima. Para ello, en cada posici\'on sin caballos, debemos ver que pasa si tomo alguna de las dos posibles decisiones (insertar un caballo o no). Este proceso cuenta con una complejidad de $O(2^{n^{2} - k})$ siendo k la cantidad de caballos preubicados. \textcolor{red}{Inserte aqu\'i porque tiene esa complejidad... O super galerazo? je}\\
+
+Con el fin de disminuir los tiempos de ejecuci\'on, se pidi\'o realizar podas al \'arbol y estrategias de recorrido (determinar si vale la pena o no seguir revisando alguna rama).\\
+
+Ninguna poda o estrategia disminuye la complejidad te\'orica exponencial del primer caso estudiado, dado que el algoritmo realiza las mismas preguntas para cada posici\'on del tablero: ¿qu\'e pasa con el resto del tablero si a esta posici\'on la dejo sin caballo? y ¿qu\'e pasa con el resto del tablero si a esta posici\'on le agrego un caballo?. 
+
+No obstante, los tiempos de ejecuci\'on se ven radicalmente afectados (ver Secci\'on: \ref{tiempos}), esto sucede porque se poda el \'arbol de soluciones posibles que se analizan. Es decir, en un primer momento se revisaban todas las ramas, sin excepci\'on; pero aplicando podas, descartamos muchas de estas que ya sabemos que no nos llevar\'an a un resultado de inter\'es.\\
+
+
+La primer poda fue la m\'as intuitiva: mientras vamos recorriendo el \'arbol contamos con una soluci\'on (acumulada) que presenta \emph{k} caballos extra agregados. Si analizando otra rama nos encontramos en una posici\'on donde debemos agregar un caballo pero la cantidad de caballos, para este camino, iguala a k no vamos a estar interesados en proseguir por esta rama ya que, a lo sumo, vamos a encontrar otra soluci\'on \'optima con \emph{k} caballos.\\
+
+
+%si tenemos una soluci\'on con k caballos extra agregados,  y analizando otra rama llegamos a tener que necesitar agregar un caballo a una subsoluci\'on de k-1 caballos (o sea que tendr\'ia por lo menos k caballos), entonces no nos interesa seguir revis\'andola, pues tenemos una soluci\'on que es igual o m\'as \'optima con k caballos.\\
+
+La segunda estrategia fue plantear si en alg\'un momento sab\'iamos que no deb\'iamos agregar un caballo en un determinado casillero. Entonces, salteamos las k posiciones de los caballos preubicados y adem\'as salteamos aquellas posiciones que, estando atacadas, si le pusieramos un caballo, estar\'ian atancando a casilleros que ya est\'an siendo cubiertos por otros caballos.\textcolor{red}{No se entiende mucho, hasta creo que ni yo lo entendi por eso no lo arregle para no mandar cualquiera jajaaj}\\
 
 \newpage
 
 \subsection{C\'odigo fuente}
+	\begin{codesnippet}
+	\begin{verbatim}
+struct casillero{
+    bool esCaballo;
+    long int ataques;
+};
+	\end{verbatim}
+	\end{codesnippet}
+
+	\begin{codesnippet}
+	\begin{verbatim}
+struct coordenadas{
+    unsigned int fila;
+    unsigned int col;
+};
+	\end{verbatim}
+	\end{codesnippet}
+
+
+	\begin{codesnippet}
+	\begin{verbatim}
+int main(int argc, char const *argv[]){
+    chrono::time_point<chrono::system_clock> start, end;
+    long int cantCaballos;
+    cin >> dimension;
+    cin >> cantCaballos;
+//Creamos un tablero sin caballos
+    Tablero tablero(dimension, Vec(dimension));
+    for (int i = 0; i < dimension; ++i){
+        for (int j = 0; j < dimension; ++j){
+            casillero actual;
+            actual.esCaballo = false;
+            actual.ataques = 0;
+            tablero[i][j] = actual;
+        }
+    }
+//Leemos informacion del problema
+    int fila;
+    int col;
+    for (int i = 0; i < cantCaballos; ++i){
+        cin >> fila;
+        cin >> col;
+//Agregamos los caballos y las posiciones a las que ataca
+        tablero[fila-1][col-1].esCaballo = true;
+        atacame(tablero, fila-1, col-1, 1);
+    }
+    start = chrono::system_clock::now();
+//Aplicamos el algoritmo
+    vector<coordenadas> sol = senorCaballos(tablero);
+    end = chrono::system_clock::now();
+//Stdout pedido
+    cout << sol.size() << endl;
+    for (int i = 0; i < sol.size(); ++i){
+        cout << sol[i].fila+1 << " " << sol[i].col+1 << endl;
+    }
+    chrono::duration<double> elapsed_seconds = end-start;
+    cout << "Tiempo: " << elapsed_seconds.count() << endl;
+    return 0;
+}
+	\end{verbatim}
+	\end{codesnippet}
+\newpage
+	\begin{codesnippet}
+	\begin{verbatim}
+vector<coordenadas> senorCaballos(Tablero& t){
+//Creamos un vector de n*n, con n = dimension del tablero, 
+//"la peor manera de cubrir un tablero es colocando un caballo en cada casillero"
+    coordenadas aca;
+    vector<coordenadas> optimo;
+    for (int i = 0; i < dimension; ++i){
+        for (int j = 0; j < dimension; ++j){
+            aca.fila = i; aca.col = j;
+            optimo.push_back(aca);
+        }
+    }
+//Creamos el vector solucion
+    vector<coordenadas> agregados;
+    senorCaballosAux(t, 0, 0, agregados, optimo);
+    return optimo;
+}
+	\end{verbatim}
+	\end{codesnippet}
+
+	\begin{codesnippet}
+	\begin{verbatim}
+void atacame(Tablero& t, int fila, int col, int ataco){
+//ataco = 1 ataca, ataco = -1 desataca
+    if(col-2 >= 0){
+        if(fila-1 >= 0) t[fila-1][col-2].ataques += ataco;
+        if(fila+1 < dimension) t[fila+1][col-2].ataques += ataco;
+    }
+    if(col+2 < dimension){
+        if(fila-1 >= 0) t[fila-1][col+2].ataques += ataco;
+        if(fila+1 < dimension) t[fila+1][col+2].ataques += ataco;
+    }
+    if(fila-2 >= 0){
+        if(col-1 >= 0) t[fila-2][col-1].ataques += ataco;
+        if(col+1 < dimension) t[fila-2][col+1].ataques += ataco;
+    }
+    if(fila+2 < dimension){
+        if(col-1 >= 0) t[fila+2][col-1].ataques +=ataco;
+        if(col+1 < dimension) t[fila+2][col+1].ataques +=ataco;
+    }
+}
+	\end{verbatim}
+	\end{codesnippet}
+
+	\begin{codesnippet}
+	\begin{verbatim}
+bool chequeo(const Tablero& t){
+    for (int i = 0; i < dimension; ++i){
+        for (int j = 0; j < dimension; ++j){
+            if(!t[i][j].esCaballo && t[i][j].ataques == 0){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+	\end{verbatim}
+	\end{codesnippet}
+
+	\begin{codesnippet}
+	\begin{verbatim}
+int senorCaballosAux(Tablero& t, int i, int j, vector<coordenadas>& agregados, 
+vector<coordenadas>& optimo){
+//si el tablero esta cubierto, dadas las podas será una solución optima, 
+//la guardamos y retornamos cuantos caballos agregamos
+    if(chequeo(t)){        
+        optimo.assign(agregados.begin(),agregados.end());
+        return optimo.size();
+    }
+//sino si estoy dentro del tablero
+    int siAgrego, siNoAgrego;
+    if(i<dimension){
+//  si hay un caballo preubicado, salteo el espacio
+//  si la posicion esta atacada y de agregar un caballo no cubre ninguna previamente cubierta, 
+//  no es lo que busco
+        if(t[i][j].esCaballo || (!sirveAgregar(t, i, j) && t[i][j].ataques > 0)){
+            j++;
+            if(j==dimension){
+                j=0; i++;}
+            return senorCaballosAux(t, i, j, agregados, optimo);
+        }
+//  sino backtracking
+        else{
+//      si tengo un optimo de k caballos, y llegue a una subsolucion de k-1 caballos que aun 
+//      no cubre todo el tablero, no es lo que busco
+            if(agregados.size() >= optimo.size()-1)
+                return -1;
+//      PRUEBO SIN AGREGAR UN CABALLO
+//      si no termine la fila
+            if(j<dimension-1)
+                siNoAgrego = senorCaballosAux(t, i, j+1, agregados, optimo);
+//      si tengo que cambiar de fila
+            else
+                siNoAgrego = senorCaballosAux(t, i+1, 0, agregados, optimo);
+//      PRUEBO AGREGANDO UN CABALLO
+            t[i][j].esCaballo = true;
+            atacame(t, i, j, 1);
+            coordenadas aca; aca.fila = i; aca.col = j;
+//      lo agrego a la posible solucion
+            agregados.push_back(aca);
+//      si no termine la fila
+            if(j<dimension-1)
+                siAgrego = senorCaballosAux(t, i, j+1, agregados, optimo);
+//      si tengo que cambiar de fila
+            else
+                siAgrego = senorCaballosAux(t, i+1, 0, agregados, optimo);
+//      RESTAURO el tablero y el vector con los caballos agregados
+            t[i][j].esCaballo = false;
+            atacame(t, i, j, -1);
+            agregados.pop_back();
+        }
+//  si no tienen solucion agregando y sin agregar, devuelvo que no hay solucion
+        if(siAgrego == -1 && siNoAgrego == -1)
+            return -1;
+        if(siNoAgrego==-1 || siAgrego < siNoAgrego)
+            return siAgrego;
+        return siNoAgrego;
+    }
+//sino devuelvo que no hay solucion
+    return -1;
+}
+	\end{verbatim}
+	\end{codesnippet}
+
+\newpage
+
+	\begin{codesnippet}
+	\begin{verbatim}
+bool sirveAgregar(const Tablero& t, int fila, int col){
+    if(col-2 >= 0){
+        if(fila-1 >= 0 && t[fila-1][col-2].ataques == 0 && !(t[fila-1][col-2].esCaballo))
+            return true;
+        if(fila+1 < dimension && t[fila+1][col-2].ataques == 0 && !(t[fila+1][col-2].esCaballo))
+            return true;
+    }
+    if(col+2 < dimension){
+        if(fila-1 >= 0 && t[fila-1][col+2].ataques == 0 && !(t[fila-1][col+2].esCaballo))
+            return true;
+        if(fila+1 < dimension && t[fila+1][col+2].ataques == 0 && !(t[fila+1][col+2].esCaballo)) 
+            return true;
+    }
+    if(fila-2 >= 0){
+        if(col-1 >= 0 && t[fila-2][col-1].ataques == 0 && !(t[fila-2][col-1].esCaballo)) 
+            return true;
+        if(col+1 < dimension && t[fila-2][col+1].ataques == 0 && !(t[fila-2][col+1].esCaballo))
+            return true;
+    }
+    if(fila+2 < dimension){
+        if(col-1 >= 0 && t[fila+2][col-1].ataques == 0 && !(t[fila+2][col-1].esCaballo)) 
+            return true;
+        if(col+1 < dimension && t[fila+2][col+1].ataques == 0 && !(t[fila+2][col+1].esCaballo)) 
+            return true;
+    }
+    return false;
+}
+	\end{verbatim}
+	\end{codesnippet}
+	
+		\begin{codesnippet}
+	\begin{verbatim}
+void imprimir(const Tablero& tablero){
+    for (int i = 0; i < dimension; ++i){
+        for (int j = 0; j < dimension; ++j){
+            cout << tablero[i][j].esCaballo << "(" << tablero[i][j].ataques << ") ";
+        }
+        cout << endl << endl;    
+        }
+    }
+	\end{verbatim}
+	\end{codesnippet}
+
 \newpage
 \subsection{Experimentaci\'on}
 
-\subsubsection*{Constrastaci\'on Emp\'irica de la complejidad}
+\subsubsection{Constrastaci\'on Emp\'irica de la complejidad}\label{tiempos}
 -Hacer lo que hicieron en clase\\
 \newpage
