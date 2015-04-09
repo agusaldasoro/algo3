@@ -273,11 +273,93 @@ const vector<ciudad>& pais, long int& salvadas){
 
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
 
+Para realizar la contrastaci\'on emp\'irica de la complejidad de nuestro algoritmo, decidimos comenzar con un muestreo aleatorio de ciudades y presupuestos, aumentando la cantidad de ciudades en cada prueba.
 
+La siguiente tabla indica cu\'anto tiempo utiliz\'o el algoritmo para resolver el problema, siendo $n$ la cantidad de ciudades en cada caso.
 
+\begin{table}[htb]
+\centering
+\begin{tabular}[c]{|l|l|}
+
+		\hline
+n & Tiempo en segundos\\
+		\hline
+1000	&	0.0002860962\\
+		\hline
+2000	&	0.0006116975\\
+		\hline
+3000	&	0.0009399667\\
+		\hline
+4000	&	0.0010920646\\
+		\hline
+5000	&	0.0015213336\\
+		\hline
+6000	&	0.0020432861\\
+		\hline
+7000	&	0.0024080363\\
+		\hline
+8000	&	0.0027960707\\
+		\hline
+9000	&	0.0032532473\\
+		\hline
+10000	&	0.0036220356\\
+		\hline
+		
+	\end{tabular}
+%\caption{Tabla muy sencilla.}
+%\label{tabla:sencilla2}
+\end{table}
+
+El gr\'afico resultante fue el siguiente:
+
+ \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics{imagenes/ej1/Mediciones/Grafico1.png}
+% 	\caption{}
+% 	\label{caballito}	
+   \end{center}
+ \end{figure}
+
+De acuerdo al an\'alisis de este gr\'afico, podemos ver que aparenta ser una curva con poca inclinaci\'on, similar al gr\'afico de $O( n*log(n) )$, que fue la complejidad propuesta.
+
+Sin embargo, esto no es suficiente para probar que nuestro algoritmo cumple la complejidad. Por lo tanto, se realiz\'o la linealizaci\'on, dividiendo los tiempos por $log(n)$.
+
+\newpage
+
+ \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics{imagenes/ej1/Mediciones/Grafico2.png}
+% 	\caption{}
+% 	\label{caballito}	
+   \end{center}
+ \end{figure}
+
+ En esta comparaci\'on, podemos ver que al dividir la curva inicial por $log(n)$, se obtiene pr\'acticamente una funci\'on lineal, lo cual era esperado.
  
+Luego realizamos una nueva prueba, para comprobar que el algoritmo solamente depende de la cantidad de ciudades, sin importar cu\'al es el presupuesto asociado.
+Como en todos los casos vamos a realizar el $sort()$, que tiene complejidad $O(n*log(n))$, el gr\'afico debiera ser similar.
 
+ \begin{figure}[h!]
+   \begin{left}
+ 	\includegraphics{imagenes/ej1/Mediciones/Grafico3.png}
+% 	\caption{}
+% 	\label{caballito}	
+   \end{left}
+ \end{figure}
+ 
+  \begin{figure}[h!]
+   \begin{right}
+ 	\includegraphics{imagenes/ej1/Mediciones/Grafico4.png}
+% 	\caption{}
+% 	\label{caballito}	
+   \end{right}
+ \end{figure}
+ 
+ 
+Efectivamente, utilizando tanto presupuestos altos como bajos, la curva es siempre similar.
 
+\newpage
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\newpage
 %\subsubsection{Modificaci\'on del algoritmo}
