@@ -133,37 +133,89 @@ struct ciudad2{
 	\end{verbatim}
 	\end{codesnippet}
 
-\textcolor{red}{Poner como leemos y escribimos?? y el main? CREO QUE SI...}
-\textcolor{blue}{no se, se puede dejar como apendice esto no? directamente lo imprimimos del sublime, toda la paja pasar todos los algoritmos a latex, con el main y las funciones extras y bla bla bla}\textcolor{red}{Pero hay una seccion que se llama codigo fuente.... algo hay que poner ahi. Y ademas, el sublime no imprime con colores. Y ademas, tiene que quedar en el pdf!}
 
-
-\begin{algorithm}[h!]
-\caption{ZombieLand(\textit{out}: vector$<$ciudad2$>$; \textit{in}: int cantCiudades, int presupuesto, vector$<$ciudad$>$\& pais; \textit{in/out}:  int\& salvadas)}
-salvadas = 0;\\
-vector$<$ciudad2$>$ datos;\\
-\For{(int i = 0; i $<$ cantCiudades; ++i)}{
-	ciudad2 actual;\\
-	actual.numCiudad = i;\\
-	double diferencia = (pais[i].zombies - pais[i].soldados * 10);\\
-	\eIf{(diferencia $>$ 0)}{
-	actual.soldadosNecesarios = ceil(diferencia/10);
-	}{
-	actual.soldadosNecesarios = 0;
-	}
-	actual.costoTotal = actual.soldadosNecesarios * pais[i].costo;\\
-		datos.push_back(actual);
+	\begin{codesnippet}
+	\begin{verbatim}
+int main(int argc, char const *argv[]){
+    chrono::time_point<chrono::system_clock> start, end;
+    long int cantCiudades, presupuesto;
+    vector<ciudad> pais;
+//Leemos informacion del problema
+    cin >> cantCiudades;
+    cin >> presupuesto;
+    for (int i = 0; i < cantCiudades; ++i){
+        ciudad alguna;
+        cin >> alguna.zombies;
+        cin >> alguna.soldados;
+        cin >> alguna.costo;
+        pais.push_back(alguna);
+    }
+    long int salvadas = 0;
+    start = chrono::system_clock::now();
+//Aplicamos el algoritmo
+    vector<ciudad2> res = zombieland(cantCiudades, presupuesto, pais, salvadas);
+    end = chrono::system_clock::now();
+    vector<long int> entregados(cantCiudades);
+//Stdout pedido
+    for (int i = 0; i < cantCiudades; ++i){
+        entregados[res[i].numCiudad] = res[i].soldadosNecesarios;
+    }
+    cout << salvadas << " ";
+    for (int i = 0; i < cantCiudades; ++i){
+        cout << entregados[i] << " ";
+    }
+    cout << endl;
+    chrono::duration<double> elapsed_seconds = end-start;
+    cout << "Tiempo: " << elapsed_seconds.count() << endl;
+    return 0;
 }
-sort_heap(datos.begin(), datos.end());\\
-\For{(int i = 0; i $<$ cantCiudades; ++i)}{
-	int dif = presupuesto - datos[i].costoTotal;\\
-	\eIf{(dif$>=$0)}{salvadas++;\\
-			presupuesto = dif;}{datos[i].soldadosNecesarios = 0;}
+	\end{verbatim}
+	\end{codesnippet}
+	
+	
+	\begin{codesnippet}
+	\begin{verbatim}
+const vector<ciudad2> zombieland(long int cantCiudades, long int presupuesto, 
+const vector<ciudad>& pais, long int& salvadas){
+    salvadas = 0;
+    vector<ciudad2> datos;
+    for (int i = 0; i < cantCiudades; ++i){
+        ciudad2 actual;
+//ID de la ciudad
+        actual.numCiudad = i;
+//Calculamos el costo de salvar la ciudad i
+        double diferencia = (pais[i].zombies - pais[i].soldados * 10);
+        if (diferencia > 0)
+            actual.soldadosNecesarios = ceil(diferencia/10);
+        else
+            actual.soldadosNecesarios = 0;
+        actual.costoTotal = actual.soldadosNecesarios * pais[i].costo;
+//Lo agregamos al vector
+        datos.push_back(actual);
+    }
+//Ordenamos el vector de menor a mayor costo para salvarlas
+    sort(datos.begin(), datos.end());
+    long int dif = presupuesto;
+//Vemos cuantas salvamos respetando el presupuesto
+    int i = 0;
+    while(i<cantCiudades && dif >= 0){
+        dif = presupuesto - datos[i].costoTotal;
+        if (dif>=0){
+            salvadas++;
+            presupuesto = dif;
+            ++i;
+        }
+    }
+//Las que sobran no se salvan
+//seteamos los soldados necesarios en 0 para imprimir una respuesta correcta
+    while(i<cantCiudades){
+        datos[i].soldadosNecesarios = 0;
+        ++i;
+    }
+    return datos;
 }
-\textbf{return} datos;
-\end{algorithm}
-
-\textcolor{red}{No segui poniendo el algoritmo, por si le tenemos que hacer algun cambio.}
-
+	\end{verbatim}
+	\end{codesnippet}
 \newpage
 \subsection{Experimentaci\'on}
 
