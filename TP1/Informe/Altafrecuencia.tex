@@ -1,7 +1,7 @@
 \section{Problema 2: Alta Frecuencia}
 \subsection{Descripci\'on de la problem\'atica}
 
-Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor tiempo posible. Los enlaces tienen asociadas distintas frecuencias, con un costo por minuto y un intervalo de tiempo (sin cortes) en el cual funcionan. Se utilizan durante minutos enteros, y es posible cambiar de una frecuencia a otra instant\'anemente (del minuto 1 al 4 uso la frecuencia A y del 4 al 6 la B). Los datos del precio y e intervalo de tiempo de cada frecuencia son dados. Se desea optimizar este problema para transmitir todo el tiempo que tenga al menos una frecuencia abierta, pero gastando la menor cantidad de dinero. Se debe contar con una complejidad de $O(n.log(n))$.\\
+Se quiere transmitir informaci\'on secuencialmente mediante un enlace el mayor tiempo posible. Los enlaces tienen asociadas distintas frecuencias, con un costo por minuto y un intervalo de tiempo (sin cortes) en el cual funcionan. Se utilizan durante minutos enteros, y es posible cambiar de una frecuencia a otra instant\'anemente (del minuto 1 al 4 uso la frecuencia A y del 4 al 6 la B). Los datos del precio e intervalo de tiempo de cada frecuencia son dados. Se desea encontrar una soluci\'on \'optima a este problema, es decir, transmitir todo el tiempo que se tenga al menos una frecuencia abierta, pero gastando la menor cantidad de dinero. El algoritmo que resuelva dicho problema debe tener una complejidad algorítmica de $O(n.log(n))$.\\
 
 A continuaci\'on se muestran dos casos particulares de este problema. En ambos se ofrecen tres frecuencias, con distintos costos cada una. Se puede ver recuadrado en violeta cu\'al es la elecci\'on que debe hacerse por intervalo de tiempo.
 
@@ -51,15 +51,18 @@ divide(conjuntoDeFrecuencias F){
 
 En palabras, si hay una sola frecuencia, la devolvemos, pues es trivial que su intervalo de duraci\'on es el m\'as barato y el de mayor extensi\'on temporal.\\
 
-Si no, intervalosA ser\'a el conjunto de intervalos en la que funcionar\'a cada frecuencia, de modo que el costo de contratar el servicio con este cronograma sea m\'inimo en el costo y m\'aximo en la cantidad de tiempo de uso. E intervalosB ser\'a un conjunto con las mismas carater\'isticas, con la diferencia de que el A ser\'a el m\'as \'optimo de la mitad m\'as barata y el B el m\'as \'optimo de la mitad m\'as cara. Esto resulta de haber ordenado las frecuencias por su costo antes de comenzas con este tramo de algoritmo.\textcolor{red}{No se si este parrafo se entiende mucho}\\
+Si esto no ocurre, se seguirá subdividiendo hasta llegar al caso en el que hay solo un intervalo.
+Es importante aclarar (pues es fundamental para el funcionamiento del algoritmo), que intervalosA tendrá la mitad de frecuencias más baratos, e intervalosB, la mitad de frecuencias más caros. Esto ocurre pues las frecuencias fueron ordenadas por su costo antes de comenzar con este tramo del algoritmo\\
 
-Al hacer conquer(intervalosA, intervalosB) se obtiene el conjunto de intervalos con las caracter\'isticas mencionadas pero de todas las frecuencias.\textcolor{red}{No habria que explicar mas aca?}\\
+\textcolor{red}{Si esto no ocurre, intervalosA ser\'a el conjunto de intervalos en la que funcionar\'a cada frecuencia, de modo que el costo de contratar el servicio con este cronograma sea m\'inimo en el costo y m\'aximo en la cantidad de tiempo de uso. E intervalosB ser\'a un conjunto con las mismas carater\'isticas, con la diferencia de que el A ser\'a el m\'as \'optimo de la mitad m\'as barata y el B el m\'as \'optimo de la mitad m\'as cara. Esto resulta de haber ordenado las frecuencias por su costo antes de comenzar con este tramo de algoritmo.}\\
 
-%Nuestro algoritmo de Merge (\emph{conquer}) se encarga de elegir entre las frecuencias de dos arreglos pasados como parámetro, de modo que devuelve un sólo vector indicando los intervalos ocupados por las frecuencias elegidas. 
+\textcolor{red}{Al hacer conquer(intervalosA, intervalosB) se obtiene el conjunto de intervalos con las caracter\'isticas mencionadas pero de todas las frecuencias.}\textcolor{red}{No habria que explicar mas aca?}\\
 
-%Dado el enunciado del problema, para elegir qu\'e frecuencia utilizar en determinado intervalo de tiempo se debe priorizar el precio m\'as barato emitiendo se\~nal siempre que sea posible.\\
+Nuestro algoritmo de Merge (\emph{conquer}) se encarga de elegir entre las frecuencias de dos arreglos pasados como parámetro, de modo que devuelve un sólo vector indicando los intervalos ocupados por las frecuencias elegidas (es decir, se toman la frecuencia más barata a cada momento, y se hacen los cortes pertinentes a cada frecuencia, según corresponda. \emph{Véase Ejemplo 1 para ver como se recortan las frecuencias}). 
 
-%Gracias a que en el primer llamado de nuestra funci\'on estas se encontraban en orden creciente respecto del costo, en cada paso de \emph{conquer} de los dos arreglos de entrada con intervalos se van a priorizar los de la izquierda. Es decir que en cada paso, todos los intervalos pertenecientes al vector de la izquierda (como son los de menor precio) van a pertencer al vector resultado. Mientras que s\'olo los intervalos que completen tiempo sin se\~nal pertenecientes al vector de la derecha van a ser colocados en el vector resultado. Esto representa un invariante que se va a cumplir en cada paso del algoritmo, lo cual nos permite justificar que la soluci\'on obtenida es la deseada. \textcolor{red}{Que alguien lea esto para ver si se entiende, para mi si :)}\\
+Dado el enunciado del problema, para elegir qu\'e frecuencia utilizar en determinado intervalo de tiempo se debe priorizar el precio m\'as barato emitiendo se\~nal siempre que sea posible.\\
+
+Gracias a que en el primer llamado de nuestra funci\'on estas se encontraban en orden creciente respecto del costo, en cada paso de \emph{conquer} de los dos arreglos de entrada con intervalos se van a priorizar los de la izquierda. Es decir que en cada paso, todos los intervalos pertenecientes al vector de la izquierda (como son los de menor precio) van a pertencer al vector resultado. Mientras que s\'olo los intervalos que completen tiempo sin se\~nal pertenecientes al vector de la derecha van a ser colocados en el vector resultado (es decir, se completarán los vacíos entre frecuencias del primer vector, con frecuencias o intervalos de frecuencias de \'este vector). Esto representa un invariante que se va a cumplir en cada paso del algoritmo, lo cual nos permite justificar que la soluci\'on obtenida es la deseada.\\
 
 %	\begin{codesnippet}
 %	\begin{verbatim}
@@ -130,7 +133,7 @@ Al hacer conquer(intervalosA, intervalosB) se obtiene el conjunto de intervalos 
 %	\end{verbatim}
 %	\end{codesnippet}
 
-Este \'ultimo paso abusa del invariante: todos los intervalos del conjunto intervalosA deben aparecer en el conjunto soluci\'on, y que lo \'unico que debe agregar son los intervalos de intervalosB que o bien aumentan el rango de tiempo para transmitir (uso el servicio desde antes o m\'as tiempo) o bien completan gaps que puedan existir entre las frecuencias m\'as baratas.
+Este \'ultimo paso hace uso exhaustivo del invariante: todos los intervalos del conjunto intervalosA deben pertenecer al conjunto soluci\'on, y lo \'unico que se debe agregar son los intervalos de intervalosB que o bien aumentan el rango de tiempo para transmitir (uso el servicio desde antes o m\'as tiempo) o bien completan gaps que puedan existir entre las frecuencias m\'as baratas.
 
 %Este algoritmo resuelve lo propuesto dando una soluci\'on \'optima porque del modo en que est\'a definido, primero divide al grupo con todas las frecuencias ofrecidas recursivamente hasta llegar a conjuntos con una sola frecuencia. Luego, al momento de mergear estos grupos de a dos, siempre prioriza al grupo de la izquierda (el m\'as barato). 
 
@@ -247,10 +250,7 @@ Partimos de la hip\'otesis de que los costos de las frecuencias eran todos disti
 
 Una vez que ya acotamos la cantidad final de intervalos por $2n-1$, podemos proceder al an\'alisis de complejidad del algoritmo de Divide \& Conquer.\\
 
-El algoritmo $divide$ particiona el problema en dos subproblemas m\'as chicos, en particular de la mitad de tamaño que el problema original, lo que implica que tiene complejidad \emph{T(n)=2T(n/2)+O(conquer)}.\\
-\textcolor{red}{No hay que explicar medianamente de donde salio el 2T(n/2)?}\textcolor{blue}{Listo?}
-
-Donde conquer va a recorrer, en el peor caso, dos vectores cuyas longitudes son $(2n-1)/2$ cada uno, y aplicar operaciones que toman $O(1)$ para cada una de ellas. El vector que va construyendo con el CS toma $O(2n-1)$ que es igual a $O(n)$. Estas complejidades se suman y por propiedades de O se obtiene $O(n)$.\\
+El algoritmo $divide$ particiona el problema en dos subproblemas m\'as chicos, en particular de la mitad de tamaño que el problema original, lo que implica que tiene complejidad \emph{T(n)=2T(n/2)+O(conquer)} (ecuación que surge de llamar recursivamente a la función \emph{divide}), donde \emph{conquer} va a recorrer, en el peor caso, dos vectores cuyas longitudes son $(2n-1)/2$ cada uno, y aplicar operaciones que toman $O(1)$ para cada una de ellas. El vector que va construyendo con el CS toma $O(2n-1)$ que es igual a $O(n)$. Estas complejidades se suman y por propiedades de $O$ se obtiene $O(n)$.\\
 
 Reemplazando en la ecuaci\'on obtenemos: \emph{T(n)=2T(n/2)+O(n)}. Vemos que es la misma ecuaci\'on de recurrencia que el algortimo de MergeSort, que por Teorema Maestro se deduce que tiene complejidad $O(n.log(n))$, como pretend\'iamos.
 
