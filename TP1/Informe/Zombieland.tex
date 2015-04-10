@@ -2,15 +2,15 @@
 
 \subsection{Descripci\'on de la problem\'atica}
 
-En un pa\'is con \emph{n} ciudades, se encuentran una determinada cantidad de Zombies y de Soldados por cada una de ellas. El objetivo del problema es exterminar la invasi\'on zombie, para ello es necesario un enfrentamiento \textit{zombies vs soldados} por cada ciudad. Para que el combate sea positivo en una ciudad, es decir se logre matar a todos los zombies de la misma, es necesario que la cantidad de zombies sea, a lo sumo, diez veces m\'as grande que la cantidad de soldados.\\
+En un pa\'is con \emph{n} ciudades, se encuentra una determinada cantidad de Zombies y de Soldados por cada una de ellas; donde el problema es exterminar la invasi\'on zombie. Para ello, es necesario un enfrentamiento \textit{zombies vs soldados} por cada ciudad. Para que el combate sea viable en una ciudad, es decir, se logre matar a todos los zombies de la misma, es necesario que la cantidad de zombies sea, a lo sumo, diez veces m\'as grande que la cantidad de soldados.\\
 
-Se sabe de antemano cu\'antos zombies y cu\'antos soldados se encuentran atrincherados en cada ciudad. Los soldados acuartelados no pueden moverse de la ciudad en la que est\'an, pero s\'i se cuenta con una dotaci\'on de soldados extra que se la puede ubicar en cualquiera de las \emph{n} ciudades para salvarla. La cantidad de soldados extra es ilimitada, mas los recursos para trasladarlos no lo son. El costo del traslado depende de cada ciudad. Siempre que se respete el presupuesto del pa\'is, se pueden trasladar todos los soldados necesarios para salvar a cada ciudad.\\
+Se sabe de antemano cu\'antos zombies y cu\'antos soldados se encuentran atrincherados en cada ciudad. Los soldados acuartelados no pueden moverse de la ciudad en la que est\'an, pero s\'i se cuenta con una dotaci\'on de soldados extra que se la puede ubicar en cualquiera de las \emph{n} ciudades para salvarlas. La cantidad de soldados extra es ilimitada, mas los recursos para trasladarlos no lo son. El costo del traslado depende de cada ciudad. Siempre que se respete el presupuesto del pa\'is, se pueden trasladar todos los soldados necesarios para salvar a cada ciudad.\\
 
-Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible salvar a las n ciudades. Lo que se desea en este problema es maximizar la cantidad de ciudades salvadas, respetando el presupuesto. Es decir, se deben establecer las cantidades de soldados extras enviados a cada ciudad de modo que la cantidad de ciudades salvadas sea la \'optima y gastando un monto por debajo del presupuesto.  El algoritmo debe tener una complejidad temporal de $O(n.log(n))$, siendo $n$ la cantidad de ciudades del pa\'is.\\
+Debido a que los recursos econ\'omicos son finitos, no siempre va a ser posible salvar a las \emph{n} ciudades. Lo que se desea en este problema es maximizar la cantidad de ciudades salvadas, respetando el presupuesto. Es decir, se deben establecer la cantidad de soldados extra enviados a cada ciudad de modo que la cantidad de ciudades salvadas sea la \'optima (es decir, la máxima) y gastando un monto por debajo o igual al presupuesto.  El algoritmo debe tener una complejidad temporal de $O(n.log(n))$, siendo $n$ la cantidad de ciudades del pa\'is.\\
 
 A continuaci\'on se presenta un ejemplo sobre c\'omo resolver el problema, dado un caso espec\'ifico.\\
 
-Se nos presenta un pa\'is con cuatro ciudades (A, B, C y D), el cual tiene un presupuesto a gastar de 100\$. Las ciudades est\'an caracterizadas de la siguiente manera:
+Se nos presenta un pa\'is con cuatro ciudades ($A$, $B$, $C$ y $D$), el cual tiene un presupuesto a gastar de 100\$. Las ciudades est\'an caracterizadas de la siguiente manera:
 
 
  \begin{figure}[h!]
@@ -31,7 +31,7 @@ Se nos presenta un pa\'is con cuatro ciudades (A, B, C y D), el cual tiene un pr
 		Casos &\multicolumn{4}{|c|}{Cantidad de Soldados}& Presupuesto Gastado & Ciudades salvadas\\
 		&\multicolumn{4}{|c|}{extra por ciudad}& &  \\
 		\cline{2-5}
-		&  A  &  B  &  C  &  D  & & \\
+		&  $A$  &  $B$  &  $C$  &  $D$  & & \\
 		\hline
 		Caso 1& 1 & 0 & 0 & 0 & 45\$ & A y B \\
 		\hline
@@ -59,9 +59,9 @@ Se nos presenta un pa\'is con cuatro ciudades (A, B, C y D), el cual tiene un pr
 %\label{tabla:sencilla2}
 \end{table}
 
-Se puede observar que la ciudad B siempre se encuentra en el conjunto de Ciudades Salvadas, esto se debe a que al momento de ser ingresada la cantidad de zombies es menor (o igual) a diez veces la cantidad de soldados. 
+Se puede observar que la ciudad $B$ siempre se encuentra en el conjunto de Ciudades Salvadas, esto se debe a que al momento de ser ingresada la cantidad de zombies es menor (o igual) a diez veces la cantidad de soldados. 
 
-En este ejemplo la soluci\'on buscada (la \'optima) es la del \emph{Caso 4}, si bien esta no es la que menor presupuesto gasta, es la que logra salvar la mayor cantidad de ciudades (3).
+En este ejemplo, la soluci\'on buscada (la \'optima) es la del \emph{Caso 4}, si bien esta no es la que menor presupuesto gasta, es la que logra salvar la mayor cantidad de ciudades (3).
 
 \newpage
 \subsection{Resoluci\'on propuesta y justificaci\'on}
@@ -79,11 +79,11 @@ Como primera instancia, el algoritmo simplemente calcula, para cada ciudad, cu\'
 	\end{verbatim}
 	\end{codesnippet}
 
-Luego de haber obtenido una magnitud con la cual se pueden comparar las ciudades entre s\'i, se ordenan las ciudades de menor a mayor en base al costo de salvarla para ser recorridas secuencialmente y enviar los ej\'ercitos requeridos hasta que se agote el presupuesto.\\
+Luego de haber obtenido una magnitud con la cual se pueden comparar las ciudades entre s\'i, se ordenan las ciudades de menor a mayor en base al costo de salvarla, para ser recorridas secuencialmente y enviar los ej\'ercitos requeridos hasta que se agote el presupuesto.\\
 
-Notar que si alguna ciudad no requiere soldados extras para ser salvada, entonces ser\'an las primeras en ser salvadas dado que el costo_total ser\'a igual a 0.\\
+Notar que si alguna ciudad no requiere soldados extras para ser salvada, entonces ser\'an las primeras en ser salvadas, dado que \texttt{costo_total} ser\'a igual a 0.\\
  
-Se recorren secuencialmente las ciudades ordenadas por el costo_total, de modo que para cada una se va a comparar el costo de salvarla contra el presupuesto restante en ese momento (presupuesto_actual). Si es factible el salvataje, se resta el costo_total del presupuesto_actual y se env\'ian las tropas necesarias a la ciudad; en caso contrario se la marca como ciudad perdida.\\
+Se recorren secuencialmente las ciudades ordenadas por \texttt{costo_total}, de modo que para cada una se va a comparar el costo de salvarla contra el presupuesto restante en ese momento (\texttt{presupuesto_actual}). Si es factible salvar la ciudad, se resta \texttt{costo_total} de \texttt{presupuesto_actual} y se env\'ian las tropas necesarias a la ciudad; en caso contrario se la marca como ciudad perdida.\\
 
 Vale aclarar que el orden impuesto a las ciudades implica que cuando ya no se pueda salvar a una ciudad, no se podr\'a salvar a ninguna otra de las restantes.\\
  
@@ -111,7 +111,7 @@ Así, $D$ debe ser óptimo, en el sentido de que debe tener la mayor cantidad ci
 \subsection{An\'alisis de la complejidad}
 La complejidad de nuestra soluci\'on es $O(n.log(n))$, siendo \emph{n} la cantidad de ciudades del pa\'is.\\
 
-En primera instancia, guardamos los datos de las ciudades pasadas por stdin en structs y los dejamos dentro de un vector, para luego poder utilizarlas de un modo pr\'actico. Como esto se realiza secuencialmente, tiene costo lineal \textbf{\textit{O(n)}}.
+En primera instancia, guardamos los datos de las ciudades pasadas por $stdin$ en $structs$ y los dejamos dentro de un vector, para luego poder utilizarlas de un modo pr\'actico. Como esto se realiza secuencialmente, tiene costo lineal \textbf{\textit{O(n)}}.
 
 \begin{algorithm}[h!]
 \caption{zombieland}
@@ -122,7 +122,7 @@ En primera instancia, guardamos los datos de las ciudades pasadas por stdin en s
 Ordena al vector \emph{datos} mediante \textit{sort()}\\
 \While{pueda salvar}{
 	\If{puede ser salvada}{
-		Indicar cantidad de soldados extras enviados y actualizar el presupuesto_actual
+		Indicar cantidad de soldados extras enviados y actualizar el \texttt{presupuesto_actual}
 	}
 }
 \While{haya ciudades insalvables}{
@@ -140,7 +140,7 @@ Ordena al vector \emph{datos} mediante \textit{sort()}\\
 
 El c\'odigo presenta un \textbf{primer ciclo \emph{for}} que calcula el costo de salvar a cada ciudad y las agrega mediante push_back() a un vector. El ciclo recorre linealmente todas las ciudades por lo que tiene complejidad $O(n)$. 
 
-El c\'alculo de salvar a cada ciudad coincide con el descripto en la secci\'on anterior, el cual por ser operaciones aritm\'eticas es $O(1)$. Armar el nuevo struct para insertar dentro del vector \emph{datos} tambi\'en posee un costo constante $O(1)$. La funci\'on \href{http://www.cplusplus.com/reference/vector/vector/push_back/}{push\_back()} \footnote{http://www.cplusplus.com/reference/vector/vector/push_back/} tiene costo $O(1)$ amortizado, lo que implica que cuando no precisa redimensionar el vector cuesta esto, y cuando lo hace, toma tiempo lineal en la cantidad de elementos. Como insertamos durante todo el ciclo tomamos el costo amortizado $O(1)$.
+El c\'alculo de salvar a cada ciudad coincide con el descripto en la secci\'on anterior, el cual, por ser operaciones aritm\'eticas, es $O(1)$. Armar el nuevo $struct$ para insertar dentro del vector \emph{datos} tambi\'en posee un costo constante $O(1)$. La funci\'on \href{http://www.cplusplus.com/reference/vector/vector/push_back/}{push\_back()} \footnote{http://www.cplusplus.com/reference/vector/vector/push_back/} tiene costo $O(1)$ amortizado, lo que implica que cuando no precisa redimensionar el vector cuesta esto, y cuando lo hace, toma tiempo lineal en la cantidad de elementos. Como insertamos durante todo el ciclo tomamos el costo amortizado $O(1)$.
 Por lo tanto, la complejidad total del primer ciclo for nos da \textbf{\textit{O(n)}}.\\
 
 Le sigue \textbf{ordenar el vector} con estos datos, para ello usamos \href{http://www.cplusplus.com/reference/algorithm/sort/}{sort()} \footnote{http://www.cplusplus.com/reference/algorithm/sort/} cuya complejidad es \textbf{\textit{O(n.log(n)})}.\\
@@ -155,7 +155,7 @@ Como cada paso de los mencionados son secuenciales, las complejidades se suman, 
 
 $O(n)$ + $O(n.log(n))$ + $O(n)$ 
 % + $O(n)$
- que es igual a \textit{\textbf{O(n.log(n))}} por propiedades de $O$.
+ que es igual a \textit{\textbf{O(n\*log(n))}} por propiedades de $O$.
 
 
 \newpage
@@ -271,7 +271,7 @@ const vector<ciudad>& pais, long int& salvadas){
 \newpage
 \subsection{Experimentaci\'on}
 
-\subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
+\subsubsection{Constrastaci\'on emp\'irica de la complejidad}
 
 Para realizar la contrastaci\'on emp\'irica de la complejidad de nuestro algoritmo, decidimos comenzar con un muestreo aleatorio de ciudades y presupuestos, aumentando la cantidad de ciudades en cada prueba.
 
