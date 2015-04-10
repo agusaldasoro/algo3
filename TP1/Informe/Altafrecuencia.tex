@@ -54,11 +54,7 @@ En palabras, si hay una sola frecuencia, la devolvemos, pues es trivial que su i
 Si esto no ocurre, se seguirá subdividiendo hasta llegar al caso en el que hay solo un intervalo.
 Es importante aclarar (pues es fundamental para el funcionamiento del algoritmo), que intervalosA tendrá la mitad de frecuencias más baratos, e intervalosB, la mitad de frecuencias más caros. Esto ocurre pues las frecuencias fueron ordenadas por su costo antes de comenzar con este tramo del algoritmo\\
 
-\textcolor{red}{Si esto no ocurre, intervalosA ser\'a el conjunto de intervalos en la que funcionar\'a cada frecuencia, de modo que el costo de contratar el servicio con este cronograma sea m\'inimo en el costo y m\'aximo en la cantidad de tiempo de uso. E intervalosB ser\'a un conjunto con las mismas carater\'isticas, con la diferencia de que el A ser\'a el m\'as \'optimo de la mitad m\'as barata y el B el m\'as \'optimo de la mitad m\'as cara. Esto resulta de haber ordenado las frecuencias por su costo antes de comenzar con este tramo de algoritmo.}\\
-
-\textcolor{red}{Al hacer conquer(intervalosA, intervalosB) se obtiene el conjunto de intervalos con las caracter\'isticas mencionadas pero de todas las frecuencias.}\textcolor{red}{No habria que explicar mas aca?}\\
-
-Nuestro algoritmo de Merge (\emph{conquer}) se encarga de elegir entre las frecuencias de dos conjuntos pasados como parámetro, de modo que devuelve un sólo conjunto indicando los intervalos ocupados por las frecuencias elegidas (es decir, se toman la frecuencia más barata a cada momento, y se hacen los cortes pertinentes a cada frecuencia, según corresponda. \emph{Véase Ejemplo 1 para ver como se recortan las frecuencias}). 
+Nuestro algoritmo de Merge (\emph{conquer}) se encarga de elegir entre las frecuencias de dos conjuntos pasados como parámetro, de modo que devuelve un sólo conjunto indicando los intervalos ocupados por las frecuencias elegidas (es decir, se toman la frecuencia más barata a cada momento, y se hacen los cortes pertinentes a cada frecuencia, según corresponda. \emph{Véase Ejemplo 1 para ver como se recortan las frecuencias}).\\
 
 Dado el enunciado del problema, para elegir qu\'e frecuencia utilizar en determinado intervalo de tiempo se debe priorizar el precio m\'as barato emitiendo se\~nal siempre que sea posible.\\
 
