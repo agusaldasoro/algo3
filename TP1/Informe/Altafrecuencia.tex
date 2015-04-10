@@ -250,10 +250,7 @@ Partimos de la hip\'otesis de que los costos de las frecuencias eran todos disti
 
 Una vez que ya acotamos la cantidad final de intervalos por $2n-1$, podemos proceder al an\'alisis de complejidad del algoritmo de Divide \& Conquer.\\
 
-El algoritmo $divide$ particiona el problema en dos subproblemas m\'as chicos, en particular de la mitad de tamaño que el problema original, lo que implica que tiene complejidad \emph{T(n)=2T(n/2)+O(conquer)}.\\
-\textcolor{red}{No hay que explicar medianamente de donde salio el 2T(n/2)?}\textcolor{blue}{Listo?}
-
-Donde conquer va a recorrer, en el peor caso, dos vectores cuyas longitudes son $(2n-1)/2$ cada uno, y aplicar operaciones que toman $O(1)$ para cada una de ellas. El vector que va construyendo con el CS toma $O(2n-1)$ que es igual a $O(n)$. Estas complejidades se suman y por propiedades de O se obtiene $O(n)$.\\
+El algoritmo $divide$ particiona el problema en dos subproblemas m\'as chicos, en particular de la mitad de tamaño que el problema original, lo que implica que tiene complejidad \emph{T(n)=2T(n/2)+O(conquer)} (ecuación que surge de llamar recursivamente a la función \emph{divide}), donde \emph{conquer} va a recorrer, en el peor caso, dos vectores cuyas longitudes son $(2n-1)/2$ cada uno, y aplicar operaciones que toman $O(1)$ para cada una de ellas. El vector que va construyendo con el CS toma $O(2n-1)$ que es igual a $O(n)$. Estas complejidades se suman y por propiedades de $O$ se obtiene $O(n)$.\\
 
 Reemplazando en la ecuaci\'on obtenemos: \emph{T(n)=2T(n/2)+O(n)}. Vemos que es la misma ecuaci\'on de recurrencia que el algortimo de MergeSort, que por Teorema Maestro se deduce que tiene complejidad $O(n.log(n))$, como pretend\'iamos.
 
