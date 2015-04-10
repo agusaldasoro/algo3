@@ -332,25 +332,25 @@ Primero analizaremos el caso en que los tableros vienen cubiertos como entrada a
 
  \begin{figure}[h!]
    \begin{center}
-	\includegraphics[scale=0.3]{../src/ej3/Mediciones/cubiertos/Promedio.png} 
+	\includegraphics[scale=0.3]{../src/ej3/Mediciones/cubiertos/PromedioInforme.png} 
    \end{center}
  \end{figure}
 
 Como se en ve en el gr\'afico, para tableros de mayor dimensi\'on, se incrementan los tiempos de ejecuci\'on. Estos aumentos aparentan seguir una curva, que en principio parece la estimada en el an\'alisis de complejidad de $O(n^{2})$.\\
 
-\newpage
-Dividimos por n las muestras obtenidas anteriormente (si la curva era la de $n^{2}$ entonces deber\'iamos obterner una recta) y dibujamos el siguiente gr\'afico:\\
+%\newpage
+%Dividimos por n las muestras obtenidas anteriormente (si la curva era la de $n^{2}$ entonces deber\'iamos obterner una recta) y dibujamos el siguiente gr\'afico:\\
 
 
-\textcolor{blue}{cambiar los graficos a los que correspondan!}
+%\textcolor{blue}{cambiar los graficos a los que correspondan!}
 
- \begin{figure}[h!]
-   \begin{center}
-	\includegraphics[scale=0.3]{../src/ej3/Mediciones/cubiertos/Promedio.png} 
-   \end{center}
- \end{figure}
+% \begin{figure}[h!]
+%   \begin{center}
+%	\includegraphics[scale=0.3]{../src/ej3/Mediciones/cubiertos/Promedio.png} 
+%   \end{center}
+% \end{figure}
 
-Que es una recta como esper\'abamos. En base a esto podemos concluir que la complejidad de nuestro algoritmo para tableros cubiertos demuestra también ser $O(n^{2})$.\\
+%Que es una recta como esper\'abamos. En base a esto podemos concluir que la complejidad de nuestro algoritmo para tableros cubiertos demuestra también ser $O(n^{2})$.\\
 \newpage
 
 En segundo lugar vamos a ver qué sucede con los tiempos de ejecuci\'on para tableros con 0, 2 y 4 caballos preubicados, para distintos tama\~nos de tablero. Cada gr\'afico corresponde a los tiempos de ejecuci\'on del algoritmo bruto, con poda, con estrategia y con ambas situaciones a la vez para las distintas cantidades de caballos preubicados.
@@ -400,11 +400,11 @@ Pero al aumentar el n, los tiempos de ejecución de realizar podas sin estrategi
  \end{figure}
    \newpage
 
- Haciendo zoom \textcolor{red}{Armar este grafico, es cualca este...}
+ Haciendo zoom
 
  \begin{figure}[h!]
    \begin{center}
-   \includegraphics[scale=0.18]{../src/ej3/Mediciones/2caballos/promedios3.png} 
+   \includegraphics[scale=0.18]{../src/ej3/Mediciones/2caballos/promedios2.png} 
    \end{center}
  \end{figure}
  
@@ -412,7 +412,7 @@ A\'un m\'as zoom...
 
  \begin{figure}[h!]
    \begin{center}
-%   \includegraphics[scale=0.18]{../src/ej3/Mediciones/2caballos/promedios3.png} 
+   \includegraphics[scale=0.18]{../src/ej3/Mediciones/2caballos/promedios3.png} 
    \end{center}
  \end{figure}
  
@@ -428,20 +428,20 @@ A\'un m\'as zoom...
  
 Se puede apreciar que al tratar con un tablero de entrada con dos o cuatro caballos preubicados, sin estar este cubierto, los tiempos de ejecución para cada método preservan la relación analizada en el tablero vacío.\\
 
-\newpage
+%\newpage
 
-\textcolor{red}{{\LARGE ARMAR EL GRÁFICO RECTIFICADO!!}}\\
+%\textcolor{red}{{\LARGE ARMAR EL GRÁFICO RECTIFICADO!!}}\\
 
-Nuestra estimación de Complejidad del algoritmo era de $O(2^{n^2}-k)$, por lo tanto decidimos aplicarle log$_2$ y dividir por $n$ a los tiempos obtenidos.\textcolor{red}{Ver que grafico va...}
+%Nuestra estimación de Complejidad del algoritmo era de $O(2^{n^2}-k)$, por lo tanto decidimos aplicarle log$_2$ y dividir por $n$ a los tiempos obtenidos.\textcolor{red}{Ver que grafico va...}
 
-\begin{figure}[h!]
-   \begin{center}
-%   \includegraphics[scale=0.3]{../src/ej3/Mediciones/BLABLA} 
+%\begin{figure}[h!]
+%   \begin{center}
+%   \includegraphics[scale=0.3]{../src/ej3/Mediciones/linealInf.png}
 % SERA EL QUE SE LLAMA LINEAL??
-   \end{center}
- \end{figure}
+%   \end{center}
+% \end{figure}
  
-Se puede apreciar que el gráfico nos resultó una recta, confirmando empíricamente nuestra hipótesis sobre la complejidad.
+%Se puede apreciar que el gráfico nos resultó una recta, confirmando empíricamente nuestra hipótesis sobre la complejidad.
 
 \newpage
 
