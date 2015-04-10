@@ -10,7 +10,7 @@ A continuaci\'on se muestran dos casos particulares de este problema. En ambos s
    \begin{center}
  	\includegraphics[scale=0.45]{imagenes/ej2/ejemplo1.png}
  	\caption{Ejemplo 1}
-% 	\label{caballito}	
+ 	\label{ej1}	
    \end{center}
  \end{figure}
 
@@ -54,11 +54,11 @@ En palabras, si hay una sola frecuencia, la devolvemos, pues es trivial que su i
 Si esto no ocurre, se seguirá subdividiendo hasta llegar al caso en el que hay solo un intervalo.
 Es importante aclarar (pues es fundamental para el funcionamiento del algoritmo), que intervalosA tendrá la mitad de frecuencias más baratos, e intervalosB, la mitad de frecuencias más caros. Esto ocurre pues las frecuencias fueron ordenadas por su costo antes de comenzar con este tramo del algoritmo\\
 
-Nuestro algoritmo de Merge (\emph{conquer}) se encarga de elegir entre las frecuencias de dos conjuntos pasados como parámetro, de modo que devuelve un sólo conjunto indicando los intervalos ocupados por las frecuencias elegidas (es decir, se toman la frecuencia más barata a cada momento, y se hacen los cortes pertinentes a cada frecuencia, según corresponda. \emph{Véase Ejemplo 1 para ver como se recortan las frecuencias}).\\
+Nuestro algoritmo de Merge (\emph{conquer}) se encarga de elegir entre las frecuencias de dos conjuntos pasados como parámetro, de modo que devuelve un sólo conjunto indicando los intervalos ocupados por las frecuencias elegidas (es decir, se toman la frecuencia más barata a cada momento, y se hacen los cortes pertinentes a cada frecuencia, según corresponda. \emph{Véase Fig:\ref{ej1} para saber c\'omo se recortan las frecuencias}).\\
 
-Dado el enunciado del problema, para elegir qu\'e frecuencia utilizar en determinado intervalo de tiempo se debe priorizar el precio m\'as barato emitiendo se\~nal siempre que sea posible.\\
+Dado el enunciado del problema, para elegir qu\'e frecuencia utilizar en determinado intervalo de tiempo, se debe priorizar el costo m\'as barato emitiendo se\~nal siempre que sea posible.\\
 
-Gracias a que en el primer llamado de nuestra funci\'on estas se encontraban en orden creciente respecto del costo, en cada paso de \emph{conquer} de los dos conjuntos de entrada con intervalos se van a priorizar los de la izquierda. Es decir que en cada paso, todos los intervalos pertenecientes al conjunto de la izquierda (como son los de menor precio) van a pertencer al conjunto resultado. Mientras que s\'olo los intervalos que completen tiempo sin se\~nal pertenecientes al conjunto de la derecha van a ser colocados en el conjunto resultado (es decir, se completarán los vacíos entre frecuencias del primer conjunto, con frecuencias o intervalos de frecuencias de \'este conjunto). Esto representa un invariante que se va a cumplir en cada paso del algoritmo, lo cual nos permite justificar que la soluci\'on obtenida es la deseada.\\
+Gracias a que en el primer llamado de nuestra funci\'on estas se encontraban en orden creciente respecto del precio, en cada paso del \emph{conquer} (sobre los dos conjuntos de entrada con intervalos) se van a priorizar los de la izquierda \textit{-intervalosA-}. Es decir que en cada paso, todos los intervalos pertenecientes a intervalosA (ya que son los de menor precio) van a pertencer al conjunto resultado. Mientras que s\'olo los intervalos que completen los tiempo sin se\~nal restantes pertenecientes al conjunto de la derecha \textit{-intervalosB-} van a ser colocados en el conjunto resultado (es decir, se completarán los vacíos entre frecuencias del primer conjunto, con frecuencias o intervalos de frecuencias de \'este conjunto). Esto representa un \emph{invariante} que se va a cumplir en cada paso del algoritmo, lo cual nos permite justificar que la soluci\'on obtenida es la deseada.\\
 
 %	\begin{codesnippet}
 %	\begin{verbatim}
@@ -244,11 +244,17 @@ Si extendemos este c\'alculo para cualquier n, vamos a concluir que siempre la c
 
 Partimos de la hip\'otesis de que los costos de las frecuencias eran todos distintos, lo cual nos asegura una soluci\'on \'unica con una cantidad \'unica de intervalos. Ahora, si consideramos que pueden existir dos (o m\'as) frecuencias, llamemos \emph{A} y \emph{B}, con el mismo precio podemos asumir indistintamente que \emph{A$<$B} o \emph{A$>$B} lo cual podr\'ia devolver intervalos distintos, pero siempre su cantidad va a estar acotada por lo mismo probado anteriormente: $2n-1$.\\
 
+\newpage
+
 Una vez que ya acotamos la cantidad final de intervalos por $2n-1$, podemos proceder al an\'alisis de complejidad del algoritmo de Divide \& Conquer.\\
 
-El algoritmo $divide$ particiona el problema en dos subproblemas m\'as chicos, en particular de la mitad de tamaño que el problema original, lo que implica que tiene complejidad \emph{T(n)=2T(n/2)+O(conquer)} (ecuación que surge de llamar recursivamente a la función \emph{divide}), donde \emph{conquer} va a recorrer, en el peor caso, dos vectores cuyas longitudes son $(2n-1)/2$ cada uno, y aplicar operaciones que toman $O(1)$ para cada una de ellas. El vector que va construyendo con el CS toma $O(2n-1)$ que es igual a $O(n)$. Estas complejidades se suman y por propiedades de $O$ se obtiene $O(n)$.\\
+El algoritmo \emph{divide} particiona el problema en dos subproblemas m\'as chicos, en particular de la mitad de tamaño que el problema original, lo que implica que tiene complejidad \emph{T(n)=2T(n/2)+O(conquer)} (ecuación que surge de llamar recursivamente a la función \emph{divide}).\\
 
-Reemplazando en la ecuaci\'on obtenemos: \emph{T(n)=2T(n/2)+O(n)}. Vemos que es la misma ecuaci\'on de recurrencia que el algortimo de MergeSort, que por Teorema Maestro se deduce que tiene complejidad $O(n.log(n))$, como pretend\'iamos.
+La funci\'on \emph{conquer} va a recorrer, en el peor caso, dos vectores cuyas longitudes son $(2n-1)/2$ para cada uno y va a aplicar operaciones que toman $O(1)$ para cada una de ellos. El vector que va construyendo con el CS toma $O(2n-1)$ que es igual a $O(n)$.
+
+ Estas complejidades se suman y por propiedades de $O$ se obtiene que $O(conquer)$ resulta $O(n)$.\\
+
+Reemplazando en la ecuaci\'on obtenemos: \emph{T(n)=2T(n/2)+O(n)}. Vemos que es la misma ecuaci\'on de recurrencia que el algortimo de MergeSort, que por \emph{Teorema Maestro} se deduce que tiene complejidad $O(n.log(n))$, como pretend\'iamos.
 
 \newpage
 \subsection{C\'odigo fuente}
@@ -418,6 +424,9 @@ vector<frecuencia> conquer(vector<frecuencia> barata, vector<frecuencia> cara){
 
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
 
+Para llevar a cabo la experimentaci\'on, consideramos distintos sets de frecuencias con sus intervalos y costos generados aleatoriamente. Cada uno de ellos var\'ia en tama\~no.\\
+
+Los tiempos de ejecuci\'on para cada tama\~no distinto de n (cantidad de frecuencias) fueron los siguientes:
 
 
 \begin{table}[htb]
@@ -488,6 +497,11 @@ n & Tiempo en segundos\\
 %   \end{center}
 % \end{figure}
 
+Dado que la Cota de Complejidad planteada te\'oricamente es de $O(n.log(n))$, era esperable que la curva sea creciente (ya que $f(n)=k.n.log(n)+q$ -considerando a $k$ y $q$ constantes- lo es). 
+
+A simple vista, no se puede apreciar si la relaci\'on que tienen respecto de tama\~no/tiempo es la caracter\'istica de $f(n)$. Por este motivo, como siguiente paso decidimos linealizar los tiempos, dividiendo a cada uno por $log(n)$.
+
+
 \begin{table}[htb]
 \centering
 \begin{tabular}[c]{|l|l|}
@@ -547,3 +561,8 @@ n & Tiempo en segundos dividido por log$_2$(n)\\
 % 	\label{caballito}	
    \end{center}
  \end{figure}
+ 
+ 
+ Si bien la morfolog\'ia del segundo gr\'afico parece similar a la anterior, en este caso la funci\'on que est\'abamos buscando era $g(n)=kn+q$ (siendo $k$ y $q$ alguna constante). Acorde a lo perceptible al ojo humano, la curva graficada se condice con alguna recta.\\
+ 
+ De este modo, deducimos que nuestra experimentaci\'on condice a la Cota Te\'orica planteada de $O(n.log(n))$.

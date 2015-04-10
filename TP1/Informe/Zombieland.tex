@@ -83,7 +83,7 @@ Luego de haber obtenido una magnitud con la cual se pueden comparar las ciudades
 
 Notar que si alguna ciudad no requiere soldados extras para ser salvada, entonces ser\'an las primeras en ser salvadas, dado que \texttt{costo_total} ser\'a igual a 0.\\
  
-Se recorren secuencialmente las ciudades ordenadas por \texttt{costo_total}, de modo que para cada una se va a comparar el costo de salvarla contra el presupuesto restante en ese momento (\texttt{presupuesto_actual}). Si es factible salvar la ciudad, se resta \texttt{costo_total} de \texttt{presupuesto_actual} y se env\'ian las tropas necesarias a la ciudad; en caso contrario se la marca como ciudad perdida.\\
+Se recorren secuencialmente las ciudades ordenadas por \texttt{costo_total}, de modo que para cada una se va a comparar el costo de salvarla contra el presupuesto restante en ese momento\\ (\texttt{presupuesto_actual}). Si es factible salvar la ciudad, se resta \texttt{costo_total} de \texttt{presupuesto_actual} y se env\'ian las tropas necesarias a la ciudad; en caso contrario se la marca como ciudad perdida.\\
 
 Vale aclarar que el orden impuesto a las ciudades implica que cuando ya no se pueda salvar a una ciudad, no se podr\'a salvar a ninguna otra de las restantes.\\
  
@@ -140,7 +140,7 @@ Ordena al vector \emph{datos} mediante \textit{sort()}\\
 
 El c\'odigo presenta un \textbf{primer ciclo \emph{for}} que calcula el costo de salvar a cada ciudad y las agrega mediante push_back() a un vector. El ciclo recorre linealmente todas las ciudades por lo que tiene complejidad $O(n)$. 
 
-El c\'alculo de salvar a cada ciudad coincide con el descripto en la secci\'on anterior, el cual, por ser operaciones aritm\'eticas, es $O(1)$. Armar el nuevo $struct$ para insertar dentro del vector \emph{datos} tambi\'en posee un costo constante $O(1)$. La funci\'on \href{http://www.cplusplus.com/reference/vector/vector/push_back/}{push\_back()} \footnote{http://www.cplusplus.com/reference/vector/vector/push_back/} tiene costo $O(1)$ amortizado, lo que implica que cuando no precisa redimensionar el vector cuesta esto, y cuando lo hace, toma tiempo lineal en la cantidad de elementos. Como insertamos durante todo el ciclo tomamos el costo amortizado $O(1)$.
+El c\'alculo de salvar a cada ciudad coincide con el descripto en la secci\'on anterior, el cual, por ser operaciones aritm\'eticas, es $O(1)$. Armar el nuevo \emph{struct} para insertar dentro del vector \emph{datos} tambi\'en posee un costo constante $O(1)$. La funci\'on \href{http://www.cplusplus.com/reference/vector/vector/push_back/}{push\_back()} \footnote{http://www.cplusplus.com/reference/vector/vector/push_back/} tiene costo $O(1)$ amortizado, lo que implica que cuando no precisa redimensionar el vector cuesta esto, y cuando lo hace, toma tiempo lineal en la cantidad de elementos. Como insertamos durante todo el ciclo tomamos el costo amortizado $O(1)$.
 Por lo tanto, la complejidad total del primer ciclo for nos da \textbf{\textit{O(n)}}.\\
 
 Le sigue \textbf{ordenar el vector} con estos datos, para ello usamos \href{http://www.cplusplus.com/reference/algorithm/sort/}{sort()} \footnote{http://www.cplusplus.com/reference/algorithm/sort/} cuya complejidad es \textbf{\textit{O(n.log(n)})}.\\
@@ -273,6 +273,9 @@ const vector<ciudad>& pais, long int& salvadas){
 
 \subsubsection{Constrastaci\'on emp\'irica de la complejidad}
 
+
+\subsubsection{Experimentaci\'on variando s\'olo el par\'ametro n}
+
 Para realizar la contrastaci\'on emp\'irica de la complejidad de nuestro algoritmo, decidimos comenzar con un muestreo aleatorio de ciudades y presupuestos, aumentando la cantidad de ciudades en cada prueba.
 
 La siguiente tabla indica cu\'anto tiempo utiliz\'o el algoritmo para resolver el problema, siendo $n$ la cantidad de ciudades en cada caso.
@@ -314,79 +317,100 @@ El gr\'afico resultante fue el siguiente:
 
  \begin{figure}[h!]
    \begin{center}
- 	\includegraphics{imagenes/ej1/Mediciones/Grafico1.png}
+ 	\includegraphics[scale=0.8]{imagenes/ej1/Mediciones/Grafico1.png}
 % 	\caption{}
 % 	\label{caballito}	
    \end{center}
  \end{figure}
 
-De acuerdo al an\'alisis de este gr\'afico, podemos ver que aparenta ser una curva con poca inclinaci\'on, similar al gr\'afico de $O( n.log(n) )$, que fue la complejidad propuesta.
+De acuerdo al an\'alisis de este gr\'afico, podemos ver que aparenta ser una curva con poca inclinaci\'on, similar al gr\'afico de $O( n.log(n) )$, que fue la complejidad propuesta.\\
 
-Sin embargo, esto no es suficiente para probar que nuestro algoritmo cumple la complejidad. Por lo tanto, se realiz\'o la linealizaci\'on, dividiendo los tiempos por $log(n)$.
+Para una mejor interpretaci\'on del muestreo obtenido, se realiz\'o una linealizaci\'on, dividiendo los tiempos por $log(n)$. De este modo, si la curva del gr\'afico resultante es una recta indicar\'ia que emp\'iricamente demuestra ser un algoritmo de complejidad $O(n.log(n))$.
 
 \newpage
 
  \begin{figure}[h!]
    \begin{center}
- 	\includegraphics{imagenes/ej1/Mediciones/Grafico2.png}
+ 	\includegraphics[scale=0.8]{imagenes/ej1/Mediciones/Grafico2.png}
 % 	\caption{}
 % 	\label{caballito}	
    \end{center}
  \end{figure}
 
- En esta comparaci\'on, podemos ver que al dividir la curva inicial por $log(n)$, se obtiene pr\'acticamente una funci\'on lineal, lo cual era esperado.
+ En esta comparaci\'on, podemos ver que al dividir la curva inicial por $log(n)$, se obtiene pr\'acticamente una funci\'on lineal. Esto nos indica que se condice emp\'iricamente con la hip\'otesis de Complejidad $O(n.log(n))$ (Cota de Complejidad Te\'orica).\\
  
-Luego realizamos una nueva prueba, para comprobar que el algoritmo solamente depende de la cantidad de ciudades, sin importar cu\'al es el presupuesto asociado.
-Como en todos los casos vamos a realizar el $sort()$, que tiene complejidad $O(n.log(n))$, el gr\'afico debiera ser similar.
+ \newpage
+\subsubsection{Experimentaci\'on variando el par\'ametro n y el presupuesto asociado} 
+ 
+Luego realizamos una nueva prueba, para mostrar que el algoritmo solamente depende de la cantidad de ciudades, sin importar cu\'al sea el presupuesto asociado. Como en todos los casos vamos a realizar el $sort()$, que tiene complejidad $O(n.log(n))$, el gr\'afico deber\'ia ser similar.\\
 
+%\textcolor{red}{Aca habria que poner de cuanto es el presupuesto en cada caso, porque sino queda como algo indefinido ''presupuesto grande'' o ''presupuesto chico''}
+
+Primero analizamos los tiempos de ejecuci\'on de nuestro algoritmo para distintas ciudades aleatorias con un presupuesto para todas de $1.000.000.000$\$.
  \begin{figure}[h!]
    \begin{center}
- 	\includegraphics{imagenes/ej1/Mediciones/Grafico3.png}
+ 	\includegraphics[scale=0.8]{imagenes/ej1/Mediciones/Grafico3.png}
 % 	\caption{}
 % 	\label{caballito}	
    \end{center}
  \end{figure}
 
-\newpage
- 
+
+ A continuaci\'on, analizamos los tiempos de ejecuci\'on de las mismas ciudades aleatorias del caso anterior pero asignandoles a todas un presupuesto de $10$\$.
   \begin{figure}[h!]
    \begin{center}
- 	\includegraphics{imagenes/ej1/Mediciones/Grafico4.png}
+ 	\includegraphics[scale=0.9]{imagenes/ej1/Mediciones/Grafico4.png}
 % 	\caption{}
 % 	\label{caballito}	
    \end{center}
  \end{figure}
  
- 
-Efectivamente, utilizando tanto presupuestos altos como bajos, la curva es siempre similar.
+ \newpage
+Efectivamente, utilizando tanto presupuestos altos como bajos, la curva presenta un comportamiento similar.
+
+Si comparamos las tablas de valores para ambos casos, podemos ver que los tiempos no difieren notablemente. Adem\'as, podemos ver c\'omo oscilan entre s\'i los tiempos de cada caso acorde avanza el n.\\
+
+\begin{table}[htb]
+\centering
+\begin{tabular}[c]{|l|l|l|l|l|}
+
+
+
+		\hline
+		n &\multicolumn{2}{|c|}{Presupuesto Alto}& \multicolumn{2}{|c|}{Presupuesto Bajo}\\
+		\cline{2-5}
+		& Tiempo & Tiempo/log(n) & Tiempo & Tiempo/log(n)\\
+		\hline
+	1000 & 0,0002944123	& 9,81374406666668E-005 & 0,0002878731 & 9,59577063333334E-005 \\
+	\hline
+	2000 &	0,0006123812 &	0,0001855121 & 	0,0006116416 & 	0,0001852881 \\
+	\hline	
+	3000 & 0,0009376308	& 0,0002696572	& 	0,0009373774 & 	0,0002695843 \\
+	\hline
+	4000 & 0,0010842365 & 0,0003010046	& 	0,0010840265 & 	0,0003009463 \\
+	\hline
+	5000 & 	0,0015145134 & 0,0004094419	& 	0,0015181007 & 	0,0004104117 \\
+	\hline
+	6000 & 	0,0020518541 &	0,0005430842 & 	0,0020493215 & 	0,0005424138 \\
+	\hline
+	7000 & 0,0024156113	&	0,0006282314 & 	0,0024062528 & 	0,0006257975 \\
+	\hline
+	8000 & 0,0027960219	&	0,0007163611 & 	0,0027869656 & 	0,0007140408 \\
+	\hline
+	9000 & 0,0032732535	&	0,0008277827 & 	0,0032490964 & 	0,0008216735 \\
+	\hline 
+	10000 & 0,0036292888 &	0,0009073222 & 	0,0036244519 & 	0,000906113 \\
+	\hline
+
+		
+	\end{tabular}
+%\caption{Tabla muy sencilla.}
+%\label{tabla:sencilla2}
+\end{table}
+
+En nuestra experimentaci\'on se puede notar que la variaci\'on de los tiempos de ejecuci\'on s\'olo depende de la cantidad de ciudades (\emph{n}) y no del presupuesto que cuente cada una.
+
+
 
 \newpage
  
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\newpage
-%\subsubsection{Modificaci\'on del algoritmo}
-
-%Decidimos hacer una modificaci\'on dentro del algoritmo. Creemos que esta misma va a generar una mejora en la cantidad de tiempo.\\
-
-%La misma consiste en: modificar el \'ultimo \emph{ciclo for} para que cuando encuentre la primer ciudad que no pueda salvar deje de iterar ya que las restantes tampoco podr\'an ser salvadas (esto ocurre porque est\'an ordenadas por costo).\\
-
-%Consideramos que saliendo antes del ciclo, el tiempo de c\'omputo para un mismo pa\'is deber\'ia ser menor que con el algoritmo original.\\
-
-%Experimentamos 10 casos distintos de tama\~no 1000\textcolor{red}{(?} y para cada uno comparamos sus tiempos de ejecuci\'on entre el algoritmo original y el modificado.
-
-%\textcolor{red}{Aca va el gr\'afico de eso que acabo de explicar arriba.}
-
-%\newpage
-%\subsubsection{Comparar pa\'ises de a dos}
-
-%Consideramos 10\textcolor{red}{??} casos, donde para cada uno tomamos dos paises (A y B) con la misma cantidad de ciudades \textcolor{red}{para cada par de paises, cantidades distintas de ciudades (100, 500, 1000, ... (hasta donde nos de la compu jajaj))}. Estos casos los vamos a armar de tal forma que A tenga ya todas sus ciudades salvadas al momento de ser ingresada, en cambio B tiene una relaci\'on de cantidad soldados/zombies aleatoria. Corremos el algoritmo para todos los pares de paises.\\
-
-%Dado a que nuestro algoritmo no establece ning\'un control de filtro sobre casos donde las ciudades ya esten salvadas al momento de ser recibidas como par\'ametro, consideramos que para cada par de ciudades los tiempos de c\'omputo no van a diferir mucho.\\
-
-%\textcolor{red}{Aca va el gr\'afico donde muestra la diferencia entre cada par. Y ver si lo dibujamos linealizado como mostraron en clase tambien.}\\
-
-%\textcolor{red}{Aca hay que escribir si coincidi\'o con lo que creiamos o no y dar una peque\~na explicaci\'on de porque pasa eso}
-
-
-%\noindent Experimentos que se pueden hacer:
-%-Muchas ciudades con pocos soldados para mandar, pero presupuesto bajo. Hipotesis: realmente es la cantidad optima, sin importar la que elija.

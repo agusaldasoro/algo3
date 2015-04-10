@@ -32,7 +32,7 @@ En este problema, se presenta un tablero de ajedrez de tama\~no $nxn$, el cual c
 \newpage
 
 \subsection{Resoluci\'on propuesta y justificaci\'on}
-Para la resoluci\'on de este ejercicio, se ped\'ia un algoritmo de backtracking. O sea que el algortimo debe, a partir de una subsoluci\'on del problema, fijarse si es soluci\'on y hacer algo  al respecto con ella, o bien, si es una subsoluci\'on v\'alida, para cada elemento que se pueda agregar a la subsoluci\'on, agregarlo y repetir el proceso, o en el \'ultimo caso, si se llega a una soluci\'on no v\'alida, volver hacia atr\'as y tomar una decisi\'on adecuada.\\
+Para la resoluci\'on de este ejercicio, se ped\'ia un algoritmo de backtracking. Es decir que el algortimo debe, a partir de una subsoluci\'on del problema, fijarse si es soluci\'on y hacer algo  al respecto con ella, o bien, si es una subsoluci\'on v\'alida, para cada elemento que se pueda agregar a la subsoluci\'on, agregarlo y repetir el proceso, o en el \'ultimo caso, si se llega a una soluci\'on no v\'alida, volver hacia atr\'as y tomar una decisi\'on adecuada.\\
 
 Bajo el contexto de un algoritmo de Backtracking se divisan a las distintas estrategias para resolver un determinado problema como distintos caminos desde la raiz hasta una hoja dentro de un \'arbol de decisiones. En nuestro caso, cada camino va a representar cada una de las distribuciones posibles de fichas \emph{caballo} en las casillas marcadas como \emph{vac\'ias} al comienzo de la ejecuci\'on.\\
 
@@ -40,7 +40,7 @@ Vamos a recorrer desde la rama que no ubica ninguna pieza de caballo, hasta la q
 
 Cuando llegamos al final de cada camino (una hoja) no tenemos asegurado haber \emph{cubierto} el tablero, es decir no todas las ramas van a ser soluci\'on. Pero si lo es, debemos comparar con las soluciones encontradas anteriormente, preservando siempre la que utiliz\'o una menor cantidad de fichas.\\
 
-Habiendo recorrido todo el \'arbol, nos aseguramos de encontrar alguna soluci\'on, en particular, una de las m\'as \'optimas, si hubiera m\'as de una. Esto implica que el algortimo debe revisar un (muy) extenso \'arbol de posibilidades, donde una decisi\'on es agregar o no un caballo en la posici\'on $i, j$ del tablero para todo $i, j$ dentro del rango del mismo. \\
+Habiendo recorrido todo el \'arbol, nos aseguramos de encontrar alguna soluci\'on. En particular, la \'optima o una entre las \'optimas, si hubiera m\'as de una. Esto implica que el algortimo debe revisar un (muy) extenso \'arbol de posibilidades, donde una decisi\'on es agregar o no un caballo en la posici\'on $i, j$ del tablero para todo $i, j$ dentro del rango del mismo. \\
 
 Posterior a esto se ped\'ia pensar e implementar una serie de podas y estrategias para no recorrer todo el \'arbol, sino mirarlo inteligentemente y as\'i reducir los tiempos de ejecuci\'on.\\
 
@@ -48,12 +48,12 @@ Para inicializar la b\'usqueda, necesitamos guardar una soluci\'on del tablero q
 
 Luego el algortimo es muy sencillo, pregunta cu\'antos caballos hace falta agregar para cubrir el tablero si en la posici\'on $i, j$ agrega un caballo (recursivamente llena todo el tablero) y lo compara con la respuesta de no agregarlo, guardando en el contenedor de soluciones antes mencionado, la soluci\'on m\'as \'optima hasta ese momento.\\
 
-El algoritmo resuelve el ejercicio planteado porque efectivamente recorre todo el \'arbol de soluciones y se queda con alguna de las m\'as \'optimas.\\
+El algoritmo resuelve el ejercicio planteado porque efectivamente recorre todo el \'arbol de soluciones y se queda con alguna de las \'optimas (o la \'optima si hubiera una sola).\\
 
 \newpage
 
 \subsection{An\'alisis de la complejidad}
-El algoritmo tiene una complejidad m\'inima de $O(n^{2})$ (siendo n la dimensi\'on del tablero) porque crea un primer vector de soluci\'on \'optima con "agregar todos los caballos posibles al tablero"\\
+El algoritmo tiene una complejidad inicial de $O(n^{2})$ (siendo \emph{n} la dimensi\'on del tablero) porque crea un primer vector de soluci\'on \'optima (el cual funcionar\'a como acumulador) con ``agregar todos los caballos posibles al tablero''.\\
 
 Conitnuando este algoritmo, hay que tener en cuenta dos situaciones.\\
 
@@ -69,20 +69,20 @@ Que sumado a la complejidad anterior da como resultado $O(n^{2})$\\
 
 El tablero pasado como par\'ametro de entrada \emph{no} se encuentra cubierto completamente con las fichas existentes.\\
 
-Es en este caso donde se comienza a trabajar con el \emph{Backtracking}. La primer resoluci\'on llevada a cabo fue aplicar ``fuerza bruta''. Esto consisti\'o en recorrer por completo el \'arbol de soluciones y devolver una que fuera \'optima. Para ello, en cada posici\'on sin caballos, debemos ver que pasa si tomo alguna de las dos posibles decisiones (insertar un caballo o no). Este proceso cuenta con una complejidad de $O(2^{n^{2} - k})$ siendo k la cantidad de caballos preubicados. Agregar o quitar un caballo toma tiempo $O(1)$ y por cada posici\'on del tablero ($n^{2}$) que est\'e libre ($n^{2} - k$), elige entre dos opciones, agregar o no un caballo, es decir, 2x2x...x2 $O(n^{2}-k)$ veces.\\
+Es en este caso donde se comienza a trabajar con el \emph{Backtracking}. La primer resoluci\'on llevada a cabo fue aplicar ``fuerza bruta''. Esto consisti\'o en recorrer por completo el \'arbol de soluciones y devolver una que fuera \'optima. Para ello, en cada posici\'on sin caballos, debemos ver que pasa si tomo alguna de las dos posibles decisiones (insertar un caballo o no). Este proceso cuenta con una complejidad de $O(2^{n^{2} - k})$ siendo $k$ la cantidad de caballos preubicados. Agregar o quitar un caballo toma tiempo $O(1)$ y por cada posici\'on del tablero que est\'e libre ($n^{2} - k$ en un tablero de  $n^{2}$ casillas totales), elige entre dos opciones, agregar o no un caballo, es decir: 2x2x...x2 $O(n^{2}-k)$ veces.\\
 
 Con el fin de disminuir los tiempos de ejecuci\'on, se pidi\'o realizar podas al \'arbol y estrategias de recorrido (determinar si vale la pena o no seguir revisando alguna rama).\\
 
-Ninguna poda o estrategia disminuye la complejidad te\'orica exponencial del primer caso estudiado, dado que el algoritmo realiza las mismas preguntas para cada posici\'on del tablero: ¿qu\'e pasa con el resto del tablero si a esta posici\'on la dejo sin caballo? y ¿qu\'e pasa con el resto del tablero si a esta posici\'on le agrego un caballo?.\\
+Ninguna poda o estrategia disminuye la complejidad te\'orica exponencial estudiada, dado que el algoritmo realiza las mismas preguntas para cada posici\'on del tablero: ¿qu\'e pasa con el resto del tablero si a esta posici\'on la dejo sin caballo? y ¿qu\'e pasa con el resto del tablero si a esta posici\'on le agrego un caballo?.\\
 
-No obstante, los tiempos de ejecuci\'on se ven radicalmente afectados (ver Secci\'on: \ref{tiempos}), esto sucede porque se poda el \'arbol de soluciones posibles que se analizan. Es decir, en un primer momento se revisaban todas las ramas, sin excepci\'on; pero aplicando podas, descartamos muchas de estas que ya sabemos que no nos llevar\'an a un resultado de inter\'es.\\
+No obstante, los tiempos de ejecuci\'on se ven radicalmente afectados (ver Secci\'on: \ref{tiempos}), esto sucede porque se poda el \'arbol de soluciones posibles que se analizan. Es decir, en un primer momento se revisaban todas las ramas, sin excepci\'on; pero aplicando podas o estrategias, descartamos caminos que ya sabemos que no nos llevar\'an a un resultado de inter\'es.\\
 
 
 La poda fue la m\'as intuitiva: mientras vamos recorriendo el \'arbol contamos con una soluci\'on (preservada) que presenta \emph{k} caballos extra agregados. Si analizando otra rama nos encontramos en una posici\'on donde debemos agregar un caballo, pero la cantidad de caballos para este camino iguala a k no vamos a estar interesados en proseguir por esta rama ya que, a lo sumo, vamos a encontrar otra soluci\'on \'optima con \emph{k} caballos.\\
 
 %si tenemos una soluci\'on con k caballos extra agregados,  y analizando otra rama llegamos a tener que necesitar agregar un caballo a una subsoluci\'on de k-1 caballos (o sea que tendr\'ia por lo menos k caballos), entonces no nos interesa seguir revis\'andola, pues tenemos una soluci\'on que es igual o m\'as \'optima con k caballos.\\
 
-La segunda estrategia fue preguntar, para cada posición a analizar, si agregar un caballo en dicha posici\'on cubre alguna casilla que estaba libre (incluyendo en la cual es colocada). Si no lo hace, podemos establecer que este caballo no se va a encontrar en el Conjunto Solución de esa rama, por lo que podemos descartarla.
+La estrategia fue preguntar, para cada posición a analizar, si agregar un caballo en dicha posici\'on cubre alguna casilla que estaba libre (incluyendo en la cual es colocada). Si no lo hace, podemos establecer que este caballo no se va a encontrar en el Conjunto Solución de esa rama, por lo que podemos descartarla.
 
 Entonces, no solo salteamos las k posiciones de los caballos preubicados, sino que también salteamos aquellas posiciones en las cuales agregar un caballo no modifica mi estado anterior, es decir, que estar\'ian atancando casilleros que ya est\'an siendo cubiertos por otros caballos.
   
@@ -328,7 +328,7 @@ void imprimir(const Tablero& tablero){
 
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}\label{tiempos}
 
-Primero analizaremos el caso en que los tableros vienen cubiertos como entrada al problema
+Primero analizaremos el caso en que los tableros vienen cubiertos como entrada al problema. Lo haremos ejecutando el algoritmo sin ninguna mejora, ya que s\'olo debe ejecutar un chequeo sobre el Tablero para ver si se encuentra cubierto y devolver que no es necesario agregar ning\'un caballo.
 
  \begin{figure}[h!]
    \begin{center}
@@ -444,6 +444,8 @@ Se puede apreciar que al tratar con un tablero de entrada con dos o cuatro cabal
 %Se puede apreciar que el gráfico nos resultó una recta, confirmando empíricamente nuestra hipótesis sobre la complejidad.
 
 \newpage
+\subsubsection{Influencia de la cantidad de caballos preexistentes sobre los tiempos de ejecuci\'on}
+
 
 Como último paso, queremos verificar si el $k$, perteneciente a nuestra cota de complejidad\\
 ($O(2^{n^2}-k)$), ejerce una influencia notoria en los tiempos de ejecución.
