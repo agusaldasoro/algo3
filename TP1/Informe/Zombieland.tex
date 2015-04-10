@@ -155,7 +155,7 @@ Como cada paso de los mencionados son secuenciales, las complejidades se suman, 
 
 $O(n)$ + $O(n.log(n))$ + $O(n)$ 
 % + $O(n)$
- que es igual a \textit{\textbf{O(n\*log(n))}} por propiedades de $O$.
+ que es igual a \textit{\textbf{O(n.log(n))}} por propiedades de $O$.
 
 
 \newpage
@@ -320,7 +320,7 @@ El gr\'afico resultante fue el siguiente:
    \end{center}
  \end{figure}
 
-De acuerdo al an\'alisis de este gr\'afico, podemos ver que aparenta ser una curva con poca inclinaci\'on, similar al gr\'afico de $O( n*log(n) )$, que fue la complejidad propuesta.
+De acuerdo al an\'alisis de este gr\'afico, podemos ver que aparenta ser una curva con poca inclinaci\'on, similar al gr\'afico de $O( n.log(n) )$, que fue la complejidad propuesta.
 
 Sin embargo, esto no es suficiente para probar que nuestro algoritmo cumple la complejidad. Por lo tanto, se realiz\'o la linealizaci\'on, dividiendo los tiempos por $log(n)$.
 
@@ -337,7 +337,7 @@ Sin embargo, esto no es suficiente para probar que nuestro algoritmo cumple la c
  En esta comparaci\'on, podemos ver que al dividir la curva inicial por $log(n)$, se obtiene pr\'acticamente una funci\'on lineal, lo cual era esperado.
  
 Luego realizamos una nueva prueba, para comprobar que el algoritmo solamente depende de la cantidad de ciudades, sin importar cu\'al es el presupuesto asociado.
-Como en todos los casos vamos a realizar el $sort()$, que tiene complejidad $O(n*log(n))$, el gr\'afico debiera ser similar.
+Como en todos los casos vamos a realizar el $sort()$, que tiene complejidad $O(n.log(n))$, el gr\'afico debiera ser similar.
 
  \begin{figure}[h!]
    \begin{center}
