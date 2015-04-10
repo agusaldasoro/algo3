@@ -1,12 +1,12 @@
 \section{Problema 3: El se\~nor de los caballos}
 \subsection{Descripci\'on de la problem\'atica}
 
-En este problema, se presenta un tablero de ajedrez de tama\~no $nxn$, el cual cuenta con \emph{cierta} cantidad de caballos ubicados en una posici\'on aleatoria del tablero. Lo que se quiere lograr es \emph{cubrir} todo el tablero. Un casillero se considera cubierto si hay un caballo en \'el o bien, si es una posici\'on en la cual alg\'un caballo existente puede moverse con un s\'olo movimiento. Para lograr este cometido, puede ser necesario agregar nuevas fichas \emph{caballo} al tablero. No existe un l\'imite en la cantidad de caballos para agregar, pero lo que se busca es dar una soluci\'on agregando la menor cantidad de caballos posibles.\\
+En este problema, se presenta un tablero de ajedrez de tama\~no $nxn$, el cual cuenta con \emph{cierta} cantidad de caballos ubicados en diferentes posiciones del tablero. Lo que se quiere lograr es \emph{cubrir} todo el tablero. Un casillero se considera cubierto si hay un caballo en \'el o bien, si es una posici\'on en la cual alg\'un caballo existente puede atacar con un s\'olo movimiento. Para lograr este cometido, puede ser necesario agregar nuevas fichas \emph{caballo} al tablero. No existe un l\'imite en la cantidad de caballos para agregar, pero lo que se busca es dar una soluci\'on agregando la menor cantidad de caballos posibles.\\
 
  \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.4]{imagenes/ej3/unCaballo.png}
- 	\caption{Casillas que \emph{cubre} un caballo}
+ 	\caption{Casillas que \emph{ataca} un caballo}
    \end{center}
  \end{figure}
 
@@ -15,7 +15,7 @@ En este problema, se presenta un tablero de ajedrez de tama\~no $nxn$, el cual c
 \begin{minipage}[t]{.45\textwidth}
 \begin{center}
 \includegraphics[width=.8\linewidth]{imagenes/ej3/6x6init.png} % primera imagen colocada a la izquierda
-	\caption{As\'i se ve un tablero dado un posible estado inicial}
+	\caption{As\'i se ver\'ia, un tablero dado un posible estado inicial}
 \end{center}
 \end{minipage}
 \hfill
@@ -32,7 +32,7 @@ En este problema, se presenta un tablero de ajedrez de tama\~no $nxn$, el cual c
 \newpage
 
 \subsection{Resoluci\'on propuesta y justificaci\'on}
-Para la resoluci\'on de este ejercicio, se ped\'ia un algoritmo de backtracking. O sea que el algortimo debe, a partir de una subsoluci\'on del problema, fijarse si es soluci\'on y hacer algo  al respecto con ella, o bien si es una subsoluci\'on v\'alida, para cada elemento que se pueda agregar a la subsoluci\'on, agregarselo y repetir el proceso, o en el \'ultimo caso, si se llega a una soluci\'on no v\'alida, volver hacia atr\'as y tomar una decisi\'on adecuada.\\
+Para la resoluci\'on de este ejercicio, se ped\'ia un algoritmo de backtracking. O sea que el algortimo debe, a partir de una subsoluci\'on del problema, fijarse si es soluci\'on y hacer algo  al respecto con ella, o bien, si es una subsoluci\'on v\'alida, para cada elemento que se pueda agregar a la subsoluci\'on, agregarlo y repetir el proceso, o en el \'ultimo caso, si se llega a una soluci\'on no v\'alida, volver hacia atr\'as y tomar una decisi\'on adecuada.\\
 
 Bajo el contexto de un algoritmo de Backtracking se divisan a las distintas estrategias para resolver un determinado problema como distintos caminos desde la raiz hasta una hoja dentro de un \'arbol de decisiones. En nuestro caso, cada camino va a representar cada una de las distribuciones posibles de fichas \emph{caballo} en las casillas marcadas como \emph{vac\'ias} al comienzo de la ejecuci\'on.\\
 
@@ -40,7 +40,7 @@ Vamos a recorrer desde la rama que no ubica ninguna pieza de caballo, hasta la q
 
 Cuando llegamos al final de cada camino (una hoja) no tenemos asegurado haber \emph{cubierto} el tablero, es decir no todas las ramas van a ser soluci\'on. Pero si lo es, debemos comparar con las soluciones encontradas anteriormente, preservando siempre la que utiliz\'o una menor cantidad de fichas.\\
 
-Habiendo recorrido todo el \'arbol, nos aseguramos de encontrar alguna soluci\'on, en particular la m\'as \'optima. Esto implica que el algortimo debe revisar un (muy) extenso \'arbol de posibilidades, donde una decisi\'on es agregar o no un caballo en la posici\'on $i, j$ del tablero para todo $i, j$ dentro del rango del mismo. \\
+Habiendo recorrido todo el \'arbol, nos aseguramos de encontrar alguna soluci\'on, en particular, una de las m\'as \'optimas, si hubiera m\'as de una. Esto implica que el algortimo debe revisar un (muy) extenso \'arbol de posibilidades, donde una decisi\'on es agregar o no un caballo en la posici\'on $i, j$ del tablero para todo $i, j$ dentro del rango del mismo. \\
 
 Posterior a esto se ped\'ia pensar e implementar una serie de podas y estrategias para no recorrer todo el \'arbol, sino mirarlo inteligentemente y as\'i reducir los tiempos de ejecuci\'on.\\
 
@@ -69,7 +69,7 @@ Que sumado a la complejidad anterior da como resultado $O(n^{2})$\\
 
 El tablero pasado como par\'ametro de entrada \emph{no} se encuentra cubierto completamente con las fichas existentes.\\
 
-Es en este caso donde se comienza a trabajar con el \emph{Backtracking}. La primer resoluci\'on llevada a cabo fue aplicar ``fuerza bruta''. Esto consisti\'o en recorrer por completo el \'arbol de soluciones y devolver una que fuera \'optima. Para ello, en cada posici\'on sin caballos, debemos ver que pasa si tomo alguna de las dos posibles decisiones (insertar un caballo o no). Este proceso cuenta con una complejidad de $O(2^{n^{2} - k})$ siendo k la cantidad de caballos preubicados. Agregar o quitar un caballo toma tiempo $O(1)$ y por cada posici\'on del tablero ($n^{2}$) que est\'e libre ($n^{2} - k$), elige entre dos opciones, o sea 2x2x..x2 $O(n^{2}-k)$ veces.\\
+Es en este caso donde se comienza a trabajar con el \emph{Backtracking}. La primer resoluci\'on llevada a cabo fue aplicar ``fuerza bruta''. Esto consisti\'o en recorrer por completo el \'arbol de soluciones y devolver una que fuera \'optima. Para ello, en cada posici\'on sin caballos, debemos ver que pasa si tomo alguna de las dos posibles decisiones (insertar un caballo o no). Este proceso cuenta con una complejidad de $O(2^{n^{2} - k})$ siendo k la cantidad de caballos preubicados. Agregar o quitar un caballo toma tiempo $O(1)$ y por cada posici\'on del tablero ($n^{2}$) que est\'e libre ($n^{2} - k$), elige entre dos opciones, agregar o no un caballo, es decir, 2x2x...x2 $O(n^{2}-k)$ veces.\\
 
 Con el fin de disminuir los tiempos de ejecuci\'on, se pidi\'o realizar podas al \'arbol y estrategias de recorrido (determinar si vale la pena o no seguir revisando alguna rama).\\
 
@@ -78,13 +78,13 @@ Ninguna poda o estrategia disminuye la complejidad te\'orica exponencial del pri
 No obstante, los tiempos de ejecuci\'on se ven radicalmente afectados (ver Secci\'on: \ref{tiempos}), esto sucede porque se poda el \'arbol de soluciones posibles que se analizan. Es decir, en un primer momento se revisaban todas las ramas, sin excepci\'on; pero aplicando podas, descartamos muchas de estas que ya sabemos que no nos llevar\'an a un resultado de inter\'es.\\
 
 
-La poda fue la m\'as intuitiva: mientras vamos recorriendo el \'arbol contamos con una soluci\'on (preservada) que presenta \emph{k} caballos extra agregados. Si analizando otra rama nos encontramos en una posici\'on donde debemos agregar un caballo pero la cantidad de caballos, para este camino, iguala a k no vamos a estar interesados en proseguir por esta rama ya que, a lo sumo, vamos a encontrar otra soluci\'on \'optima con \emph{k} caballos.\\
+La poda fue la m\'as intuitiva: mientras vamos recorriendo el \'arbol contamos con una soluci\'on (preservada) que presenta \emph{k} caballos extra agregados. Si analizando otra rama nos encontramos en una posici\'on donde debemos agregar un caballo, pero la cantidad de caballos para este camino iguala a k no vamos a estar interesados en proseguir por esta rama ya que, a lo sumo, vamos a encontrar otra soluci\'on \'optima con \emph{k} caballos.\\
 
 %si tenemos una soluci\'on con k caballos extra agregados,  y analizando otra rama llegamos a tener que necesitar agregar un caballo a una subsoluci\'on de k-1 caballos (o sea que tendr\'ia por lo menos k caballos), entonces no nos interesa seguir revis\'andola, pues tenemos una soluci\'on que es igual o m\'as \'optima con k caballos.\\
 
-La estrategia fue plantear, para cada posición a analizar, si agregar un caballo cubre alguna casilla que estaba libre (contando la suya). Si no lo hace, podemos establecer que este caballo no se va a encontrar en el Conjunto Solución de esa rama.
+La segunda estrategia fue preguntar, para cada posición a analizar, si agregar un caballo en dicha posici\'on cubre alguna casilla que estaba libre (incluyendo en la cual es colocada). Si no lo hace, podemos establecer que este caballo no se va a encontrar en el Conjunto Solución de esa rama, por lo que podemos descartarla.
 
- Entonces, no solo saltemaos las k posiciones de los caballos preubicados, sino que también salteamos aquellas posiciones que, estando atacadas, si le pusieramos un caballo, estar\'ian atancando a casilleros que ya est\'an siendo cubiertos por otros caballos.
+Entonces, no solo salteamos las k posiciones de los caballos preubicados, sino que también salteamos aquellas posiciones en las cuales agregar un caballo no modifica mi estado anterior, es decir, que estar\'ian atancando casilleros que ya est\'an siendo cubiertos por otros caballos.
   
 \newpage
 
@@ -386,7 +386,7 @@ Como era de esperar, el algoritmo que realiza el \emph{Backtracking completo} es
 
 Adem\'as podemos ver que aplicar la estrategia (solamente) es menos eficiente que podar el árbol ya que sus mediciones de tiempo se preservan por encima de las dos curvas restantes.\\
 
-Al momento de comparar los dos casos con podas sucede que para los tableros más pequeños las mediciones de tiempo oscilan entre sí. Esto se debe a que para tableros chicos calcular si agregar un caballo es una buena idea o no (que es el procedimiento que se lleva a cabo en la estrategia) carece de sentido ya que hay poca probabilidad de que un caballo ataque otras posiciones del tablero que no esten cubiertas. En la mayoría de los casos, va a ser mejor agregar un caballo y después ver que pasa.
+Al momento de comparar los dos casos con podas sucede que para los tableros más pequeños las mediciones de tiempo oscilan entre sí. Esto se debe a que para tableros chicos, calcular si agregar un caballo es una buena idea o no (que es el procedimiento que se lleva a cabo en la estrategia) carece de sentido ya que hay poca probabilidad de que un caballo ataque otras posiciones del tablero que no esten cubiertas. En la mayoría de los casos, va a ser mejor agregar un caballo y después ver que pasa.
 
 Pero al aumentar el n, los tiempos de ejecución de realizar podas sin estrategia siempre son mayores. En estos casos lo que ocurre es que llevar a cabo nuestra estrategia conviene ya que se eliminan muchas ramas del árbol de un sólo paso.
 
@@ -426,7 +426,7 @@ A\'un m\'as zoom...
    \end{center}
  \end{figure}
  
-Se puede apreciar que al tratar con un tablero de entrada con dos o cuatro caballos preubicados, sin estar este cubierto, los tiempos de ejecución para cada método preservan la relación analizada en el tablero vacío.\\
+Se puede apreciar que al tratar con un tablero de entrada con dos o cuatro caballos preubicados, sin estar este cubierto, los tiempos de ejecución para cada método preservan la relaci\'on analizada en el tablero vac\'io.\\
 
 %\newpage
 
