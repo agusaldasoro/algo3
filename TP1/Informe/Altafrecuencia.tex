@@ -145,7 +145,10 @@ Este \'ultimo paso hace uso exhaustivo del invariante: todos los intervalos del 
 
 \subsection{An\'alisis de la complejidad}
 
-Para realizar este análisis primero es necesario calcular cu\'antos intervalos contendr\'a, como m\'aximo, el conjunto soluci\'on (desde ahora ``\emph{CS}''). Este valor ser\'a $2n-1$, siendo $n$ la cantidad de frecuencias dadas como par\'ametro.
+La primera ejecuci\'on que realiza el algoritmo es ordenar a las frecuencias de menor a mayor (dado que definimos el operador $<$ tal que: $frecA<frecB$ $\Rightarrow$ $costo(frecA)<costo(frecB)$). Este ordenamiento lo realizamos mediante el algoritmo \href{http://www.cplusplus.com/reference/algorithm/sort/}{sort()} \footnote{http://www.cplusplus.com/reference/algorithm/sort/}, el cual cuenta con una complejidad de $O(n.log(n))$.\\
+\\
+
+Para realizar el análisis de la ejecuci\'on siguiente del algoritmo, es necesario calcular cu\'antos intervalos contendr\'a, como m\'aximo, el conjunto soluci\'on (desde ahora ``\emph{CS}''). Este valor ser\'a $2n-1$, siendo $n$ la cantidad de frecuencias dadas como par\'ametro.
 
 Esto se deduce de analizar las posibles entradas para el algoritmo. Primero vamos a analizar el caso donde no existan dos frecuencias pasadas como par\'ametro con el mismo valor. De este modo la soluci\'on \'optima al problema va a ser \'unica. \\
 
@@ -254,7 +257,10 @@ La funci\'on \emph{conquer} va a recorrer, en el peor caso, dos vectores cuyas l
 
  Estas complejidades se suman y por propiedades de $O$ se obtiene que $O(conquer)$ resulta $O(n)$.\\
 
-Reemplazando en la ecuaci\'on obtenemos: \emph{T(n)=2T(n/2)+O(n)}. Vemos que es la misma ecuaci\'on de recurrencia que el algortimo de MergeSort, que por \emph{Teorema Maestro} se deduce que tiene complejidad $O(n.log(n))$, como pretend\'iamos.
+Reemplazando en la ecuaci\'on obtenemos: \emph{T(n)=2T(n/2)+O(n)}. Vemos que es la misma ecuaci\'on de recurrencia que el algortimo de MergeSort, que por \emph{Teorema Maestro} se deduce que tiene complejidad $O(n.log(n))$.\\
+\\
+
+Dado que cont\'abamos con una complejidad inicial de $O(n.log(n))$, la complejidad resultante del algoritmo es $O(n.log(n))+O(n.log(n))$ que equivale a una complejidad de $O(n.log(n))$, como prentend\'iamos.
 
 \newpage
 \subsection{C\'odigo fuente}
