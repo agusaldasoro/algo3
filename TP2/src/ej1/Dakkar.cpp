@@ -24,11 +24,12 @@ int main(int argc, char const *argv[]){
 		}
 		cubo.push_back(fila);
 	}
-	cout << dakkar(etapas, cmoto, cbuggy, datos, cubo) << endl;
+	deque<int> decisiones;
+	cout << dakkar(etapas, cmoto, cbuggy, datos, cubo, decisiones) << endl;
 	return 0;
 }
 
-unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy, deque<datosPorEtapas>& datos, Matriz cubo){
+unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy, deque<datosPorEtapas>& datos, Matriz cubo, deque<int> decisiones){
 	for (int n = 0; n < etapas; ++n){
 		for (int m = 0; m <= cmoto; ++m){
 			for (int b = 0; b <= cbuggy; ++b){
