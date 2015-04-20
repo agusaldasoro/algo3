@@ -9,8 +9,8 @@ struct datosPorEtapas{
 	unsigned int buggy;
 };
 
-typedef deque<int> Etapas;
+typedef deque<pair<int, pair<int, int> > > Etapas;
 typedef deque<Etapas> Filas;
 typedef deque<Filas> Matriz;
 
-unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy, deque<datosPorEtapas>& datos, Matriz cubo, deque<int> decisiones);
+unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy, deque<datosPorEtapas>& datos, Matriz& cubo);
