@@ -3,8 +3,4 @@
 
 using namespace std;
 
-struct conectados{
-	unsigned int pozoA;
-	unsigned int pozoB;
-	unsigned int costo;
-};
+typedef deque<deque<pair<int, int> > > Matriz;

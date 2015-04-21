@@ -25,25 +25,29 @@ int main(int argc, char const *argv[]){
 		cubo.push_back(fila);
 	}
 	cout << dakkar(etapas, cmoto, cbuggy, datos, cubo);
-
+deque<int> usados;
 	pair<int, int> recorrido;
 	int cantMoto = cmoto, cantBuggy = cbuggy;
 	for (int cantE = etapas-1; cantE >= 0; --cantE) {
-cout << " etapa " << cantE << " desdeM " << cantMoto << " desdeB " << cantBuggy << endl;
 		recorrido = cubo[cantMoto][cantBuggy][cantE].second;
-cout << " etapa " << cantE << " hastaM " << recorrido.first << " hastaB " << recorrido.second << endl;
 		if(cantMoto > recorrido.first){
 			cantMoto--;
-			cout << " " << 2;
+			usados.push_back(2);
+//			cout << " " << 2;
 		}
 		else if(cantBuggy > recorrido.second){
 			cantBuggy--;
-			cout << " " << 3;
+			usados.push_back(3);
+//			cout << " " << 3;
 		}
 		else
-			cout << " " << 1;
+			usados.push_back(1);
+//			cout << " " << 1;
 	}
-	cout << endl;
+	for (int i = etapas-1; i >= 0; --i) {
+		cout << " " << usados[i];
+	}
+	cout << " ";// << endl;
 	return 0;
 }
 
