@@ -1,6 +1,6 @@
 #include <iostream>
-#include <deque>
+#include <vector>
 
 using namespace std;
 
-typedef deque<deque<pair<int, int> > > Matriz;
+typedef vector<vector<int> > Matriz;

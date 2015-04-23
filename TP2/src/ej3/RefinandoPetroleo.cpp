@@ -1,45 +1,54 @@
 //g++ -o main RefinandoPetroleo.cpp
 
 #include "RefinandoPetroleo.h"
+#include "UnionFind.h"
 #define INFINITO 2^64
 
 void generarArbolMinimo(const Matriz& grafo, Matriz& arboles);
-int refinandoPetroleo(const Matriz& grafo);
+int refinandoPetroleo(const UnionFind& grafo, int componente, const Matriz& costos);
 
 int main(int argc, char const *argv[]){
 	unsigned int pozos, cantConexiones, costoRefineria;
 	unsigned int pozoA, pozoB, costoTuberia;
 	cin >> pozos >> cantConexiones >> costoRefineria;
-	Matriz grafo;
+/*	Matriz grafo;
 	for (int i = 0; i < pozos; ++i) {
-		grafo.push_back(deque<pair<int, int> >(pozos));
+		grafo.push_back(vector<pair<int, int> >(pozos));
 	}
 	for (int i = 0; i < cantConexiones; ++i){
 		cin >> pozoA >> pozoB >> costoTuberia;
 		grafo[pozoA-1][pozoB-1] = make_pair(costoTuberia, 1);
 		grafo[pozoB-1][pozoA-1] = make_pair(costoTuberia, 1);
 	}
-	refinandoPetroleo(grafo);
+*/
+	Matriz costos(pozos, vector<int>(pozos));
+	UnionFind grafo(pozos);
+	for (int i = 0; i < cantConexiones; ++i){
+		cin >> pozoA >> pozoB >> costoTuberia;
+		pozoA--;
+		pozoB--;
+		if(!grafo.is_in(pozoA, pozoB))
+			grafo.union_set(pozoA, pozoB);
+		costos[pozoA][pozoB] = costoTuberia;
+	}
+	vector<int> conexos;
+	for (int i = 0; i < pozos; ++i) {
+		if(grafo.find_set(i) == i)
+			conexos.push_back(i);
+	}
+	for (int i = 0; i < grafo.cantConexos(); ++i) {
+		refinandoPetroleo(grafo, conexos[i], costos);
+	}
 	return 0;
 }
 
-int refinandoPetroleo(const Matriz& grafo){
-	Matriz arbolesGeneradores;
-	for (int i = 0; i < grafo.size(); ++i) {
-		arbolesGeneradores.push_back(deque<pair<int, int> >(grafo.size()));
-	}
-	generarArbolMinimo(grafo, arbolesGeneradores);
-	for (int i = 0; i < grafo.size(); ++i) {
-		for (int j = 0; j < grafo.size(); ++j) {
-			cout << arbolesGeneradores[i][j].first << " ";
-		}
-		cout << endl;
-	}
+int refinandoPetroleo(const UnionFind& grafo, int componente, const Matriz& costos){
+//	generarArbolMinimo(grafo, arbolesGeneradores);
 	return 0;
 }
-
+/*
 void generarArbolMinimo(const Matriz& grafo, Matriz& arboles){
-	deque<int> seConectoCon;
+	vector<int> seConectoCon;
 	for (int i = 0; i < grafo.size(); ++i) {
 		seConectoCon.push_back(i);
 	}
@@ -67,3 +76,4 @@ void generarArbolMinimo(const Matriz& grafo, Matriz& arboles){
 		}
 	}
 }
+*/
