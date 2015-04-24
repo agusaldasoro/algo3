@@ -25,7 +25,7 @@ int main(int argc, char const *argv[]){
 		cubo.push_back(fila);
 	}
 	cout << dakkar(etapas, cmoto, cbuggy, datos, cubo);
-deque<int> usados;
+	deque<int> usados;
 	pair<int, int> recorrido;
 	int cantMoto = cmoto, cantBuggy = cbuggy;
 	for (int cantE = etapas-1; cantE >= 0; --cantE) {
@@ -40,14 +40,19 @@ deque<int> usados;
 			usados.push_back(3);
 //			cout << " " << 3;
 		}
-		else
+		else{
+			cout << cantMoto << endl;
+			cout << recorrido.first << endl;
+			cout << cantBuggy << endl;
+			cout << recorrido.second << endl;
 			usados.push_back(1);
 //			cout << " " << 1;
+		}
 	}
 	for (int i = etapas-1; i >= 0; --i) {
 		cout << " " << usados[i];
 	}
-	cout << " ";// << endl;
+	cout << endl;
 	return 0;
 }
 
@@ -68,6 +73,8 @@ unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy
 						else{
 							bici = datos[n].bmx;
 							buggy = datos[n].buggy;
+							if(bici > buggy)
+								par.second--;
 							cubo[m][b][n] = make_pair(min(bici, buggy), par);
 						}
 					}
@@ -75,12 +82,18 @@ unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy
 						if(b == 0){
 							bici = datos[n].bmx;
 							moto = datos[n].moto;
+							if(bici > moto)
+								par.first--;
 							cubo[m][b][n] = make_pair(min(bici, moto), par);
 						}
 						else{
 							bici = datos[n].bmx;
 							moto = datos[n].moto;
 							buggy = datos[n].buggy;
+							if(buggy > moto)
+								par.first--;
+							else
+								par.second--;
 							cubo[m][b][n] = make_pair(min(min(bici, moto), buggy), par);
 						}
 					}
