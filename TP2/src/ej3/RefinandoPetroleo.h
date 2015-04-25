@@ -1,10 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "UnionFind.h"
 
 using namespace std;
-
-typedef vector<vector<int> > Matriz;
 
 struct eje {
 	unsigned int pozoA;
@@ -14,3 +13,6 @@ struct eje {
 		return costoTuberia < otro.costoTuberia;
 	}
 };
+
+int refinandoPetroleo(const UnionFind& grafo, vector<eje>& ejes, int cantPozos, int costoRefineria);
+vector<eje> generarArbolesMinimos(const UnionFind& grafo, UnionFind& bosqueMinimo, vector<eje>& ejes, int costoRefineria);

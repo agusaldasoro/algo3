@@ -41,10 +41,6 @@ int main(int argc, char const *argv[]){
 //			cout << " " << 3;
 		}
 		else{
-			cout << cantMoto << endl;
-			cout << recorrido.first << endl;
-			cout << cantBuggy << endl;
-			cout << recorrido.second << endl;
 			usados.push_back(1);
 //			cout << " " << 1;
 		}
