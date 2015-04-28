@@ -32,20 +32,20 @@ int main(int argc, char const *argv[]){
 		recorrido = cubo[cantMoto][cantBuggy][cantE].second;
 		if(cantMoto > recorrido.first){
 			cantMoto--;
-			usados.push_back(2);
+			usados.push_front(2);
 //			cout << " " << 2;
 		}
 		else if(cantBuggy > recorrido.second){
 			cantBuggy--;
-			usados.push_back(3);
+			usados.push_front(3);
 //			cout << " " << 3;
 		}
 		else{
-			usados.push_back(1);
+			usados.push_front(1);
 //			cout << " " << 1;
 		}
 	}
-	for (int i = etapas-1; i >= 0; --i) {
+	for (int i = 0; i < etapas; ++i) {
 		cout << " " << usados[i];
 	}
 	cout << endl;

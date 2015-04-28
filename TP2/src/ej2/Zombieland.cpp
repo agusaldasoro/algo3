@@ -4,7 +4,6 @@
 
 Matriz ciudadInfestada;
 unsigned int n, m;
-int zombieland(Cubo& grafo, int inicioH, int inicioV, int bunkerH, int bunkerV, int soldados);
 
 int main(int argc, char const *argv[]){
 	unsigned int s;
@@ -37,7 +36,26 @@ int main(int argc, char const *argv[]){
 			grafo[i][j] = vector<pair<posYsold, bool> >(s+1);
 		}
 	}
-	cout << zombieland(grafo, inicioH, inicioV, bunkerH, bunkerV, s) << endl;
+	int soldadosVivos = zombieland(grafo, inicioH, inicioV, bunkerH, bunkerV, s);
+	cout << soldadosVivos << endl;
+	deque<posYsold> recorrido;
+	if(soldadosVivos != 0){
+		posYsold posActual;
+		posActual.soldadosVivos = soldadosVivos;
+		posActual.i = bunkerH;
+		posActual.j = bunkerV;
+		while(posActual.i != inicioH || posActual.j != inicioV){
+			recorrido.push_front(posActual);
+			posActual = grafo[posActual.i][posActual.j][posActual.soldadosVivos].first;
+		}
+		posActual.soldadosVivos = s;
+		posActual.i = inicioH;
+		posActual.j = inicioV;
+		recorrido.push_front(posActual);
+	}
+	for (int i = 0; i < recorrido.size(); ++i) {
+		cout << recorrido[i].i+1 << " " << recorrido[i].j+1 << endl;
+	}
 //	cout << zombiesCuadra(1, 1, ARRIBA) << endl;
 //	cout << zombiesCuadra(1, 1, ABAJO) << endl;
 //	cout << zombiesCuadra(1, 1, IZQ) << endl;
