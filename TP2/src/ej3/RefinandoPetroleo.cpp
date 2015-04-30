@@ -7,26 +7,23 @@ int main(int argc, char const *argv[]){
 	unsigned int pozoA, pozoB, costoTuberia;
 	cin >> pozos >> cantConexiones >> costoRefineria;
 	vector<eje> ejes;
-	UnionFind grafo(pozos);
 	for (int i = 0; i < cantConexiones; ++i){
 		cin >> pozoA >> pozoB >> costoTuberia;
 		pozoA--;
 		pozoB--;
-		if(!grafo.is_in(pozoA, pozoB))
-			grafo.union_set(pozoA, pozoB);
 		eje conex;
 		conex.pozoA = pozoA;
 		conex.pozoB = pozoB;
 		conex.costoTuberia = costoTuberia;
 		ejes.push_back(conex);
 	}
-	int res = refinandoPetroleo(grafo, ejes, pozos, costoRefineria);
+	int res = refinandoPetroleo(ejes, pozos, costoRefineria);
 	return 0;
 }
 
-int refinandoPetroleo(const UnionFind& grafo, vector<eje>& ejes, int cantPozos, int costoRefineria){
+int refinandoPetroleo(vector<eje>& ejes, int cantPozos, int costoRefineria){
 	UnionFind bosqueMinimo(cantPozos);
-	vector<eje> conexionesMinimas = generarArbolesMinimos(grafo, bosqueMinimo, ejes, costoRefineria);
+	vector<eje> conexionesMinimas = generarArbolesMinimos(bosqueMinimo, ejes, costoRefineria);
 	UnionFind conexos(cantPozos);
 	int costoTotal = 0, cantRef = 0;
 	for (int i = 0; i < conexionesMinimas.size(); ++i) {
@@ -53,7 +50,7 @@ int refinandoPetroleo(const UnionFind& grafo, vector<eje>& ejes, int cantPozos, 
 	return costoTotal;
 }
 
-vector<eje> generarArbolesMinimos(const UnionFind& grafo, UnionFind& bosqueMinimo, vector<eje>& ejes, int costoRefineria){
+vector<eje> generarArbolesMinimos(UnionFind& bosqueMinimo, vector<eje>& ejes, int costoRefineria){
 	vector<eje> res;
 	sort(ejes.begin(), ejes.end());
 	for (int i = 0; i < ejes.size(); ++i) {

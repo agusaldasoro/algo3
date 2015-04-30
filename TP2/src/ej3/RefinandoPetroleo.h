@@ -14,5 +14,5 @@ struct eje {
 	}
 };
 
-int refinandoPetroleo(const UnionFind& grafo, vector<eje>& ejes, int cantPozos, int costoRefineria);
-vector<eje> generarArbolesMinimos(const UnionFind& grafo, UnionFind& bosqueMinimo, vector<eje>& ejes, int costoRefineria);
+int refinandoPetroleo(vector<eje>& ejes, int cantPozos, int costoRefineria);
+vector<eje> generarArbolesMinimos(UnionFind& bosqueMinimo, vector<eje>& ejes, int costoRefineria);
