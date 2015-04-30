@@ -1,17 +1,51 @@
 \section{Dakkar}
 \subsection{Descripci\'on de la problem\'atica}
-La problem\'atica trata de una traves\'ia, la cual cuenta con \emph{n} cantidad de etapas. Para cada una de ellas se puede elegir recorrerla en alguno de los tres veh\'iculos disponibles: una BMX, una motocross o un buggy arenero. Cada uno de ellos presenta un costo de uso diferente en cada \'etapa. Adem\'as, la cantidad de veces que se pueden usar la motocross y el buggy arenero est\'a acotada por \emph{k}$_m$ y \emph{k}$_b$ respectivamente.
+La problem\'atica trata de una traves\'ia, la cual cuenta con \emph{n} cantidad de etapas. Para cada una de las etapas, se puede elegir recorrerla en alguno de los tres veh\'iculos disponibles: una BMX, una motocross o un buggy arenero. Cada uno de ellos permite concretar cada etapa en cantidades de tiempo diferentes. Adem\'as, la cantidad de veces que se pueden usar la motocross y el buggy arenero est\'a acotada por \emph{k}$_m$ y \emph{k}$_b$ respectivamente.
 
-Los \emph{costos} por etapa para cada veh\'iculo, \emph{n}, \emph{k}$_m$ y \emph{k}$_b$ son datos conocidos pasados por par\'ametro.
+Los \emph{tiempos} que le llevan a los veh\'iculos recorrer el trayecto var\'ia por cada etapa y son datos conocidos pasados por par\'ametro.
 
-Se pide recorrer la traves\'ia, dentro de las restricciones, de modo que se utilice la menor cantidad de dinero posible. Si existen dos (o m\'as) maneras de atravesarla usando la cantidad de dinero \'optima, se pide devolver s\'olo una.
+Se pide recorrer la traves\'ia, dentro de las restricciones, de modo que se utilice la menor cantidad de tiempo posible. Si existen dos (o m\'as) maneras de atravesarla dentro del tiempo \'optimo, se pide devolver s\'olo una.
 
-Se exige resolver la problem\'atica con una complejidad temporal de $O(n.k_m.k_b)$ y unca complejidad espacial de $O(n+k_m.k_b)$.\\
+Se exige resolver la problem\'atica con una complejidad temporal de $O(n.k_m.k_b)$.\\
 
-\textcolor{red}{Dibujitos :)}
+\textcolor{red}{Dibujitos con ejemplos :)}
 
+\newpage
 \subsection{Resoluci\'on propuesta y justificaci\'on}
+
+Para resolver esta problem\'atica, optamos por implementar un algoritmo de \emph{Programaci\'on Din\'amica}.\\
+
+\subsubsection*{Formulaci\'on Recursiva}
+
+\begin{equation*}
+func(n, k_m, k_b) = 
+\begin{cases} 
+       0  & \mbox{si } n = 0  \\[2ex]
+       tiempoBici(n) + f(n-1, 0, 0)  & \mbox{si } k_m=0 \wedge k_b=0 \\[2ex]
+      min \left(
+      \begin{split}
+       tiempoBici(n) & + func(n-1, 0, k_b) , \\
+       tiempoBoogy(n) & + func(n-1, 0, k_b-1)
+\end{split} \right) & \mbox{si } k_m=0 \wedge k_b\neq0 \\[3ex]
+      min \left(
+      \begin{split}
+       tiempoBici(n) & + func(n-1, k_m, 0) , \\
+       tiempoMoto(n) & + func(n-1, k_m-1, 0)
+\end{split} \right) & \mbox{si } k_m\neq0 \wedge k_b=0 \\[3ex]
+           min \left(
+      \begin{split}
+       tiempoBici(n) & + func(n-1, k_m, k_b) , \\
+       tiempoMoto(n) & + func(n-1, k_m-1, k_b) , \\
+       tiempoBoogy(n) & + func(n-1, k_m, k_b-1)
+\end{split} \right) & \mbox{sino}
+\end{cases} 
+\end{equation*}
+
+
 \subsection{An\'alisis de la complejidad}
+\subsubsection{Complejidad Temporal}
+\subsubsection{Complejidad Espacial}
+\textcolor{red}{Si bien, ya no piden ningun requisito, pongamos cuanta memoria usa :)}
 \subsection{C\'odigo fuente}
 \subsection{Experimentaci\'on}
 
