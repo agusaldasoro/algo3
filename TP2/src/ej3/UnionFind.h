@@ -6,46 +6,46 @@ class UnionFind {
 public:
 	UnionFind(int tamano);
 	~UnionFind();
-	int find_set(int x) const;
+	int find_set(int x);
 	void union_set(int x, int y);
-	bool is_in(int x, int y) const;
+	bool is_in(int x, int y);
 
 private:
 	vector<int> parent;
-	vector<int> size;
+	vector<int> rank;
 };
 
 UnionFind::UnionFind(int tamano){
 	parent = vector<int>(tamano);
-	size = vector<int>(tamano);
+	rank = vector<int>(tamano);
 	for (int i = 0; i < tamano; ++i) {
 		parent[i] = i;
-		size[i] = 1;
+		rank[i] = 0;
 	}
 }
 
 UnionFind::~UnionFind(){
 }
 
-int UnionFind::find_set(int x) const {
-	if(parent[x] == x)
-		return x;
-	return find_set(parent[x]);
+int UnionFind::find_set(int x) {
+	if(parent[x] != x)
+		parent[x] = find_set(parent[x]);
+	return parent[x];
 }
 
 void UnionFind::union_set(int x, int y) {
 	int rx = find_set(x);
 	int ry = find_set(y);
-	if(size[rx] > size[ry]){
-		parent[ry] = rx;
-		size[rx] += size[ry];
+	if(rank[rx] < rank[ry]){
+		parent[rx] = ry;
 	}
 	else{
-		parent[rx] = ry;
-		size[ry] += size[rx];
+		parent[ry] = rx;
+		if(rank[ry] == rank[rx])
+			rank[rx]++;
 	}
 }
 
-bool UnionFind::is_in(int x, int y) const {
+bool UnionFind::is_in(int x, int y) {
 	return find_set(x) == find_set(y);
 }

@@ -51,7 +51,6 @@ int refinandoPetroleo(const UnionFind& grafo, vector<eje>& ejes, int cantPozos, 
 		cout << conexionesMinimas[i].pozoA+1 << " " << conexionesMinimas[i].pozoB+1 << endl;
 	}
 	return costoTotal;
-	return 0;
 }
 
 vector<eje> generarArbolesMinimos(const UnionFind& grafo, UnionFind& bosqueMinimo, vector<eje>& ejes, int costoRefineria){
