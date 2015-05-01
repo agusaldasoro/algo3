@@ -15,7 +15,25 @@ Se exige resolver la problem\'atica con una complejidad temporal de $O(n.k_m.k_b
 
 Para resolver esta problem\'atica, optamos por implementar un algoritmo de \emph{Programaci\'on Din\'amica}.\\
 
+Con el fin de encontrar el recorrido factible que emplee menos tiempo; debemos comparar, para cada etapa, cu\'al es el menor tiempo con el que puede recorrer el camino faltante eligiendo en la instancia actual uno de los tres veh\'iculos disponibles. Dado que la formulaci\'on de este problema es muy extensa, se realiz\'o una formulaci\'on recursiva de modo que para cada problema se le asigna un valor dependiendo de un subproblema menor. 
+
 \subsubsection*{Formulaci\'on Recursiva}
+
+Optamos por comenzar recorriendo desde la etapa n hasta la etapa 0; \emph{n} va a indicar la etapa actual, \emph{k$_m$} la cantidad de motos y \emph{k$_b$} la cantidad de boogys restantes que se pueden utilizar.
+
+\begin{itemize}
+\item[•]Cuando llegamos a la etapa \emph{n}$=0$ es porque terminamos todo el recorrido, de modo que el tiempo devuelto va a ser 0.
+
+\item[•]Cuando \emph{k$_m$}$=0$ y \emph{k$_b$}$=0$ es porque la etapa actual (\emph{n}) y el recorrido restante (las \emph{n-1} etapas) lo vamos a tener que hacer s\'olo en bicicleta, sin importar el tiempo que conlleve ya que nos quedamos sin motos y boogys para usar.
+
+\item[•]Cuando \emph{k$_m$}$=0$ y \emph{k$_b$}$\neq0$ es porque utilizamos la mayor cantidad de motos posibles y las \emph{n-1} etapas restantes -conjunto a la actual(\emph{n})- las vamos a tener que recorrer con Bicicleta o Boogy. Por este motivo se elige la opci\'on con tiempo menor usando Bicicleta o Boogy en la etapa \emph{n} y llamando recursivamente a la funci\'on para \emph{n-1} considerando esta elecci\'on.
+
+\item[•]De modo an\'alogo, cuando \emph{k$_m$}$\neq0$ y \emph{k$_b$}$=0$ s\'olo vamos a contar con Motos y Bicicletas para la etapa actual y las \emph{n-1} etapas faltantes.
+
+\item[•]En cambio, en caso contrario, todav\'ia tenemos disponible cantidad de los tres veh\'iculos. Por este motivo, se comparan los tres casos: empleando la Bicicleta en la etapa n, la Moto o el Boogy llamando recursivamente a la funci\'on para \emph{n-1} de modo que va a devolver el menor tiempo posible considerando la elecci\'on llevada a cabo.
+\end{itemize}
+
+
 
 \begin{equation*}
 func(n, k_m, k_b) = 
@@ -41,7 +59,22 @@ func(n, k_m, k_b) =
 \end{cases} 
 \end{equation*}
 
+Dado que los $n$, $k_m$ y $k_b$ iniciales van a ser los dados por par\'ametro y en el planteo de nuestra ecuaci\'on en la llamada recursiva n siempre decrementa en 1 y los dem\'as o bien quedan iguales o uno de ellos decrementa en uno, estos par\'ametros van a estar acotados por:
 
+\begin{equation*}
+\begin{array}{lllll}
+0 & \leq & n &\leq & n_{parametro} \\
+0 & \leq & k_m & \leq & k_{m_{parametro}} \\
+0 & \leq & k_b & \leq & k_{b_{parametro}}
+\end{array}
+\end{equation*}
+
+
+ 
+
+
+
+\newpage
 \subsection{An\'alisis de la complejidad}
 \subsubsection{Complejidad Temporal}
 \subsubsection{Complejidad Espacial}
