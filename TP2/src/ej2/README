@@ -1,0 +1,14 @@
+En la carpeta pruebas:
+
+Para generar instancias, escribir en consola:
+
+$ python ./randominstance.py n
+
+Les va a preguntar por el n, m y s
+Se crearan n archivos de pruebas, con los nombres testi, con 0 <= i < n
+El punto de partida es siempre el (1,1) y el de llegada es siempre el (m,n)
+(Pueden cambiar eso descomentando una linea del codigo)
+
+Luego ejecutan
+
+$ cat testi | ../main
