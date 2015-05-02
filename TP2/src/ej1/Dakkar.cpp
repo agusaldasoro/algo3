@@ -13,18 +13,21 @@ int main(int argc, char const *argv[]){
 		datos.push_back(actual);
 	}
 	Matriz cubo;
+//iniciliazamos el cubo
 	for (int i = 0; i <= cmoto; ++i){
 		Filas fila;
 		for (int j = 0; j <= cbuggy; ++j){
 			Etapas etapa;
 			for (int k = 0; k < etapas; ++k){
-				etapa.push_back(make_pair(-1, make_pair(-1, -1)));
+				etapa.push_back(make_pair(0, make_pair(0, 0)));
 			}
 			fila.push_back(etapa);
 		}
 		cubo.push_back(fila);
 	}
+//cout pedido
 	cout << dakkar(etapas, cmoto, cbuggy, datos, cubo);
+//para devolver del comienzo hasta el final
 	deque<int> usados;
 	pair<int, int> recorrido;
 	int cantMoto = cmoto, cantBuggy = cbuggy;
@@ -33,16 +36,13 @@ int main(int argc, char const *argv[]){
 		if(cantMoto > recorrido.first){
 			cantMoto--;
 			usados.push_front(2);
-//			cout << " " << 2;
 		}
 		else if(cantBuggy > recorrido.second){
 			cantBuggy--;
 			usados.push_front(3);
-//			cout << " " << 3;
 		}
 		else{
 			usados.push_front(1);
-//			cout << " " << 1;
 		}
 	}
 	for (int i = 0; i < etapas; ++i) {
@@ -57,9 +57,11 @@ unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy
 	for (int n = 0; n < etapas; ++n){
 		for (int m = 0; m <= cmoto; ++m){
 			for (int b = 0; b <= cbuggy; ++b){
+			//guardamos un link hacia el lugar de donde salimos
 				pair<int, int> par;
 				par.first = m;
 				par.second = b;
+			//llenamos espacios triviales y luego sabemos cuales estan calculados, para ahorrar rehacer las cuentas
 				if (n==0){
 					if(m == 0){
 						if(b == 0){
@@ -69,6 +71,7 @@ unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy
 						else{
 							bici = datos[n].bmx;
 							buggy = datos[n].buggy;
+						//si elegimos el buggy guardamos esa decision
 							if(bici > buggy)
 								par.second--;
 							cubo[m][b][n] = make_pair(min(bici, buggy), par);
@@ -78,6 +81,7 @@ unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy
 						if(b == 0){
 							bici = datos[n].bmx;
 							moto = datos[n].moto;
+						//si elegimos la moto guardamos esa decision
 							if(bici > moto)
 								par.first--;
 							cubo[m][b][n] = make_pair(min(bici, moto), par);
@@ -86,10 +90,12 @@ unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy
 							bici = datos[n].bmx;
 							moto = datos[n].moto;
 							buggy = datos[n].buggy;
-							if(buggy > moto)
-								par.first--;
-							else
-								par.second--;
+						//guardamos lo que elegimos
+							if(bici > buggy || bici > moto)
+								if(buggy > moto)
+									par.first--;
+								else
+									par.second--;
 							cubo[m][b][n] = make_pair(min(min(bici, moto), buggy), par);
 						}
 					}
@@ -103,6 +109,7 @@ unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy
 						else{
 							bici = cubo[m][b][n-1].first + datos[n].bmx;
 							buggy = cubo[m][b-1][n-1].first + datos[n].buggy;
+						//si elegimos el buggy guardamos esa decision
 							if(bici > buggy)
 								par.second--;
 							cubo[m][b][n] = make_pair(min(bici, buggy), par);
@@ -112,6 +119,7 @@ unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy
 						if(b == 0){
 							bici = cubo[m][b][n-1].first + datos[n].bmx;
 							moto = cubo[m-1][b][n-1].first + datos[n].moto;
+						//si elegimos la moto guardamos esa decision
 							if(bici > moto)
 								par.first--;
 							cubo[m][b][n] = make_pair(min(bici, moto), par);
@@ -120,6 +128,7 @@ unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy
 							bici = cubo[m][b][n-1].first + datos[n].bmx;
 							moto = cubo[m-1][b][n-1].first + datos[n].moto;
 							buggy = cubo[m][b-1][n-1].first + datos[n].buggy;
+						//guardamos lo que elegimos
 							if(bici > buggy || bici > moto)
 								if(buggy > moto)
 									par.first--;

@@ -14,31 +14,43 @@ int main(int argc, char const *argv[]){
 	inicioH--;
 	bunkerV--;
 	bunkerH--;
-	ciudadInfestada = Matriz(m, vector<pair<int, int> >(n)); //first es derecha, second es abajo
+//la matriz de la ciudad guarda cuantos zombies tiene el eje para moverse a la derecha y hacia abajo (en ese orden)
+//para la izquierda es ir al de la izquierda y preguntar por el derecho
+//para arriba es ir al de arriba y preguntar por el de abajo
+	ciudadInfestada = Matriz(m, vector<pair<int, int> >(n));
 	for (int i = 0; i < m-1; ++i) {
 		for (int j = 0; j < n-1; ++j) {
 			cin >> ciudadInfestada[i][j].first;
-		}
-		ciudadInfestada[i][n-1].first = -1;
-		for (int j = 0; j < n; ++j) {
 			cin >> ciudadInfestada[i][j].second;
 		}
+//no hay camino a la derecha
+		ciudadInfestada[i][n-1].first = -1;
+		cin >> ciudadInfestada[i][n-1].second;
+//		for (int j = 0; j < n; ++j) {
+//			cin >> ciudadInfestada[i][j].second;
+//		}
 	}
 	for (int j = 0; j < n-1; ++j) {
 		cin >> ciudadInfestada[m-1][j].first;
+//no hay camino hacia abajo
 		ciudadInfestada[m-1][j].second = -1;
 	}
+//no hay camino a la derecha ni abajo
 	ciudadInfestada[m-1][n-1].first = -1;
 	ciudadInfestada[m-1][n-1].second = -1;
+//creamos el cubo a completar
 	Cubo grafo(m, vector<vector<pair<posYsold, bool> > >(n));
 	for (int i = 0; i < m; ++i) {
 		for (int j = 0; j < n; ++j) {
 			grafo[i][j] = vector<pair<posYsold, bool> >(s+1);
 		}
 	}
+//aplicamos el algoritmo
 	int soldadosVivos = zombieland(grafo, inicioH, inicioV, bunkerH, bunkerV, s);
+//cout pedido
 	cout << soldadosVivos << endl;
 	deque<posYsold> recorrido;
+//para armarlo desde el principio hasta el final
 	if(soldadosVivos != 0){
 		posYsold posActual;
 		posActual.soldadosVivos = soldadosVivos;
@@ -61,17 +73,24 @@ int main(int argc, char const *argv[]){
 
 int zombieland(Cubo& grafo, int inicioH, int inicioV, int bunkerH, int bunkerV, int soldados){
 	int maxSoldados = 0;
+//cola para el BFS arranca con la posicion de donde salimos
 	queue<posYsold> cola;
 	posYsold actual;
 	actual.soldadosVivos = soldados;
 	actual.i = inicioH;
 	actual.j = inicioV;
 	cola.push(actual);
+//se marca esta posicion como visitada
 	grafo[inicioH][inicioV][soldados].second = true;
 	int zombies;
 	int resultadoBatalla;
+//mientras tengamos algo para visitar (no sabemos si llegaremos al final)
 	while(cola.size() > 0){
+//actual es el primero de la cola
 		actual = cola.front();
+	//si no estamos el final vemos si podemos ir a cada una de las cuatro direcciones
+	//si es valido, no se mueren todos los soldados y no visite ese nodo, agregare el siguiente nodo a visitar
+	//si ya lo visite, existe un camino que me lleva hasta ahi, ya fue encolado el camino que le sigue
 		if(!(actual.i == bunkerH && actual.j == bunkerV)){
 			zombies = zombiesCuadra(actual.i, actual.j, ARRIBA);
 			resultadoBatalla = resulBatalla(actual.soldadosVivos, zombies);
@@ -118,15 +137,18 @@ int zombieland(Cubo& grafo, int inicioH, int inicioV, int bunkerH, int bunkerV, 
 				grafo[actual.i][actual.j-1][resultadoBatalla].first = actual;
 			}
 		}
+	//si llegamos al final, actualizamos los soldados que quedaron vivos, si es mayor a haber llegado por otro camino
 		else
 			if(maxSoldados < actual.soldadosVivos)
 				maxSoldados = actual.soldadosVivos;
+	//desencolo el nodo que estaba analizando
 		cola.pop();
 	}
 	return maxSoldados;
 }
 
 int zombiesCuadra(int i, int j, movimiento mov){
+//devuelve los zombies que en la cuadra pedida
 	switch(mov){
 		case ARRIBA:
 			if(i == 0)
@@ -144,6 +166,7 @@ int zombiesCuadra(int i, int j, movimiento mov){
 }
 
 int resulBatalla(int sold, int zomb){
+//devuelve si es posible pasar por una cuadra
 	if(sold>=zomb)
 		return sold;
 	return sold-(zomb-sold); 
