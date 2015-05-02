@@ -17,31 +17,30 @@ int main(int argc, char const *argv[]){
 //la matriz de la ciudad guarda cuantos zombies tiene el eje para moverse a la derecha y hacia abajo (en ese orden)
 //para la izquierda es ir al de la izquierda y preguntar por el derecho
 //para arriba es ir al de arriba y preguntar por el de abajo
-	ciudadInfestada = Matriz(m, vector<pair<int, int> >(n));
-	for (int i = 0; i < m-1; ++i) {
-		for (int j = 0; j < n-1; ++j) {
+	ciudadInfestada = Matriz(n, vector<pair<int, int> >(m));
+	for (int i = 0; i < n-1; ++i) {
+		for (int j = 0; j < m-1; ++j) {
 			cin >> ciudadInfestada[i][j].first;
-			cin >> ciudadInfestada[i][j].second;
 		}
 //no hay camino a la derecha
-		ciudadInfestada[i][n-1].first = -1;
-		cin >> ciudadInfestada[i][n-1].second;
-//		for (int j = 0; j < n; ++j) {
-//			cin >> ciudadInfestada[i][j].second;
-//		}
+		ciudadInfestada[i][m-1].first = -1;
+		for (int j = 0; j < m; ++j) {
+			cin >> ciudadInfestada[i][j].second;
+		}
 	}
-	for (int j = 0; j < n-1; ++j) {
-		cin >> ciudadInfestada[m-1][j].first;
+	for (int j = 0; j < m-1; ++j) {
+		cin >> ciudadInfestada[n-1][j].first;
 //no hay camino hacia abajo
-		ciudadInfestada[m-1][j].second = -1;
+		ciudadInfestada[n-1][j].second = -1;
 	}
 //no hay camino a la derecha ni abajo
-	ciudadInfestada[m-1][n-1].first = -1;
-	ciudadInfestada[m-1][n-1].second = -1;
+	ciudadInfestada[n-1][m-1].first = -1;
+	ciudadInfestada[n-1][m-1].second = -1;
+//	print();
 //creamos el cubo a completar
-	Cubo grafo(m, vector<vector<pair<posYsold, bool> > >(n));
-	for (int i = 0; i < m; ++i) {
-		for (int j = 0; j < n; ++j) {
+	Cubo grafo(n, vector<vector<pair<posYsold, bool> > >(m));
+	for (int i = 0; i < n; ++i) {
+		for (int j = 0; j < m; ++j) {
 			grafo[i][j] = vector<pair<posYsold, bool> >(s+1);
 		}
 	}
@@ -173,18 +172,18 @@ int resulBatalla(int sold, int zomb){
 }
 
 void print(){
-	for (int i = 0; i < m-1; ++i) {
-		for (int j = 0; j < n-1; ++j) {
+	for (int i = 0; i < n-1; ++i) {
+		for (int j = 0; j < m-1; ++j) {
 			cout << " " << ciudadInfestada[i][j].first;
 		}
 		cout << endl;
-		for (int j = 0; j < n; ++j) {
+		for (int j = 0; j < m; ++j) {
 			cout << ciudadInfestada[i][j].second << " ";
 		}
 		cout << endl;
 	}
-	for (int j = 0; j < n-1; ++j) {
-		cout << " " << ciudadInfestada[m-1][j].first;
+	for (int j = 0; j < m-1; ++j) {
+		cout << " " << ciudadInfestada[n-1][j].first;
 	}
 	cout << endl;
 }
