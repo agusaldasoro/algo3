@@ -1,14 +1,31 @@
+GENERADOR DE INSTANCIAS DE PRUEBA:
+
 En la carpeta pruebas:
 
 Para generar instancias, escribir en consola:
 
-$ python ./randominstance.py n
+$ python ./randominstance.py
 
-Les va a preguntar por el n, m y s
-Se crearan n archivos de pruebas, con los nombres testi, con 0 <= i < n
-El punto de partida es siempre el (1,1) y el de llegada es siempre el (m,n)
-(Pueden cambiar eso descomentando una linea del codigo)
+Cuando les pregunte por la lista de tamaños para las instancias, deben pasarle algo como esto:
+[50,100] --> Una ciudad de 50x50 y una de 100x100
 
-Luego ejecutan
+Despues les va a preguntar el tipo de prueba:
+Allways: Cualquier camino llega, y con todos los soldados vivos.
+Impossible: Hay demasiados zombies en cualquier camino. Es imposible siquiera salir del punto inicial.
+Random: Hay una cantidad aleatoria de zombies por cuadra. No se puede asegurar que exista un camino, ni si es unico
+Maze: Version mejorada del aleatorio. Crea un laberinto basado en el algoritmo de Prim. Los pasajes tienen entre 0 y s+s/2 zombies. No se puede asegurar que exista un camino, ni si es unico.
 
-$ cat testi | ../main
+Luego, mover las instancias generadas a la carpeta con el nombre del tipo
+
+CORRER LAS PRUEBAS:
+
+En la carpeta ej2, ejecutar
+
+$ ./exec.sh
+
+Les va a preguntar que tipo de test correr. Son los mismos que se explico arriba.
+Va a ejecutar el algoritmo 1000 veces por cada archivo de prueba del tipo que especificaron, que este en la carpeta
+tests/[tipo de instancia]
+
+
+Luego, las guarda en mediciones/[tipo de instancia]
