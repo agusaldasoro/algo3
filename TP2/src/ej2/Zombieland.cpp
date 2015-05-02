@@ -56,11 +56,6 @@ int main(int argc, char const *argv[]){
 	for (int i = 0; i < recorrido.size(); ++i) {
 		cout << recorrido[i].i+1 << " " << recorrido[i].j+1 << endl;
 	}
-//	cout << zombiesCuadra(1, 1, ARRIBA) << endl;
-//	cout << zombiesCuadra(1, 1, ABAJO) << endl;
-//	cout << zombiesCuadra(1, 1, IZQ) << endl;
-//	cout << zombiesCuadra(1, 1, DER) << endl;
-//	print();
 	return 0;
 }
 
@@ -148,6 +143,12 @@ int zombiesCuadra(int i, int j, movimiento mov){
 	}
 }
 
+int resulBatalla(int sold, int zomb){
+	if(sold>=zomb)
+		return sold;
+	return sold-(zomb-sold); 
+}
+
 void print(){
 	for (int i = 0; i < m-1; ++i) {
 		for (int j = 0; j < n-1; ++j) {
@@ -163,10 +164,4 @@ void print(){
 		cout << " " << ciudadInfestada[m-1][j].first;
 	}
 	cout << endl;
-}
-
-int resulBatalla(int sold, int zomb){
-	if(sold>=zomb)
-		return sold;
-	return sold-(zomb-sold); 
 }

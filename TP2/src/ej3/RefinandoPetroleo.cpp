@@ -17,7 +17,7 @@ int main(int argc, char const *argv[]){
 		conex.costoTuberia = costoTuberia;
 		ejes.push_back(conex);
 	}
-	int res = refinandoPetroleo(ejes, pozos, costoRefineria);
+	refinandoPetroleo(ejes, pozos, costoRefineria);
 	return 0;
 }
 
