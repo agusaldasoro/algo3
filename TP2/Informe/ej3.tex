@@ -1,14 +1,40 @@
 \section{Refinando petr\'oleo}
 \subsection{Descripci\'on de la problem\'atica}
+	Se quiere construir una red de refinamiento de petr\'oleo mediante refiner\'ias, colodas en cada pozo, o bien tuber\'ias que conectan los distintos pozos entre s\'i para llegar a alguna planta procesadora.
+	
+	Las refiner\'ias tienen un costo fijo. Las tuber\'ias dependen de los pozos que conecten. Dadas la geograf\'ia del lugar, no todos los pozos se pueden conectar entre s\'i.
+	
+	Se desea escribir un algoritmo que minimice el costo de la inversi\'on, indique cu\'antas refier\'ias y en que pozos as\'i como tambi\'en diga cu\'antos tuber\'ias y entre que pozos se deben contruir las instalaciones.
+	
+	El algoritmo debe tener complejidad mejor que $O(n^3)$ siendo $n$ la cantidad de pozos de la zona.
+
 \subsection{Resoluci\'on propuesta y justificaci\'on}
+	El algoritmo es un algoritmo sobre grafos, en particular, sobre \'arboles generadores m\'inimos.
+	
+	En primera instancia guarda los ejes que se pasan por la entrada standar como una lista de adyacencia. Luego aplica el $algoritmo de Kruskal$ sobre esos ejes, pero con la particularidad de que la soluci\'on tendr\'a una tuber'ia entre dos pozos, si el costo es menos que poner un refiner\'ia (en alguno de los dos pozos debe haber una refiner\'ia, o acceso a alguna, si cuesta m\'as construir la tuber\'ia, mejor construyo una refiner\'ia en la que a\'un no esta conectada a ninguna). \textcolor{red}{AGUS! AYUDA! jajaja}.
+	
+	Una vez que obtuvimos estos ejes, nos queda simplemente contar cuantas refiner\'ias hay que colocar (una, por cada componente conexa que formen los ejes seleccionados) y colocar las tuber\'ias correspondientes. Llevar la cuenta de cu\'anto se lleva gastado es sumar los costos de cada tuber\'ia colocada m\'as la cantidad de refiner\'ias por su costo.
+
 \subsection{An\'alisis de la complejidad}
 	El algoritmo recibe por par\'ametro un grafo no dirigido en forma de cantidad de nodos (numerados arbitrariamente de 0 a n-1) y los ejes que existen entre cada par de nodos, y el costo de construir una refiner\'ia. Es importante destacar que la cantidad de ejes est\'a acotada por $O(n^2)$, porque cada nodo, en el peor caso, puede conectarse con todos los nodos del grafo, excepto consigo mismo, es decir que para cada nodo, existen a lo sumo n-1 ejes que entran y salen del mismo. Tomamos como notaci\'on $n = cantNodos$ y $m = cantEjes$.
 	
 	Lo primero que hace es identificar los ejes donde es conveniente colocar una tuber\'ia para conectar dos pozos en vez de construir una refiner\'ia sobre ambos, aplicando el algoritmo de $Kruskal$, apoyados sobre la estructura $Union-Find$.
 	
-	Este paso ordena los ejes mediante sort \textcolor{red}{Poner referencia a sort si todavia no se uso} de la librer\'ia standar de $C$. Esto tarda $O(m.log(m))$, lo que es lo mismo que $O(n^2.log(n^2))$, que por propiedades del logaritmo es $O(n^2.2.log(n))$, eliminando constantes es $O(n^2.log(n))$. Luego por cada eje de ejes, si no forma un ciclo dentro de la componente conexa a la que pertenece, une ambos pozos, pero solo lo agrega al resultado si cuesta menos que poner una refiner\'ia. Este paso aprovecha la estructura de conjuntos disjuntos $Union-Find$, para ver si dos conjuntos son dijuntos y eventualmente unirlos "r\'apidamente". Dado que lo implementamos con las heur\'isticas de $path compression$ y $union by rank$, la complejidad de $m$ operaciones find_set y union-set m\'as una llamada a make_set de complejidad $O(n)$, ejecutan en tiempo $O(m\alpha(n))$, donde $\alpha(n)$ es la inversa de funci\'on de Ackerman:
+	Este paso ordena los ejes mediante sort \textcolor{red}{Poner referencia a sort si todavia no se uso} de la librer\'ia standar de $C$. Esto tarda $O(m.log(m))$, lo que es lo mismo que $O(n^2.log(n^2))$, que por propiedades del logaritmo es $O(n^2.2.log(n))$, eliminando constantes es $O(n^2.log(n))$. Luego por cada eje de ejes, si no forma un ciclo dentro de la componente conexa a la que pertenece, une ambos pozos, pero solo lo agrega al resultado si cuesta menos que poner una refiner\'ia. Este paso aprovecha la estructura de conjuntos disjuntos $Union-Find$, para ver si dos conjuntos son dijuntos y eventualmente unirlos "r\'apidamente". Dado que lo implementamos con las heur\'isticas de $path compression$ y $union by rank$, la complejidad de $m$ operaciones find_set y union-set m\'as una llamada a make_set de complejidad $O(n)$, ejecutan en tiempo $O(m\alpha(n))$, donde $\alpha(n)$ es la inversa de funci\'on de Ackerman:\\
 	
-	A(m,n) = 2\uparrow 
+	$A(m,n) = (2\uparrow^{m-2}(n+3))-3$\\
+	
+	$\alpha(n) = min\{k \in N_0 : A(k,1) \geq n\}$\\
+	
+	Esto es, para casi cualquier caso pr\'actico (hasta $10^{80}$ nodos) a lo sumo 4. Por lo tanto la complejidad de estas operaciones es $O(m)$ o lo que es lo mismo $O(n^2)$.
+	
+	Finalmente devuelve el vector resultante por copia, lo que suma a lo sumo $O(n)$ dado que un \'arbol generador tiene a lo sumo $n-1$ ejes.
+	
+	Hasta este punto la complejidad es la suma de las mencionadas, $O(n^2.2.log(n)) + O(n^2) = O(n^2.2.log(n))$.
+	
+	Falta hacer un recorrido lineal en los ejes del \'arbol generador m\'inimo que nos devolvi\'o el algoritmo de $Kruskal$, armando un nuevo Union-Find para distingar qu\'e componentes necesitan una refiner\'ia (las triviales y el elemento representante de una no trivial). Esto tarda $O(n)$ ya que, como se indic\'o anteriormente, a lo sumo son $n-1$ ejes.
+	
+	La cuenta final es entonces $O(n) + O(n^2.2.log(n)) = O(n^2.2.log(n))$ que es mejor que $O(n^3)$ como se ped\'ia en el enunciado.
 
 \subsection{C\'odigo fuente}
 
