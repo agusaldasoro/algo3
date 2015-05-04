@@ -1,66 +1,129 @@
 \section{Refinando petr\'oleo}
 \subsection{Descripci\'on de la problem\'atica}
-	Se quiere construir una red de refinamiento en una ciudad con pozos petrol\'iferos. Para esto se deber\'an construir refiner\'ias, colocadas en cada pozo, o bien tuber\'ias que conectan los distintos pozos entre s\'i para llegar a alguna planta procesadora.
 
-	Las refiner\'ias tienen un costo fijo. Las tuber\'ias dependen de los pozos que conecten. Dadas la geograf\'ia del lugar, no todos los pozos se pueden conectar entre s\'i.
+Dentro de una locaci\'on dada, se cuenta con \emph{n} pozos de extracci\'on de petr\'oleo. Como el petr\'oleo luego de ser extra\'ido debe ser refinado, se nos pide diagramar la construcci\'on de refiner\'ias y tuber\'ias para hacerlo posible.
 
-	Se desea escribir un algoritmo que minimice el costo de la inversi\'on, indique cu\'antas refier\'ias y en que pozos as\'i como tambi\'en cu\'antos tuber\'ias y entre que pozos se deben contruir las instalaciones.
+Para armar esta red de refinamiento se podr\'an construir refiner\'ias, colocadas en cada pozo, y tuber\'ias que conectan los distintos pozos entre s\'i. Como todos los pozos deben tener un camino factible, para llegar a alguna planta procesadora, se les deber\'a colocar una planta de refinamiento en el mismo, o bien, armar un camino de tuber\'ias que lo conecte con una.
+ 
+	Las refiner\'ias tienen un costo fijo, independiente del pozo donde se ubiquen, mientras que el costo de las tuber\'ias depende de los pozos que se quiera conectar. Adem\'as, contamos con la restricci\'on de que s\'olo se pueden construir tuber\'ias entre los pozos que nos son indicados. Todos estos datos nos son dados como par\'ametros de la funci\'on.\\
 
-	El algoritmo debe tener complejidad mejor que $O(n^3)$ siendo $n$ la cantidad de pozos de la zona.
+	Se desea escribir un algoritmo que de una distribuci\'on de refiner\'ias y tuber\'ias tal que todo pozo tenga acceso a una refiner\'ia y minimice el costo de la inversi\'on. Se debe indicar cu\'antas refiner\'ias construir y en qu\'e pozos, as\'i como tambi\'en cu\'antas tuber\'ias y entre que pozos.
+
+	El algoritmo debe tener complejidad mejor que $O(n^3)$ siendo $n$ la cantidad de pozos de la zona.\\
+	
+	\textcolor{red}{Insertar ejemplito con dibujito :)}
+
+\newpage
 
 \subsection{Resoluci\'on propuesta y justificaci\'on}
-	El algoritmo es un algoritmo sobre grafos, en particular, sobre \'arboles generadores m\'inimos.
 
-	En primera instancia guarda los ejes que se pasan por la entrada standar como una lista de adyacencia. Luego aplica el \textit{algoritmo de Kruskal} sobre esos ejes, pero con la particularidad de que la soluci\'on tendr\'a una tuber'ia entre dos pozos, si el costo es menos que poner un refiner\'ia (en alguno de los dos pozos debe haber una refiner\'ia, o acceso a alguna, si cuesta m\'as construir la tuber\'ia, mejor construyo una refiner\'ia en la que a\'un no esta conectada a ninguna). \textcolor{red}{AGUS! AYUDA! jajaja}.
+Dada la estructura del problema presentado, se opt\'o por modelar la situaci\'on mediante un grafo no dirigido. En este mismo, cada nodo presenta un pozo petrolero y los ejes indican la posibilidad de la construcci\'on de tuber\'ias. Es decir, dados dos nodos $e$ y $f$ del grafo, va a existir un eje $w=(e,f)$ si y solo si se puede construir una tuber\'ia entre $e$ y $f$. Adem\'as, cada eje va a contar con un peso que indica el costo de construcci\'on de su tuber\'ia.
 
-	Una vez que obtuvimos estos ejes, nos queda simplemente contar cuantas refiner\'ias hay que colocar (una, por cada componente conexa que formen los ejes seleccionados) y colocar las tuber\'ias correspondientes. Llevar la cuenta de cu\'anto se lleva gastado es sumar los costos de cada tuber\'ia colocada m\'as la cantidad de refiner\'ias por su costo.
+Este grafo inicial se va a armar con los datos pasados por par\'ametro. En primera instancia, se guardan los ejes que se obtienen de la \emph{entrada standard} como una lista de adyacencia.\\
 
+A partir de aqu\'i vamos a trabajar con un algoritmo particular sobre \emph{\'arboles generadores m\'inimos}: \textbf{algoritmo de Kruskal}.\\
+
+El grafo obtenido hasta ahora puede tener desde $1$ hasta $n$ componentes conexas, para cada una de ellas vamos a formar su \'arbol generador m\'inimo. Esto nos asegurar\'a formar un \'arbol por componente tal que su peso total sea el m\'inimo de todos los \'arboles factibles. Al saber que los pesos de los ejes son todos positivos, contamos con que el \'unico camino resultante entre dos nodos va a ser el camino de menor costo de los caminos originales.\\
+
+%LA WIKI PAPA
+%Dado un grafo conexo y no dirigido, un árbol recubridor mínimo de ese grafo es un subgrafo que tiene que ser un árbol y contener todos los vértices del grafo inicial. Cada arista tiene asignado un peso proporcional entre ellos, que es un número representativo de algún objeto, distancia, etc.; y se usa para asignar un peso total al árbol recubridor mínimo computando la suma de todos los pesos de las aristas del árbol en cuestión. Un árbol recubridor mínimo o un árbol expandido mínimo es un árbol recubridor que pesa menos o igual que otros árboles recubridores. Todo grafo tiene un bosque recubridor mínimo.
+% Si los pesos son positivos, el árbol recubridor mínimo es el subgrafo de menor costo posible conectando todos los vértices, ya que los subgrafos que contienen ciclos necesariamente tienen más peso total.
+
+El algoritmo de Kruskal es un algoritmo goloso que est\'a implementado para grafos. Lo primero que realizamos fue ordenar los ejes que tenemos del grafo, por su peso en orden creciente. A continuaci\'on, se recorren los ejes secuencialmente y para cada uno se decide si debe permanecer o se debe quitar, de modo que si el eje actual no genera un ciclo (con los elegidos hasta esta instancia) permanece, en caso contrario se elimina.
+
+Adem\'as, cuenta con una restricci\'on adicional. Cada eje que revisa va a permanecer s\'olo si su peso es menor al costo de construir una refiner\'ia. Esta nueva condici\'on, nos asegura que para cada pozo su camino para llegar a una refiner\'ia va a ser el m\'inimo. \textcolor{red}{Poner un ejemplito}\\
+
+	Una vez que obtuvimos los ejes definitivos, nos queda simplemente contar cu\'antas refiner\'ias hay que colocar (una, por cada componente conexa -\'arbol- que formen los ejes seleccionados) y ubicarla en cualquier nodo de la componente.
+	
+	Llevar la cuenta de cu\'anto se lleva gastado es sumar los costos de cada tuber\'ia colocada m\'as la cantidad de refiner\'ias por su costo, y as\'i obtenemos el costo total.
+
+
+\newpage
 \subsection{An\'alisis de la complejidad}
-	El algoritmo recibe por par\'ametro un grafo no dirigido en forma de cantidad de nodos (numerados arbitrariamente de 0 a n-1) y los ejes que existen entre cada par de nodos, y el costo de construir una refiner\'ia. Es importante destacar que la cantidad de ejes est\'a acotada por $O(n^2)$, porque cada nodo, en el peor caso, puede conectarse con todos los nodos del grafo, excepto consigo mismo, es decir que para cada nodo, existen a lo sumo n-1 ejes que entran y salen del mismo. Tomamos como notaci\'on $n = cantNodos$ y $m = cantEjes$.
+
+Dados los datos ingresados como par\'ametros, contamos con el costo de construir una refiner\'ia y un grafo no dirigido de forma tal que la cantidad de nodos  est\'an numerados (arbitrariamente) de $0$ a $n-1$ y posee $m$ ejes. Tomamos como notaci\'on \emph{n = cantNodos} y \emph{m = cantEjes}.
+
+Es importante destacar que la cantidad de ejes est\'a acotada por $O(n^2)$; ya que cada nodo, en el peor caso, puede conectarse con todos los nodos del grafo, excepto consigo mismo, es decir que para cada nodo, existen a lo sumo n-1 ejes que entran y salen del mismo.\\
+
+El grafo que constru\'imos con los datos pasados como par\'ametro va a estar representado mediante una lista de adyacencia, la cual va a ser un vector de ejes. Esto presenta un costo de $O(m)$, como $m \leq n^2$ pertenece a $\mathbf{O(n^2)}$.\\
+
+Luego, vamos a utilizar la estructura \emph{Union-Find} \footnote{Introduction to Algorithms (Third Edition) - Cormen, Leiserson, Rivest, Stein [2009], Unidad 21.} \footnote{Gregory C. Harfst and Edward M. Reingold. A potential-based amortized analysis of the
+union-find data structure, 2000.	\label{paper}}. Esta estructura (adjuntada en el archivo \textit{UnionFind.h}) consiste de un vector capaz de almacenar diversos conjuntos disjuntos -cada uno con un \emph{Elemento Representante}-, la cual cuenta con los siguientes tres m\'etodos: \texttt{find_set(x)}, \texttt{union_set(x, y)} y \texttt{is_in(x, y)}. 
+
+\texttt{find_set(x)} devuelve el elemento representante del conjunto al que pertenece \emph{x}.
+
+\texttt{union_set(x, y)} une al conjunto que contiene a \emph{x} con el conjunto al que pertenece \emph{y}. 
+ 
+\texttt{is_in(x, y)} devuelve true si \emph{x} est\'a en el mismo conjunto que \emph{y}, false en caso contrario. \\
+
+
+El algoritmo de Kruskal se apoya en esta estructura. Nuestra funci\'on \texttt{generarArbolesMinimos} recibe como par\'ametros de entrada al vector de ejes totales, el costo de construir una refiner\'ia y la cantidad de pozos (n).
+
+
+Como primer paso, ordena los ejes mediante el algoritmo  \href{http://www.cplusplus.com/reference/algorithm/sort/}{sort()} \footnote{http://www.cplusplus.com/reference/algorithm/sort/} de la librer\'ia Standard de \emph{C}, cuya complejidad es $O(m.log(m))$. Lo cual es equivalente a $O(n^2.log(n^2))$, por propiedades de logaritmo es $O(n^{2}2.log(n))$ y eliminando constantes es $\mathbf{O(n^2.log(n))}$. \\
+
+%Crea un bosque m\'inimo que es un \emph{Union-Find}, Lo primero que hace es identificar los ejes donde es conveniente colocar una tuber\'ia para conectar dos pozos en vez de construir una refiner\'ia sobre ambos, aplicando el algoritmo de \textit{Kruskal}, apoyados sobre la estructura $Union-Find$.
 	
-	Lo primero que hace es identificar los ejes donde es conveniente colocar una tuber\'ia para conectar dos pozos en vez de construir una refiner\'ia sobre ambos, aplicando el algoritmo de \textit{Kruskal}, apoyados sobre la estructura $Union-Find$.
+Luego, se recorren todos los ejes del vector obtenido como par\'ametro (\texttt{ejes}), ya ordenados. De modo que, primero nos ubicamos en el eje de menor costo, terminando el recorrido con el de mayor. Contamos con un nuevo vector \texttt{res}, el cual va almacenar s\'olo los ejes que esten en el resultado, el cual comienza vac\'io. Para cada eje recorrido en \texttt{ejes}, se consulta si al insertarlo en \texttt{res} formar\'ia un ciclo con los que ya se encuentran en \'el. Si esta consulta es positiva, se saltea este eje; en caso contrario se inserta al vector \texttt{res} s\'olo si su costo es menor al costo de construir una refiner\'ia. 	
+
+%Luego por cada eje de los ejes obtenidos como par\'ametro de la funcion, si no forma un ciclo dentro de la componente conexa a la que pertenece, une ambos pozos, pero solo lo agrega al resultado si cuesta menos que poner una refiner\'ia. 
+
+Adem\'as vamos a contar con una estructura \emph{Union-Find} \texttt{(bosqueMinimo)}, la cual va a representar los conjuntos disjuntos que forman las componentes conexas del grafo. De modo que, al momento de insertar un nuevo eje a \texttt{res} dentro del ciclo tambi\'en se uniran los dos nodos que une este eje dentro de su conjunto correspondiente en \texttt{(bosqueMinimo)}.\\
 	
-	Este paso ordena los ejes mediante sort \textcolor{red}{Poner referencia a sort si todavia no se uso} de la librer\'ia standar de $C$. Esto tarda $O(m.log(m))$, lo que es lo mismo que $O(n^2.log(n^2))$, que por propiedades del logaritmo es $O(n^2.2.log(n))$, eliminando constantes es $O(n^2.log(n))$. Luego por cada eje de ejes, si no forma un ciclo dentro de la componente conexa a la que pertenece, une ambos pozos, pero solo lo agrega al resultado si cuesta menos que poner una refiner\'ia. Este paso aprovecha la estructura de conjuntos disjuntos \textit{Union-Find}, para ver si dos conjuntos son dijuntos y eventualmente unirlos eficientemente. Dado que lo implementamos con las heur\'isticas de \textit{path compression} y \textit{union by rank}, la complejidad de $m$ operaciones find_set y union-set m\'as una llamada a make_set de complejidad $O(n)$, ejecutan en tiempo $O(m\alpha(n))$\footnote{Leopoldo dio la clase sobre esta estructura y dijo que no hace falta justificar la complejidad \textcolor{red}{esto es asi??}}, donde $\alpha(n)$ es la inversa de funci\'on de Ackerman:\\
+Este paso aprovecha la estructura de conjuntos disjuntos \textit{Union-Find}, para ver si dos conjuntos son disjuntos y eventualmente unirlos eficientemente. 
 
-	$A(m,n) = (2\uparrow^{m-2}(n+3))-3$\\
+\newpage
 
-	$\alpha(n) = min\{k \in N_0 : A(k,1) \geq n\}$\\
+Dado que lo implementamos con las heur\'isticas de \textit{path compression} y \textit{union by rank}, la complejidad de $m$ operaciones \texttt{find_set} y \texttt{union-set} m\'as una llamada a \texttt{make_set} de complejidad $O(n)$, ejecutan en tiempo $O(m\alpha(n))$, donde $\alpha(n)$ es la inversa de\emph{ funci\'on de Ackerman}\textsuperscript{\ref{paper}}:
 
-	Algunos valores de la funci\'on de Ackerman:
+\begin{equation*}
+\begin{array}{lll}
+A(m,n) & = & (2\uparrow^{m-2}(n+3))-3 \\
+\alpha(n) & = & min\{k \in N_0 : A(k,1) \geq n\}
+\end{array}
+\end{equation*}
 
-	$A(0,1) = 2$\\
+	Algunos valores de la \emph{funci\'on de Ackerman} se presentan a continuaci\'on:
 
-	$A(1,1) = 3$\\
+\begin{equation*}
+\begin{array}{lll}
+A(0,1) & = & 2 \\
+A(1,1) & = & 3 \\
+A(2,1) & = & 7 \\
+A(3,1) & = & 2047 \\
+A(4,1) & = & 10^{80}
+\end{array}
+\end{equation*}
 
-	$A(2,1) = 7$\\
-
-	$A(3,1) = 2047$\\
-
-	$A(4,1) = 10^{80}$\\
-
-	Como A crece terriblemente r\'apido, $\alpha$ crece terriblemente lento:
+	Como A crece excesivamente r\'apido, $\alpha$ crece excesivamente lento:
 
 	\begin{equation*}
 	\alpha(n) = 
 	\begin{cases} 
-		0  & \mbox{si } 0 \leq n \leq 2 \\[2ex]
-		1  & \mbox{si } n = 3 \\[2ex]
-		2  & \mbox{si } 4 \leq n \leq 7 \\[2ex]
-		3  & \mbox{si } 8 \leq n \leq 2047 \\[2ex]
-		4  & \mbox{si } 2048 \leq n \leq A(4,1) \\[2ex]
+		0  & \mbox{si } 0 \leq n \leq 2 \\
+		1  & \mbox{si } n = 3 \\
+		2  & \mbox{si } 4 \leq n \leq 7 \\
+		3  & \mbox{si } 8 \leq n \leq 2047 \\
+		4  & \mbox{si } 2048 \leq n \leq A(4,1) \\
 	\end{cases}
 	\end{equation*}
 
-	Esto es, para casi cualquier caso pr\'actico (hasta $10^{80}$ nodos) a lo sumo 4. Por lo tanto la complejidad de estas operaciones es $O(m)$ o lo que es lo mismo $O(n^2)$.
+	Esto nos indica que para casi cualquier caso pr\'actico que empleemos (hasta $10^{80}$ nodos), $\alpha(n)$ ser\'a a lo sumo $4$. Por lo tanto, la complejidad de estas operaciones es $O(m)$ o lo que es lo mismo $\mathbf{O(n^2)}$.
+	
+	Tener en cuenta que, dentro del ciclo tambi\'en se ejecutan asignaciones y \href{http://www.cplusplus.com/reference/vector/vector/push_back/}{push\_back()} \footnote{http://www.cplusplus.com/reference/vector/vector/push_back/} en un vector pero estas operaciones cuentan con un costo $O(1)$ (amortizado en el caso de \texttt{push\_back}), lo cual es despreciable.\\
 
-	Finalmente devuelve el vector resultante por copia, lo que suma, en el peor caso, $O(n)$ dado que un \'arbol generador tiene a lo sumo $n-1$ ejes.
+	Finalmente devuelve el vector resultante por copia, lo que suma, en el peor caso, $\mathbf{O(n)}$ dado que un \'arbol generador tiene a lo sumo $n-1$ ejes.\\
 
-	Hasta este punto la complejidad es la suma de las mencionadas, $O(n^2.log(n)) + O(n^2) = O(n^2.log(n))$.
+	Hasta este punto, la complejidad es la suma de las mencionadas:  $ O(n^2) + O(n^2.log(n)) + O(n^2) = \mathbf{O(n^2.log(n))}$.\\
 
-	Falta hacer un recorrido lineal en los ejes del \'arbol generador m\'inimo que nos devolvi\'o el algoritmo de \textit{Kruskal}, armando un nuevo \textit{Union-Find} para distinguir qu\'e componentes necesitan una refiner\'ia (el elemento representante de cada conjunto). Esto tarda $O(n)$ ya que, como se indic\'o anteriormente, a lo sumo son $n-1$ ejes.
+	Resta hacer un recorrido lineal en los ejes del \'arbol generador m\'inimo que nos devolvi\'o el algoritmo de \textit{Kruskal}, armando un nuevo \textit{Union-Find} para distinguir cu\'ales son las componentes conexas resultantes. De esta manera, vamos a determinar 	qu\'e componentes necesitan una refiner\'ia (determinamos que el elemento representante de cada conjunto).
+		
+	 Esto tarda $\mathbf{O(n)}$ ya que, como se indic\'o anteriormente, a lo sumo son $n-1$ ejes.\\
 
-	La cuenta final es entonces $O(n) + O(n^2.log(n)) = O(n^2.log(n))$ que es mejor que $O(n^3)$ como se ped\'ia en el enunciado.
+	La cuenta final resulta $O(n) + O(n^2.log(n)) = \mathbf{O(n^2.log(n))}$, la cual es estrictamente mejor que $O(n^3)$ como se ped\'ia en el enunciado.
 
+
+\newpage
 \subsection{C\'odigo fuente}
 
 	\begin{codesnippet}
@@ -175,12 +238,14 @@
 	\begin{codesnippet}
 	\begin{verbatim}
     int refinandoPetroleo(vector<eje>& ejes, int cantPozos, int costoRefineria){
-    //generamos los arboles minimos para cada componente conexa, en realidad solo los ejes que cuesten menos que poner refinerias
+    //generamos los arboles minimos para cada componente conexa, 
+    //en realidad solo los ejes que cuesten menos que poner refinerias
         vector<eje> conexionesMinimas = generarArbolesMinimos(ejes, costoRefineria, cantPozos);
         UnionFind conexos(cantPozos);
         int costoTotal = 0, cantRef = 0;
-    //armamos un union-find para identificar componentes triviales, en las demas solo hara falta poner una refineria
-    //en el representante de la componente pues los tubos son mas baratos para unir los distintos pozos
+    //armamos un union-find para identificar componentes triviales, en las demas solo hara falta 
+    //poner una refineria en el representante de la componente pues los tubos son mas baratos 
+    //para unir los distintos pozos
         for (int i = 0; i < conexionesMinimas.size(); ++i) {
             conexos.union_set(conexionesMinimas[i].pozoA, conexionesMinimas[i].pozoB);
             costoTotal += conexionesMinimas[i].costoTuberia;
@@ -235,6 +300,7 @@
 	\end{verbatim}
 	\end{codesnippet}
 
+\newpage
 \subsection{Experimentaci\'on}
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
 	Para llevar a cabo esta experimentaci\'on, consideramos el peor caso posible de cantidad de ejes del grafo, es decir que habr\'a exactamente $n.(n-1)$ ejes (cada nodo puede conectarse con cualquier nodo del grafo, excepto consigo mismo), variando la cantidad de nodos.
@@ -305,6 +371,7 @@ n & Tiempo en segundos\\
 
 	Dado que la Cota de Complejidad planteada te\'oricamente es de $O(n^2.log(n))$, era esperable que la curva sea una par\'abola creciente.
 
+\newpage
 	A simple vista, no se puede apreciar si la relaci\'on que tienen respecto de tama\~no/tiempo es efectivamente la que buscamos (pues casi todas las curvas polinomiales tienen gr\'aficos similares). Por este motivo, como siguiente paso decidimos comenzar a linealizar los tiempos, dividiendo a cada uno por $log(n)$.
 
    \begin{figure}[h!]
@@ -327,4 +394,4 @@ n & Tiempo en segundos\\
  \end{figure}
 % \newpage
 
-	Efectivamente puede observarse que el comportamiento es lineal. Por lo tanto, podemos afirmar que nuestra experimentaci\'on condice a la Cota Te\'orica planteada de $O(n^2.log(n))$.
+	Efectivamente puede observarse que el comportamiento es lineal. Por lo tanto, podemos afirmar que nuestra experimentaci\'on condice a la Cota Te\'orica planteada de $\mathbf{O(n^2.log(n))}$.
