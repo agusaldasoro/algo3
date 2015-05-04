@@ -31,7 +31,15 @@ El grafo obtenido hasta ahora puede tener desde $1$ hasta $n$ componentes conexa
 
 El algoritmo de Kruskal es un algoritmo goloso que est\'a implementado para grafos. Lo primero que realizamos fue ordenar los ejes que tenemos del grafo, por su peso en orden creciente. A continuaci\'on, se recorren los ejes secuencialmente y para cada uno se decide si debe permanecer o se debe quitar, de modo que si el eje actual no genera un ciclo (con los elegidos hasta esta instancia) permanece, en caso contrario se elimina.
 
-Adem\'as, cuenta con una restricci\'on adicional. Cada eje que revisa va a permanecer s\'olo si su peso es menor al costo de construir una refiner\'ia. Esta nueva condici\'on, nos asegura que para cada pozo su camino para llegar a una refiner\'ia va a ser el m\'inimo. \textcolor{red}{Poner un ejemplito}\\
+Adem\'as, cuenta con una restricci\'on adicional. Cada eje que revisa va a permanecer s\'olo si su peso es menor al costo de construir una refiner\'ia. Esta nueva condici\'on, nos asegura que para cada pozo su camino para llegar a una refiner\'ia va a ser el m\'inimo. 
+
+Consideremos el caso de $n=3$, donde contamos con los nodos: A, B y C con un costo de construir una refiner\'ia de \$10. A continuaci\'on, adjuntamos tres ejemplos donde se puede ver que la elecci\'on (entre insertar una tuber\'ia entre dos nodos o una refiner\'ia en cada uno) se condice con insertar una tuber\'ia s\'olo si su costo es menor al de construir una refiner\'ia.
+
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.5]{imagenes/ej3/grafos.png}
+   \end{center}
+ \end{figure}
 
 	Una vez que obtuvimos los ejes definitivos, nos queda simplemente contar cu\'antas refiner\'ias hay que colocar (una, por cada componente conexa -\'arbol- que formen los ejes seleccionados) y ubicarla en cualquier nodo de la componente.
 	
@@ -312,6 +320,9 @@ A(4,1) & = & 10^{80}
 \newpage
 \subsection{Experimentaci\'on}
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
+
+\textcolor{red}{Poner aca lo del script. ``Le puse que tome la cant de pozos y que arme grafos con todas las conexiones posibles de peso random entre 0 y el doble de costo de refiner\'ia''}
+
 	Para llevar a cabo esta experimentaci\'on, consideramos el peor caso posible de cantidad de ejes del grafo, es decir que habr\'a exactamente $n.(n-1)$ ejes (cada nodo puede conectarse con cualquier nodo del grafo, excepto consigo mismo), variando la cantidad de nodos.
 
 	Los tiempos de ejecuci\'on para cada n (cantidad de nodos) fueron los siguientes:
