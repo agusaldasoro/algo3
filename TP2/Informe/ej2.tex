@@ -4,5 +4,81 @@
 \subsection{An\'alisis de la complejidad}
 \subsection{C\'odigo fuente}
 \subsection{Experimentaci\'on}
-
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
+Para realizar los experimentos, se consideró como peor caso, aquel en el que se debiera recorrer cada nodo de la ciudad, tantas veces como cantidad de soldados se tuviese a disposicion, siendo ese caso, en el que se recorrerían $s.n.m$ elementos, coiniciendo así con la complejidad teórica $O(s.n.m)$.
+Pese a ser ese el caso deseable, generar dicha instancia para los distintos valores de $s$, $n$ y $m$, resultó tan dificultoso como resolver el problema en cuestion.
+Por ello, se decidio generar instancias con una cantidad aleatoria de zombies por cuadra. Esto permitió generar instancias automáticamente, para casos de prueba grandes, pero trajo consigo los siguientes problemas:
+\begin{enumerate}
+	\item No se puede determinar si existe un camino desde el punto de inicio hasta el búnker.
+	\item No se puede determinar, si al existir un camino, este será único.
+	\item No se puede determinar cuantos soldados van a llegar al búnker.
+	\item No se puede determinar cuantos caminos adulteran la cantidad de soldados, ni cuantos soldados mueren en cada uno de ellos.
+\end{enumerate}
+
+Pese a dichas dificultades, se decidió proceder con dichas instancias, ya que lograban generar una fluctuación en la cantidad de soldados, y esto, si bien lejos del peor caso propuesto, resultó ser una aproximación que nos resultó suficiente.
+
+Por lo dicho anteriormente, se realizaron experimentos sobre los siguientes dos casos:
+\begin{itemize}
+	\item \textbf{Cero zombies}: En esta instancia, la cantidad de zombies en cada cuadra es cero, con lo cual, el algoritmo recorre toda la ciudad, y se queda con cualquier camino.
+	\item \textbf{Zombies aleatorios}: Es la instancia explicada anteriormente.
+\end{itemize}
+
+También es necesario aclarar, que los experimentos se realizaron sobre ciudades cuadradas, con puntos de inicio y llegada en los extremos opuestos de la ciudad, y con cantidad de soldados iniciales igual a 20.
+
+A continuación se detallan los experimentos y sus resultados.
+Debido al tamaño de las instancias de prueba, los inputs de dichos experimentos no fueron adjuntados.
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+	\hline
+	Experimento & \textbf{Cero zombies} & \textbf{Zombies aleatorios}\\
+	\hline
+	\hline
+	Tamaño de la ciudad & \multicolumn{2}{|c|}{Soldados al final}\\
+	\hline
+	50x50 & 20 & 6\\
+	\hline
+	100x100 & 20 & 19\\
+	\hline
+	250x250 & 20 & 17\\
+	\hline
+	500x500 & 20 & 17\\
+	\hline
+	750x750 & 20 & 16\\
+	\hline
+	1000x1000 & 20 & 12\\
+	\hline
+	1250x1250 & 20 & 20\\
+	\hline
+	1500x1500 & 20 & 7\\
+	\hline
+	1750x1750 & 20 & 14\\
+	\hline
+	2000x2000 & 20 & 20\\
+	\hline
+	\end{tabular}
+\end{center}
+
+Dado que los tiempos de ejecución para ambos experimentos varían ampliamente, primero analizaremos el experimento de \textbf{Cero zombies}.
+
+\includegraphics[width=15cm,keepaspectratio=yes]{imagenes/ej2/czneto.png}
+
+Como se puede apreciar, al no haber zombies, no existe ningun camino en el cual mueran soldados, por lo que los tiempos se incrementan acorde a la dimension de la ciudad, y al ser cuadradas, crece exponencialmente.
+
+\includegraphics[width=15cm,keepaspectratio=yes]{imagenes/ej2/czyza.png}
+
+Aquí se pueden apreciar las diferencias de tiempos. Ésta radica en el hecho de que \textbf{Zombies aleatorios} posee caminos en los cuales los soldados mueren. Por ello, el algoritmo deberá recorrer, en peor caso, $s$ veces la ciudad entera.\\
+
+Se procedió, entonces, a dividir los resultados de \textbf{Zombies aleatorios} por la cantidad de soldados iniciales con los que se ejecutó el algoritmo, a fin de que quede reflejado, que en ese caso, los tiempos serán muy similares a los de \textbf{Cero zombies}. Esto se debe a que ya no son los tiempos de recorrer $s$ veces la ciudad, sino de recorrerla una sola vez.
+Sin embargo, es necesario aclarar que la similitud que se intenta mostrar, es aproximada, ya que no podemos asegurar que efectivamente, el algoritmo recorre $s$ la ciudad. Tal es el peor caso, y como hemos expuesto en un principio, no podemos asegurar que sea el que realmente ocurre.
+
+\includegraphics[width=15cm,keepaspectratio=yes]{imagenes/ej2/zaczados.png}
+
+Manteniendo los resultados de \textbf{Zombies aleatorios} divididos por $s$, finalmente dividimos los resultados tanto de \textbf{Cero zombies} como de \textbf{Zombies aleatorios}, por $n$, y en una instancia aparte, por $n.m$.
+De esta manera, dado que en ambos tienen $s$ igual a 1, solo queda ver que al dividir por $n$, los resultados se aproximan a una función lineal, y que al dividirlos por $n.m$, se aproximan a una constante.
+
+Como solo nos interesa la relación, y no la función exacta ni la constante, multiplicamos los resultados de dichas divisiones por 100, para que los valores sean más claros y visibles.
+
+\includegraphics[width=15cm,keepaspectratio=yes]{imagenes/ej2/linealizacion.png}
+
+\includegraphics[width=15cm,keepaspectratio=yes]{imagenes/ej2/constantizacion.png}
+
