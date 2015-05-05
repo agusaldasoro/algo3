@@ -74,94 +74,225 @@ Esta formulaci\'on recursiva resuelve el problema porque.... \textcolor{red}{Pon
 
 \subsubsection*{Diccionario a utilizar}
 
-El diccionario que vamos a utilizar consiste en una matriz de $k_{m_{inicial}}$\texttt{x}$k_{b_{inicial}}$, en la que por cada posici\'on va a haber un contenedor de tama\~no $n_{inicial}$ (lo cual forma un cubo) de modo que dentro de cada uno de ellos se va a poder almacenar el resultado de invocar a la funci\'on con estos tres par\'ametros.
+El diccionario que vamos a utilizar consiste en una matriz de $k_{m_{inicial}}$\texttt{x}$k_{b_{inicial}}$, en la que por cada posici\'on va a haber un contenedor de tama\~no $n_{inicial}$ de modo que dentro de cada uno de ellos se va a poder almacenar el resultado de invocar a la funci\'on con estos tres par\'ametros.
 
 \subsubsection*{Formulaci\'on Top Down}
 
-	Si analizamos el comportamiento de nuestra funci\'on recursiva como si fuera un algoritmo recursivo, podemos notar que la primer posici\'on del cubo que va a poder completar va a ser la de $(k_{m_{inicial}},k_{b_{inicial}},0)$. Dado que para todas las guardas el primer caso que compara es usar la bicicleta. \textcolor{red}{Explicar con un poco mas de detalle.}
+	Si analizamos el comportamiento de nuestra funci\'on recursiva como si fuera un algoritmo recursivo, podemos notar que la primer posici\'on de la matriz que va a poder completar va a ser la de $(k_{m_{inicial}},k_{b_{inicial}},0)$. Dado que para todas las guardas el primer caso que compara es usar la bicicleta.
 
 	Luego, seguir\'a completando la matriz variando en orden ascendente el tercer par\'ametro y completando para todos los $k_m$ y $k_b$.
 
 \subsubsection*{Formulaci\'on Bottom Up}
 
+Una vez comprendido el comportamiento de la funci\'on, podemos establecer una manera de completar nuestro diccionario matriz de modo iterativo.\\
 
-Una vez comprendido el comportamiento de la funci\'on, podemos establecer una manera de completar nuestro diccionario cubo de modo iterativo.\\
-
-Primero completamos para $n=0$ todos los valores de $k_m$ y $k_b$. \textcolor{red}{Esto:}Notar que dados los \'indices que utilizamos a la hora de la implementaci\'on, cuando hablamos de $n=0$ nos referimos a la etapa 1 de la carrera (la \'ultima que vamos a recorrer), lo cual no es estrictamente el mismo resultado que el expuesto en la formulaci\'on recursiva. Sin embargo, podemos denotar esto como una diferencia que no afecta al funcionamiento del algoritmo.\textcolor{red}{es asi?}
-
-Cuando $n=0$ simplemente vamos a asignar el veh\'iculo que presente menor tiempo para esta etapa, entre los disponibles bas\'andonos en los $k_m$ y $k_b$.
-
-Luego para $n=1$, debemos considerar el costo m\'inimo entre usar cada uno de los veh\'iculos disponibles para esta etapa sumado a su correspondiente costo m\'inimo de la etapa anterior.
-
-Continuamos con las iteraciones hasta llegar a $n=n_{parametro}$.\\
-
-\textcolor{red}{Aca poner un dibujito que ejemplifique.}\\
+Primero completamos para $n=0$ todos los valores de $k_m$ y $k_b$, luego para $n=1$ y as\'i iterativamente hasta llegar a $n=n_{parametro}$.\\
 
 Cuando contamos con la matriz Diccionario completa, nuestro resultado va a estar ubicado en la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$.\\
 
-Al ingresar los datos dentro del diccionario de esta manera, lo \'unico que hacemos es invertir el orden de llenado. Es por este motivo que estamos cumpliendo con el mismo comportamiento de la funci\'on recursiva ya mencionada. Como ya pudimos asegurar que la formulaci\'on recursiva resolv\'ia de manera correcta la problem\'atica planteada, estamos en condiciones de afirmar que completar el diccionario en el orden inverso tambi\'en resuelve el ejercicio.\\
-\\
+A medida que llenamos el diccionario, estamos tomando decisiones, estas son la elecci\'on del transporte a utilizar, entonces, como adem\'as de los resultados de tiempo nos interesa saber en qu\'e momento elegir cada veh\'iculo, guardamos ambas, el tiempo y esta decisi\'on, en el diccionario.
 
-
-%%%%%%%%%%%%%%%%
-Con el fin de poder calcular el camino una vez obtenida la cantidad de tiempo menor para realizar el trayecto, en cada posici\'on del diccionario no s\'olo guardamos el tiempo empleado para llegar hasta ah\'i sino que tambi\'en cu\'al fue su situaci\'on inmediatamente anterior.\\
-
-<<<<<<< HEAD
-\newpage
-
-=======
-De este modo, recorremos la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$ hacia la situaci\'on que indica la misma, y as\'i sucesivamente. De este modo obtenemos las elecciones hechas desde la \'ultima etapa hasta la primera.
-
-
+De este modo, podemos recorrer la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$ hacia la situaci\'on que indica la misma, y as\'i sucesivamente para reconstruir el camino.
 
 \newpage
->>>>>>> 9611625dca6437d973b75f82c5133e1aa1e17c68
+
 \subsection{An\'alisis de la complejidad}
 \subsubsection{Complejidad Temporal}
 
 Como par\'ametro vamos a recibir $m_k$, $m_b$, $n$ y los tiempos necesarios para atravesar con cada veh\'iculo las \emph{n} etapas. Los tiempos los vamos a tener almacenados en un vector de tuplas, donde cada componente va a ser BMX, Moto y buggy.\\
 
-Mediante tres \texttt{for}s anidados (primero por la cantidad de etapas, despu\'es por la cantidad de motos y por \'ultimo la cantidad de buggys), vamos a recorrer posici\'on a posici\'on nuestra matriz de vectores (cubo). Comenzando en la posici\'on $(0,0,0)$ y finalizando en  $(k_{m},k_{b},n)$.
+Mediante tres \texttt{for}s anidados (primero por la cantidad de etapas, despu\'es por la cantidad de motos y por \'ultimo la cantidad de buggys ), vamos a recorrer posici\'on a posici\'on nuestra matriz de vectores. Comenzando en la posici\'on $(0,0,0)$ y finalizando en  $(k_{m},k_{b},n)$.
 
-Dentro de cada iteraci\'on, lo que vamos a hacer es completar la posici\'on del diccionario correspondiente acorde indica el planteo recursivo, con la salvedad de que cada casillero representa cu\'anto nos cuesta llegar a la siguiente etapa, es decir que la posici\'on $(k_{m},k_{b},n)$ tendr\'a lo que cueste ir de la etapa n a la etapa n+1, usando la cantidad de Motos y Buggys correspondiente.\\
+Dentro de cada iteraci\'on, lo que vamos a hacer es lo que indica el planteo recursivo, con la salvedad de que cada casillero representa cu\'anto nos cuesta llegar a la siguiente etapa, es decir que la posici\'on (0,0,0) tendr\'a lo que cueste ir de la etapa 0 a la etapa 1, usando la bici.
 
-
-En todas las iteraciones, escribiremos en el diccionario bajo la clave:  $(k{_m}, k{_b}, n)$. En cada posici\'on vamos a poner un par: la primera posici\'on corresponde al valor del tiempo y la segunda al indicador de la posici\'on inmediatamente anterior.\\
-
-Para escribir la \emph{primer posici\'on} vamos a seguir la siguiente regla:
+Siempre escribiremos en el diccionario en la posici\'on $(k{_m}, k{_b}, n)$, omitimos la escritura para devolver el camino, pero aclaramos que son operacion elementales (asignacion y suma de enteros) y un llamado a make_pair \textcolor{blue}{link plis :)} que toma tiempo constante:
 
 \begin{itemize}
-\item Si $n=0 \wedge k_m=0 \wedge k_b=0$ escribimos el tiempo que le lleva a la BMX para ir de $0$ a $1$
-\item Si $n=0 \wedge k_m=0 \wedge k_b\neq0$ escribimos el tiempo que sea menor para ir  de $0$ a $1$ entre BMX y Buggy
-\item Si $n=0 \wedge k_m\neq0 \wedge k_b=0$ escribimos el tiempo que sea menor para ir  de $0$ a $1$ entre BMX y Moto
-\item Si $n=0 \wedge k_m\neq0 \wedge k_b\neq0$ escribimos el tiempo que sea menor para ir  de $0$ a $1$ entre BMX, Buggy y Moto
-\item Si $n\neq0 \wedge k_m=0 \wedge k_b=0$ escribimos el tiempo que le lleva a la BMX para ir de $n$ a $n+1$ + $dicc(m, b, n-1)$
-\item Si $n\neq0 \wedge k_m=0 \wedge k_b\neq0$ escribimos el tiempo que sea menor para ir  de $n$ a $n+1$ entre $tiempo(BMX) + dicc(m, b, n-1)$ y $tiempo(Buggy) + dicc(m, b-1, n-1)$
-\item Si $n\neq0 \wedge k_m\neq0 \wedge k_b=0$ escribimos el tiempo que sea menor para ir  de $n$ a $n+1$ entre $tiempo(BMX) + dicc(m, b, n-1)$ y $tiempo(Moto) + dicc(m-1, b, n-1)$
-\item Si $n\neq0 \wedge k_m\neq0 \wedge k_b\neq0$ escribimos el tiempo que sea menor para ir  de $n$ a $n+1$ entre $tiempo(BMX) + dicc(m, b, n-1)$, $tiempo(Buggy) + dicc(m, b-1, n-1)$ y $tiempo(Moto) + dicc(m-1, b, n-1)$
+\item Si $n=0 \wedge k_m=0 \wedge k_b=0$ escribimos el costo de la bici para ir de 0 a 1
+\item Si $n=0 \wedge k_m=0 \wedge k_b\neq0$ escribimos el m\'inimo entre la bici y el buggy
+\item Si $n=0 \wedge k_m\neq0 \wedge k_b=0$ escribimos el m\'inimo entre la bici y la moto
+\item Si $n=0 \wedge k_m\neq0 \wedge k_b\neq0$ escribimos el m\'inimo entre la bici, la moto y el buggy
+\item Si $n\neq0 \wedge k_m=0 \wedge k_b=0$ escribimos el costo de la bici + $dicc(m, b, n-1)$
+\item Si $n\neq0 \wedge k_m=0 \wedge k_b\neq0$ escribimos el m\'inimo de la bici + $dicc(m, b, n-1)$ y el buggy + $dicc(m, b-1, n-1)$
+\item Si $n\neq0 \wedge k_m\neq0 \wedge k_b=0$ escribimos el m\'inimo de la bici + $dicc(m, b, n-1)$ y la moto + $dicc(m-1, b, n-1)$
+\item Si $n\neq0 \wedge k_m\neq0 \wedge k_b\neq0$ escribimos el m\'inimo de la bici + $dicc(m, b, n-1)$, la moto + $dicc(m-1, b, n-1)$ y el buggy + $dicc(m, b-1, n-1)$
 \end{itemize}
-
-Debido a la forma de completar el diccionario, todas estas asignaciones son operaciones con un costo de $\mathbf{O(1)}$. 
-
-Esto se debe a que acceder al vector con todos los costos por etapa, sumar y buscar el m\'inimo entre enteros ( \href{http://www.cplusplus.com/reference/algorithm/min/}{min()} \footnote{http://www.cplusplus.com/reference/algorithm/min/}) son operaciones de costo: $O(1)$. Adem\'as, al buscar en el diccionario siempre lo hacemos en posiciones ya definidas lo cual tambi\'en presenta un costo de $O(1)$ debido a que es una matriz de vectores.\\
-
-\newpage
-
-Para la \emph{segunda posici\'on}, que representa la escritura para devolver el camino, lo que realizamos es dejar asentado cu\'antos Buggys y cu\'antas Motos quedan disponibles despu\'es de esta iteraci\'on. \textcolor{red}{Es asi, no? Eze?}.
-
-El costo de estas operaciones tambi\'en pertenece a $\mathbf{O(1)}$. Las mismas son operaciones elementales (asignaci\'on y suma de enteros) y un llamado a  \href{http://www.cplusplus.com/reference/utility/make_pair/}{make\_pair()} \footnote{http://www.cplusplus.com/reference/utility/make_pair/} que toma tiempo constante.\\
-
-
 
 Finalmente retornamos el valor de $dicc(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$\\
 
-La complejidad resulta entonces: por cada etapa, por cada posible uso de moto, por cada posible uso de buggy, realizar operaciones en tiempo constante. De esto deducimos que la complejidad es de $\mathbf{O(k_{m},k_{b},n)}$ como se ped\'ia en el enunciado.
+La complejidad resulta entonces: por cada etapa, por cada posible uso de moto, por cada posible uso de buggy, hacemos cosas en tiempo constante. De esto deducimos que la complejidad es de $O(k_{m},k_{b},n)$ como se ped\'ia en el enunciado.
 
 \subsubsection{Complejidad Espacial}
 Dado que la estructura utilizada es una matriz (\texttt{vector$<$vector$>$}) de $m_k$x$m_b$, donde en cada posici\'on contamos con un arreglo de $n$ posiciones y una tupla ($O(1)$); su complejidad espacial es de $\mathbf{O(m_k.m_b.n)}$.
 
 \newpage
 \subsection{C\'odigo fuente}
+	\begin{codesnippet}
+	\begin{verbatim}
+    struct datosPorEtapas{
+        unsigned int bmx;
+        unsigned int moto;
+        unsigned int buggy;
+    };
+	\end{verbatim}
+	\end{codesnippet}
+
+	\begin{codesnippet}
+	\begin{verbatim}
+    int main(int argc, char const *argv[]){
+        unsigned int etapas, cmoto, cbuggy;
+        cin >> etapas >> cmoto >> cbuggy;
+        deque<datosPorEtapas> datos;
+        for (int i = 0; i < etapas; ++i){
+            unsigned int bmx, moto, buggy;
+            datosPorEtapas actual;
+            cin >> actual.bmx >> actual.moto >> actual.buggy;
+            datos.push_back(actual);
+        }
+        Matriz cubo;
+    //iniciliazamos el cubo
+        for (int i = 0; i <= cmoto; ++i){
+            Filas fila;
+            for (int j = 0; j <= cbuggy; ++j){
+                Etapas etapa;
+                for (int k = 0; k < etapas; ++k){
+                    etapa.push_back(make_pair(0, make_pair(0, 0)));
+                }
+                fila.push_back(etapa);
+            }
+            cubo.push_back(fila);
+        }
+    //cout pedido
+        cout << dakkar(etapas, cmoto, cbuggy, datos, cubo);
+    //para devolver del comienzo hasta el final
+        deque<int> usados;
+        pair<int, int> recorrido;
+        int cantMoto = cmoto, cantBuggy = cbuggy;
+        for (int cantE = etapas-1; cantE >= 0; --cantE) {
+            recorrido = cubo[cantMoto][cantBuggy][cantE].second;
+            if(cantMoto > recorrido.first){
+                cantMoto--;
+                usados.push_front(2);
+            }
+            else if(cantBuggy > recorrido.second){
+                cantBuggy--;
+                usados.push_front(3);
+            }
+            else{
+                usados.push_front(1);
+            }
+        }
+        for (int i = 0; i < etapas; ++i) {
+            cout << " " << usados[i];
+        }
+        cout << endl;
+        return 0;}
+	\end{verbatim}
+	\end{codesnippet}
+
+	\begin{codesnippet}
+	\begin{verbatim}
+    unsigned int dakkar(unsigned int etapas, unsigned int cmoto, unsigned int cbuggy,
+     deque<datosPorEtapas>& datos, Matriz& cubo){
+        int bici, moto, buggy;
+        for (int n = 0; n < etapas; ++n){
+            for (int m = 0; m <= cmoto; ++m){
+                for (int b = 0; b <= cbuggy; ++b){
+                //guardamos un link hacia el lugar de donde salimos
+                    pair<int, int> par;
+                    par.first = m;
+                    par.second = b;
+                //llenamos espacios triviales y luego sabemos cuales estan calculados,
+                // para ahorrar rehacer las cuentas
+                    if (n==0){
+                        if(m == 0){
+                            if(b == 0){
+                                bici = datos[n].bmx;
+                                cubo[m][b][n] = make_pair(bici, par);
+                            }
+                            else{
+                                bici = datos[n].bmx;
+                                buggy = datos[n].buggy;
+                            //si elegimos el buggy guardamos esa decision
+                                if(bici > buggy)
+                                    par.second--;
+                                cubo[m][b][n] = make_pair(min(bici, buggy), par);
+                            }
+                        }
+                        else{
+                            if(b == 0){
+                                bici = datos[n].bmx;
+                                moto = datos[n].moto;
+                            //si elegimos la moto guardamos esa decision
+                                if(bici > moto)
+                                    par.first--;
+                                cubo[m][b][n] = make_pair(min(bici, moto), par);
+                            }
+                            else{
+                                bici = datos[n].bmx;
+                                moto = datos[n].moto;
+                                buggy = datos[n].buggy;
+                            //guardamos lo que elegimos
+                                if(bici > buggy || bici > moto)
+                                    if(buggy > moto)
+                                        par.first--;
+                                    else
+                                        par.second--;
+                                cubo[m][b][n] = make_pair(min(min(bici, moto), buggy), par);
+                            }
+                        }
+                    }
+	\end{verbatim}
+	\end{codesnippet}
+
+	\begin{codesnippet}
+	\begin{verbatim}
+                    else{
+                        if(m == 0){
+                            if(b == 0){
+                                bici = cubo[m][b][n-1].first + datos[n].bmx;
+                                cubo[m][b][n] = make_pair(bici, par);
+                            }
+                            else{
+                                bici = cubo[m][b][n-1].first + datos[n].bmx;
+                                buggy = cubo[m][b-1][n-1].first + datos[n].buggy;
+                            //si elegimos el buggy guardamos esa decision
+                                if(bici > buggy)
+                                    par.second--;
+                                cubo[m][b][n] = make_pair(min(bici, buggy), par);
+                            }
+                        }
+                        else{
+                            if(b == 0){
+                                bici = cubo[m][b][n-1].first + datos[n].bmx;
+                                moto = cubo[m-1][b][n-1].first + datos[n].moto;
+                            //si elegimos la moto guardamos esa decision
+                                if(bici > moto)
+                                    par.first--;
+                                cubo[m][b][n] = make_pair(min(bici, moto), par);
+                            }
+                            else{
+                                bici = cubo[m][b][n-1].first + datos[n].bmx;
+                                moto = cubo[m-1][b][n-1].first + datos[n].moto;
+                                buggy = cubo[m][b-1][n-1].first + datos[n].buggy;
+                            //guardamos lo que elegimos
+                                if(bici > buggy || bici > moto)
+                                    if(buggy > moto)
+                                        par.first--;
+                                    else
+                                        par.second--;
+                                cubo[m][b][n] = make_pair(min(min(bici, moto), buggy), par);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return cubo[cmoto][cbuggy][etapas-1].first;
+    }
+	\end{verbatim}
+	\end{codesnippet}
+
 
 \newpage
 \subsection{Experimentaci\'on}

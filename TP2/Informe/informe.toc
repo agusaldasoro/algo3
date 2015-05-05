@@ -4,34 +4,21 @@
 \contentsline {subsection}{\numberline {1.2}Resoluci\'on propuesta y justificaci\'on}{4}{subsection.1.2}
 \contentsline {subsection}{\numberline {1.3}An\'alisis de la complejidad}{6}{subsection.1.3}
 \contentsline {subsubsection}{\numberline {1.3.1}Complejidad Temporal}{6}{subsubsection.1.3.1}
-<<<<<<< HEAD
 \contentsline {subsubsection}{\numberline {1.3.2}Complejidad Espacial}{6}{subsubsection.1.3.2}
 \contentsline {subsection}{\numberline {1.4}C\'odigo fuente}{7}{subsection.1.4}
-=======
-\contentsline {subsubsection}{\numberline {1.3.2}Complejidad Espacial}{7}{subsubsection.1.3.2}
-\contentsline {subsection}{\numberline {1.4}C\'odigo fuente}{8}{subsection.1.4}
->>>>>>> 9611625dca6437d973b75f82c5133e1aa1e17c68
-\contentsline {subsection}{\numberline {1.5}Experimentaci\'on}{8}{subsection.1.5}
-\contentsline {subsubsection}{\numberline {1.5.1}Constrastaci\'on Emp\'irica de la complejidad}{8}{subsubsection.1.5.1}
-\contentsline {section}{\numberline {2}Zombieland II}{9}{section.2}
-\contentsline {subsection}{\numberline {2.1}Descripci\'on de la problem\'atica}{9}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Resoluci\'on propuesta y justificaci\'on}{9}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}An\'alisis de la complejidad}{9}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}C\'odigo fuente}{9}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Experimentaci\'on}{9}{subsection.2.5}
-\contentsline {subsubsection}{\numberline {2.5.1}Constrastaci\'on Emp\'irica de la complejidad}{9}{subsubsection.2.5.1}
-\contentsline {section}{\numberline {3}Refinando petr\'oleo}{16}{section.3}
-\contentsline {subsection}{\numberline {3.1}Descripci\'on de la problem\'atica}{16}{subsection.3.1}
-<<<<<<< HEAD
-\contentsline {subsection}{\numberline {3.2}Resoluci\'on propuesta y justificaci\'on}{18}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}An\'alisis de la complejidad}{20}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}C\'odigo fuente}{22}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}Experimentaci\'on}{25}{subsection.3.5}
-\contentsline {subsubsection}{\numberline {3.5.1}Constrastaci\'on Emp\'irica de la complejidad}{25}{subsubsection.3.5.1}
-=======
-\contentsline {subsection}{\numberline {3.2}Resoluci\'on propuesta y justificaci\'on}{17}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}An\'alisis de la complejidad}{18}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}C\'odigo fuente}{20}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}Experimentaci\'on}{23}{subsection.3.5}
-\contentsline {subsubsection}{\numberline {3.5.1}Constrastaci\'on Emp\'irica de la complejidad}{23}{subsubsection.3.5.1}
->>>>>>> 9611625dca6437d973b75f82c5133e1aa1e17c68
+\contentsline {subsection}{\numberline {1.5}Experimentaci\'on}{10}{subsection.1.5}
+\contentsline {subsubsection}{\numberline {1.5.1}Constrastaci\'on Emp\'irica de la complejidad}{10}{subsubsection.1.5.1}
+\contentsline {section}{\numberline {2}Zombieland II}{11}{section.2}
+\contentsline {subsection}{\numberline {2.1}Descripci\'on de la problem\'atica}{11}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Resoluci\'on propuesta y justificaci\'on}{11}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}An\'alisis de la complejidad}{11}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}C\'odigo fuente}{12}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Experimentaci\'on}{17}{subsection.2.5}
+\contentsline {subsubsection}{\numberline {2.5.1}Constrastaci\'on Emp\'irica de la complejidad}{17}{subsubsection.2.5.1}
+\contentsline {section}{\numberline {3}Refinando petr\'oleo}{24}{section.3}
+\contentsline {subsection}{\numberline {3.1}Descripci\'on de la problem\'atica}{24}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Resoluci\'on propuesta y justificaci\'on}{26}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}An\'alisis de la complejidad}{28}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}C\'odigo fuente}{30}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Experimentaci\'on}{33}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {3.5.1}Constrastaci\'on Emp\'irica de la complejidad}{33}{subsubsection.3.5.1}
