@@ -21,6 +21,29 @@ Se exige una cota de complejidad temporal de $\mathbf{O(s.n.m)}$.\\
 
 \newpage
 \subsection{Resoluci\'on propuesta y justificaci\'on}
+
+Para modelar la problem\'atica planteada, utilizamos dos grafos.\\
+\\
+
+El \emph{primer grafo} (no dirigido) con el que vamos a tratar es el que almacena los datos de entrada -\texttt{ciudadInfestada}- (cantidad de zombies por cuadra), de modo que cada nodo es una esquina de la ciudad y cada eje tiene en su peso la cantidad de zombies que est\'an presentes en esa locaci\'on.\\
+\\
+
+El \emph{segundo grafo} (dirigido) -\texttt{grafo}- lo vamos a ir construyendo, de modo que al finalizarlo tengamos calculada la soluci\'on.\\
+
+Cada nodo de \texttt{grafo} va a contener la siguiente informaci\'on: cantidad de soldados vivos con la que se lleg\'o a esa posici\'on (\texttt{soldadosVivos}) y las coordenadas de su posici\'on: \texttt{i} y \texttt{j}.
+
+Los ejes de nuestro \texttt{grafo} no van a contener ninguna informaci\'on extra, s\'olo indicar\'an movimientos desde un nodo a otro que sean posibles. Es decir, s\'olo va a haber una conexi\'on del nodo \emph{e} al nodo \emph{f} si en ese trayecto no se produjo la baja total de los soldados.
+
+\textcolor{red}{Poner un ejemplito que diga de un nodo e al f cuantos soldados se perdieron porque nos fijamos en ciudadInfestada}.\\
+
+
+
+Lo primero que vamos a hacer es situarnos en la posici\'on inicial ($X_i = (inicioH, inicioV)$) y crear este nodo en \texttt{grafo}, de modo que \texttt{soldadosVivos} va a ser la cantidad de soldados inicial \textcolor{red}{... Llegue hasta aca, depsues continuo}
+
+
+del grafo \texttt{ciudadInfestada}
+
+
 \subsubsection*{PseudoC\'odigo}
 \textcolor{red}{Poner un pseudo codigo del algoritmo.}
 \subsection{An\'alisis de la complejidad}
