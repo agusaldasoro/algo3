@@ -1,0 +1,12 @@
+for i in {1..9}
+do
+	cat Mediciones/Peor/test00$i.in | ./main >> Mediciones/Peor/test00$i.out
+	echo "Test" $i
+	
+done
+for i in {10..20}
+do
+	cat Mediciones/Peor/test0$i.in | ./main >> Mediciones/Peor/test0$i.out
+	echo "Test" $i
+done
+

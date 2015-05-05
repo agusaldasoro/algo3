@@ -328,3 +328,226 @@ Dado que la estructura utilizada es una matriz (\texttt{vector$<$vector$>$}) de 
 \subsection{Experimentaci\'on}
 
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
+Para realizar la siguiente experimentaci\'on, comenzamos mirando el caso m\'as sencillo, que se da cuando tanto $k_m$ como $k_b$ son igual a 0.
+  Es decir, en todos los casos debemos usar la BMX.
+  La complejidad te\'orica planteada es de $O(n * k_m * k_b)$, por lo que se intuye que en este caso deber\'ia ser $O(n)$.\\
+  Los tiempos de ejecuci\'on para cada etapa $n$ fueron:
+  
+  \begin{table}[htb]
+  \centering
+  \begin{tabular}[c]{|l|l|}
+
+		\hline
+n & Tiempo en segundos\\
+		\hline
+50	&	0.0000428063\\
+		\hline
+100	&	0.0000990471\\
+		\hline
+150	&	0.0001270313\\
+		\hline
+200	&	0.0001718291\\
+		\hline
+250	&	0.0002251666\\
+		\hline
+300	&	0.0002632707\\
+		\hline
+350	&	0.0003082768\\
+		\hline
+400	&	0.0003563523\\
+		\hline
+450	&	0.0003971006\\
+		\hline
+500	&	0.0004461637\\
+		\hline
+550	&	0.0004880608\\
+		\hline
+600	&	0.0005325091\\
+		\hline
+650	&	0.0005865319\\
+		\hline
+700	&	0.0006258109\\
+		\hline
+750	&	0.0006709416\\
+		\hline
+800	&	0.0007168112\\
+		\hline
+850	&	0.0007580348\\
+		\hline
+900	&	0.000803331\\
+		\hline
+950	&	0.0008650634\\
+		\hline
+1000	&	0.0008941003\\
+		\hline
+
+	\end{tabular}
+	%\caption{Tabla muy sencilla.}
+	%\label{tabla:n.png}
+	\end{table}
+	
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.8]{imagenes/ej1/mejorCaso.png}
+% 	\caption{}
+% 	\label{n.png}
+   \end{center}
+ \end{figure}
+ 
+  Como preve\'iamos, el gr\'afico tiene comportamiento lineal, lo cual es consistente con la cota te\'orica planteada.
+  
+  \newpage
+   
+  Luego, consideramos el peor caso posible, que es el que iguala tanto $k_m$ como $k_b$ con $n$.
+  Es decir, el caso en el que para cada etapa, tenemos la posiblidad de elegir cualquiera de las 3 opciones, BMX, motocross o buggy.\\
+  Los tiempos que cuestan recorrer cada etapa con las distintas opciones fueron generados aleatoriamente, ya que no influyen en el costo temporal del algoritmo.\\
+  Los tiempos de ejecuci\'on para cada etapa $n$ fueron:
+  
+  \begin{table}[htb]
+  \centering
+  \begin{tabular}[c]{|l|l|}
+
+		\hline
+n & Tiempo en segundos\\
+		\hline
+50	&	0.1744401\\
+		\hline
+100	&	1.733896\\
+		\hline
+150	&	6.082229\\
+		\hline
+200	&	14.68914\\
+		\hline
+250	&	29.19128\\
+		\hline
+300	&	50.62509\\
+		\hline
+350	&	81.18956\\
+		\hline
+400	&	121.5241\\
+		\hline
+450	&	173.8635\\
+		\hline
+500	&	239.492\\
+		\hline
+550	&	318.615\\
+		\hline
+600	&	420.213\\
+		\hline
+650	&	570.048\\
+		\hline
+
+	\end{tabular}
+	%\caption{Tabla muy sencilla.}
+	%\label{tabla:n.png}
+	\end{table}
+	
+  \begin{figure}[h!]
+   \begin{center}
+	\includegraphics[scale=0.8]{imagenes/ej1/peorCaso1.png}
+% 	\caption{}
+% 	\label{n.png}
+   \end{center}
+  \end{figure}
+  
+  Como en este caso tanto $k_m$ como $k_b$ son iguales a $n$, la Cota de Complejidad planteada te\'oricamente ($O(n* k_m* k_b)$) es igual a $O(n^3)$.
+  En el gr\'afico se aprecia una par\'abola creciente, pero no podemos asegurar que \'esta sea la que nosotros planteamos, ya que todas las curvas son similares.
+  Por ello, linealizamos los tiempos, dividiendo cada instancia por $n$. \\
+      \newpage
+  El gr\'afico resultante es el siguiente:
+  
+  \begin{figure}[h!]
+   \begin{center}
+	\includegraphics[scale=0.8]{imagenes/ej1/peorCaso2.png}
+% 	\caption{}
+% 	\label{n.png}
+   \end{center}
+  \end{figure}
+  
+
+  
+  Este gr\'afico es similar al anterior, con una pendiende menos pronunciada.
+  De todas formas, para asegurarnos que nuestra experimentaci\'on se condice con la Cota Te\'orica planteada, volvemos a linealizar, dividiendo cada instancia por $n$:\\
+  
+    \begin{figure}[h!]
+   \begin{center}
+	\includegraphics[scale=0.8]{imagenes/ej1/peorCaso3.png}
+% 	\caption{}
+% 	\label{n.png}
+   \end{center}
+  \end{figure}
+  
+  En efecto, este gr\'afico tiene comportamiento lineal, lo cual confirma nuestra afirmaci\'on.
+  \newpage
+  Luego, con el fin de comparar los tiempos de ejecuci\'on, se realiz\'o una \'ultima experimentaci\'on, en la cual se tomaron los mismos valores para $k_m$ y $k_b$, proporcionales al $n$ dado.
+  Como resultado se obtuvieron los siguientes valores:
+    \begin{table}[htb]
+  \centering
+  \begin{tabular}[c]{|l|l|}
+
+		\hline
+n & Tiempo en segundos\\
+		\hline
+50	&	0.0015956707\\
+		\hline
+100	&	0.0152238567\\
+		\hline
+150	&	0.055239755\\
+		\hline
+200	&	0.132059613\\
+		\hline
+250	&	0.264843302\\
+		\hline
+300	&	0.464658156\\
+		\hline
+350	&	0.748833425\\
+		\hline
+400	&	1.13247454\\
+		\hline
+450	&	1.63054066\\
+		\hline
+500	&	2.28274084\\
+		\hline
+550	&	3.03236404\\
+		\hline
+600	&	3.84826384\\
+		\hline
+650	&	5.3375904\\
+		\hline
+700	&	6.2688524\\
+		\hline
+750	&	7.82798085\\
+		\hline
+800	&	9.62078432\\
+		\hline
+850	&	11.6278678182\\
+		\hline
+900	&	14.0280025641\\
+		\hline
+950	&	16.79448\\
+		\hline
+1000	&	19.80024\\
+		\hline
+
+	\end{tabular}
+	%\caption{Tabla muy sencilla.}
+	%\label{tabla:n.png}
+	\end{table}
+	
+    \begin{figure}[h!]
+   \begin{center}
+	\includegraphics[scale=0.8]{imagenes/ej1/aleatorio1.png}
+% 	\caption{}
+% 	\label{n.png}
+   \end{center}
+  \end{figure}
+  
+  Como se ve, el gr\'afico es similar al del peor caso, pero los tiempos de ejecuci\'on son mucho menores, por lo que es evidente la influencia de $k_m$ y $k_b$ en la Cota Te\'orica planteada.
+  
+  
+  
+  
+  
+  
+  
+  
