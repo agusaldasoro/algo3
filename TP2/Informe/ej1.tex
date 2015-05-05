@@ -87,7 +87,7 @@ El diccionario que vamos a utilizar consiste en una matriz de $k_{m_{inicial}}$\
 
 Una vez comprendido el comportamiento de la funci\'on, podemos establecer una manera de completar nuestro diccionario cubo de modo iterativo.\\
 
-Primero completamos para $n=0$ todos los valores de $k_m$ y $k_b$. \textcolor{red}{Esto:}Notar que dados los \'indices que utilizamos a la hora de la implementaci\'on, cuando hablamos de $n=0$ nos referimos a la etapa 1 de la carrera (la \'ultima que vamos a recorrer), lo cual no es estrictamente el mismo resultado que el expuesto en la formulaci\'on recursiva. Sin embargo, podemos denotar esto como una diferencia que no afecta al funcionamiento del algoritmo.\textcolor{red}{es asi?}
+Primero completamos para $n=0$ todos los valores de $k_m$ y $k_b$. Notar que dados los \'indices que utilizamos a la hora de la implementaci\'on, cuando hablamos de $n=0$ nos referimos a la etapa 1 de la carrera (la \'ultima que vamos a recorrer), lo cual no es estrictamente el mismo resultado que el expuesto en la formulaci\'on recursiva. Sin embargo, podemos denotar esto como una diferencia que no afecta al funcionamiento del algoritmo.
 
 Cuando $n=0$ simplemente vamos a asignar el veh\'iculo que presente menor tiempo para esta etapa, entre los disponibles bas\'andonos en los $k_m$ y $k_b$.
 
@@ -109,7 +109,8 @@ Con el fin de poder calcular el camino una vez obtenida la cantidad de tiempo me
 De este modo, recorremos la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$ hacia la situaci\'on que indica la misma, y as\'i sucesivamente. De este modo obtenemos las elecciones hechas desde la \'ultima etapa hasta la primera.
 
 
-
+\subsubsection*{PseudoC\'odigo}
+\textcolor{red}{Poner un pseudo codigo del algoritmo.}
 \newpage
 
 \subsection{An\'alisis de la complejidad}
@@ -143,7 +144,7 @@ Esto se debe a que acceder al vector con todos los costos por etapa, sumar y bus
 
 \newpage
 
-Para la \emph{segunda posici\'on}, que representa la escritura para devolver el camino, lo que realizamos es dejar asentado cu\'antos Buggys y cu\'antas Motos quedan disponibles despu\'es de esta iteraci\'on. \textcolor{red}{Es asi, no? Eze?}.
+Para la \emph{segunda posici\'on}, que representa la escritura para devolver el camino, lo que realizamos es dejar asentado cu\'antos Buggys y cu\'antas Motos quedan disponibles despu\'es de esta iteraci\'on. 
 
 El costo de estas operaciones tambi\'en pertenece a $\mathbf{O(1)}$. Las mismas son operaciones elementales (asignaci\'on y suma de enteros) y un llamado a  \href{http://www.cplusplus.com/reference/utility/make_pair/}{make\_pair()} \footnote{http://www.cplusplus.com/reference/utility/make_pair/} que toma tiempo constante.\\
 
@@ -328,9 +329,13 @@ Dado que la estructura utilizada es una matriz (\texttt{vector$<$vector$>$}) de 
 \subsection{Experimentaci\'on}
 
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
-Para realizar la siguiente experimentaci\'on, comenzamos mirando el caso m\'as sencillo, que se da cuando tanto $k_m$ como $k_b$ son igual a 0.
-  Es decir, en todos los casos debemos usar la BMX.
+
+\textcolor{red}{Poner como fueron generados los casos de test, si aunque aca sean re pavos...}\\
+
+Para realizar la siguiente experimentaci\'on, comenzamos mirando el caso m\'as sencillo (\emph{mejor caso}), que se da cuando tanto $k_m$ como $k_b$ son igual a 0. Es decir, en todos los casos debemos usar la BMX.
+  
   La complejidad te\'orica planteada es de $O(n * k_m * k_b)$, por lo que se intuye que en este caso deber\'ia ser $O(n)$.\\
+  
   Los tiempos de ejecuci\'on para cada etapa $n$ fueron:
   
   \begin{table}[htb]
@@ -398,9 +403,11 @@ n & Tiempo en segundos\\
   
   \newpage
    
-  Luego, consideramos el peor caso posible, que es el que iguala tanto $k_m$ como $k_b$ con $n$.
-  Es decir, el caso en el que para cada etapa, tenemos la posiblidad de elegir cualquiera de las 3 opciones, BMX, motocross o buggy.\\
-  Los tiempos que cuestan recorrer cada etapa con las distintas opciones fueron generados aleatoriamente, ya que no influyen en el costo temporal del algoritmo.\\
+  Luego, consideramos el \emph{peor caso} posible, que es el que iguala tanto $k_m$ como $k_b$ con $n$.
+  Es decir, el caso en el que para cada etapa, tenemos la posiblidad de elegir cualquiera de las 3 opciones, BMX, motocross o buggy.
+  
+  Los tiempos que cuestan recorrer cada etapa con las distintas opciones fueron generados aleatoriamente, ya que no influyen en el costo temporal del algoritmo. \textcolor{red}{Aca tambien poner como los generamos, si es una fiaca, pero bueno...}\\
+  
   Los tiempos de ejecuci\'on para cada etapa $n$ fueron:
   
   \begin{table}[htb]
@@ -451,9 +458,13 @@ n & Tiempo en segundos\\
   \end{figure}
   
   Como en este caso tanto $k_m$ como $k_b$ son iguales a $n$, la Cota de Complejidad planteada te\'oricamente ($O(n* k_m* k_b)$) es igual a $O(n^3)$.
-  En el gr\'afico se aprecia una par\'abola creciente, pero no podemos asegurar que \'esta sea la que nosotros planteamos, ya que todas las curvas son similares.
-  Por ello, linealizamos los tiempos, dividiendo cada instancia por $n$. \\
+  
+  En el gr\'afico se aprecia una par\'abola creciente, pero no podemos asegurar que \'esta sea la que nosotros planteamos, ya que las curvas son similares a simple vista.
+
       \newpage
+      
+        Por lo explicado anteriormente, linealizamos los tiempos, dividiendo cada instancia por $n$.\\
+        
   El gr\'afico resultante es el siguiente:
   
   \begin{figure}[h!]
@@ -466,8 +477,9 @@ n & Tiempo en segundos\\
   
 
   
-  Este gr\'afico es similar al anterior, con una pendiende menos pronunciada.
-  De todas formas, para asegurarnos que nuestra experimentaci\'on se condice con la Cota Te\'orica planteada, volvemos a linealizar, dividiendo cada instancia por $n$:\\
+  Este gr\'afico es similar al anterior, con una pendiende menos pronunciada.\\
+  
+  De todas formas, para asegurarnos que nuestra experimentaci\'on se condice con la Cota Te\'orica planteada, volvemos a dividir cada instancia por $n$ linealizando as\'i la muestra obtenida:\\
   
     \begin{figure}[h!]
    \begin{center}
@@ -477,9 +489,13 @@ n & Tiempo en segundos\\
    \end{center}
   \end{figure}
   
-  En efecto, este gr\'afico tiene comportamiento lineal, lo cual confirma nuestra afirmaci\'on.
+  En efecto, este gr\'afico tiene comportamiento lineal, lo cual confirma nuestra afirmaci\'on y prueba emp\'iricamente nuestra cota de Complejidad Temporal Te\'orica.
+  
   \newpage
-  Luego, con el fin de comparar los tiempos de ejecuci\'on, se realiz\'o una \'ultima experimentaci\'on, en la cual se tomaron los mismos valores para $k_m$ y $k_b$, proporcionales al $n$ dado.
+  
+  Luego, con el fin de comparar los tiempos de ejecuci\'on, se realiz\'o una \'ultima experimentaci\'on, en la cual se tomaron los mismos valores para $k_m$ y $k_b$, proporcionales al $n$ dado.\textcolor{red}{Si, aca tambien poner aunque sea una oracion de como se armaron}\\
+  
+  
   Como resultado se obtuvieron los siguientes valores:
     \begin{table}[htb]
   \centering
@@ -542,7 +558,7 @@ n & Tiempo en segundos\\
    \end{center}
   \end{figure}
   
-  Como se ve, el gr\'afico es similar al del peor caso, pero los tiempos de ejecuci\'on son mucho menores, por lo que es evidente la influencia de $k_m$ y $k_b$ en la Cota Te\'orica planteada.
+  Como se ve, el gr\'afico tiene un comportamiento similar al del peor caso, pero los tiempos de ejecuci\'on son mucho menores, por lo que es evidente la influencia de $k_m$ y $k_b$ en la Cota Te\'orica planteada.
   
   
   
