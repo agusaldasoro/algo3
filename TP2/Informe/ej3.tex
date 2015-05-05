@@ -320,12 +320,10 @@ A(4,1) & = & 10^{80}
 \newpage
 \subsection{Experimentaci\'on}
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
-	Para llevar a cabo esta experimentaci\'on, consideramos el peor caso posible de cantidad de ejes del grafo, es decir que habr\'a exactamente $n.(n-1)$ ejes (cada nodo puede conectarse con cualquier nodo del grafo, excepto consigo mismo), variando la cantidad de nodos.
+	Para llevar a cabo esta experimentaci\'on, consideramos el peor caso posible de cantidad de ejes del grafo, es decir que habr\'a exactamente $n.(n-1)$ ejes (cada nodo puede conectarse con cualquier nodo del grafo, excepto consigo mismo), variando la cantidad de nodos.\\
 
-\textcolor{red}{Poner aca lo del script. ``Le puse que tome la cant de pozos y que arme grafos con todas las conexiones posibles de peso random entre 0 y el doble de costo de refiner\'ia''}
-\textcolor{blue}{listo?}
 
-	Armamos un script que gener\'o estas instancias, toma como par\'ametro la cantidad de pozos, y el costo de la refiner\'ia, las conexiones no, porque quer\'iamos un grafo completo, este valor ser\'a $n.(n-1)$. El mismo escribe un archivo con el formato de la entrada standard, donde a cada eje le asigna un peso random entre 0 y 2\texttt{*}costoRefiner\'ia.
+	Armamos un script que gener\'o estas instancias, toma como par\'ametro la cantidad de pozos, y el costo de la refiner\'ia, las conexiones no, porque quer\'iamos un grafo completo, este valor ser\'a $n.(n-1)$. El mismo escribe un archivo con el formato de la entrada standard, donde a cada eje le asigna un peso random entre 0 y 2\texttt{*}costoRefiner\'ia.\textcolor{red}{El archivo se adjunta en... y se llama ...}\\
 
 	Los tiempos de ejecuci\'on para cada n (cantidad de nodos) fueron los siguientes:
 
@@ -389,7 +387,8 @@ n & Tiempo en segundos\\
 % 	\label{n.png}
    \end{center}
  \end{figure}
-% \newpage
+
+ \newpage
 
 	Dado que la Cota de Complejidad planteada te\'oricamente es de $O(n^2.log(n))$, era esperable que la curva sea una par\'abola creciente.
 
