@@ -10,26 +10,33 @@ Para armar esta red de refinamiento se podr\'an construir refiner\'ias, colocada
 	Se desea escribir un algoritmo que de una distribuci\'on de refiner\'ias y tuber\'ias tal que todo pozo tenga acceso a una refiner\'ia y minimice el costo de la inversi\'on. Se debe indicar cu\'antas refiner\'ias construir y en qu\'e pozos, as\'i como tambi\'en cu\'antas tuber\'ias y entre que pozos.
 
 	El algoritmo debe tener complejidad mejor que $O(n^3)$ siendo $n$ la cantidad de pozos de la zona.\\
+\\
 
-	Por ejemplo, si tenemos esta distribuci\'on de pozos y posibles conexiones y costo de refiner\'ia igual a 7:
+	A continuaci\'on citaremos una serie de ejemplos donde los modelamos como grafos, tal que los nodos son los pozos existentes y los ejes iniciales son las posibles conexiones entre ellos con un peso igual al costo de construir una tuber\'ia all\'i. En las soluciones, se preservan s\'olo los ejes donde construiremos una tuber\'ia y los nodos que sean amarillos representan pozos que contendr\'an una refiner\'ia en ellos.\\
+	
+	\newpage
+	
+	\underline{Ejemplo 1}: considerando un costo de construir una refiner\'ia igual a 7, contamos con la siguiente distribuci\'on de pozos y sus posibles conexiones:
+	
+
 
   \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.7]{imagenes/ej3/cliqueBIEN.png}
    \end{center}
  \end{figure}
-	
-	Queremos obtener algo como esto (nodo amarillo tiene refiner\'ia), de costo total 22:
-	
-\newpage
 
+
+La soluci\'on debe tener un costo total de 22 y es correcto devolver una distribuci\'on como la siguiente:
   \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.7]{imagenes/ej3/listoSIN.png}
    \end{center}
  \end{figure}
 
-	Si tenemos esta otra distribuci\'on con costo de refiner\'ia igual a 6:
+\newpage
+
+	\underline{Ejemplo 2}: Consideramos otra distribuci\'on con un costo de construir una refiner\'ia igual a 6:
 	
   \begin{figure}[h!]
    \begin{center}
@@ -37,7 +44,8 @@ Para armar esta red de refinamiento se podr\'an construir refiner\'ias, colocada
    \end{center}
  \end{figure}
 	
-	Nos gustar\'ia llegar a algo como esto (nodos amarillo tienen refiner\'ia), de costo total 27:
+	La soluci\'on tendr\'a un costo total de 27, con la siguiente como una distribuci\'on v\'alida:
+
 	
   \begin{figure}[h!]
    \begin{center}
@@ -73,7 +81,6 @@ Consideremos el caso de $n=3$, donde contamos con los nodos: A, B y C con un cos
    \end{center}
  \end{figure}
 
-\newpage
 
 	Una vez que obtuvimos los ejes definitivos, nos queda simplemente contar cu\'antas refiner\'ias hay que colocar (una, por cada componente conexa -\'arbol- que formen los ejes seleccionados) y ubicarla en cualquier nodo de la componente.
 	
