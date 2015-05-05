@@ -74,26 +74,43 @@ Esta formulaci\'on recursiva resuelve el problema porque.... \textcolor{red}{Pon
 
 \subsubsection*{Diccionario a utilizar}
 
-El diccionario que vamos a utilizar consiste en una matriz de $k_{m_{inicial}}$\texttt{x}$k_{b_{inicial}}$, en la que por cada posici\'on va a haber un contenedor de tama\~no $n_{inicial}$ de modo que dentro de cada uno de ellos se va a poder almacenar el resultado de invocar a la funci\'on con estos tres par\'ametros.
+El diccionario que vamos a utilizar consiste en una matriz de $k_{m_{inicial}}$\texttt{x}$k_{b_{inicial}}$, en la que por cada posici\'on va a haber un contenedor de tama\~no $n_{inicial}$ (lo cual forma un cubo) de modo que dentro de cada uno de ellos se va a poder almacenar el resultado de invocar a la funci\'on con estos tres par\'ametros.
 
 \subsubsection*{Formulaci\'on Top Down}
 
-	Si analizamos el comportamiento de nuestra funci\'on recursiva como si fuera un algoritmo recursivo, podemos notar que la primer posici\'on de la matriz que va a poder completar va a ser la de $(k_{m_{inicial}},k_{b_{inicial}},0)$. Dado que para todas las guardas el primer caso que compara es usar la bicicleta.
+	Si analizamos el comportamiento de nuestra funci\'on recursiva como si fuera un algoritmo recursivo, podemos notar que la primer posici\'on del cubo que va a poder completar va a ser la de $(k_{m_{inicial}},k_{b_{inicial}},0)$. Dado que para todas las guardas el primer caso que compara es usar la bicicleta. \textcolor{red}{Explicar con un poco mas de detalle.}
 
 	Luego, seguir\'a completando la matriz variando en orden ascendente el tercer par\'ametro y completando para todos los $k_m$ y $k_b$.
 
 \subsubsection*{Formulaci\'on Bottom Up}
 
-Una vez comprendido el comportamiento de la funci\'on, podemos establecer una manera de completar nuestro diccionario matriz de modo iterativo.\\
 
-Primero completamos para $n=0$ todos los valores de $k_m$ y $k_b$, luego para $n=1$ y as\'i iterativamente hasta llegar a $n=n_{parametro}$.\\
+Una vez comprendido el comportamiento de la funci\'on, podemos establecer una manera de completar nuestro diccionario cubo de modo iterativo.\\
+
+Primero completamos para $n=0$ todos los valores de $k_m$ y $k_b$. Notar que dados los \'indices que utilizamos a la hora de la implementaci\'on, cuando hablamos de $n=0$ nos referimos a la etapa 1 de la carrera (la \'ultima que vamos a recorrer), lo cual no es estrictamente el mismo resultado que el expuesto en la formulaci\'on recursiva. Sin embargo, podemos denotar esto como una diferencia que no afecta al funcionamiento del algoritmo.
+
+Cuando $n=0$ simplemente vamos a asignar el veh\'iculo que presente menor tiempo para esta etapa, entre los disponibles bas\'andonos en los $k_m$ y $k_b$.
+
+Luego para $n=1$, debemos considerar el costo m\'inimo entre usar cada uno de los veh\'iculos disponibles para esta etapa sumado a su correspondiente costo m\'inimo de la etapa anterior.
+
+Continuamos con las iteraciones hasta llegar a $n=n_{parametro}$.\\
+
+\textcolor{red}{Aca poner un dibujito que ejemplifique.}\\
 
 Cuando contamos con la matriz Diccionario completa, nuestro resultado va a estar ubicado en la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$.\\
 
-A medida que llenamos el diccionario, estamos tomando decisiones, estas son la elecci\'on del transporte a utilizar, entonces, como adem\'as de los resultados de tiempo nos interesa saber en qu\'e momento elegir cada veh\'iculo, guardamos ambas, el tiempo y esta decisi\'on, en el diccionario.
+Al ingresar los datos dentro del diccionario de esta manera, lo \'unico que hacemos es invertir el orden de llenado. Es por este motivo que estamos cumpliendo con el mismo comportamiento de la funci\'on recursiva ya mencionada. Como ya pudimos asegurar que la formulaci\'on recursiva resolv\'ia de manera correcta la problem\'atica planteada, estamos en condiciones de afirmar que completar el diccionario en el orden inverso tambi\'en resuelve el ejercicio.\\
+\\
 
-De este modo, podemos recorrer la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$ hacia la situaci\'on que indica la misma, y as\'i sucesivamente para reconstruir el camino.
 
+%%%%%%%%%%%%%%%%
+Con el fin de poder calcular el camino una vez obtenida la cantidad de tiempo menor para realizar el trayecto, en cada posici\'on del diccionario no s\'olo guardamos el tiempo empleado para llegar hasta ah\'i sino que tambi\'en cu\'al fue su situaci\'on inmediatamente anterior.\\
+
+De este modo, recorremos la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$ hacia la situaci\'on que indica la misma, y as\'i sucesivamente. De este modo obtenemos las elecciones hechas desde la \'ultima etapa hasta la primera.
+
+
+
+\newpage
 \subsection{An\'alisis de la complejidad}
 \subsubsection{Complejidad Temporal}
 
@@ -123,6 +140,7 @@ La complejidad resulta entonces: por cada etapa, por cada posible uso de moto, p
 \subsubsection{Complejidad Espacial}
 Dado que la estructura utilizada es una matriz (\texttt{vector$<$vector$>$}) de $m_k$x$m_b$, donde en cada posici\'on contamos con un arreglo de $n$ posiciones y una tupla ($O(1)$); su complejidad espacial es de $\mathbf{O(m_k.m_b.n)}$.
 
+\newpage
 \subsection{C\'odigo fuente}
 \subsection{Experimentaci\'on}
 
