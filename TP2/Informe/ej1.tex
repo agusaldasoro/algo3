@@ -87,7 +87,7 @@ El diccionario que vamos a utilizar consiste en una matriz de $k_{m_{inicial}}$\
 
 Una vez comprendido el comportamiento de la funci\'on, podemos establecer una manera de completar nuestro diccionario cubo de modo iterativo.\\
 
-Primero completamos para $n=0$ todos los valores de $k_m$ y $k_b$. Notar que dados los \'indices que utilizamos a la hora de la implementaci\'on, cuando hablamos de $n=0$ nos referimos a la etapa 1 de la carrera (la \'ultima que vamos a recorrer), lo cual no es estrictamente el mismo resultado que el expuesto en la formulaci\'on recursiva. Sin embargo, podemos denotar esto como una diferencia que no afecta al funcionamiento del algoritmo.
+Primero completamos para $n=0$ todos los valores de $k_m$ y $k_b$. \textcolor{red}{Esto:}Notar que dados los \'indices que utilizamos a la hora de la implementaci\'on, cuando hablamos de $n=0$ nos referimos a la etapa 1 de la carrera (la \'ultima que vamos a recorrer), lo cual no es estrictamente el mismo resultado que el expuesto en la formulaci\'on recursiva. Sin embargo, podemos denotar esto como una diferencia que no afecta al funcionamiento del algoritmo.\textcolor{red}{es asi?}
 
 Cuando $n=0$ simplemente vamos a asignar el veh\'iculo que presente menor tiempo para esta etapa, entre los disponibles bas\'andonos en los $k_m$ y $k_b$.
 
@@ -116,26 +116,41 @@ De este modo, recorremos la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b
 
 Como par\'ametro vamos a recibir $m_k$, $m_b$, $n$ y los tiempos necesarios para atravesar con cada veh\'iculo las \emph{n} etapas. Los tiempos los vamos a tener almacenados en un vector de tuplas, donde cada componente va a ser BMX, Moto y buggy.\\
 
-Mediante tres \texttt{for}s anidados (primero por la cantidad de etapas, despu\'es por la cantidad de motos y por \'ultimo la cantidad de buggys ), vamos a recorrer posici\'on a posici\'on nuestra matriz de vectores. Comenzando en la posici\'on $(0,0,0)$ y finalizando en  $(k_{m},k_{b},n)$.
+Mediante tres \texttt{for}s anidados (primero por la cantidad de etapas, despu\'es por la cantidad de motos y por \'ultimo la cantidad de buggys), vamos a recorrer posici\'on a posici\'on nuestra matriz de vectores (cubo). Comenzando en la posici\'on $(0,0,0)$ y finalizando en  $(k_{m},k_{b},n)$.
 
-Dentro de cada iteraci\'on, lo que vamos a hacer es lo que indica el planteo recursivo, con la salvedad de que cada casillero representa cu\'anto nos cuesta llegar a la siguiente etapa, es decir que la posici\'on (0,0,0) tendr\'a lo que cueste ir de la etapa 0 a la etapa 1, usando la bici.
+Dentro de cada iteraci\'on, lo que vamos a hacer es completar la posici\'on del diccionario correspondiente acorde indica el planteo recursivo, con la salvedad de que cada casillero representa cu\'anto nos cuesta llegar a la siguiente etapa, es decir que la posici\'on $(k_{m},k_{b},n)$ tendr\'a lo que cueste ir de la etapa n a la etapa n+1, usando la cantidad de Motos y Buggys correspondiente.\\
 
-Siempre escribiremos en el diccionario en la posici\'on $(k{_m}, k{_b}, n)$, omitimos la escritura para devolver el camino, pero aclaramos que son operacion elementales (asignacion y suma de enteros) y un llamado a make_pair \textcolor{blue}{link plis :)} que toma tiempo constante:
+
+En todas las iteraciones, escribiremos en el diccionario bajo la clave:  $(k{_m}, k{_b}, n)$. En cada posici\'on vamos a poner un par: la primera posici\'on corresponde al valor del tiempo y la segunda al indicador de la posici\'on inmediatamente anterior.\\
+
+Para escribir la \emph{primer posici\'on} vamos a seguir la siguiente regla:
 
 \begin{itemize}
-\item Si $n=0 \wedge k_m=0 \wedge k_b=0$ escribimos el costo de la bici para ir de 0 a 1
-\item Si $n=0 \wedge k_m=0 \wedge k_b\neq0$ escribimos el m\'inimo entre la bici y el buggy
-\item Si $n=0 \wedge k_m\neq0 \wedge k_b=0$ escribimos el m\'inimo entre la bici y la moto
-\item Si $n=0 \wedge k_m\neq0 \wedge k_b\neq0$ escribimos el m\'inimo entre la bici, la moto y el buggy
-\item Si $n\neq0 \wedge k_m=0 \wedge k_b=0$ escribimos el costo de la bici + $dicc(m, b, n-1)$
-\item Si $n\neq0 \wedge k_m=0 \wedge k_b\neq0$ escribimos el m\'inimo de la bici + $dicc(m, b, n-1)$ y el buggy + $dicc(m, b-1, n-1)$
-\item Si $n\neq0 \wedge k_m\neq0 \wedge k_b=0$ escribimos el m\'inimo de la bici + $dicc(m, b, n-1)$ y la moto + $dicc(m-1, b, n-1)$
-\item Si $n\neq0 \wedge k_m\neq0 \wedge k_b\neq0$ escribimos el m\'inimo de la bici + $dicc(m, b, n-1)$, la moto + $dicc(m-1, b, n-1)$ y el buggy + $dicc(m, b-1, n-1)$
+\item Si $n=0 \wedge k_m=0 \wedge k_b=0$ escribimos el tiempo que le lleva a la BMX para ir de $0$ a $1$
+\item Si $n=0 \wedge k_m=0 \wedge k_b\neq0$ escribimos el tiempo que sea menor para ir  de $0$ a $1$ entre BMX y Buggy
+\item Si $n=0 \wedge k_m\neq0 \wedge k_b=0$ escribimos el tiempo que sea menor para ir  de $0$ a $1$ entre BMX y Moto
+\item Si $n=0 \wedge k_m\neq0 \wedge k_b\neq0$ escribimos el tiempo que sea menor para ir  de $0$ a $1$ entre BMX, Buggy y Moto
+\item Si $n\neq0 \wedge k_m=0 \wedge k_b=0$ escribimos el tiempo que le lleva a la BMX para ir de $n$ a $n+1$ + $dicc(m, b, n-1)$
+\item Si $n\neq0 \wedge k_m=0 \wedge k_b\neq0$ escribimos el tiempo que sea menor para ir  de $n$ a $n+1$ entre $tiempo(BMX) + dicc(m, b, n-1)$ y $tiempo(Buggy) + dicc(m, b-1, n-1)$
+\item Si $n\neq0 \wedge k_m\neq0 \wedge k_b=0$ escribimos el tiempo que sea menor para ir  de $n$ a $n+1$ entre $tiempo(BMX) + dicc(m, b, n-1)$ y $tiempo(Moto) + dicc(m-1, b, n-1)$
+\item Si $n\neq0 \wedge k_m\neq0 \wedge k_b\neq0$ escribimos el tiempo que sea menor para ir  de $n$ a $n+1$ entre $tiempo(BMX) + dicc(m, b, n-1)$, $tiempo(Buggy) + dicc(m, b-1, n-1)$ y $tiempo(Moto) + dicc(m-1, b, n-1)$
 \end{itemize}
+
+Debido a la forma de completar el diccionario, todas estas asignaciones son operaciones con un costo de $\mathbf{O(1)}$. 
+
+Esto se debe a que acceder al vector con todos los costos por etapa, sumar y buscar el m\'inimo entre enteros ( \href{http://www.cplusplus.com/reference/algorithm/min/}{min()} \footnote{http://www.cplusplus.com/reference/algorithm/min/}) son operaciones de costo: $O(1)$. Adem\'as, al buscar en el diccionario siempre lo hacemos en posiciones ya definidas lo cual tambi\'en presenta un costo de $O(1)$ debido a que es una matriz de vectores.\\
+
+\newpage
+
+Para la \emph{segunda posici\'on}, que representa la escritura para devolver el camino, lo que realizamos es dejar asentado cu\'antos Buggys y cu\'antas Motos quedan disponibles despu\'es de esta iteraci\'on. \textcolor{red}{Es asi, no? Eze?}.
+
+El costo de estas operaciones tambi\'en pertenece a $\mathbf{O(1)}$. Las mismas son operaciones elementales (asignaci\'on y suma de enteros) y un llamado a  \href{http://www.cplusplus.com/reference/utility/make_pair/}{make\_pair()} \footnote{http://www.cplusplus.com/reference/utility/make_pair/} que toma tiempo constante.\\
+
+
 
 Finalmente retornamos el valor de $dicc(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$\\
 
-La complejidad resulta entonces: por cada etapa, por cada posible uso de moto, por cada posible uso de buggy, hacemos cosas en tiempo constante. De esto deducimos que la complejidad es de $O(k_{m},k_{b},n)$ como se ped\'ia en el enunciado.
+La complejidad resulta entonces: por cada etapa, por cada posible uso de moto, por cada posible uso de buggy, realizar operaciones en tiempo constante. De esto deducimos que la complejidad es de $\mathbf{O(k_{m},k_{b},n)}$ como se ped\'ia en el enunciado.
 
 \subsubsection{Complejidad Espacial}
 Dado que la estructura utilizada es una matriz (\texttt{vector$<$vector$>$}) de $m_k$x$m_b$, donde en cada posici\'on contamos con un arreglo de $n$ posiciones y una tupla ($O(1)$); su complejidad espacial es de $\mathbf{O(m_k.m_b.n)}$.
