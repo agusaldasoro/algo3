@@ -19,18 +19,18 @@ Con el fin de encontrar el recorrido factible que emplee menos tiempo; debemos c
 
 \subsubsection*{Formulaci\'on Recursiva}
 
-Optamos por comenzar recorriendo desde la etapa n hasta la etapa 0; \emph{n} va a indicar la etapa actual, \emph{k$_m$} la cantidad de motos y \emph{k$_b$} la cantidad de boogys restantes que se pueden utilizar.
+Optamos por comenzar recorriendo desde la etapa n hasta la etapa 0; \emph{n} va a indicar la etapa actual, \emph{k$_m$} la cantidad de motos y \emph{k$_b$} la cantidad de buggys restantes que se pueden utilizar.
 
 \begin{itemize}
 \item[•]Cuando llegamos a la etapa \emph{n}$=0$ es porque terminamos todo el recorrido, de modo que el tiempo devuelto va a ser 0.
 
-\item[•]Cuando \emph{k$_m$}$=0$ y \emph{k$_b$}$=0$ es porque la etapa actual (\emph{n}) y el recorrido restante (las \emph{n-1} etapas) lo vamos a tener que hacer s\'olo en bicicleta, sin importar el tiempo que conlleve ya que nos quedamos sin motos y boogys para usar.
+\item[•]Cuando \emph{k$_m$}$=0$ y \emph{k$_b$}$=0$ es porque la etapa actual (\emph{n}) y el recorrido restante (las \emph{n-1} etapas) lo vamos a tener que hacer s\'olo en bicicleta, sin importar el tiempo que conlleve ya que nos quedamos sin motos y buggys para usar.
 
-\item[•]Cuando \emph{k$_m$}$=0$ y \emph{k$_b$}$\neq0$ es porque utilizamos la mayor cantidad de motos posibles y las \emph{n-1} etapas restantes -conjunto a la actual(\emph{n})- las vamos a tener que recorrer con Bicicleta o Boogy. Por este motivo se elige la opci\'on con tiempo menor usando Bicicleta o Boogy en la etapa \emph{n} y llamando recursivamente a la funci\'on para \emph{n-1} considerando esta elecci\'on.
+\item[•]Cuando \emph{k$_m$}$=0$ y \emph{k$_b$}$\neq0$ es porque utilizamos la mayor cantidad de motos posibles y las \emph{n-1} etapas restantes -conjunto a la actual(\emph{n})- las vamos a tener que recorrer con Bicicleta o buggy. Por este motivo se elige la opci\'on con tiempo menor usando Bicicleta o buggy en la etapa \emph{n} y llamando recursivamente a la funci\'on para \emph{n-1} considerando esta elecci\'on.
 
 \item[•]De modo an\'alogo, cuando \emph{k$_m$}$\neq0$ y \emph{k$_b$}$=0$ s\'olo vamos a contar con Motos y Bicicletas para la etapa actual y las \emph{n-1} etapas faltantes.
 
-\item[•]En cambio, en caso contrario, todav\'ia tenemos disponible cantidad de los tres veh\'iculos. Por este motivo, se comparan los tres casos: empleando la Bicicleta en la etapa n, la Moto o el Boogy llamando recursivamente a la funci\'on para \emph{n-1} de modo que va a devolver el menor tiempo posible considerando la elecci\'on llevada a cabo.
+\item[•]En cambio, en caso contrario, todav\'ia tenemos disponible cantidad de los tres veh\'iculos. Por este motivo, se comparan los tres casos: empleando la Bicicleta en la etapa n, la Moto o el buggy llamando recursivamente a la funci\'on para \emph{n-1} de modo que va a devolver el menor tiempo posible considerando la elecci\'on llevada a cabo.
 \end{itemize}
 
 
@@ -43,7 +43,7 @@ func(n, k_m, k_b) =
       min \left(
       \begin{split}
        tiempoBici(n) & + func(n-1, 0, k_b) , \\
-       tiempoBoogy(n) & + func(n-1, 0, k_b-1)
+       tiempobuggy(n) & + func(n-1, 0, k_b-1)
 \end{split} \right) & \mbox{si } k_m=0 \wedge k_b\neq0 \\[3ex]
       min \left(
       \begin{split}
@@ -54,7 +54,7 @@ func(n, k_m, k_b) =
       \begin{split}
        tiempoBici(n) & + func(n-1, k_m, k_b) , \\
        tiempoMoto(n) & + func(n-1, k_m-1, k_b) , \\
-       tiempoBoogy(n) & + func(n-1, k_m, k_b-1)
+       tiempobuggy(n) & + func(n-1, k_m, k_b-1)
 \end{split} \right) & \mbox{sino}
 \end{cases} 
 \end{equation*}
@@ -70,7 +70,7 @@ Dado que los $n$, $k_m$ y $k_b$ iniciales van a ser los dados por par\'ametro y 
 \end{equation*}
 
 \newpage
-Esta formulaci\'on recursiva resuelve el problema porque.... \textcolor{red}{Poner aca algo del estilo de la demo de golosos je}\\
+Esta formulaci\'on recursiva resuelve el problema porque.... \textcolor{red}{Poner aca algo del estilo de la demo de golosos je} \textcolor{blue}{ALGUIEN???!!!}
 
 \subsubsection*{Diccionario a utilizar}
 
@@ -78,10 +78,9 @@ El diccionario que vamos a utilizar consiste en una matriz de $k_{m_{inicial}}$\
 
 \subsubsection*{Formulaci\'on Top Down}
 
- Si analizamos el comportamiento de nuestra funci\'on recursiva como si fuera un algoritmo recursivo, podemos notar que la primer posici\'on de la matriz que va a poder completar va a ser la de $(k_{m_{inicial}},k_{b_{inicial}},0)$. Dado que para todas las guardas el primer caso que compara es usar la bicicleta.
- 
- Luego, seguir\'a completando la matriz variando en orden ascendente el tercer par\'ametro y completando para todos los $k_m$ y $k_b$.
+	Si analizamos el comportamiento de nuestra funci\'on recursiva como si fuera un algoritmo recursivo, podemos notar que la primer posici\'on de la matriz que va a poder completar va a ser la de $(k_{m_{inicial}},k_{b_{inicial}},0)$. Dado que para todas las guardas el primer caso que compara es usar la bicicleta.
 
+	Luego, seguir\'a completando la matriz variando en orden ascendente el tercer par\'ametro y completando para todos los $k_m$ y $k_b$.
 
 \subsubsection*{Formulaci\'on Bottom Up}
 
@@ -89,34 +88,41 @@ Una vez comprendido el comportamiento de la funci\'on, podemos establecer una ma
 
 Primero completamos para $n=0$ todos los valores de $k_m$ y $k_b$, luego para $n=1$ y as\'i iterativamente hasta llegar a $n=n_{parametro}$.\\
 
-Cuando contamos con la matriz Diccionario completa, nuestro resultado va a estar ubicao en la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$.\\
-\\
+Cuando contamos con la matriz Diccionario completa, nuestro resultado va a estar ubicado en la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$.\\
 
-Con el fin de poder calcular el camino una vez obtenida la cantidad de tiempo menor para realizar el trayecto, en cada posici\'on del diccionario no s\'olo guardamos el tiempo empleado para llegar hasta ah\'i sino que tambi\'en cu\'al fue su situaci\'on inmediatamente anterior.\\
+A medida que llenamos el diccionario, estamos tomando decisiones, estas son la elecci\'on del transporte a utilizar, entonces, como adem\'as de los resultados de tiempo nos interesa saber en qu\'e momento elegir cada veh\'iculo, guardamos ambas, el tiempo y esta decisi\'on, en el diccionario.
 
-De este modo, recorremos la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$ hacia la situaci\'on que indica la misma, y as\'i sucesivamente. De este modo obtenemos las elecciones hechas desde la \'ultima etapa hasta la primera.
+De este modo, podemos recorrer la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$ hacia la situaci\'on que indica la misma, y as\'i sucesivamente para reconstruir el camino.
 
-
-\newpage
 \subsection{An\'alisis de la complejidad}
 \subsubsection{Complejidad Temporal}
 
-Como par\'ametro vamos a recibir $m_k$, $m_b$, $n$ y los tiempos necesarios para atravesar con cada veh\'iculo las \emph{n} etapas. Los tiempos los vamos a tener almacenados en un vector de tuplas, donde cada componente va a ser BMX, Moto y Boogy.\\
+Como par\'ametro vamos a recibir $m_k$, $m_b$, $n$ y los tiempos necesarios para atravesar con cada veh\'iculo las \emph{n} etapas. Los tiempos los vamos a tener almacenados en un vector de tuplas, donde cada componente va a ser BMX, Moto y buggy.\\
 
-Mediante tres \texttt{for}s anidados (primero por la cantidad de etapas, despu\'es por la cantidad de motos y por \'ultimo la cantidad de Boogys ), vamos a recorrer posici\'on a posici\'on nuestra matriz de vectores. Comenzando en la posici\'on $(0,0,0)$ y finalizando en  $(k_{m},k_{b},n)$.
+Mediante tres \texttt{for}s anidados (primero por la cantidad de etapas, despu\'es por la cantidad de motos y por \'ultimo la cantidad de buggys ), vamos a recorrer posici\'on a posici\'on nuestra matriz de vectores. Comenzando en la posici\'on $(0,0,0)$ y finalizando en  $(k_{m},k_{b},n)$.
 
-Dentro de cada iteraci\'on, lo que vamos a hacer es:
+Dentro de cada iteraci\'on, lo que vamos a hacer es lo que indica el planteo recursivo, con la salvedad de que cada casillero representa cu\'anto nos cuesta llegar a la siguiente etapa, es decir que la posici\'on (0,0,0) tendr\'a lo que cueste ir de la etapa 0 a la etapa 1, usando la bici.
+
+Siempre escribiremos en el diccionario en la posici\'on $(k{_m}, k{_b}, n)$, omitimos la escritura para devolver el camino, pero aclaramos que son operacion elementales (asignacion y suma de enteros) y un llamado a make_pair \textcolor{blue}{link plis :)} que toma tiempo constante:
 
 \begin{itemize}
-\item Si $k_m=0 \wedge k_b=0$ le asignamos el valor de la matriz en $()$
+\item Si $n=0 \wedge k_m=0 \wedge k_b=0$ escribimos el costo de la bici para ir de 0 a 1
+\item Si $n=0 \wedge k_m=0 \wedge k_b\neq0$ escribimos el m\'inimo entre la bici y el buggy
+\item Si $n=0 \wedge k_m\neq0 \wedge k_b=0$ escribimos el m\'inimo entre la bici y la moto
+\item Si $n=0 \wedge k_m\neq0 \wedge k_b\neq0$ escribimos el m\'inimo entre la bici, la moto y el buggy
+\item Si $n\neq0 \wedge k_m=0 \wedge k_b=0$ escribimos el costo de la bici + $dicc(m, b, n-1)$
+\item Si $n\neq0 \wedge k_m=0 \wedge k_b\neq0$ escribimos el m\'inimo de la bici + $dicc(m, b, n-1)$ y el buggy + $dicc(m, b-1, n-1)$
+\item Si $n\neq0 \wedge k_m\neq0 \wedge k_b=0$ escribimos el m\'inimo de la bici + $dicc(m, b, n-1)$ y la moto + $dicc(m-1, b, n-1)$
+\item Si $n\neq0 \wedge k_m\neq0 \wedge k_b\neq0$ escribimos el m\'inimo de la bici + $dicc(m, b, n-1)$, la moto + $dicc(m-1, b, n-1)$ y el buggy + $dicc(m, b-1, n-1)$
 \end{itemize}
 
-\textcolor{red}{Mejor me voy a dormir, estoy poniendo pavadas. :(}
+Finalmente retornamos el valor de $dicc(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$\\
+
+La complejidad resulta entonces: por cada etapa, por cada posible uso de moto, por cada posible uso de buggy, hacemos cosas en tiempo constante. De esto deducimos que la complejidad es de $O(k_{m},k_{b},n)$ como se ped\'ia en el enunciado.
 
 \subsubsection{Complejidad Espacial}
 Dado que la estructura utilizada es una matriz (\texttt{vector$<$vector$>$}) de $m_k$x$m_b$, donde en cada posici\'on contamos con un arreglo de $n$ posiciones y una tupla ($O(1)$); su complejidad espacial es de $\mathbf{O(m_k.m_b.n)}$.
 
-\newpage
 \subsection{C\'odigo fuente}
 \subsection{Experimentaci\'on}
 
