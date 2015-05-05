@@ -1,5 +1,25 @@
 \section{Zombieland II}
 \subsection{Descripci\'on de la problem\'atica}
+
+El escenario con el que vamos a trabajar es una ciudad tipo con \emph{n} calles horizontales y \emph{m} calles verticales. En esta ciudad se encuentran dispersos zombies, los mismos est\'an dispuestos en las calles (tanto en las verticales como en las horizontales) pero ninguno est\'a ubicado exactamente en alguna esquina. 
+
+Contamos con \emph{s} soldados, los cuales se quieren movilizar desde una posici\'on inicial ($X_i$) hasta una posici\'on final ($X_f$).
+
+Todos estos datos van a ser ingresados como par\'ametros de entrada.\\
+
+Efectivamente, al encontrarse soldados con zombies se va a producir un enfrentamiento. Si la cantidad de soldados que se enfrentan con los zombies es mayor o igual, se exterminan los zombies de esa cuadra sin dejar ning\'un soldado muerto. 
+
+En cambio, si la cantidad de zombies es mayor a la cantidad de soldados, se va a sufrir una baja de ($z-s$) soldados. De este modo, si $z-s\geq s$ toda la cuadrilla va a quedar eliminada impidiendo el avance con el recorrido. En caso contrario, se eliminan los zombies de esa cuadra perdiendo los $z-s$ soldados.
+
+Esto implica el impedimento de recorrer un camino cuando $s=0$ (incluso cuando as\'i sea el par\'ametro de entrada) sin tener en cuenta la existencia o no de zombies en el trayecto restante.\\
+
+Se busca hallar la manera de llegar desde $X_i$ hasta $X_f$ con la mayor cantidad de soldados sobrevivientes, si es posible. De haber m\'as de un camino que cumpla estas condiciones, se debe devolver s\'olo uno.\\
+
+Se exige una cota de complejidad temporal de $\mathbf{O(s.n.m)}$.\\
+
+\textcolor{red}{Insertar ejemplito con dibujo.}
+
+\newpage
 \subsection{Resoluci\'on propuesta y justificaci\'on}
 \subsection{An\'alisis de la complejidad}
 
