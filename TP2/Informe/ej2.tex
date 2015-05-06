@@ -1,11 +1,10 @@
 \section{Zombieland II}
 \subsection{Descripci\'on de la problem\'atica}
 
-\textcolor{red}{Poner que la posicion final es bunker}
 
 El escenario con el que vamos a trabajar es una ciudad tipo con \emph{n} calles horizontales y \emph{m} calles verticales. En esta ciudad se encuentran dispersos zombies, los mismos est\'an dispuestos en las calles (tanto en las verticales como en las horizontales) pero ninguno est\'a ubicado exactamente en alguna esquina. 
 
-Contamos con \emph{s} soldados, los cuales se quieren movilizar desde una posici\'on inicial ($X_i$) hasta una posici\'on final ($X_f$).
+Contamos con \emph{s} soldados, los cuales se quieren movilizar desde una posici\'on inicial ($X_i$) hasta una posici\'on final ($X_f$) donde se encuentra el b\'unker.
 
 Todos estos datos van a ser ingresados como par\'ametros de entrada.\\
 
@@ -30,7 +29,7 @@ Para modelar la problem\'atica planteada, utilizamos dos grafos.\\
 El \emph{primer grafo} (no dirigido) con el que vamos a tratar es el que almacena los datos de entrada -\texttt{ciudadInfestada}- (cantidad de zombies por cuadra), de modo que cada nodo es una esquina de la ciudad y cada eje tiene en su peso la cantidad de zombies que est\'an presentes en esa locaci\'on.\\
 \\
 
-El \emph{segundo grafo} (dirigido) -\texttt{grafo}- lo vamos a ir construyendo, de modo que al finalizarlo tengamos calculada la soluci\'on.\\
+El \emph{segundo grafo} \textcolor{red}{(dirigido)?} -\texttt{grafo}- lo vamos a ir construyendo, de modo que al finalizarlo tengamos calculada la soluci\'on.\\
 
 Cada nodo de \texttt{grafo} va a contener la siguiente informaci\'on: cantidad de soldados vivos con la que se lleg\'o a esa posici\'on (\texttt{soldadosVivos}) y las coordenadas de su posici\'on: \texttt{i} y \texttt{j}.
 
@@ -40,15 +39,89 @@ Los ejes de nuestro \texttt{grafo} no van a contener ninguna informaci\'on extra
 
 
 
-Lo primero que vamos a hacer es situarnos en la posici\'on inicial ($X_i = (inicioH, inicioV)$) y crear este nodo en \texttt{grafo}, de modo que \texttt{soldadosVivos} va a ser la cantidad de soldados inicial \textcolor{red}{... Llegue hasta aca, depsues continuo}
+Lo primero que vamos a hacer es situarnos en la posici\'on inicial ($X_i = (inicioH, inicioV)$) y crear este nodo en \texttt{grafo}, de modo que \texttt{soldadosVivos} va a ser la cantidad de soldados inicial y las coordenadas van a ser \texttt{i=inicioH,j=inicioV}. 
+
+Para continuar la creaci\'on de este \texttt{grafo}, lo vamos a recorrer mediante \textcolor{red}{BFS? o el otro?}. Es decir, vamos a conectar al nodo inicial con sus cuatro nodos vecinos (si los tiene) e indicar en ellos con cu\'antos soldados se arriba (en caso de ser menor o igual a 0, ese nodo no se agrega) y desde qu\'e posici\'on. De la misma manera, vamos a repetir el proceso para todos los nodos que sean agregados. De este modo, armamos todos los caminos posibles.
+
+Al momento de avanzar de nodo, nos fijamos en el grafo \texttt{ciudadInfestada} la cantidad de zombies en esa cuadra.\\
+
+\textcolor{red}{Y si volvemos a pasar por una cuadra que ya pasamos y habiamos matado a todos los zombies y nos fijamos en la cantidad de zombies original? Por favor, diganme que esto nunca pasa :)}\\
+
+Para realizar este procedimiento, utilizamos una \texttt{cola} la cual nos va a indicar qu\'e nodos nos falta recorrer.
+
+Comenzamos con el primer nodo, lo encolamos. Al desencolarlo lo marcamos como visitado y no s\'olo agregamos los nodos vecinos correspondientes al \texttt{grafo} sino que, los insertamos en la cola. A continuaci\'on, desencolamos el elemento siguiente, lo marcamos como visitado y agregamos los nodos vecinos correspondientes que no hayan sido visitados.
+
+Repetimos este proceso hasta que la cola quede vac\'ia. Es importante destacar que no es lo mismo visitar al nodo de la posici\'on (\texttt{x,y}) con \texttt{soldadosVivos}=$s_1$ que el de la misma posici\'on con \texttt{soldadosVivos}=$s_2$. En cambio, si $s_1=s2$ no nos es de inter\'es diferenciar llegar a la misma posici\'on desde coordenadas previas anteriores distintas ya que se arriba con la misma cantidad de soldados sobrevivientes. \textcolor{red}{Esto creo que no quedo muy claro}\\
+
+Una vez completo todo el \texttt{grafo}, basta verificar que exista al menos un nodo en la posici\'on $X_f = (bunkerH, bunkerV)$ para establecer que existe un camino donde sobrevive alg\'un soldado.
+
+Para encontrar la cantidad de soldados m\'axima con la que se puede llegar a destino, lo que debemos hacer es recorrer todos los nodos de la posic\'on $X_f$ y localizar al que tenga la cantidad de \texttt{SoldadosVivos} menor. Esta va a ser la soluci\'on \'optima.
+
+Por \'ultimo, para hallar el camino debemos hacer el proceso inverso. Como en cada nodo existente de \texttt{grafo} vamos a tener la coordenada anterior en la que se estaba para llegar all\'i, vamos accediendo secuencialmente. De esta manera, tenemos todas las posiciones (esquinas) por donde pas\'o la guardilla hasta llegar a destino.\\
+
+\bigskip
+\textcolor{red}{Esta solucion propuesta funciona porque..}
 
 
-del grafo \texttt{ciudadInfestada}
 
 
 \subsubsection*{PseudoC\'odigo}
-\textcolor{red}{Poner un pseudo codigo del algoritmo.}
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{int $n$, $m$, $s$, $Ih$, $Iv$, $Bh$, $Bv$, grafo $ciudadInfestada$}
+\BlankLine
+\BlankLine
+\emph{cola.push(Ih, Iv)}\;
+
+\While{$!cola.vacia()$}{
+\emph{$nodoActual \leftarrow cola.pop()$}\;
+\emph{$nodoActual.marcar()$}\;
+\For{$nodoVecino$ in $nodoActual.vecinos()$}{
+	\If{Cantidad de Zombies en $grafo$ desde $nodoActual$ hasta $nodoVecino$ no mata a todos los $nodoActual$.\texttt{soldadosVivos}}{
+		$nodoVecino$.\texttt{previo} $\leftarrow$ $nodoActual$\;
+		\emph{cola.push($nodoVecino$)}\;
+	}
+}
+}
+	\emph{$nodoActual \leftarrow nodoFinal$}\;
+\While{no llegue a $X_i$}{
+	\emph{camino.push_front($nodoActual$)}\;
+	$nodoActual \leftarrow nodoActual$.\texttt{previo}\;
+}
+\KwRet{cantidad m\'axima de \texttt{soldadosVivos} para la posici\'on de $nodoFinal$}\;
+
+
+
+\caption{Zombieland II}%\label{algo_ej3}
+\end{algorithm}\DecMargin{1em}
+
+\newpage
 \subsection{An\'alisis de la complejidad}
+
+Los valores pasados por par\'ametro est\'an almacenados en el grafo \texttt{ciudadInfestada}, el cual est\'a representado mediante una matriz. Cada posici\'on de la matriz es una esquina de la ciudad y en la misma se indican la cantidad de zombies que hay en el trayecto hacia la esquina de la derecha y la cantidad que hay en el inferior. Con esta informaci\'on basta porque si se desea saber la cantidad de zombies existentes hacia la izquierda, basta con posicionarse en el valor de la matriz de esa posici\'on y mirar hacia la derecha. En el caso de los bordes, como no poseen cuadras a su derecha y/o hacia abajo se les asign\'o el valor de -1.
+
+Armamos una funci\'on (\texttt{zombiesCuadra}) la cual nos devuelve en $O(1)$ la cantidad de zombies que hay desde una esquina hacia alguna de sus cuatro direcciones. La complejidad Temporal de esta funci\'on es constante porque s\'olo basta con acceder al \'indice de la matriz correspondiente y buscar la posici\'on de la tupla deseada.\\
+\\
+
+Para almacenar el grafo que va a contener la soluci\'on (\texttt{grafo}), utilizamos una matriz de vectores (\texttt{cubo}). Esta matriz tiene un taman\~no de $O(s.n.m)$ ya que para cada coordenada pueden existir $s$ cantidad de \texttt{soldadosVivos} distintas para llegar hasta all\'i.
+
+Si bien, no necesariamente vayamos a completar la matriz completa, debemos considerar el peor caso que es cuando esto s\'i sucede.\\
+
+Por lo detallado anteriormente, nuestro \texttt{grafo} tiene, a lo sumo, $s.n.m$ nodos. Sabiendo esto, podemos justificar que la guarda del while va a ejecutar  $\mathbf{O(s.n.m)}$ ya que cada nodo visitado se va a marcar y no se va a recorrer dos veces el mismo nodo.
+
+La complejidad del ciclo del While podemos afirmar que es $\mathbf{O(1)}$. Las operaciones que se ejecutan son: de acceso a una matriz (ya sea \texttt{ciudadInfestada} o \texttt{grafo}) asignando o leyendo, en ambos casos con complejidad $O(1)$; operaciones elementales ($O(1)$) y operaciones de cola en un queue (
+\href{http://www.cplusplus.com/reference/queue/queue/push/}{push()} \footnote{http://www.cplusplus.com/reference/queue/queue/push/}, 
+\href{http://www.cplusplus.com/reference/queue/queue/pop/}{pop()} \footnote{http://www.cplusplus.com/reference/queue/queue/pop/} y 
+\href{http://www.cplusplus.com/reference/queue/queue/front/}{front()} \footnote{http://www.cplusplus.com/reference/queue/queue/front/}
+) las cuales poseen todas complejidad constante.\\
+
+\bigskip
+
+Por lo tanto, la complejidad Temporal del algoritmo es de $O(s.n.m)*O(1)$, lo que por propiedas de $O$ equivale a $\mathbf{O(s.n.m)}$ tal que concuerda con la complejidad exigida.
 
 \newpage
 
