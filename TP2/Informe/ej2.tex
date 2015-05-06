@@ -1,6 +1,8 @@
 \section{Zombieland II}
 \subsection{Descripci\'on de la problem\'atica}
 
+\textcolor{red}{Poner que la posicion final es bunker}
+
 El escenario con el que vamos a trabajar es una ciudad tipo con \emph{n} calles horizontales y \emph{m} calles verticales. En esta ciudad se encuentran dispersos zombies, los mismos est\'an dispuestos en las calles (tanto en las verticales como en las horizontales) pero ninguno est\'a ubicado exactamente en alguna esquina. 
 
 Contamos con \emph{s} soldados, los cuales se quieren movilizar desde una posici\'on inicial ($X_i$) hasta una posici\'on final ($X_f$).
@@ -267,33 +269,53 @@ del grafo \texttt{ciudadInfestada}
 
 \subsection{Experimentaci\'on}
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
-Para realizar los experimentos, se consideró como peor caso, aquel en el que se debiera recorrer cada nodo de la ciudad, tantas veces como cantidad de soldados se tuviese a disposicion, siendo ese caso, en el que se recorrerían $s.n.m$ elementos, coiniciendo así con la complejidad teórica $O(s.n.m)$.\\
-Aunque ese el caso deseable, generar dicha instancia para los distintos valores de $s$, $n$ y $m$, resultó tan dificultoso como resolver el problema en cuestión.\\
-Por ello, se decidio generar instancias con una cantidad aleatoria de zombies por cuadra. Ésto permitió generar instancias automáticamente, para casos de prueba grandes, pero trajo consigo los siguientes problemas:
+
+Al momento de llevar a cabo la experimentaci\'on, se consideró como\emph{ peor caso}, aquel en el que se debiera recorrer cada nodo de la ciudad (\texttt{grafo}), tantas veces como cantidad de soldados se tuviese a disposici\'on en el momento inicial. Es decir, pasar por cada esquina de la ciudad $s$ veces, cada vez con una cantidad diferente de \texttt{soldadosVivos}. Siendo ese caso, en el que se recorren $s.n.m$ elementos, coiniciendo así con la complejidad teórica $\mathbf{O(s.n.m)}$.\\
+
+Aunque este ser\'ia el caso deseable, generar dicha instancia para los distintos valores de $s$, $n$ y $m$, resultó tan dificultoso como resolver el problema en cuestión. Por este motivo, se decidi\'o generar instancias con una cantidad aleatoria de zombies por cuadra.
+
+Al proceder bajo este m\'etodo fue posible efectuar casos de prueba de tama\~no grande. Sin embargo, debido a la dimensi\'on de los casos de tests, hay ciertos aspectos de la soluci\'on del problema que no podemos determinar por nuestra cuenta para contrastar con la soluci\'on propuesta por el algoritmo:
+
+
+
 \begin{enumerate}
-	\item No se puede determinar si existe un camino desde el punto de inicio hasta el búnker.
-	\item No se puede determinar, si al existir un camino, este será único.
-	\item No se puede determinar cuantos soldados van a llegar al búnker.
-	\item No se puede determinar cuantos caminos adulteran la cantidad de soldados, ni cuantos soldados mueren en cada uno de ellos.
+	\item No se puede determinar si existe un camino desde el punto de inicio ($X_i$) hasta el búnker ($X_f$).
+	\item No se puede determinar, si al existir un camino, este será único. 
+	\item No se puede determinar cu\'antos soldados van a llegar al búnker.
+	\item No se puede determinar cu\'antos caminos adulteran la cantidad de soldados, ni cu\'antos soldados mueren en cada uno de ellos.
 \end{enumerate}
 
+De este modo, al ejecutar nuestro algoritmo bajo las instancias aleatorias generadas, obtenemos soluciones para las cuales no podemos contrastar con otros valores para mostrar su correctitud. \textcolor{red}{Nos importa esto? solo queriamos medir tiempos...}\\
+
+\textcolor{red}{Aca poner algo del estilo ``Como queremos probar instancias que se acerquen lo mejor posible al peor caso, generamos instancias probabilisticas que agranden lo mejor posible la complejidad''}\\
+
+\textcolor{red}{Aca poner qu\'e es el generador de instancias, que es un laberitno y que represneta antes de mandar el dibujo :)}
 El resultado del generador de instancias, proporcionaba un laberinto como el siguiente:
 
 \begin{center}
 \includegraphics[width=7cm,keepaspectratio=yes]{imagenes/ej2/maze.png}
 \end{center}
 
-Los pasajes del laberinto son los caminos donde hay entre $0$ y $s+1$ zombies, y las paredes, caminos donde hay entre $0$ y $s$.2.\\
+\textcolor{red}{Desde aca...}
+Los pasajes del laberinto son los caminos donde hay entre $0$ y $s+1$ zombies, y las paredes, caminos donde hay entre $0$ y $s$.2.
+
 Estos valores aleatorios fueron tomados adrede, por un lado, para que incluso el mejor camino (alguno de los pasajes que conducen a la salida), tuviera perdida de soldados, pero intentando que éstas sean mínimas, para aumentar las probabilidades de que puedan efectivamente llegar al búnker.
-Las paredes, no son un obstaculo, dado que podrían terminar siendo un pasaje, pero la probabilidad de que eso ocurra es muy baja.\\
-Aún asi, el $s$ tomado en el algoritmo aleatorio es el que se recibe en la entrada. Esto significa, que se configura al principio, y despues no se actualiza con la cantidad de soldados despues de una batalla.\\
-Por ende, no podemos determinar el porcentaje de soldados totales que llegarán, pero sí podemos saber el porcentaje que sobrevivirá a la primer batalla.\\
+Las paredes, no son un obstaculo, dado que podrían terminar siendo un pasaje, pero la probabilidad de que eso ocurra es muy baja.\textcolor{red}{hasta aca, no se entiende mucho}
+
+Aún asi, el $s$ tomado en el algoritmo aleatorio es el que se recibe en la entrada. Esto significa, que se configura al principio, y despues no se actualiza con la cantidad de soldados despues de una batalla.
+
+Por ende, no podemos determinar el porcentaje de soldados totales que llegarán, pero sí podemos saber el porcentaje que sobrevivirá a la primer batalla.
+
 Así, la cantidad de soldados que sobreviviran a la primer batalla es:
 \begin{itemize}
 	\item 95\% en caso de que el camino sea un pasaje.
 	\item 50\% en casos de que el camino sea una pared.
 \end{itemize}
-Estos rangos aleatorios también se obtuvieron experimentando, hasta lograr valores que ocasionaran bajas pero que no impidieran a los soldados llegar al búnker en la mayoría de los casos. Dichos experimentos exceden el interés de esta sección y no serán discutidos.\\
+\textcolor{red}{que es pasaje o pared?}\\
+
+\textcolor{red}{[}Estos rangos aleatorios también se obtuvieron experimentando, hasta lograr valores que ocasionaran bajas pero que no impidieran a los soldados llegar al búnker en la mayoría de los casos.\textcolor{red}{]?} Dichos experimentos exceden el interés de esta sección y no serán discutidos.\\
+
+\bigskip
 
 Pese a dificultades expuestas, se decidió proceder con dichas instancias, ya que lograban generar una fluctuación en la cantidad de soldados, y esto, si bien lejos del peor caso propuesto, resultó ser una aproximación que nos resultó suficiente.\\
 
@@ -303,7 +325,7 @@ Por lo dicho anteriormente, se realizaron experimentos sobre los siguientes dos 
 	\item \textbf{Zombies aleatorios}: Es la instancia explicada anteriormente.
 \end{itemize}
 
-También es necesario aclarar, que los experimentos se realizaron sobre ciudades cuadradas, con puntos de inicio y llegada en los extremos opuestos de la ciudad, y con cantidad de soldados iniciales igual a 20.\\
+También es necesario aclarar, que los experimentos se realizaron sobre ciudades cuadradas, con puntos de inicio y llegada en los extremos opuestos de la ciudad, y con cantidad de soldados iniciales igual a 20. \textcolor{red}{Tomamos esta decision porque nos parecieron casos analogos los de ciudades cuadradas, y rectangulares mientras la cantidad de cuadras total sea similar y pusimos los puntos de partida y de llegada para aprovechar al maximo la dimension de la ciudad. O algo asi...}\\
 
 A continuación se detallan los experimentos y sus resultados.
 Debido al tamaño de las instancias de prueba, los inputs de dichos experimentos no fueron adjuntados.
@@ -338,29 +360,57 @@ Debido al tamaño de las instancias de prueba, los inputs de dichos experimentos
 	\end{tabular}
 \end{center}
 
+
+
+\newpage
+
+\subsubsection*{Cero Zombies}
+
 Dado que los tiempos de ejecución para ambos experimentos varían ampliamente, primero analizaremos el experimento de \textbf{Cero zombies}.
 
 \includegraphics[width=15cm,keepaspectratio=yes]{imagenes/ej2/czneto.png}
 
-Como se puede apreciar, al no haber zombies, no existe ningun camino en el cual mueran soldados, por lo que los tiempos se incrementan acorde a la dimension de la ciudad, y al ser cuadradas, crece polinomialmente.
+Como se puede apreciar, al no haber zombies, no existe ningun camino en el cual mueran soldados, por lo que los tiempos se incrementan acorde a la dimension de la ciudad, y al ser cuadradas, crece \textcolor{red}{polinomialmente ?}.
+
+\newpage
+
+\subsubsection*{Cero Zombies vs Zombies Aleatorios}
 
 \includegraphics[width=15cm,keepaspectratio=yes]{imagenes/ej2/czyza.png}
 
-Aquí se pueden apreciar las diferencias de tiempos. Ésta radica en el hecho de que \textbf{Zombies aleatorios} posee caminos en los cuales los soldados mueren. Por ello, el algoritmo deberá recorrer, en peor caso, $s$ veces la ciudad entera.\\
+Aquí se pueden apreciar las diferencias de tiempos. Ésta radica en el hecho de que \textbf{Zombies aleatorios} posee caminos en los cuales los soldados mueren. Por ello, el algoritmo deberá recorrer, en peor caso, $s$ veces la ciudad entera. En cambio, en el caso de \textbf{Cero Zombies} s\'olo arma una ``capa'' de la ciudad, es decir todos los nodos para las esquinas de la ciudad pero siempre \texttt{soldadosVivos}$=0$. \\
 
+\newpage
 Se procedió, entonces, a dividir los resultados de \textbf{Zombies aleatorios} por la cantidad de soldados iniciales con los que se ejecutó el algoritmo a fin de que quede reflejado, que en ese caso, los tiempos serán muy similares a los de \textbf{Cero zombies}. Esto se debe a que ya no son los tiempos de recorrer $s$ veces la ciudad, sino de recorrerla una sola vez.
+
 Sin embargo, es necesario aclarar que la similitud que se intenta mostrar, es aproximada, ya que no podemos asegurar que efectivamente, el algoritmo recorre $s$ veces la ciudad. Tal es el peor caso, y como hemos expuesto en un principio, no podemos asegurar que sea el que realmente ocurre.
 
 \includegraphics[width=15cm,keepaspectratio=yes]{imagenes/ej2/zaczados.png}
 
+\textcolor{red}{Tal como era esperado, en este grafico se puede apreciar que ... bla bla bla}
+
+\newpage
+
 Manteniendo los resultados de \textbf{Zombies aleatorios} divididos por $s$, finalmente dividimos los resultados tanto de \textbf{Cero zombies} como de \textbf{Zombies aleatorios}, por $n$, y en una instancia aparte, por $n.m$.
+
 De esta manera, dado que en ambos tienen $s$ igual a 1, solo queda ver que al dividir por $n$, los resultados se aproximan a una función lineal, y que al dividirlos por $n.m$, se aproximan a una constante.\\
 
-Como solo nos interesa la relación, y no la función exacta ni la constante, multiplicamos los resultados de dichas divisiones por 100, para que los valores sean más claros y visibles.
+Como s\'olo nos interesa la relación, y no la función exacta ni la constante, multiplicamos los resultados de dichas divisiones por 100, para que los valores sean más claros y visibles.\\
+\\
+
+El gr\'afico siguiente corresponde a los tiempos de ejecuci\'on divididos por $s.n$ en el caso de \textbf{Zombies aleatorios}  y por $n$ en el caso de \textbf{Cero zombies}.
 
 \includegraphics[width=15cm,keepaspectratio=yes]{imagenes/ej2/linealizacion.png}
 
-\includegraphics[width=15cm,keepaspectratio=yes]{imagenes/ej2/constantizacion.png}
+\textcolor{red}{Tal como era esperado, en este grafico se puede apreciar que ... bla bla bla}
 
-Se puede ver que la experimentación se corresponde con la teoría, y que la complejidad, en peor caso, es $O(s.n.m)$.
+\newpage
+
+El gr\'afico siguiente corresponde a los tiempos de ejecuci\'on divididos por $s.n.m$ en el caso de \textbf{Zombies aleatorios}  y por $n.m$ en el caso de \textbf{Cero zombies}.
+
+\includegraphics[width=15cm,keepaspectratio=yes]{imagenes/ej2/constantizacion.png}\
+\textcolor{red}{Tal como era esperado, en este grafico se puede apreciar que ... bla bla bla}\\
+\bigskip
+
+Se puede ver que la experimentación se corresponde con la teoría, y que la complejidad, en peor caso, es $\mathbf{O(s.n.m)}$.
 
