@@ -86,8 +86,31 @@ Consideremos el caso de $n=3$, donde contamos con los nodos: A, B y C con un cos
 	
 	Llevar la cuenta de cu\'anto se lleva gastado es sumar los costos de cada tuber\'ia colocada m\'as la cantidad de refiner\'ias por su costo, y as\'i obtenemos el costo total.
 
+\newpage
+
 \subsubsection*{PseudoC\'odigo}
-\textcolor{red}{Poner un pseudo codigo del algoritmo.}
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{int $m$, int $n$, int $C$, listaDeAdyacencia $ejes$}
+\BlankLine
+\BlankLine
+\emph{Ordenar $ejes$ en orden creciente acorde a su costo}\;
+\BlankLine
+\emph{$conexionesMinimas \leftarrow$Aplicar Kruskal sobre $ejes$, eliminando tambi\'en los ejes que tengan un costo mayor a construir una refiner\'ia}\;
+\BlankLine
+\For{$i\leftarrow 0$ \KwTo $conexionesMinimas.size()$}{
+	\emph{costoTotal$+=$conexionesMinimas[i]}\;
+}
+\BlankLine
+\For{cada componente conexa $\in$ conexionesMinimas}{
+	\emph{Poner una refiner\'ia en un nodo de la componente}\;
+}
+\caption{Refinando Petr\'oleo}%\label{algo_ej3}
+\end{algorithm}\DecMargin{1em}
 
 \newpage
 \subsection{An\'alisis de la complejidad}

@@ -108,12 +108,34 @@ Con el fin de poder calcular el camino una vez obtenida la cantidad de tiempo me
 
 De este modo, recorremos la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$ hacia la situaci\'on que indica la misma, y as\'i sucesivamente. De este modo obtenemos las elecciones hechas desde la \'ultima etapa hasta la primera.
 
-
+\newpage
 \subsubsection*{PseudoC\'odigo}
-\textcolor{red}{Poner un pseudo codigo del algoritmo.}
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{int $n$, $k_m$, $k_b$ , lista$<$BMX, Moto, Buggy$>$ $datosPorEtapas$}
+\BlankLine
+\BlankLine
+\For{$etapa\leftarrow 0$ \KwTo $n$}{
+	\For{$cmoto\leftarrow 0$ \KwTo $k_m$}{
+		\For{$cbuggy\leftarrow 0$ \KwTo $k_b$}{
+			\emph{$dicc(cmoto, cbuggy, etapa) \leftarrow$Elijo el m\'inimo entre los veh\'iculos disponibles para esta etapa sumado a lo que tarde en la anterior considerando esta elecci\'on}\;
+			\emph{$dicc(cmoto, cbuggy, etapa) \leftarrow$Elecci\'on tomada de veh\'iculo}\;
+		}
+	}
+}
+\BlankLine
+\emph{Recorrer el diccionario desde la posici\'on final para armar el recorrido}\;
+\caption{Dakkar}%\label{algo_ej3}
+\end{algorithm}\DecMargin{1em}
+
 \newpage
 
 \subsection{An\'alisis de la complejidad}
+
 \subsubsection{Complejidad Temporal}
 
 Como par\'ametro vamos a recibir $m_k$, $m_b$, $n$ y los tiempos necesarios para atravesar con cada veh\'iculo las \emph{n} etapas. Los tiempos los vamos a tener almacenados en un vector de tuplas, donde cada componente va a ser BMX, Moto y buggy.\\
