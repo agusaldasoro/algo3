@@ -18,12 +18,36 @@ Se busca hallar la manera de llegar desde $X_i$ hasta $X_f$ con la mayor cantida
 
 Se exige una cota de complejidad temporal de $\mathbf{O(s.n.m)}$.\\
 
-\textcolor{red}{Insertar ejemplito con dibujo.}
+\bigskip
+
+Un caso espec\'ifico de la problem\'atica a tratar es el que detallamos a continuaci\'on.\\
+
+Consideremos una ciudad con $n=3$ y $m=3$, de modo que se forma una ciudad cuadrada de cuatro manzanas en total. La cantidad de soldados inicial($s$) es 10 y se deben mover desde un extremo de la ciudad ($X_i$) hasta el otro ($X_f$) tal como indica la figura. En color verde se indica el camino \'optimo que debe ser devuelto al ejecutar el algoritmo.\\
+
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.7]{imagenes/ej2/cuadras.png}
+ 	\caption{Ciudad de 3x3}
+ 	\label{ejemplitoCiudad}
+   \end{center}
+ \end{figure}
+
+\newpage
+
+Es claro observar que la cuadra donde la cantidad de zombies es $30$ no va a pertenecer al camino soluci\'on ya que al pasar por all\'i con la cantidad m\'axima de soldados (la cantidad inicial) no se efectuar\'an sobrevivientes. A continuaci\'on, el primer movimiento que pueden hacer es pasar por la cuadra con $11$ zombies, sufriendo la baja de un soldado.\\
+
+Luego de este paso, contamos con una cantidad de $9$ soldados sobrevivientes por lo que resulta tambi\'en trivial esquivar la calle con $20$ zombies ya que no se puede salvar a ning\'un soldados de la cuadrilla. Por este motivo, se prosigue el camino por la cuadra con $5$ zombies, sin sufrir ninguna baja.\\
+
+Al llegar a este momento, mantenemos la cantidad de soldados sobrevivientes en $9$. Si bien un camino m\'as corto en longitud ser\'ia pasar por la cuadra con $10$ zombies, no es el camino soluci\'on ya que al enfrentarse $9$ soldados con $10$ zombies se sufre una baja m\'as dejando al ej\'ercito con $8$ soldados. En cambio, se pasa por las cuadras de $9$, $7$ y $0$ zombies sin perder ningun hombre.\\
+
+Al finalizar, s\'olo queda una cuadra posible que contiene a $10$ zombies tambi\'en. Luego de cruzar esta cuadra, la cantidad de soldados ser\'a $8$ y llegaremos a destino.
+
+
 
 \newpage
 \subsection{Resoluci\'on propuesta y justificaci\'on}
 
-Para modelar la problem\'atica planteada, utilizamos dos grafos.\\
+\textcolor{magenta}{[EZE] Leete esta seccion y corregila, que le tengo mis dudas. }Para modelar la problem\'atica planteada, utilizamos dos grafos.\\
 \\
 
 El \emph{primer grafo} (no dirigido) con el que vamos a tratar es el que almacena los datos de entrada -\texttt{ciudadInfestada}- (cantidad de zombies por cuadra), de modo que cada nodo es una esquina de la ciudad y cada eje tiene en su peso la cantidad de zombies que est\'an presentes en esa locaci\'on.\\
@@ -33,11 +57,31 @@ El \emph{segundo grafo} \textcolor{red}{(dirigido)?} -\texttt{grafo}- lo vamos a
 
 Cada nodo de \texttt{grafo} va a contener la siguiente informaci\'on: cantidad de soldados vivos con la que se lleg\'o a esa posici\'on (\texttt{soldadosVivos}) y las coordenadas de su posici\'on: \texttt{i} y \texttt{j}.
 
-Los ejes de nuestro \texttt{grafo} no van a contener ninguna informaci\'on extra, s\'olo indicar\'an movimientos desde un nodo a otro que sean posibles. Es decir, s\'olo va a haber una conexi\'on del nodo \emph{e} al nodo \emph{f} si en ese trayecto no se produjo la baja total de los soldados.
+Los ejes de nuestro \texttt{grafo} no van a contener ninguna informaci\'on extra, s\'olo indicar\'an movimientos desde un nodo a otro que sean posibles. Es decir, s\'olo va a haber una conexi\'on del nodo \emph{e} al nodo \emph{f} si en ese trayecto no se produjo la baja total de los soldados.\\
 
-\textcolor{red}{Poner un ejemplito que diga de un nodo e al f cuantos soldados se perdieron porque nos fijamos en ciudadInfestada}.\\
+Por ejemplo, si consideramos el caso visto en la Secci\'on \ref{ejemplitoCiudad}, vamos a construir un grafo de la siguiente manera:
 
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.4]{imagenes/ej2/todos.png}
+   \end{center}
+ \end{figure}
+ 
+Donde los n\'umeros en negro que figuran sobre los ejes es la cantidad de zombies por esa cuadra, consultada en \texttt{ciudadInfestada}. Los nodos que permanecieron grises, o ni fueron consultados no van a formar parte de nuestro grafo.
 
+As\'i mismo, se puede apreciar que para una misma esquina hay dos nodos distintos, ya que cambia la cantidad de soldados con la que se arrib\'o.\\
+
+\newpage
+
+En este caso, encontramos dos caminos para llegar al b\'unker con vida. De todos modos, queremos el que lo haga con mayor cantidad de sobrevivientes que es el camino azul.
+
+   \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.7]{imagenes/ej2/final.png}
+   \end{center}
+ \end{figure}
+
+\bigskip
 
 Lo primero que vamos a hacer es situarnos en la posici\'on inicial ($X_i = (inicioH, inicioV)$) y crear este nodo en \texttt{grafo}, de modo que \texttt{soldadosVivos} va a ser la cantidad de soldados inicial y las coordenadas van a ser \texttt{i=inicioH,j=inicioV}. 
 
@@ -45,7 +89,8 @@ Para continuar la creaci\'on de este \texttt{grafo}, lo vamos a recorrer mediant
 
 Al momento de avanzar de nodo, nos fijamos en el grafo \texttt{ciudadInfestada} la cantidad de zombies en esa cuadra.\\
 
-\textcolor{red}{Y si volvemos a pasar por una cuadra que ya pasamos y habiamos matado a todos los zombies y nos fijamos en la cantidad de zombies original? Por favor, diganme que esto nunca pasa :)}\\
+
+\textcolor{magenta}{[EZE]Y si volvemos a pasar por una cuadra que ya pasamos y habiamos matado a todos los zombies y nos fijamos en la cantidad de zombies original? Explicar porque esto nunca pasa :)}\\
 
 Para realizar este procedimiento, utilizamos una \texttt{cola} la cual nos va a indicar qu\'e nodos nos falta recorrer.
 
@@ -60,7 +105,19 @@ Para encontrar la cantidad de soldados m\'axima con la que se puede llegar a des
 Por \'ultimo, para hallar el camino debemos hacer el proceso inverso. Como en cada nodo existente de \texttt{grafo} vamos a tener la coordenada anterior en la que se estaba para llegar all\'i, vamos accediendo secuencialmente. De esta manera, tenemos todas las posiciones (esquinas) por donde pas\'o la guardilla hasta llegar a destino.\\
 
 \bigskip
-\textcolor{red}{Esta solucion propuesta funciona porque..}
+
+
+Esta soluci\'on propuesta resuelve el problema porque considera todos los caminos posibles desde el punto inicial $X_i$. Es decir, recorre el grafo situ\'andose en un primer momento en este nodo por todos los caminos existentes. S\'olo se detiene cuando la cantidad de zombies es suficiente para destruir a todo el escuadr\'on. Sin embargo, todos los recorridos deben finalizar cuando se alcanza la posici\'on del bunker $X_f$.\\
+
+De este modo, diagramamos todos los caminos posibles que conducen desde $X_i$ hasta $X_f$ dejando (al menos) un soldado con vida. Los caminos que se cortan antes de alcanzar la posici\'on del b\'unker no nos son de inter\'es.\\
+
+Nos basta con encontrar si se arm\'o alg\'un nodo que sus coordenadas coincidan con $X_f$ para notar que el problema tiene soluci\'on. Para encontrar la soluci\'on que cumple ser la \'optima s\'olo debemos recorrer los nodos que existan con coordenadas $X_f$ y devolver el que tenga un valor de \texttt{soldadosVivos} mayor.\\
+\\
+
+Si existe soluci\'on, nos situamos en el nodo con la soluci\'on \'optima y desde all\'i reeconstruimos el camino que debimos recorrer. Es v\'alido aclarar que si existi\'o m\'as de una manera de llegar a un \emph{mismo} nodo no nos es de inter\'es diferenciarlas y s\'olo  nos vamos a quedar con una \textcolor{red}{No estoy segura ahora si con la ultima o la primera.} ya que cada nodo cuenta con la cantidad \texttt{soldadosVivos} en \'el y no existe una diferencia cualitativa entre caminos que no se vea reflejada ah\'i.\\
+
+\bigskip
+
 
 
 

@@ -10,21 +10,25 @@ Se pide recorrer la traves\'ia, dentro de las restricciones, de modo que se util
 
 Se exige resolver la problem\'atica con una complejidad temporal de $O(n.k_m.k_b)$.\\
 
+\bigskip
+
 A continuaci\'on, se presenta un ejemplo sobre c\'omo resolver el problema, dado un caso espec\'ifico.\\
 
 Dada una traves\'ia con 3 etapas (A, B y C), para las cu\'ales se cuenta con 1 uso de la moto ($k_m$ = 1) y 2 usos del buggy ($k_b$ = 2). Las diferentes etapas est\'an caracterizadas de la siguiente manera:\\
-\textcolor{red}{Dibujitos con ejemplos :)} \textcolor{blue}{Manana agrego el dibujito! Me peleé con la tabla pero no pude arreglar la última columna, estoy re quemado, manana vuelvo a intentar}\\
+
+\textcolor{red}{Dibujitos con ejemplos :)} \textcolor{blue}{Manana agrego el dibujito! Me peleé con la tabla pero no pude arreglar la última columna, estoy re quemado, manana vuelvo a intentar} \textcolor{magenta}{te arregle la tabla :)}\\
+
 En la siguiente tabla se muestran las diferentes elecciones que se pueden realizar,
 teniendo en cuenta la cantidad de usos disponibles, indicando cu\'al es el tiempo total en cada caso.
 \begin{table}[htb]
 \centering
-\begin{tabular}[c]{|l|l|l|l|l|l|}
+\begin{tabular}[c]{|l|l|l|l|l|}
 
 		\hline
-		Casos &\multicolumn{3}{|c|}{Veh\'iculo utilizado}& Tiempo total & &
-		&\multicolumn{3}{|c|}{por etapa}& &  \\
+		Casos &\multicolumn{3}{|c|}{Veh\'iculo utilizado}& Tiempo total \\
+		&\multicolumn{3}{|c|}{por etapa}&   \\
 		\cline{2-4}
-		&  $A$  &  $B$  &  $C$ & & \\
+		&  $A$  &  $B$  &  $C$ &  \\
 		\hline
 		Caso 1& 1 & 1 & 1 & 11 \\
 		\hline
@@ -135,7 +139,10 @@ Dado que los $n$, $k_m$ y $k_b$ iniciales van a ser los dados por par\'ametro y 
 \end{equation*}
 
 \newpage
-Esta formulaci\'on recursiva resuelve el problema porque.... \textcolor{red}{Poner aca algo del estilo de la demo de golosos je} \textcolor{blue}{ALGUIEN???!!!}
+
+\textcolor{blue}{ALGUIEN???!!!}\textcolor{magenta}{[NORIEGA]}\\
+
+Esta formulaci\'on recursiva resuelve el problema porque.... \textcolor{magenta}{Poner aca algo del estilo de la demo de golosos je. } 
 
 \subsubsection*{Diccionario a utilizar}
 
@@ -160,7 +167,7 @@ Luego para $n=1$, debemos considerar el costo m\'inimo entre usar cada uno de lo
 
 Continuamos con las iteraciones hasta llegar a $n=n_{parametro}$.\\
 
-\textcolor{red}{Aca poner un dibujito que ejemplifique.}\\
+\textcolor{red}{Habra que poner un dibujito que ejemplifique aca?}\\
 
 Cuando contamos con la matriz Diccionario completa, nuestro resultado va a estar ubicado en la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$.\\
 
@@ -417,7 +424,7 @@ Dado que la estructura utilizada es una matriz (\texttt{vector$<$vector$>$}) de 
 
 \subsubsection{Constrastaci\'on Emp\'irica de la complejidad}
 
-\textcolor{red}{Poner como fueron generados los casos de test, si aunque aca sean re pavos...}\\
+\textcolor{magenta}{[BRIAN]Poner como fueron generados los casos de test, si aunque aca sean re pavos...}\\
 
 Para realizar la siguiente experimentaci\'on, comenzamos mirando el caso m\'as sencillo (\emph{mejor caso}), que se da cuando tanto $k_m$ como $k_b$ son igual a 0. Es decir, en todos los casos debemos usar la BMX.
   
@@ -493,7 +500,7 @@ n & Tiempo en segundos\\
   Luego, consideramos el \emph{peor caso} posible, que es el que iguala tanto $k_m$ como $k_b$ con $n$.
   Es decir, el caso en el que para cada etapa, tenemos la posiblidad de elegir cualquiera de las 3 opciones, BMX, motocross o buggy.
   
-  Los tiempos que cuestan recorrer cada etapa con las distintas opciones fueron generados aleatoriamente, ya que no influyen en el costo temporal del algoritmo. \textcolor{red}{Aca tambien poner como los generamos, si es una fiaca, pero bueno...}\\
+  Los tiempos que cuestan recorrer cada etapa con las distintas opciones fueron generados aleatoriamente, ya que no influyen en el costo temporal del algoritmo. \textcolor{magenta}{[BRIAN]Aca tambien poner como los generamos, si es una fiaca, pero bueno...}\\
   
   Los tiempos de ejecuci\'on para cada etapa $n$ fueron:
   
@@ -580,7 +587,7 @@ n & Tiempo en segundos\\
   
   \newpage
   
-  Luego, con el fin de comparar los tiempos de ejecuci\'on, se realiz\'o una \'ultima experimentaci\'on, en la cual se tomaron los mismos valores para $k_m$ y $k_b$, proporcionales al $n$ dado.\textcolor{red}{Si, aca tambien poner aunque sea una oracion de como se armaron}\\
+  Luego, con el fin de comparar los tiempos de ejecuci\'on, se realiz\'o una \'ultima experimentaci\'on, en la cual se tomaron los mismos valores para $k_m$ y $k_b$, proporcionales al $n$ dado.\textcolor{magenta}{[BRIAN]Si, aca tambien poner aunque sea una oracion de como se armaron}\\
   
   
   Como resultado se obtuvieron los siguientes valores:
