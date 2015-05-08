@@ -162,7 +162,11 @@ Vale, puesto que si no hay etapas, el camino mínimo tiene longitud 0, independi
 
 \textbf{\emph{Paso inductivo:}}\\
 $P(n)\Rightarrow P(n+1)$\\
-Primero vamos a mencionar que este problema cumple con el principio de optimalidad, es decir que para cada subsecuencia de la soluci\'on \'optima, vale que es \'optima si se acotase el problema a esas instancias. Esto se puede ver en la tabla de anterior.
+Primero vamos a mencionar que este problema cumple con el principio de optimalidad, es decir que, desde la etapa 0 hasta la i, la subsoluci\'on hallada, ser\'a \'optima.
+
+Esto se puede ver en la tabla de anterior:
+
+En el caso 4 y 11, si acotamos el problema a 2 etapas, ambas soluciones nos indican que el tiempo total ser\'ia 5, que es \'optimo.
 
 Hasta la \emph{n-ésima} etapa, sabemos que contamos con el tiempo m\'inimo para cada decisi\'on posible en las n-1 etapas anteriores. Entonces por el principio de optimalidad, podemos agregar el tiempo m\'inimo de los posibles veh\'iculos, obteniendo una elecci\'on \'optima de \emph{n+1} etapas.
 
