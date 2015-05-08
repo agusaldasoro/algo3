@@ -31,8 +31,6 @@ Dada una traves\'ia con 3 etapas (A, B y C), para las cuales se cuenta con 1 uso
 En la siguiente tabla se muestran las diferentes elecciones que se pueden realizar,
 teniendo en cuenta la cantidad de usos disponibles, indicando cu\'al es el tiempo total en cada caso.\\
 
-\textcolor{red}{Cambiar los numeritos 1, 2 y 3 de la tabla por BMX, BUG, MOT  porque asi no se entiende}
-
 \begin{table}[htb]
 \centering
 \begin{tabular}[c]{|l|l|l|l|l|}
@@ -43,43 +41,43 @@ teniendo en cuenta la cantidad de usos disponibles, indicando cu\'al es el tiemp
 		\cline{2-4}
 		&  $A$  &  $B$  &  $C$ &  \\
 		\hline
-		Caso 1& 1 & 1 & 1 & 11 \\
+		Caso 1& BMX & BMX & BMX & 11 \\
 		\hline
-		Caso 2& 1 & 1 & 2 & 15 \\
+		Caso 2& BMX & BMX & MOTO & 15 \\
 		\hline
-		Caso 3& 1 & 1 & 3 & 12 \\
+		Caso 3& BMX & BMX & BUGGY & 12 \\
 		\hline
-		\textbf{Caso 4}& \textbf{1} & \textbf{2} & \textbf{1} & \textbf{7} \\
+		\textbf{Caso 4}& \textbf{BMX} & \textbf{MOTO} & \textbf{BMX} & \textbf{7} \\
 		\hline
-		Caso 5& 1 & 2 & 3 & 8 \\
+		Caso 5& BMX & MOTO & BUGGY & 8 \\
 		\hline		
-		Caso 6& 1 & 3 & 1 & 9 \\
+		Caso 6& BMX & BUGGY & BMX & 9 \\
 		\hline
-		Caso 7& 1 & 3 & 2 & 13 \\
+		Caso 7& BMX & BUGGY & MOTO & 13 \\
 		\hline
-		Caso 8& 1 & 3 & 3 & 10 \\
+		Caso 8& BMX & BUGGY & BUGGY & 10 \\
 		\hline
-		Caso 9& 2 & 1 & 1 & 9\\
+		Caso 9& MOTO & BMX & BMX & 9\\
 		\hline
-		Caso 10& 2 & 1 & 3 & 10 \\
+		Caso 10& MOTO & BMX & BUGGY & 10 \\
 		\hline
-		\textbf{Caso 11}& \textbf{2} & \textbf{3} & \textbf{1} & \textbf{7} \\
+		\textbf{Caso 11}& \textbf{MOTO} & \textbf{BUGGY} & \textbf{BMX} & \textbf{7} \\
 		\hline
-		Caso 12& 2 & 3 & 3 & 8 \\
+		Caso 12& MOTO & BUGGY & BUGGY & 8 \\
 		\hline
-		Caso 13& 3 & 1 & 1 & 13 \\
+		Caso 13& BUGGY & BMX & BMX & 13 \\
 		\hline
-		Caso 14& 3 & 1 & 2 & 17 \\
+		Caso 14& BUGGY & BMX & MOTO & 17 \\
 		\hline
-		Caso 15& 3 & 1 & 3 & 14 \\
+		Caso 15& BUGGY & BMX & BUGGY & 14 \\
 		\hline
-		Caso 16& 3 & 2 & 1 & 9 \\
+		Caso 16& BUGGY & MOTO & BMX & 9 \\
 		\hline
-		Caso 17& 3 & 2 & 3 & 10 \\
+		Caso 17& BUGGY & MOTO & BUGGY & 10 \\
 		\hline
-		Caso 18& 3 & 3 & 1 & 11 \\
+		Caso 18& BUGGY & BUGGY & BMX & 11 \\
 		\hline
-		Caso 19& 3 & 3 & 2 & 15 \\
+		Caso 19& BUGGY & BUGGY & MOTO & 15 \\
 		\hline
 		
 	\end{tabular}
@@ -89,8 +87,6 @@ teniendo en cuenta la cantidad de usos disponibles, indicando cu\'al es el tiemp
 
 En este ejemplo, la soluci\'on buscada, es decir, la \'optima, puede ser tanto el caso 4 como el 11, ya que ambos toman el mismo tiempo y respetan la cantidad de usos de buggy y moto posibles.
 Por la formulaci\'on de nuestro algoritmo, nosotros devolvemos el caso 11.
-
-
 
 \newpage
 \subsection{Resoluci\'on propuesta y justificaci\'on}
@@ -166,12 +162,18 @@ Vale, puesto que si no hay etapas, el camino mínimo tiene longitud 0, independi
 
 \textbf{\emph{Paso inductivo:}}\\
 $P(n)\Rightarrow P(n+1)$\\
-Encontrándose en la \emph{n+1-ésima} etapa, el algoritmo calcula cuanto tiempo tomaría completar esa etapa (es decir, la \emph{longitud} entre la etapa anterior y la actual) para los distintos vehículos (tiempo que llamaremos $T_{v}$, donde $v$ es cada vehículo), y luego se invoca a si mismo recursivamente, para cada posible decisión de que vehiculo utilizar. Finalmente, suma el tiempo $T_{v}$ al valor retornado a la función, para cada vehículo respectivo, y luego toma el mínimo de esos resultados.\\
-Sabemos que vale $P(n)$, es decir, que hasta \emph{n-ésima} etapa, el algoritmo ha tomado el camino mínimo para llegar a ella.\\
-Por el principio de optimalidad, si ya generó el camino mínimo hasta la \emph{n-ésima} etapa, solo debe ver qué vehiculo es conveniente usar entre la \emph{n+1-ésima} etapa y la \emph{n-ésima} etapa. Este es, efectivamente, su comportamiento.
+Primero vamos a mencionar que este problema cumple con el principio de optimalidad, es decir que para cada subsecuencia de la soluci\'on \'optima, vale que es \'optima si se acotase el problema a esas instancias. Esto se puede ver en la tabla de anterior.
+
+Hasta la \emph{n-ésima} etapa, sabemos que contamos con el tiempo m\'inimo para cada decisi\'on posible en las n-1 etapas anteriores. Entonces por el principio de optimalidad, podemos agregar el tiempo m\'inimo de los posibles veh\'iculos, obteniendo una elecci\'on \'optima de \emph{n+1} etapas.
+
+%Encontrándose en la \emph{n+1-ésima} etapa, el algoritmo calcula cuanto tiempo tomaría completar esa etapa (es decir, la \emph{longitud} entre la etapa anterior y la actual) para los distintos vehículos (tiempo que llamaremos $T_{v}$, donde $v$ es cada vehículo), y luego se invoca a s\'i mismo recursivamente, para cada posible decisión de que veh\'iculo utilizar. Finalmente, suma el tiempo $T_{v}$ al valor retornado a la función, para cada vehículo respectivo, y luego toma el mínimo de esos resultados.
+
+%Sabemos que vale $P(n)$, es decir, que hasta \emph{n-ésima} etapa, el algoritmo ha tomado el camino mínimo para llegar a ella.
+
+%Por el principio de optimalidad, si ya generó el camino mínimo hasta la \emph{n-ésima} etapa, solo debe ver qué vehiculo es conveniente usar entre la \emph{n+1-ésima} etapa y la \emph{n-ésima} etapa. Este es, efectivamente, su comportamiento.
 Por lo tanto, vale $P(n) \Rightarrow P(n+1)$. $\square$\\
 
-Es necesario destacar, que el algoritmo resuelve de la misma manera que el \emph{Algoritmo de Bellman-Ford para caminos mínimos}, donde cada camino corresponde a las distintas decisiones posibles que se puedan tomar.
+Resulta pertinenete destacar que el algoritmo resuelve de la misma manera que el \emph{Algoritmo de Bellman-Ford para caminos mínimos}, donde cada camino corresponde a las distintas decisiones posibles que se puedan tomar.
 
 \subsubsection*{Diccionario a utilizar}
 
