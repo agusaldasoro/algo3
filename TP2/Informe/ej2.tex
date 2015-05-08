@@ -24,11 +24,10 @@ Un caso espec\'ifico de la problem\'atica a tratar es el que detallamos a contin
 
 Consideremos una ciudad con $n=3$ y $m=3$, de modo que se forma una ciudad cuadrada de cuatro manzanas en total. La cantidad de soldados inicial($s$) es 10 y se deben mover desde un extremo de la ciudad ($X_i$) hasta el otro ($X_f$) tal como indica la figura. En color verde se indica el camino \'optimo que debe ser devuelto al ejecutar el algoritmo.\\
 
-\textcolor{red}{Cambiar 15 por 18}
 
   \begin{figure}[h!]
    \begin{center}
- 	\includegraphics[scale=0.7]{imagenes/ej2/cuadras.png}
+ 	\includegraphics[scale=0.9]{imagenes/ej2/cuadras.png}
  	\caption{Ciudad de 3x3}
  	\label{ejemplitoCiudad}
    \end{center}
@@ -40,7 +39,7 @@ Es claro observar que la cuadra donde la cantidad de zombies es $30$ no va a per
 
 Luego de este paso, contamos con una cantidad de $9$ soldados sobrevivientes por lo que resulta tambi\'en trivial esquivar la calle con $20$ zombies ya que no se podr\'ia salvar a ning\'un soldado de la cuadrilla. Por este motivo, se prosigue el camino por la cuadra con $5$ zombies, sin sufrir ninguna baja.\\
 
-Al llegar a este momento, mantenemos la cantidad de soldados sobrevivientes en $9$. Si bien un camino m\'as corto en longitud ser\'ia pasar por la cuadra con $10$ zombies, no es el camino soluci\'on ya que al enfrentarse $9$ soldados con $10$ zombies se sufre una baja m\'as dejando al ej\'ercito con $8$ soldados. En cambio, se pasa por las cuadras de $9$, $7$ y $0$ zombies sin perder ningun hombre.\\
+Al llegar a este momento, mantenemos la cantidad de soldados sobrevivientes en $9$. Ir por la cuadra con $18$ zombies no es opci\'on ya que no habr\'ia ning\'un sobreviviente. Si bien un camino m\'as corto en longitud ser\'ia pasar por la cuadra con $10$ zombies, no es el camino soluci\'on ya que al enfrentarse $9$ soldados con $10$ zombies se sufre una baja m\'as dejando al ej\'ercito con $8$ soldados. En cambio, se pasa por las cuadras de $9$, $7$ y $0$ zombies sin perder ningun hombre.\\
 
 Al finalizar, s\'olo queda una cuadra posible que contiene a $10$ zombies tambi\'en. Luego de cruzar esta cuadra, la cantidad de soldados ser\'a $8$ y llegaremos a destino.
 
