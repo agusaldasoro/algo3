@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.5.7)  8 MAY 2015 01:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.5.7)  8 MAY 2015 01:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2970,7 +2970,7 @@ ic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/
 msam10.pfb>
-Output written on informe.pdf (46 pages, 1090149 bytes).
+Output written on informe.pdf (46 pages, 1090029 bytes).
 PDF statistics:
  516 PDF objects out of 1000 (max. 8388607)
  404 compressed objects within 5 object streams
