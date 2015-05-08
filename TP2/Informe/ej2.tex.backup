@@ -99,7 +99,7 @@ Para realizar este procedimiento, utilizamos una \texttt{cola} la cual nos va a 
 Comenzamos con el primer nodo, lo encolamos. Al desencolarlo, lo marcamos como visitado y no s\'olo agregamos los nodos vecinos correspondientes al \texttt{grafo}, sino que los insertamos en la cola. A continuaci\'on, desencolamos el elemento siguiente, lo marcamos como visitado y agregamos los nodos vecinos correspondientes que no hayan sido visitados.
 
 Repetimos este proceso hasta que la cola quede vac\'ia. Es importante destacar que no es lo mismo visitar al nodo de la posici\'on (\texttt{x,y}) con \texttt{soldadosVivos}=$s_1$ que el de la misma posici\'on con \texttt{soldadosVivos}=$s_2$ (con $s_1$ $\neq$ $s_2$).
-En cambio, si $s_1$ = $s_2$, no nos es de inter\'es diferenciar llegar a la misma posici\'on desde coordenadas previas anteriores distintas, ya que se arriba con la misma cantidad de soldados sobrevivientes. \textcolor{red}{Esto creo que no quedo muy claro}\\
+En cambio, si $s_1$ = $s_2$ no nos es de inter\'es diferenciar llegar a la misma posici\'on desde coordenadas previas anteriores distintas ya que se arriba con la misma cantidad de soldados sobrevivientes. \textcolor{red}{Esto creo que no quedo muy claro}\\
 
 Una vez completo todo el \texttt{grafo}, basta verificar que exista al menos un nodo en la posici\'on $X_f = (bunkerH, bunkerV)$ para establecer que existe un camino donde sobrevive alg\'un soldado.
 
@@ -117,7 +117,7 @@ De este modo, diagramamos todos los caminos posibles que conducen desde $X_i$ ha
 Nos basta con encontrar si se arm\'o alg\'un nodo que sus coordenadas coincidan con $X_f$ para notar que el problema tiene soluci\'on. Para encontrar la soluci\'on que cumple ser la \'optima s\'olo debemos recorrer los nodos que existan con coordenadas $X_f$ y devolver el que tenga un valor de \texttt{soldadosVivos} mayor.\\
 \\
 
-Si existe soluci\'on, nos situamos en el nodo con la soluci\'on \'optima y desde all\'i reeconstruimos el camino que debimos recorrer. Es v\'alido aclarar que si existi\'o m\'as de una manera de llegar a un \emph{mismo} nodo, no nos es de inter\'es diferenciarlas y s\'olo  nos vamos a quedar con una \textcolor{red}{No estoy segura ahora si con la ultima o la primera.} ya que cada nodo cuenta con la cantidad \texttt{soldadosVivos} en \'el y no existe una diferencia cualitativa entre caminos que no se vea reflejada ah\'i.\\
+Si existe soluci\'on, nos situamos en el nodo con la soluci\'on \'optima y desde all\'i reeconstruimos el camino que debimos recorrer. Es v\'alido aclarar que si existi\'o m\'as de una manera de llegar a un \emph{mismo} nodo no nos es de inter\'es diferenciarlas y s\'olo  nos vamos a quedar con una \textcolor{red}{No estoy segura ahora si con la ultima o la primera.} ya que cada nodo cuenta con la cantidad \texttt{soldadosVivos} en \'el y no existe una diferencia cualitativa entre caminos que no se vea reflejada ah\'i.\\
 
 \bigskip
 
@@ -162,10 +162,7 @@ Si existe soluci\'on, nos situamos en el nodo con la soluci\'on \'optima y desde
 \newpage
 \subsection{An\'alisis de la complejidad}
 
-Los valores pasados por par\'ametro est\'an almacenados en el grafo \texttt{ciudadInfestada}, el cual est\'a representado mediante una matriz.
-Cada posici\'on de la matriz es una esquina de la ciudad y en la misma se indican la cantidad de zombies que hay en el trayecto hacia la esquina de la derecha y la cantidad que hay en el inferior. 
-Esta informaci\'on es suficiente, porque si se desea saber la cantidad de zombies existentes hacia la izquierda, basta con posicionarse en el valor de la matriz de esa posici\'on y mirar hacia la derecha.
-En el caso de los bordes, como no poseen cuadras a su derecha y/o hacia abajo, se les asign\'o el valor de -1.
+Los valores pasados por par\'ametro est\'an almacenados en el grafo \texttt{ciudadInfestada}, el cual est\'a representado mediante una matriz. Cada posici\'on de la matriz es una esquina de la ciudad y en la misma se indican la cantidad de zombies que hay en el trayecto hacia la esquina de la derecha y la cantidad que hay en el inferior. Con esta informaci\'on basta porque si se desea saber la cantidad de zombies existentes hacia la izquierda, basta con posicionarse en el valor de la matriz de esa posici\'on y mirar hacia la derecha. En el caso de los bordes, como no poseen cuadras a su derecha y/o hacia abajo se les asign\'o el valor de -1.
 
 Armamos una funci\'on (\texttt{zombiesCuadra}) la cual nos devuelve en $O(1)$ la cantidad de zombies que hay desde una esquina hacia alguna de sus cuatro direcciones. La complejidad Temporal de esta funci\'on es constante porque s\'olo basta con acceder al \'indice de la matriz correspondiente y buscar la posici\'on de la tupla deseada.\\
 \\
