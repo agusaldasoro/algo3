@@ -26,7 +26,7 @@ Consideremos una ciudad con $n=3$ y $m=3$, de modo que se forma una ciudad cuadr
 
   \begin{figure}[h!]
    \begin{center}
- 	\includegraphics[scale=0.3]{imagenes/ej2/cuadras.png}
+ 	\includegraphics[scale=0.7]{imagenes/ej2/cuadras.png}
  	\caption{Ciudad de 3x3}
  	\label{ejemplitoCiudad}
    \end{center}
@@ -47,7 +47,7 @@ Al finalizar, s\'olo queda una cuadra posible que contiene a $10$ zombies tambi\
 \newpage
 \subsection{Resoluci\'on propuesta y justificaci\'on}
 
-\textcolor{magenta}{[EZE] Leete esta seccion y corregila, que le tengo mis dudas. }Para modelar la problem\'atica planteada, utilizamos dos grafos.\\
+\textcolor{red}{[EZE] Leete esta seccion y corregila, que le tengo mis dudas. }Para modelar la problem\'atica planteada, utilizamos dos grafos.\\
 \\
 
 El \emph{primer grafo} (no dirigido) con el que vamos a tratar es el que almacena los datos de entrada -\texttt{ciudadInfestada}- (cantidad de zombies por cuadra), de modo que cada nodo es una esquina de la ciudad y cada eje tiene en su peso la cantidad de zombies que est\'an presentes en esa locaci\'on.\\
@@ -92,7 +92,7 @@ Para continuar la creaci\'on de este \texttt{grafo}, lo vamos a recorrer mediant
 Al momento de avanzar de nodo, nos fijamos en el grafo \texttt{ciudadInfestada} la cantidad de zombies en esa cuadra.\\
 
 
-\textcolor{magenta}{[EZE]Y si volvemos a pasar por una cuadra que ya pasamos y habiamos matado a todos los zombies y nos fijamos en la cantidad de zombies original? Explicar porque esto nunca pasa :)}\\
+\textcolor{red}{[EZE]Y si volvemos a pasar por una cuadra que ya pasamos y habiamos matado a todos los zombies y nos fijamos en la cantidad de zombies original? Explicar porque esto nunca pasa :)}\\
 
 Para realizar este procedimiento, utilizamos una \texttt{cola} la cual nos va a indicar qu\'e nodos nos falta recorrer.
 
