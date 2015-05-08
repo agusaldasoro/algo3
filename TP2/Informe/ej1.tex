@@ -20,7 +20,7 @@ Dada una traves\'ia con 3 etapas (A, B y C), para las cuales se cuenta con 1 uso
    \begin{center}
  	\includegraphics[scale=0.4]{imagenes/ej1/ejemplo.png}
 % 	\caption{}
-% 	\label{n.png}
+	\label{dibujitoAUTOS}
    \end{center}
  \end{figure}
 
@@ -32,6 +32,7 @@ En la siguiente tabla se muestran las diferentes elecciones que se pueden realiz
 teniendo en cuenta la cantidad de usos disponibles, indicando cu\'al es el tiempo total en cada caso.\\
 
 \begin{table}[htb]
+\label{TABLITAetapas}
 \centering
 \begin{tabular}[c]{|l|l|l|l|l|}
 
@@ -150,34 +151,60 @@ Dado que los $n$, $k_m$ y $k_b$ iniciales van a ser los dados por par\'ametro y 
 \newpage
 
 {\large\textbf{Teorema}}\\
+
 La formulación recursiva planteada resuelve el problema.\\
 
+%Programación Dinámica
+% Principio de optimalidad : un problema de optimización satisface el principio de optimalidad si en una sucesión óptima de decisiones o elecciones, cada subsucesión es a su vez óptima. (es necesario que se cumpla para poder usar la técnica de programación dinámica, no todos los problemas lo cumplen)
 {\large\textbf{Demostración}}\\
-Para demostrar que el algoritmo resuelve, explotaremos la definición recursiva para aplicar inducción en la cantidad de etapas.\\
-Entonces, queremos demostrar $P(n)=(\forall k_m, k_b) func(n, k_m, k_b)$ $obtiene$ $la$ $longitud$ $del$ $camino$ $minimo$.\\
 
-\textbf{\emph{Caso base:}}\\
-$P(0) = 0$\\
-Vale, puesto que si no hay etapas, el camino mínimo tiene longitud 0, independientemente de la cantidad de buggys o motos de los que se disponga.\\
+%Para demostrar que el algoritmo resuelve, explotaremos la definición recursiva para aplicar inducción en la cantidad de etapas.\\
+%Entonces, queremos demostrar $P(n)=(\forall k_m, k_b) func(n, k_m, k_b)$ $obtiene$ $la$ $longitud$ $del$ $camino$ $minimo$.\\
+%\textbf{\emph{Caso base:}}\\
+%$P(0) = 0$\\
+%Vale, puesto que si no hay etapas, el camino mínimo tiene longitud 0, independientemente de la cantidad de buggys o motos de los que se disponga.\\
+%\textbf{\emph{Paso inductivo:}}\\
+%$P(n)\Rightarrow P(n+1)$\\
+%Primero vamos a mencionar que este problema cumple con el principio de optimalidad, es decir que, desde la etapa 0 hasta la i, la subsoluci\'on hallada, ser\'a \'optima.
 
-\textbf{\emph{Paso inductivo:}}\\
-$P(n)\Rightarrow P(n+1)$\\
-Primero vamos a mencionar que este problema cumple con el principio de optimalidad, es decir que, desde la etapa 0 hasta la i, la subsoluci\'on hallada, ser\'a \'optima.
+Primero vamos a mencionar que este problema cumple con el \emph{principio de optimalidad}, lo que es necesario para poder utilizar una t\'ecnica de \emph{programaci\'on din\'amica}. 
 
-Esto se puede ver en la tabla de anterior:
+En nuestro caso, esto se traduce a que: Hallado el camino \'optimo ($S$) que recorre las \emph{n} etapas con cantidad m\'axima de buggys utilizados $k_b$ y de motos $k_m$, el camino \'optimo desde la etapa $inicial$ hasta la etapa $i$ con cantidad m\'axima de buggys utilizados $k_b-k_b[i+1,n]$ y de motos $k_m-k_m[i+1,n]$ ser\'a $S[1,i]$. Donde $k_b[i+1,n]$ significa la cantidad de buggys usados entre las etapas $i+1$ y $n$, $k_m[i+1,n]$ la cantidad de motos usadas entre las etapas $i+1$ y $n$ dentro del camino $S$. Asumiendo $S[1,i]$ como el camino recorrido en $S$ desde la etapa $inicial$ hasta la etapa $i$.\\
+\bigskip
 
-En el caso 4 y 11, si acotamos el problema a 2 etapas, ambas soluciones nos indican que el tiempo total ser\'ia 5, que es \'optimo.
+%Esto se puede ver en la tabla de anterior:
+%En el caso 4 y 11, si acotamos el problema a 2 etapas, ambas soluciones nos indican que el tiempo total ser\'ia 5, que es \'optimo.
+%Hasta la \emph{n-ésima} etapa, sabemos que contamos con el tiempo m\'inimo para cada decisi\'on posible en las n-1 etapas anteriores. Entonces por el principio de optimalidad, podemos agregar el tiempo m\'inimo de los posibles veh\'iculos, obteniendo una elecci\'on \'optima de \emph{n+1} etapas.
+En el ejemplo planteado en la Secci\'on \ref{TABLITAetapas}, se puede observar que este principio se cumple.\\
 
-Hasta la \emph{n-ésima} etapa, sabemos que contamos con el tiempo m\'inimo para cada decisi\'on posible en las n-1 etapas anteriores. Entonces por el principio de optimalidad, podemos agregar el tiempo m\'inimo de los posibles veh\'iculos, obteniendo una elecci\'on \'optima de \emph{n+1} etapas.
+Tomamos el \textbf{caso 4}. Donde las elecciones fueron: $S=[BMX, MOTO, BMX]$ y con par\'ametros iniciales: $k_m=1$ y $k_b=2$.
+
+Tomamos $i=2$, lo que corresponde a ver el camino \'optimo con s\'olo tres etapas y como en la tercer etapa utilizamos una BMX, $k_m$ y $k_b$ se preservan. En este caso, la subsoluci\'on del problema corresponde a $S[1,2]=[BMX, MOTO]$ que posee un tiempo de $5$. Si analizamos en detalle el caso \ref{dibujitoAUTOS} podremos comprobar que si s\'olo tenemos disponible $1$ moto y $2$ buggys el menor tiempo que se necesita para recorrer las etapas 1 y 2 es $5$ unidades. 
+
+Del  mismo modo, considerando $i=1$, queremos analizar el camino \'optimo de la primer etapa. Esta vez, la cantidad de motos m\'axima que se puede utilizar va a cambiar: $k_m=0$ y $k_b=2$. Por lo tanto, en esta etapa tenemos para elegir entre usar BMX o Buggy solamente, como el tiempo en Bicicleta es menor, se corresponde a la secuencia $s[1]=[BMX]$ que se condice con lo antes planteado.\\
+
+Si analizamos el \textbf{caso 11}: $S=[MOTO, BUGGY, BMX]$, su resultado va a ser el an\'alogo.
+
+Con $i+2$, debemos considerar $k_m=1$ y $k_b=2$ (ya que en la tercer etapa se utiliz\'o una bicicleta). La subsoluci\'on ser\'a $S[1,2]=[MOTO, BUGGY]$ la cual tambi\'en otorga un tiempo de $5$.
+
+Cuando $i=1$, nuestro problema se reduce a encontrar el veh\'iculo que requiera m\'as tiempo en finalizar la etapa 1 dado: $k_m=1$ y $k_b=1$. Es decir, podemos elegir entre los tres veh\'iculos disponibles. Por lo tanto, la elecci\'on correcta es la moto quien posee el menor tiempo para la etapa 1: $S[1]=[MOTO]$.\\
+
+
+\bigskip
+
+Por lo antes planteado, podemos ver que la soluci\'on \'optima no tiene que necesariamente ser \'unica. As\'i mismo, las subsoluciones \'optimas tampoco deben ser \'unicas, ya que encontramos dos maneras de recorrer las etapa 1 y 2 con los mismos par\'ametros otorgando un tiempo de $5$.\\
+
+
 
 %Encontrándose en la \emph{n+1-ésima} etapa, el algoritmo calcula cuanto tiempo tomaría completar esa etapa (es decir, la \emph{longitud} entre la etapa anterior y la actual) para los distintos vehículos (tiempo que llamaremos $T_{v}$, donde $v$ es cada vehículo), y luego se invoca a s\'i mismo recursivamente, para cada posible decisión de que veh\'iculo utilizar. Finalmente, suma el tiempo $T_{v}$ al valor retornado a la función, para cada vehículo respectivo, y luego toma el mínimo de esos resultados.
 
 %Sabemos que vale $P(n)$, es decir, que hasta \emph{n-ésima} etapa, el algoritmo ha tomado el camino mínimo para llegar a ella.
 
 %Por el principio de optimalidad, si ya generó el camino mínimo hasta la \emph{n-ésima} etapa, solo debe ver qué vehiculo es conveniente usar entre la \emph{n+1-ésima} etapa y la \emph{n-ésima} etapa. Este es, efectivamente, su comportamiento.
-Por lo tanto, vale $P(n) \Rightarrow P(n+1)$. $\square$\\
+%Por lo tanto, vale $P(n) \Rightarrow P(n+1)$. $\square$\\
 
-Resulta pertinenete destacar que el algoritmo resuelve de la misma manera que el \emph{Algoritmo de Bellman-Ford para caminos mínimos}, donde cada camino corresponde a las distintas decisiones posibles que se puedan tomar.
+%Resulta pertinenete destacar que el algoritmo resuelve de la misma manera que el \emph{Algoritmo de Bellman-Ford para caminos mínimos}, donde cada camino corresponde a las distintas decisiones posibles que se puedan tomar.
+\bigskip
 
 \subsubsection*{Diccionario a utilizar}
 
