@@ -13,12 +13,12 @@
 \contentsline {subsection}{\numberline {2.2}Resoluci\'on propuesta y justificaci\'on}{21}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}An\'alisis de la complejidad}{24}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}C\'odigo fuente}{25}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Experimentaci\'on}{30}{subsection.2.5}
-\contentsline {subsubsection}{\numberline {2.5.1}Constrastaci\'on Emp\'irica de la complejidad}{30}{subsubsection.2.5.1}
-\contentsline {section}{\numberline {3}Refinando petr\'oleo}{37}{section.3}
-\contentsline {subsection}{\numberline {3.1}Descripci\'on de la problem\'atica}{37}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Resoluci\'on propuesta y justificaci\'on}{40}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}An\'alisis de la complejidad}{42}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}C\'odigo fuente}{44}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}Experimentaci\'on}{47}{subsection.3.5}
-\contentsline {subsubsection}{\numberline {3.5.1}Constrastaci\'on Emp\'irica de la complejidad}{47}{subsubsection.3.5.1}
+\contentsline {subsection}{\numberline {2.5}Experimentaci\'on}{29}{subsection.2.5}
+\contentsline {subsubsection}{\numberline {2.5.1}Constrastaci\'on Emp\'irica de la complejidad}{29}{subsubsection.2.5.1}
+\contentsline {section}{\numberline {3}Refinando petr\'oleo}{36}{section.3}
+\contentsline {subsection}{\numberline {3.1}Descripci\'on de la problem\'atica}{36}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Resoluci\'on propuesta y justificaci\'on}{39}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}An\'alisis de la complejidad}{41}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}C\'odigo fuente}{43}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Experimentaci\'on}{46}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {3.5.1}Constrastaci\'on Emp\'irica de la complejidad}{46}{subsubsection.3.5.1}

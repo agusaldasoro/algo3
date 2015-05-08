@@ -47,13 +47,12 @@ Al finalizar, s\'olo queda una cuadra posible que contiene a $10$ zombies tambi\
 \newpage
 \subsection{Resoluci\'on propuesta y justificaci\'on}
 
-\textcolor{red}{[EZE] Leete esta seccion y corregila, que le tengo mis dudas. }Para modelar la problem\'atica planteada, utilizamos dos grafos.\\
-\\
+Para modelar la problem\'atica planteada, utilizamos dos grafos.\\
 
 El \emph{primer grafo} (no dirigido) con el que vamos a tratar es el que almacena los datos de entrada -\texttt{ciudadInfestada}- (cantidad de zombies por cuadra), de modo que cada nodo es una esquina de la ciudad y cada eje tiene en su peso la cantidad de zombies que est\'an presentes en esa locaci\'on.\\
 \\
 
-El \emph{segundo grafo} \textcolor{red}{(dirigido)?} -\texttt{grafo}- lo vamos a ir construyendo, de modo que al finalizarlo tengamos calculada la soluci\'on.\\
+El \emph{segundo grafo} (dirigido) -\texttt{grafo}- lo vamos a ir construyendo, de modo que al finalizarlo tengamos calculada la soluci\'on.\\
 
 Cada nodo de \texttt{grafo} va a contener la siguiente informaci\'on: cantidad de soldados vivos con la que se lleg\'o a esa posici\'on (\texttt{soldadosVivos}) y las coordenadas de su posici\'on: \texttt{i} y \texttt{j}.
 
@@ -87,43 +86,29 @@ En este caso, encontramos dos caminos para llegar al b\'unker con vida. De todos
 
 Lo primero que vamos a hacer es situarnos en la posici\'on inicial ($X_i = (inicioH, inicioV)$) y crear este nodo en \texttt{grafo}, de modo que \texttt{soldadosVivos} va a ser la cantidad de soldados inicial y las coordenadas van a ser \texttt{i=inicioH,j=inicioV}. 
 
-Para continuar la creaci\'on de este \texttt{grafo}, lo vamos a recorrer mediante \textcolor{red}{BFS? o el otro?}. Es decir, vamos a conectar al nodo inicial con sus cuatro nodos vecinos (si los tiene) e indicar en ellos con cu\'antos soldados se arriba (en caso de ser menor o igual a 0, ese nodo no se agrega) y desde qu\'e posici\'on. De la misma manera, vamos a repetir el proceso para todos los nodos que sean agregados. De este modo, armamos todos los caminos posibles.
+Para continuar la creaci\'on de este \texttt{grafo}, lo vamos a recorrer mediante BFS. Es decir, vamos a conectar al nodo inicial con sus cuatro nodos vecinos (si los tiene) e indicar en ellos con cu\'antos soldados se arriba (en caso de ser menor o igual a 0, ese nodo no se agrega) y desde qu\'e posici\'on. De la misma manera, vamos a repetir el proceso para todos los nodos que sean agregados. De este modo, armamos todos los caminos posibles.
 
 Al momento de avanzar de nodo, nos fijamos en el grafo \texttt{ciudadInfestada} la cantidad de zombies en esa cuadra.\\
 
-
-\textcolor{red}{[EZE]Y si volvemos a pasar por una cuadra que ya pasamos y habiamos matado a todos los zombies y nos fijamos en la cantidad de zombies original? Explicar porque esto nunca pasa :)}\\
+Cabe destacar que podr\'ia formarse un ciclo, para evitar esto, marcamos a los nodos ya visitados para no volverlos a agregar. Adem\'as no nos interesa un cam\'ino que repita cuadras. Marcar los nodos visitados salva el caso en que podr\'ia pasar por cuadras repetidas con m\'as de 0 soldados, en caso contrario, se alcanzan los 0 soldados y decimos que esa no es una soluci\'on posible.
 
 Para realizar este procedimiento, utilizamos una \texttt{cola} la cual nos va a indicar qu\'e nodos nos falta recorrer.
 
 Comenzamos con el primer nodo, lo encolamos. Al desencolarlo, lo marcamos como visitado y no s\'olo agregamos los nodos vecinos correspondientes al \texttt{grafo}, sino que los insertamos en la cola. A continuaci\'on, desencolamos el elemento siguiente, lo marcamos como visitado y agregamos los nodos vecinos correspondientes que no hayan sido visitados.
 
 Repetimos este proceso hasta que la cola quede vac\'ia. Es importante destacar que no es lo mismo visitar al nodo de la posici\'on (\texttt{x,y}) con \texttt{soldadosVivos}=$s_1$ que el de la misma posici\'on con \texttt{soldadosVivos}=$s_2$ (con $s_1$ $\neq$ $s_2$).
-En cambio, si $s_1$ = $s_2$, no nos es de inter\'es diferenciar llegar a la misma posici\'on desde coordenadas previas anteriores distintas, ya que se arriba con la misma cantidad de soldados sobrevivientes. \textcolor{red}{Esto creo que no quedo muy claro}\\
+En cambio, si $s_1$ = $s_2$, ya ten\'iamos un camino que llegaba con la misma cantidad de soldados, por lo tanto, este lo desestimamos.
+%En cambio, si $s_1$ = $s_2$, no nos es de inter\'es diferenciar llegar a la misma posici\'on desde coordenadas previas anteriores distintas, ya que se arriba con la misma cantidad de soldados sobrevivientes. \textcolor{red}{Esto creo que no quedo muy claro}\\
 
 Una vez completo todo el \texttt{grafo}, basta verificar que exista al menos un nodo en la posici\'on $X_f = (bunkerH, bunkerV)$ para establecer que existe un camino donde sobrevive alg\'un soldado.
 
-Para encontrar la cantidad de soldados m\'axima con la que se puede llegar a destino, lo que debemos hacer es recorrer todos los nodos de la posic\'on $X_f$ y localizar al que tenga la cantidad de \texttt{SoldadosVivos} menor. Esta va a ser la soluci\'on \'optima.
+Para encontrar la cantidad de soldados m\'axima con la que se puede llegar a destino, lo que debemos hacer es recorrer todos los nodos de la posic\'on $X_f$ y localizar al que tenga la cantidad de \texttt{SoldadosVivos} mayor. Esta va a ser la soluci\'on \'optima.
 
 Por \'ultimo, para hallar el camino debemos hacer el proceso inverso. Como en cada nodo existente de \texttt{grafo} vamos a tener la coordenada anterior en la que se estaba para llegar all\'i, vamos accediendo secuencialmente. De esta manera, tenemos todas las posiciones (esquinas) por donde pas\'o la guardilla hasta llegar a destino.\\
-
-\bigskip
-
 
 Esta soluci\'on propuesta resuelve el problema porque considera todos los caminos posibles desde el punto inicial $X_i$. Es decir, recorre el grafo situ\'andose en un primer momento en este nodo por todos los caminos existentes. S\'olo se detiene cuando la cantidad de zombies es suficiente para destruir a todo el escuadr\'on. Sin embargo, todos los recorridos deben finalizar cuando se alcanza la posici\'on del bunker $X_f$.\\
 
 De este modo, diagramamos todos los caminos posibles que conducen desde $X_i$ hasta $X_f$ dejando (al menos) un soldado con vida. Los caminos que se cortan antes de alcanzar la posici\'on del b\'unker no nos son de inter\'es.\\
-
-Nos basta con encontrar si se arm\'o alg\'un nodo que sus coordenadas coincidan con $X_f$ para notar que el problema tiene soluci\'on. Para encontrar la soluci\'on que cumple ser la \'optima s\'olo debemos recorrer los nodos que existan con coordenadas $X_f$ y devolver el que tenga un valor de \texttt{soldadosVivos} mayor.\\
-\\
-
-Si existe soluci\'on, nos situamos en el nodo con la soluci\'on \'optima y desde all\'i reeconstruimos el camino que debimos recorrer. Es v\'alido aclarar que si existi\'o m\'as de una manera de llegar a un \emph{mismo} nodo, no nos es de inter\'es diferenciarlas y s\'olo  nos vamos a quedar con una \textcolor{red}{No estoy segura ahora si con la ultima o la primera.} ya que cada nodo cuenta con la cantidad \texttt{soldadosVivos} en \'el y no existe una diferencia cualitativa entre caminos que no se vea reflejada ah\'i.\\
-
-\bigskip
-
-
-
-
 
 \subsubsection*{PseudoC\'odigo}
 
@@ -135,8 +120,7 @@ Si existe soluci\'on, nos situamos en el nodo con la soluci\'on \'optima y desde
 \Input{int $n$, $m$, $s$, $Ih$, $Iv$, $Bh$, $Bv$, grafo $ciudadInfestada$}
 \BlankLine
 \BlankLine
-\emph{cola.push(Ih, Iv)}\;
-
+\emph{cola.push(Ih, Iv, s)}\;
 \While{$!cola.vacia()$}{
 \emph{$nodoActual \leftarrow cola.pop()$}\;
 \emph{$nodoActual.marcar()$}\;
@@ -146,15 +130,9 @@ Si existe soluci\'on, nos situamos en el nodo con la soluci\'on \'optima y desde
 		\emph{cola.push($nodoVecino$)}\;
 	}
 }
-}
 	\emph{$nodoActual \leftarrow nodoFinal$}\;
-\While{no llegue a $X_i$}{
-	\emph{camino.push_front($nodoActual$)}\;
-	$nodoActual \leftarrow nodoActual$.\texttt{previo}\;
 }
 \KwRet{cantidad m\'axima de \texttt{soldadosVivos} para la posici\'on de $nodoFinal$}\;
-
-
 
 \caption{Zombieland II}%\label{algo_ej3}
 \end{algorithm}\DecMargin{1em}
@@ -278,6 +256,39 @@ Por lo tanto, la complejidad Temporal del algoritmo es de $O(s.n.m)*O(1)$, lo qu
 
 	\begin{codesnippet}
 	\begin{verbatim}
+    int resulBatalla(int sold, int zomb){
+    //devuelve si es posible pasar por una cuadra
+        if(sold>=zomb)
+            return sold;
+        return sold-(zomb-sold); 
+    }
+	\end{verbatim}
+	\end{codesnippet}
+
+	\begin{codesnippet}
+	\begin{verbatim}
+    int zombiesCuadra(int i, int j, movimiento mov){
+    //devuelve los zombies que en la cuadra pedida
+        switch(mov){
+            case ARRIBA:
+                if(i == 0)
+                    return -1;
+                return ciudadInfestada[i-1][j].second;
+            case ABAJO:
+                return ciudadInfestada[i][j].second;
+            case IZQ:
+                if(j == 0)
+                    return -1;
+                return ciudadInfestada[i][j-1].first;
+            case DER:
+                return ciudadInfestada[i][j].first;
+        }
+    }
+	\end{verbatim}
+	\end{codesnippet}
+
+	\begin{codesnippet}
+	\begin{verbatim}
     int zombieland(Cubo& grafo, int inicioH, int inicioV, int bunkerH, int bunkerV, int soldados){
         int maxSoldados = 0;
     //cola para el BFS arranca con la posicion de donde salimos
@@ -368,39 +379,6 @@ Por lo tanto, la complejidad Temporal del algoritmo es de $O(s.n.m)*O(1)$, lo qu
 	\end{verbatim}
 	\end{codesnippet}
 
-	\begin{codesnippet}
-	\begin{verbatim}
-    int zombiesCuadra(int i, int j, movimiento mov){
-    //devuelve los zombies que en la cuadra pedida
-        switch(mov){
-            case ARRIBA:
-                if(i == 0)
-                    return -1;
-                return ciudadInfestada[i-1][j].second;
-            case ABAJO:
-                return ciudadInfestada[i][j].second;
-            case IZQ:
-                if(j == 0)
-                    return -1;
-                return ciudadInfestada[i][j-1].first;
-            case DER:
-                return ciudadInfestada[i][j].first;
-        }
-    }
-	\end{verbatim}
-	\end{codesnippet}
-
-	\begin{codesnippet}
-	\begin{verbatim}
-    int resulBatalla(int sold, int zomb){
-    //devuelve si es posible pasar por una cuadra
-        if(sold>=zomb)
-            return sold;
-        return sold-(zomb-sold); 
-    }
-	\end{verbatim}
-	\end{codesnippet}
-
 \newpage
 
 \subsection{Experimentaci\'on}
@@ -415,7 +393,6 @@ Primero analizaremos con detalle estas instancias, y luego expondremos porque de
 
 Asumiendo que la posici\'on inicial es la de la esquina superior izquierda y la final la de la esquina inferior derecha, al ejecutar el generador de instancias aleatorias se obtiene un diagrama similar al siguiente:
 
-
 \begin{center}
 \includegraphics[width=7cm,keepaspectratio=yes]{imagenes/ej2/maze.png}
 \end{center}
@@ -427,7 +404,7 @@ Vale aclarar, que las paredes no necesariamente constituyen un medio por el cual
 Estos valores aleatorios fueron tomados adrede, por un lado, para que incluso el mejor camino (alguno de los pasajes que conducen a la salida), tuviera p\'erdida de soldados, pero intentando que éstas sean mínimas, para aumentar las probabilidades de que puedan efectivamente llegar al búnker.\\
 \bigskip
 
-Aún asi, el $s$ tomado en el algoritmo aleatorio es el que se recibe en la entrada. Esto significa, que se configura al principio, y no se actualiza con la cantidad de soldados despu\'es de una batalla.
+Aún as\'i, el $s$ tomado en el algoritmo aleatorio es el que se recibe en la entrada. Esto significa, que se configura al principio, y no se actualiza con la cantidad de soldados despu\'es de una batalla.
 
 Por ende, no podemos determinar el porcentaje de soldados totales que llegarán, pero sí podemos saber el porcentaje que sobrevivirá a la primer batalla, en el peor de los casos.
 
@@ -440,9 +417,7 @@ Así, la cantidad de soldados que sobrevivir\'an a la primer batalla, en el \emp
 	\item Si toma una pared, solo sobrevivirá un 50\%, sin importar la cantidad de soldados.
 \end{itemize}
 
-Estos rangos aleatorios se obtuvieron experimentando con distintas distribuciones de zombies, hasta lograr valores que ocasionaran bajas pero que no impidieran a los soldados llegar al búnker en la mayoría de los casos. Dichos experimentos exceden el interés de esta sección y no serán discutidos.\\
-\\
-\bigskip
+Estos rangos aleatorios se obtuvieron experimentando con distintas distribuciones de zombies, hasta lograr valores que ocasionaran bajas pero que no impidieran a los soldados llegar al búnker en la mayoría de los casos. Dichos experimentos exceden el interés de esta sección y no serán discutidos\\
 
 Al proceder bajo este m\'etodo fue posible efectuar casos de prueba de gran tamaño. Sin embargo, debido a la dimensi\'on de los casos de tests, hay ciertos aspectos de la soluci\'on del problema que no podemos determinar por nuestra cuenta para contrastar con la soluci\'on propuesta por el algoritmo:
 
@@ -452,10 +427,6 @@ Al proceder bajo este m\'etodo fue posible efectuar casos de prueba de gran tama
 	\item No se puede determinar cu\'antos soldados van a llegar al búnker.
 	\item No se puede determinar cu\'antos caminos adulteran la cantidad de soldados, ni cu\'antos soldados mueren en cada uno de ellos.
 \end{enumerate}
-
-\bigskip
-\bigskip
-
 
 Finalmente, y pese a las dificultades expuestas, se decidió proceder con dichas instancias, tom\'andose s\'olo aquellas donde se pudo asegurar que existía un camino al búnker, y que existía un camino donde hubiera al menos una baja (no necesariamente, estos dos sean el mismo camino), ya que lograban generar una fluctuación en la cantidad de soldados, y esto, si bien lejos del peor caso propuesto, resultó ser una aproximación que consideramos suficiente.
 
@@ -469,7 +440,7 @@ Consecuentemente, se realizaron experimentos sobre los siguientes dos casos:
 
 También es necesario aclarar, que los experimentos se realizaron sobre ciudades cuadradas, con puntos de inicio y llegada en los extremos opuestos de la ciudad, y con cantidad de soldados iniciales igual a 20. 
 
-Tomamos esta decision porque los casos de ciudades cuadradas y de ciudades rectangulares, son análogos, dado que lo importante es la cantidad de cuadras en total. En lo que respecta a los puntos de partida y llegada, fueron elegidos para aprovechar al maximo la dimensi\'on de la ciudad y obtener el más largo de los caminos posibles.\\
+Tomamos esta decisi\'on porque los casos de ciudades cuadradas y de ciudades rectangulares, son análogos, dado que lo importante es la cantidad de cuadras en total. En lo que respecta a los puntos de partida y llegada, fueron elegidos para aprovechar al maximo la dimensi\'on de la ciudad y obtener el más largo de los caminos posibles.\\
 
 \newpage
 
