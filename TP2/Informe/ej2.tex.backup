@@ -34,9 +34,9 @@ Consideremos una ciudad con $n=3$ y $m=3$, de modo que se forma una ciudad cuadr
 
 \newpage
 
-Es claro observar que la cuadra donde la cantidad de zombies es $30$ no va a pertenecer al camino soluci\'on ya que al pasar por all\'i con la cantidad m\'axima de soldados (la cantidad inicial) no se efectuar\'an sobrevivientes. A continuaci\'on, el primer movimiento que pueden hacer es pasar por la cuadra con $11$ zombies, sufriendo la baja de un soldado.\\
+Es claro observar que la cuadra donde la cantidad de zombies es $30$ no va a pertenecer al camino soluci\'on ya que al pasar por all\'i con la cantidad m\'axima de soldados (la cantidad inicial) no habr\'a sobrevivientes. A continuaci\'on, el primer movimiento que pueden hacer es pasar por la cuadra con $11$ zombies, sufriendo la baja de un soldado.\\
 
-Luego de este paso, contamos con una cantidad de $9$ soldados sobrevivientes por lo que resulta tambi\'en trivial esquivar la calle con $20$ zombies ya que no se puede salvar a ning\'un soldados de la cuadrilla. Por este motivo, se prosigue el camino por la cuadra con $5$ zombies, sin sufrir ninguna baja.\\
+Luego de este paso, contamos con una cantidad de $9$ soldados sobrevivientes por lo que resulta tambi\'en trivial esquivar la calle con $20$ zombies ya que no se podr\'ia salvar a ning\'un soldado de la cuadrilla. Por este motivo, se prosigue el camino por la cuadra con $5$ zombies, sin sufrir ninguna baja.\\
 
 Al llegar a este momento, mantenemos la cantidad de soldados sobrevivientes en $9$. Si bien un camino m\'as corto en longitud ser\'ia pasar por la cuadra con $10$ zombies, no es el camino soluci\'on ya que al enfrentarse $9$ soldados con $10$ zombies se sufre una baja m\'as dejando al ej\'ercito con $8$ soldados. En cambio, se pasa por las cuadras de $9$, $7$ y $0$ zombies sin perder ningun hombre.\\
 
@@ -57,7 +57,8 @@ El \emph{segundo grafo} \textcolor{red}{(dirigido)?} -\texttt{grafo}- lo vamos a
 
 Cada nodo de \texttt{grafo} va a contener la siguiente informaci\'on: cantidad de soldados vivos con la que se lleg\'o a esa posici\'on (\texttt{soldadosVivos}) y las coordenadas de su posici\'on: \texttt{i} y \texttt{j}.
 
-Los ejes de nuestro \texttt{grafo} no van a contener ninguna informaci\'on extra, s\'olo indicar\'an movimientos desde un nodo a otro que sean posibles. Es decir, s\'olo va a haber una conexi\'on del nodo \emph{e} al nodo \emph{f} si en ese trayecto no se produjo la baja total de los soldados.\\
+Los ejes de nuestro \texttt{grafo} no van a contener ninguna informaci\'on extra, s\'olo indicar\'an los movimientos posibles desde un nodo a otro. 
+Es decir, s\'olo va a haber una conexi\'on del nodo \emph{e} al nodo \emph{f} si en ese trayecto no se produjo la baja total de los soldados.\\
 
 Por ejemplo, si consideramos el caso visto en la Secci\'on \ref{ejemplitoCiudad}, vamos a construir un grafo de la siguiente manera:
 
@@ -67,13 +68,14 @@ Por ejemplo, si consideramos el caso visto en la Secci\'on \ref{ejemplitoCiudad}
    \end{center}
  \end{figure}
  
-Donde los n\'umeros en negro que figuran sobre los ejes es la cantidad de zombies por esa cuadra, consultada en \texttt{ciudadInfestada}. Los nodos que permanecieron grises, o ni fueron consultados no van a formar parte de nuestro grafo.
+Donde los n\'umeros en negro que figuran sobre los ejes es la cantidad de zombies por esa cuadra, consultada en \texttt{ciudadInfestada}. 
+Los nodos que permanecieron grises, o ni fueron consultados, no van a formar parte de nuestro grafo.
 
 As\'i mismo, se puede apreciar que para una misma esquina hay dos nodos distintos, ya que cambia la cantidad de soldados con la que se arrib\'o.\\
 
 \newpage
 
-En este caso, encontramos dos caminos para llegar al b\'unker con vida. De todos modos, queremos el que lo haga con mayor cantidad de sobrevivientes que es el camino azul.
+En este caso, encontramos dos caminos para llegar al b\'unker con vida. De todos modos, queremos el que lo haga con mayor cantidad de sobrevivientes, que es el camino azul.
 
    \begin{figure}[h!]
    \begin{center}
@@ -94,9 +96,10 @@ Al momento de avanzar de nodo, nos fijamos en el grafo \texttt{ciudadInfestada} 
 
 Para realizar este procedimiento, utilizamos una \texttt{cola} la cual nos va a indicar qu\'e nodos nos falta recorrer.
 
-Comenzamos con el primer nodo, lo encolamos. Al desencolarlo lo marcamos como visitado y no s\'olo agregamos los nodos vecinos correspondientes al \texttt{grafo} sino que, los insertamos en la cola. A continuaci\'on, desencolamos el elemento siguiente, lo marcamos como visitado y agregamos los nodos vecinos correspondientes que no hayan sido visitados.
+Comenzamos con el primer nodo, lo encolamos. Al desencolarlo, lo marcamos como visitado y no s\'olo agregamos los nodos vecinos correspondientes al \texttt{grafo}, sino que los insertamos en la cola. A continuaci\'on, desencolamos el elemento siguiente, lo marcamos como visitado y agregamos los nodos vecinos correspondientes que no hayan sido visitados.
 
-Repetimos este proceso hasta que la cola quede vac\'ia. Es importante destacar que no es lo mismo visitar al nodo de la posici\'on (\texttt{x,y}) con \texttt{soldadosVivos}=$s_1$ que el de la misma posici\'on con \texttt{soldadosVivos}=$s_2$. En cambio, si $s_1=s2$ no nos es de inter\'es diferenciar llegar a la misma posici\'on desde coordenadas previas anteriores distintas ya que se arriba con la misma cantidad de soldados sobrevivientes. \textcolor{red}{Esto creo que no quedo muy claro}\\
+Repetimos este proceso hasta que la cola quede vac\'ia. Es importante destacar que no es lo mismo visitar al nodo de la posici\'on (\texttt{x,y}) con \texttt{soldadosVivos}=$s_1$ que el de la misma posici\'on con \texttt{soldadosVivos}=$s_2$ (con $s_1$ $\neq$ $s_2$).
+En cambio, si $s_1$ = $s_2$ no nos es de inter\'es diferenciar llegar a la misma posici\'on desde coordenadas previas anteriores distintas ya que se arriba con la misma cantidad de soldados sobrevivientes. \textcolor{red}{Esto creo que no quedo muy claro}\\
 
 Una vez completo todo el \texttt{grafo}, basta verificar que exista al menos un nodo en la posici\'on $X_f = (bunkerH, bunkerV)$ para establecer que existe un camino donde sobrevive alg\'un soldado.
 
