@@ -185,13 +185,12 @@ El diccionario que vamos a utilizar consiste en una matriz de $k_{m_{inicial}}$\
 
 \subsubsection*{Formulaci\'on Top Down}
 
-Si analizamos el comportamiento de nuestra funci\'on recursiva como si fuera un algoritmo recursivo, podemos notar que la primer posici\'on del cubo que va a poder completar
-va a ser la de $(k_{m_{inicial}},k_{b_{inicial}},0)$, dado que para todas las guardas el primer caso que compara es usar la bicicleta. \textcolor{red}{Explicar con un poco mas de detalle.}
+
+Si analizamos el comportamiento de nuestra funci\'on recursiva como si fuera un algoritmo recursivo, podemos notar que la primer posici\'on del cubo que va a poder completar va a ser la de $(k_{m_{inicial}},k_{b_{inicial}},0)$, dado que para todas las guardas el primer caso que compara es usar la bicicleta. 
 
 Luego, seguir\'a completando la matriz variando en orden ascendente el tercer par\'ametro y completando para todos los $k_m$ y $k_b$.
 
 \subsubsection*{Formulaci\'on Bottom Up}
-
 
 Una vez comprendido el comportamiento de la funci\'on, podemos establecer una manera de completar nuestro diccionario cubo de modo iterativo.\\
 
@@ -203,20 +202,14 @@ Luego para $n=1$, debemos considerar el costo m\'inimo entre usar cada uno de lo
 
 Continuamos con las iteraciones hasta llegar a $n=n_{_{parametro}}$.\\
 
-\textcolor{red}{Habra que poner un dibujito que ejemplifique aca?}\\
-
 Cuando contamos con la matriz Diccionario completa, nuestro resultado va a estar ubicado en la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{_{parametro}})$.\\
 
 Al ingresar los datos dentro del diccionario de esta manera, lo \'unico que hacemos es invertir el orden de llenado. Es por este motivo que estamos cumpliendo con el mismo comportamiento de la funci\'on recursiva ya mencionada. Como ya pudimos asegurar que la formulaci\'on recursiva resolv\'ia de manera correcta la problem\'atica planteada, estamos en condiciones de afirmar que completar el diccionario en el orden inverso tambi\'en resuelve el ejercicio.\\
-\\
 
-
-%%%%%%%%%%%%%%%%
 Con el fin de poder calcular el camino una vez obtenida la cantidad de tiempo menor para realizar el trayecto, en cada posici\'on del diccionario no s\'olo guardamos el tiempo empleado para llegar hasta ah\'i sino que tambi\'en cu\'al fue su situaci\'on inmediatamente anterior.\\
 
 De este modo, recorremos la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{_{parametro}})$ hacia la situaci\'on que indica la misma, y as\'i sucesivamente. De este modo obtenemos las elecciones hechas desde la \'ultima etapa hasta la primera.
 
-\newpage
 \subsubsection*{PseudoC\'odigo}
 
 \IncMargin{1em}
