@@ -161,9 +161,10 @@ El diccionario que vamos a utilizar consiste en una matriz de $k_{m_{inicial}}$\
 
 \subsubsection*{Formulaci\'on Top Down}
 
-Si analizamos el comportamiento de nuestra funci\'on recursiva como si fuera un algoritmo recursivo, podemos notar que la primer posici\'on del cubo que va a poder completar va a ser la de $(k_{m_{inicial}},k_{b_{inicial}},0)$. Dado que para todas las guardas el primer caso que compara es usar la bicicleta. \textcolor{red}{Explicar con un poco mas de detalle.}
+Si analizamos el comportamiento de nuestra funci\'on recursiva como si fuera un algoritmo recursivo, podemos notar que la primer posici\'on del cubo que va a poder completar
+va a ser la de $(k_{m_{inicial}},k_{b_{inicial}},0)$, dado que para todas las guardas el primer caso que compara es usar la bicicleta. \textcolor{red}{Explicar con un poco mas de detalle.}
 
-	Luego, seguir\'a completando la matriz variando en orden ascendente el tercer par\'ametro y completando para todos los $k_m$ y $k_b$.
+Luego, seguir\'a completando la matriz variando en orden ascendente el tercer par\'ametro y completando para todos los $k_m$ y $k_b$.
 
 \subsubsection*{Formulaci\'on Bottom Up}
 
@@ -221,16 +222,16 @@ De este modo, recorremos la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b
 
 \subsubsection{Complejidad Temporal}
 
-Como par\'ametro vamos a recibir $m_k$, $m_b$, $n$ y los tiempos necesarios para atravesar con cada veh\'iculo las \emph{n} etapas. Los tiempos los vamos a tener almacenados en un vector de tuplas, donde cada componente va a ser BMX, Moto y buggy.\\
+Como par\'ametro vamos a recibir $n$, $k_m$, $k_b$ y los tiempos necesarios para atravesar con cada veh\'iculo las \emph{n} etapas. Los tiempos los vamos a tener almacenados en un vector de tuplas, donde cada componente va a ser BMX, Moto y buggy.\\
 
 Mediante tres \texttt{for}s anidados (primero por la cantidad de etapas, despu\'es por la cantidad de motos y por \'ultimo la cantidad de buggys), vamos a recorrer posici\'on a posici\'on nuestra matriz de vectores (cubo). Comenzando en la posici\'on $(0,0,0)$ y finalizando en  $(k_{m},k_{b},n)$.
 
-Dentro de cada iteraci\'on, lo que vamos a hacer es completar la posici\'on del diccionario correspondiente acorde indica el planteo recursivo, con la salvedad de que cada casillero representa cu\'anto nos cuesta llegar a la siguiente etapa, es decir que la posici\'on $(k_{m},k_{b},n)$ tendr\'a lo que cueste ir de la etapa n a la etapa n+1, usando la cantidad de Motos y Buggys correspondiente.\\
+Dentro de cada iteraci\'on, lo que vamos a hacer es completar la posici\'on del diccionario correspondiente acorde indica el planteo recursivo, con la salvedad de que cada casillero representa cu\'anto nos cuesta llegar a la siguiente etapa, es decir, que la posici\'on $(k_{m},k_{b},n)$ tendr\'a lo que cueste ir de la etapa n a la etapa n+1, usando la cantidad de Motos y Buggys correspondiente.\\
 
 
 En todas las iteraciones, escribiremos en el diccionario bajo la clave:  $(k{_m}, k{_b}, n)$. En cada posici\'on vamos a poner un par: la primera posici\'on corresponde al valor del tiempo y la segunda al indicador de la posici\'on inmediatamente anterior.\\
 
-Para escribir la \emph{primer posici\'on} vamos a seguir la siguiente regla:
+Para escribir la \emph{primer posici\'on} vamos a seguir las siguientes reglas:
 
 \begin{itemize}
 \item Si $n=0 \wedge k_m=0 \wedge k_b=0$ escribimos el tiempo que le lleva a la BMX para ir de $0$ a $1$
@@ -257,10 +258,10 @@ El costo de estas operaciones tambi\'en pertenece a $\mathbf{O(1)}$. Las mismas 
 
 Finalmente retornamos el valor de $dicc(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$\\
 
-La complejidad resulta entonces: por cada etapa, por cada posible uso de moto, por cada posible uso de buggy, realizar operaciones en tiempo constante. De esto deducimos que la complejidad es de $\mathbf{O(k_{m},k_{b},n)}$ como se ped\'ia en el enunciado.
+La complejidad resulta entonces: por cada etapa, por cada posible uso de moto, por cada posible uso de buggy, realizar operaciones en tiempo constante. De esto deducimos que la complejidad es de $\mathbf{O(k_{m} * k_{b} * n)}$, como se ped\'ia en el enunciado.
 
 \subsubsection{Complejidad Espacial}
-Dado que la estructura utilizada es una matriz (\texttt{vector$<$vector$>$}) de $m_k$x$m_b$, donde en cada posici\'on contamos con un arreglo de $n$ posiciones y una tupla ($O(1)$); su complejidad espacial es de $\mathbf{O(m_k.m_b.n)}$.
+Dado que la estructura utilizada es una matriz (\texttt{vector$<$vector$>$}) de $m_k$x$m_b$, donde en cada posici\'on contamos con un arreglo de $n$ posiciones y una tupla ($O(1)$); su complejidad espacial es de $\mathbf{O(k_m * k_b * n)}$.
 
 \newpage
 \subsection{C\'odigo fuente}
