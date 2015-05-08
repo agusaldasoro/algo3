@@ -14,12 +14,23 @@ Se exige resolver la problem\'atica con una complejidad temporal de $O(n.k_m.k_b
 
 A continuaci\'on, se presenta un ejemplo sobre c\'omo resolver el problema, dado un caso espec\'ifico.\\
 
-Dada una traves\'ia con 3 etapas (A, B y C), para las cu\'ales se cuenta con 1 uso de la moto ($k_m$ = 1) y 2 usos del buggy ($k_b$ = 2). Las diferentes etapas est\'an caracterizadas de la siguiente manera:\\
+Dada una traves\'ia con 3 etapas (A, B y C), para las cu\'ales se cuenta con 1 uso de la moto ($k_m$ = 1) y 2 usos del buggy ($k_b$ = 2), los tiempos que tarda cada veh\'iculo por cada etapa son los siguientes: \\
+
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.4]{imagenes/ej1/ejemplo.png}
+% 	\caption{}
+% 	\label{n.png}
+   \end{center}
+ \end{figure}
 
 \textcolor{red}{Dibujitos con ejemplos :)} \textcolor{blue}{Manana agrego el dibujito! Me peleé con la tabla pero no pude arreglar la última columna, estoy re quemado, manana vuelvo a intentar} \textcolor{magenta}{te arregle la tabla :)}\\
 
+\newpage
+
 En la siguiente tabla se muestran las diferentes elecciones que se pueden realizar,
-teniendo en cuenta la cantidad de usos disponibles, indicando cu\'al es el tiempo total en cada caso.
+teniendo en cuenta la cantidad de usos disponibles, indicando cu\'al es el tiempo total en cada caso.\\
+
 \begin{table}[htb]
 \centering
 \begin{tabular}[c]{|l|l|l|l|l|}
@@ -72,7 +83,7 @@ teniendo en cuenta la cantidad de usos disponibles, indicando cu\'al es el tiemp
 	\end{tabular}
 %\caption{Tabla muy sencilla.}
 %\label{tabla:sencilla2}
-\end{table}
+\end{table}\\
 
 En este ejemplo, la soluci\'on buscada, es decir, la \'optima, puede ser tanto el caso 4 como el 11, ya que ambos toman el mismo tiempo y respetan la cantidad de usos de buggy y moto posibles.
 Por la formulaci\'on de nuestro algoritmo, nosotros devolvemos el caso 11.
@@ -99,7 +110,7 @@ Optamos por comenzar recorriendo desde la etapa n hasta la etapa 0; \emph{n} va 
 
 \item[•]De modo an\'alogo, cuando \emph{k$_m$}$\neq0$ y \emph{k$_b$}$=0$ s\'olo vamos a contar con Motos y Bicicletas para la etapa actual y las \emph{n-1} etapas faltantes.
 
-\item[•]En cambio, en caso contrario, todav\'ia tenemos disponible cantidad de los tres veh\'iculos. Por este motivo, se comparan los tres casos: empleando la Bicicleta en la etapa n, la Moto o el buggy llamando recursivamente a la funci\'on para \emph{n-1} de modo que va a devolver el menor tiempo posible considerando la elecci\'on llevada a cabo.
+\item[•]En cambio, en caso contrario, todav\'ia tenemos disponible cantidad de los tres veh\'iculos. Por este motivo, se comparan los tres casos: empleando la Bicicleta en la etapa n, la Moto o el Buggy llamando recursivamente a la funci\'on para \emph{n-1} de modo que va a devolver el menor tiempo posible considerando la elecci\'on llevada a cabo.
 \end{itemize}
 
 
@@ -132,7 +143,7 @@ Dado que los $n$, $k_m$ y $k_b$ iniciales van a ser los dados por par\'ametro y 
 
 \begin{equation*}
 \begin{array}{lllll}
-0 & \leq & n &\leq & n_{parametro} \\
+0 & \leq & n &\leq & n_{_{parametro}} \\
 0 & \leq & k_m & \leq & k_{m_{parametro}} \\
 0 & \leq & k_b & \leq & k_{b_{parametro}}
 \end{array}
@@ -140,19 +151,36 @@ Dado que los $n$, $k_m$ y $k_b$ iniciales van a ser los dados por par\'ametro y 
 
 \newpage
 
-\textcolor{blue}{ALGUIEN???!!!}\textcolor{magenta}{[NORIEGA]}\\
+{\large\textbf{Teorema}}\\
+La formulación recursiva planteada resuelve el problema.\\
 
-Esta formulaci\'on recursiva resuelve el problema porque.... \textcolor{magenta}{Poner aca algo del estilo de la demo de golosos je. } 
+{\large\textbf{Demostración}}\\
+Para demostrar que el algoritmo resuelve, explotaremos la definición recursiva para aplicar inducción en la cantidad de etapas.\\
+Entonces, queremos demostrar $P(n)=(\forall k_m, k_b) func(n, k_m, k_b)$ $obtiene$ $la$ $longitud$ $del$ $camino$ $minimo$.\\
+
+\textbf{\emph{Caso base:}}\\
+$P(0) = 0$\\
+Vale, puesto que si no hay etapas, el camino mínimo tiene longitud 0, independientemente de la cantidad de buggys o motos de los que se disponga.\\
+
+\textbf{\emph{Paso inductivo:}}\\
+$P(n)\Rightarrow P(n+1)$\\
+Encontrándose en la \emph{n+1-ésima} etapa, el algoritmo calcula cuanto tiempo tomaría completar esa etapa (es decir, la \emph{longitud} entre la etapa anterior y la actual) para los distintos vehículos (tiempo que llamaremos $T_{v}$, donde $v$ es cada vehículo), y luego se invoca a si mismo recursivamente, para cada posible decisión de que vehiculo utilizar. Finalmente, suma el tiempo $T_{v}$ al valor retornado a la función, para cada vehículo respectivo, y luego toma el mínimo de esos resultados.\\
+Sabemos que vale $P(n)$, es decir, que hasta \emph{n-ésima} etapa, el algoritmo ha tomado el camino mínimo para llegar a ella.\\
+Por el principio de optimalidad, si ya generó el camino mínimo hasta la \emph{n-ésima} etapa, solo debe ver qué vehiculo es conveniente usar entre la \emph{n+1-ésima} etapa y la \emph{n-ésima} etapa. Este es, efectivamente, su comportamiento.
+Por lo tanto, vale $P(n) \Rightarrow P(n+1)$. $\square$\\
+
+Es necesario destacar, que el algoritmo resuelve de la misma manera que el \emph{Algoritmo de Bellman-Ford para caminos mínimos}, donde cada camino corresponde a las distintas decisiones posibles que se puedan tomar.
 
 \subsubsection*{Diccionario a utilizar}
 
-El diccionario que vamos a utilizar consiste en una matriz de $k_{m_{inicial}}$\texttt{x}$k_{b_{inicial}}$, en la que por cada posici\'on va a haber un contenedor de tama\~no $n_{inicial}$ (lo cual forma un cubo) de modo que dentro de cada uno de ellos se va a poder almacenar el resultado de invocar a la funci\'on con estos tres par\'ametros.
+El diccionario que vamos a utilizar consiste en una matriz de $k_{m_{inicial}}$\texttt{x}$k_{b_{inicial}}$, en la que por cada posici\'on va a haber un contenedor de tama\~no $n_{_{inicial}}$ (lo cual forma un cubo) de modo que dentro de cada uno de ellos se va a poder almacenar el resultado de invocar a la funci\'on con estos tres par\'ametros.
 
 \subsubsection*{Formulaci\'on Top Down}
 
-	Si analizamos el comportamiento de nuestra funci\'on recursiva como si fuera un algoritmo recursivo, podemos notar que la primer posici\'on del cubo que va a poder completar va a ser la de $(k_{m_{inicial}},k_{b_{inicial}},0)$. Dado que para todas las guardas el primer caso que compara es usar la bicicleta. \textcolor{red}{Explicar con un poco mas de detalle.}
+Si analizamos el comportamiento de nuestra funci\'on recursiva como si fuera un algoritmo recursivo, podemos notar que la primer posici\'on del cubo que va a poder completar
+va a ser la de $(k_{m_{inicial}},k_{b_{inicial}},0)$, dado que para todas las guardas el primer caso que compara es usar la bicicleta. \textcolor{red}{Explicar con un poco mas de detalle.}
 
-	Luego, seguir\'a completando la matriz variando en orden ascendente el tercer par\'ametro y completando para todos los $k_m$ y $k_b$.
+Luego, seguir\'a completando la matriz variando en orden ascendente el tercer par\'ametro y completando para todos los $k_m$ y $k_b$.
 
 \subsubsection*{Formulaci\'on Bottom Up}
 
@@ -165,11 +193,11 @@ Cuando $n=0$ simplemente vamos a asignar el veh\'iculo que presente menor tiempo
 
 Luego para $n=1$, debemos considerar el costo m\'inimo entre usar cada uno de los veh\'iculos disponibles para esta etapa sumado a su correspondiente costo m\'inimo de la etapa anterior.
 
-Continuamos con las iteraciones hasta llegar a $n=n_{parametro}$.\\
+Continuamos con las iteraciones hasta llegar a $n=n_{_{parametro}}$.\\
 
 \textcolor{red}{Habra que poner un dibujito que ejemplifique aca?}\\
 
-Cuando contamos con la matriz Diccionario completa, nuestro resultado va a estar ubicado en la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$.\\
+Cuando contamos con la matriz Diccionario completa, nuestro resultado va a estar ubicado en la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{_{parametro}})$.\\
 
 Al ingresar los datos dentro del diccionario de esta manera, lo \'unico que hacemos es invertir el orden de llenado. Es por este motivo que estamos cumpliendo con el mismo comportamiento de la funci\'on recursiva ya mencionada. Como ya pudimos asegurar que la formulaci\'on recursiva resolv\'ia de manera correcta la problem\'atica planteada, estamos en condiciones de afirmar que completar el diccionario en el orden inverso tambi\'en resuelve el ejercicio.\\
 \\
@@ -178,7 +206,7 @@ Al ingresar los datos dentro del diccionario de esta manera, lo \'unico que hace
 %%%%%%%%%%%%%%%%
 Con el fin de poder calcular el camino una vez obtenida la cantidad de tiempo menor para realizar el trayecto, en cada posici\'on del diccionario no s\'olo guardamos el tiempo empleado para llegar hasta ah\'i sino que tambi\'en cu\'al fue su situaci\'on inmediatamente anterior.\\
 
-De este modo, recorremos la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$ hacia la situaci\'on que indica la misma, y as\'i sucesivamente. De este modo obtenemos las elecciones hechas desde la \'ultima etapa hasta la primera.
+De este modo, recorremos la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b_{parametro}},n_{_{parametro}})$ hacia la situaci\'on que indica la misma, y as\'i sucesivamente. De este modo obtenemos las elecciones hechas desde la \'ultima etapa hasta la primera.
 
 \newpage
 \subsubsection*{PseudoC\'odigo}
@@ -210,16 +238,16 @@ De este modo, recorremos la matriz  desde la posici\'on $(k_{m_{parametro}},k_{b
 
 \subsubsection{Complejidad Temporal}
 
-Como par\'ametro vamos a recibir $m_k$, $m_b$, $n$ y los tiempos necesarios para atravesar con cada veh\'iculo las \emph{n} etapas. Los tiempos los vamos a tener almacenados en un vector de tuplas, donde cada componente va a ser BMX, Moto y buggy.\\
+Como par\'ametro vamos a recibir $n$, $k_m$, $k_b$ y los tiempos necesarios para atravesar con cada veh\'iculo las \emph{n} etapas. Los tiempos los vamos a tener almacenados en un vector de tuplas, donde cada componente va a ser BMX, Moto y buggy.\\
 
 Mediante tres \texttt{for}s anidados (primero por la cantidad de etapas, despu\'es por la cantidad de motos y por \'ultimo la cantidad de buggys), vamos a recorrer posici\'on a posici\'on nuestra matriz de vectores (cubo). Comenzando en la posici\'on $(0,0,0)$ y finalizando en  $(k_{m},k_{b},n)$.
 
-Dentro de cada iteraci\'on, lo que vamos a hacer es completar la posici\'on del diccionario correspondiente acorde indica el planteo recursivo, con la salvedad de que cada casillero representa cu\'anto nos cuesta llegar a la siguiente etapa, es decir que la posici\'on $(k_{m},k_{b},n)$ tendr\'a lo que cueste ir de la etapa n a la etapa n+1, usando la cantidad de Motos y Buggys correspondiente.\\
+Dentro de cada iteraci\'on, lo que vamos a hacer es completar la posici\'on del diccionario correspondiente acorde indica el planteo recursivo, con la salvedad de que cada casillero representa cu\'anto nos cuesta llegar a la siguiente etapa, es decir, que la posici\'on $(k_{m},k_{b},n)$ tendr\'a lo que cueste ir de la etapa n a la etapa n+1, usando la cantidad de Motos y Buggys correspondiente.\\
 
 
 En todas las iteraciones, escribiremos en el diccionario bajo la clave:  $(k{_m}, k{_b}, n)$. En cada posici\'on vamos a poner un par: la primera posici\'on corresponde al valor del tiempo y la segunda al indicador de la posici\'on inmediatamente anterior.\\
 
-Para escribir la \emph{primer posici\'on} vamos a seguir la siguiente regla:
+Para escribir la \emph{primer posici\'on} vamos a seguir las siguientes reglas:
 
 \begin{itemize}
 \item Si $n=0 \wedge k_m=0 \wedge k_b=0$ escribimos el tiempo que le lleva a la BMX para ir de $0$ a $1$
@@ -244,12 +272,12 @@ El costo de estas operaciones tambi\'en pertenece a $\mathbf{O(1)}$. Las mismas 
 
 
 
-Finalmente retornamos el valor de $dicc(k_{m_{parametro}},k_{b_{parametro}},n_{parametro})$\\
+Finalmente retornamos el valor de $dicc(k_{m_{parametro}},k_{b_{parametro}},n_{_{parametro}})$\\
 
-La complejidad resulta entonces: por cada etapa, por cada posible uso de moto, por cada posible uso de buggy, realizar operaciones en tiempo constante. De esto deducimos que la complejidad es de $\mathbf{O(k_{m},k_{b},n)}$ como se ped\'ia en el enunciado.
+La complejidad resulta entonces: por cada etapa, por cada posible uso de moto, por cada posible uso de buggy, realizar operaciones en tiempo constante. De esto deducimos que la complejidad es de $\mathbf{O(k_{m} * k_{b} * n)}$, como se ped\'ia en el enunciado.
 
 \subsubsection{Complejidad Espacial}
-Dado que la estructura utilizada es una matriz (\texttt{vector$<$vector$>$}) de $m_k$x$m_b$, donde en cada posici\'on contamos con un arreglo de $n$ posiciones y una tupla ($O(1)$); su complejidad espacial es de $\mathbf{O(m_k.m_b.n)}$.
+Dado que la estructura utilizada es una matriz (\texttt{vector$<$vector$>$}) de $m_k$x$m_b$, donde en cada posici\'on contamos con un arreglo de $n$ posiciones y una tupla ($O(1)$); su complejidad espacial es de $\mathbf{O(k_m * k_b * n)}$.
 
 \newpage
 \subsection{C\'odigo fuente}
@@ -426,7 +454,11 @@ Dado que la estructura utilizada es una matriz (\texttt{vector$<$vector$>$}) de 
 
 \textcolor{magenta}{[BRIAN]Poner como fueron generados los casos de test, si aunque aca sean re pavos...}\\
 
-Para realizar la siguiente experimentaci\'on, comenzamos mirando el caso m\'as sencillo (\emph{mejor caso}), que se da cuando tanto $k_m$ como $k_b$ son igual a 0. Es decir, en todos los casos debemos usar la BMX.
+Para realizar la experimentaci\'on, generamos una serie de tests en los cuales fuimos aumentando progresivamente la cantidad de etapas ($n$).
+Los tiempos que le toma a cada veh\'iculo recorrer cada etapa fueron elegidos aleatoriamente, con n\'umeros entre 1 y 10000, ya que no influyen en la complejidad del algoritmo. 
+Esto se debe a que las operaciones entre ellos son de comparaci\'on, es decir que tienen una complejidad de $O(1)$.\\
+
+Luego, comenzamos mirando el caso m\'as sencillo (\emph{mejor caso}), que se da cuando tanto $k_m$ como $k_b$ son igual a 0. Es decir, en todos los casos debemos usar la BMX. 
   
   La complejidad te\'orica planteada es de $O(n * k_m * k_b)$, por lo que se intuye que en este caso deber\'ia ser $O(n)$.\\
   
@@ -484,6 +516,8 @@ n & Tiempo en segundos\\
 	%\caption{Tabla muy sencilla.}
 	%\label{tabla:n.png}
 	\end{table}
+
+\newpage
 	
   \begin{figure}[h!]
    \begin{center}
@@ -500,7 +534,7 @@ n & Tiempo en segundos\\
   Luego, consideramos el \emph{peor caso} posible, que es el que iguala tanto $k_m$ como $k_b$ con $n$.
   Es decir, el caso en el que para cada etapa, tenemos la posiblidad de elegir cualquiera de las 3 opciones, BMX, motocross o buggy.
   
-  Los tiempos que cuestan recorrer cada etapa con las distintas opciones fueron generados aleatoriamente, ya que no influyen en el costo temporal del algoritmo. \textcolor{magenta}{[BRIAN]Aca tambien poner como los generamos, si es una fiaca, pero bueno...}\\
+  \textcolor{magenta}{[BRIAN]Aca tambien poner como los generamos, si es una fiaca, pero bueno...}\textcolor{azul}{Lo puse arriba, creo que no hace falta aca también}\\
   
   Los tiempos de ejecuci\'on para cada etapa $n$ fueron:
   
@@ -587,7 +621,8 @@ n & Tiempo en segundos\\
   
   \newpage
   
-  Luego, con el fin de comparar los tiempos de ejecuci\'on, se realiz\'o una \'ultima experimentaci\'on, en la cual se tomaron los mismos valores para $k_m$ y $k_b$, proporcionales al $n$ dado.\textcolor{magenta}{[BRIAN]Si, aca tambien poner aunque sea una oracion de como se armaron}\\
+  Luego, con el fin de comparar los tiempos de ejecuci\'on, se realiz\'o una \'ultima experimentaci\'on, en la cual se tomaron los mismos valores para $k_m$ y $k_b$, proporcionales al $n$ dado.
+  \textcolor{magenta}{[BRIAN]Si, aca tambien poner aunque sea una oracion de como se armaron}\textcolor{azul}{Idem arriba}\\
   
   
   Como resultado se obtuvieron los siguientes valores:
