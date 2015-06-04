@@ -4,30 +4,29 @@
 
 using namespace std;
 
-typedef vector<vector<bool> > Matriz;
+typedef vector<list<unsigned int> > ListaAdy;
 
-
-
-void imprimirMatriz(Matriz& adyacencia){
-	for (int i = 0; i < adyacencia.size(); ++i){
-		for (int j = 0; j < adyacencia.size(); ++j)
-			cout << adyacencia[i][j];
+void imprimirListaAdy(ListaAdy& adyacencia){
+	for (int i = 0; i < adyacencia.size(); ++i)
+	{
+		cout << "nodo: " << i << " ";
+		for (list<unsigned int>::iterator it = adyacencia[i].begin(); it != adyacencia[i].end(); ++it)
+		{
+			cout << *it << " ";
+		}
 		cout << endl;
 	}
 }
 
-
-unsigned int esIndependienteMaximal(Matriz& adyacencia, vector<unsigned int>& conjNodos){
+unsigned int esIndependienteMaximal(ListaAdy& adyacencia, vector<unsigned int>& conjNodos){
 	vector<bool> maximal(adyacencia.size());
 	for (int i = 0; i < conjNodos.size(); ++i){
-		for (int j = i+1; j < conjNodos.size(); ++j){
-			if (adyacencia[conjNodos[i]][conjNodos[j]])
-				return 0;
-		}
-		maximal[conjNodos[i]] = true;
-		for (int k = 0; k < adyacencia.size(); ++k){
-			if (adyacencia[conjNodos[i]][k])
-				maximal[k] = true;
+		unsigned int nodo = conjNodos[i];
+		if(maximal[nodo])
+			return 0;
+		maximal[nodo] = true;
+		for (list<unsigned>::iterator it = adyacencia[nodo].begin(); it != adyacencia[nodo].end(); ++it){
+			maximal[*it] = true;
 		}
 	}
 	for (int i = 0; i < maximal.size(); ++i){
@@ -37,7 +36,7 @@ unsigned int esIndependienteMaximal(Matriz& adyacencia, vector<unsigned int>& co
 	return conjNodos.size();
 }
 
-unsigned int calcularCIDM(Matriz& adyacencia, unsigned int i, vector<unsigned int>& conjNodos, vector<unsigned int>& optimo){
+unsigned int calcularCIDM(ListaAdy& adyacencia, unsigned int i, vector<unsigned int>& conjNodos, vector<unsigned int>& optimo){
 	unsigned int res = esIndependienteMaximal(adyacencia, conjNodos);
 	if (res > 0){
 		optimo.assign(conjNodos.begin(), conjNodos.end());
@@ -45,11 +44,10 @@ unsigned int calcularCIDM(Matriz& adyacencia, unsigned int i, vector<unsigned in
 	}
 	unsigned int siAgrego, siNoAgrego;
 	if(i < adyacencia.size()){
-/*		if(!sirveAgregar(t, i, j)){
+/*		if(!sirveAgregar(adyacencia, i)){
 			return calcularCIDM(adyacencia, i+1, conjNodos, optimo);
 		}
-*/
-		if(conjNodos.size() >= optimo.size() - 1)
+*/		if(conjNodos.size() >= optimo.size() - 1)
 			return 0;
 		siNoAgrego = calcularCIDM(adyacencia, i+1, conjNodos, optimo);
 		conjNodos.push_back(i);
@@ -67,14 +65,13 @@ unsigned int calcularCIDM(Matriz& adyacencia, unsigned int i, vector<unsigned in
 int main(int argc, char const *argv[]){
 	unsigned int cantNodos, cantEjes, uno, dos;
 	cin >> cantNodos >> cantEjes;
-	Matriz adyacencia(cantNodos, vector<bool>(cantNodos));
+	ListaAdy adyacencia(cantNodos, list<unsigned int>());
 	for (int i = 0; i < cantEjes; ++i){
 		cin >> uno >> dos;
-		adyacencia[uno][dos] = true;
-		adyacencia[dos][uno] = true;
+		adyacencia[uno].push_back(dos);
+		adyacencia[dos].push_back(uno);
 	}
 	vector<unsigned int> conjNodos, optimo(cantNodos);
-//	imprimirMatriz(adyacencia);
 	calcularCIDM(adyacencia, 0, conjNodos, optimo);
 	cout << optimo.size() << " ";
 	for (int i = 0; i < optimo.size(); ++i){
@@ -83,4 +80,3 @@ int main(int argc, char const *argv[]){
 	cout << endl;
 	return 0;
 }
-
