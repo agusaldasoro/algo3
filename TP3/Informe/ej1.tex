@@ -15,14 +15,18 @@ El problema de Conjunto Independiente Dominante M\'inimo (CIDM) consiste en hall
 
 \subsection{Todo conjunto independiente maximal es un conjunto dominante}
 
- Un \emph{conjunto independiente} de $I \subseteq V$ se dice \emph{maximal} si no existe otro conjunto independiente $J \subseteq V$ tal que $I \subset J$, es decir que $I$ est\'a incluido estrictamente en $J$. Todo conjunto independiente maximal es un \emph{conjunto dominante}.
+ Sea $G = (V, E)$ un grafo simple, un \emph{conjunto independiente} de $I \subseteq V$ se dice \emph{maximal} si no existe otro conjunto independiente $J \subseteq V$ tal que $I \subset J$, es decir que $I$ est\'a incluido estrictamente en $J$. \\
+ 
+ Todo conjunto independiente maximal es un \emph{conjunto dominante}.
  
 \subsubsection*{Demostraci\'on}
 
-Sea G = (V, E), $I \subseteq V$ independiente maximal.
+Sean $G = (V, E)$ grafo simple, $I \subseteq V$ \emph{conjunto independiente maximal}.\\
 
-Quiero ver que:
-Para todo v\'ertice de V, o bien v pertenece a I, o bien alg\'un vecino de v pertenece a I.
+Quiero ver que $I$ es un \emph{conjunto dominante}: 
+
+Lo que es equivalente a:
+Para todo v\'ertice $v \in V$, o bien v pertenece a I, o bien alg\'un vecino de v pertenece a I.
 %($\forall$ v $\in$ V) (v $\in$ I $\vee$ $\exists$ w $\in$ adyacentes(v) tal que w $\in$ I)\\
 Como I es independiente, no existe ning\'un eje de E entre v\'ertices de I; por ser I maximal, no existe ning\'un v\'ertice w de V que no pertenezca a I, tal que w no sea adyacente a alguno de I.\\
 Entonces:
