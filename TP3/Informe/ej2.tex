@@ -5,12 +5,13 @@ De este modo, nos vemos obligados a recorrer inteligentemente todos los conjunto
 
 
 \subsection{Explicaci\'on y mejoras}
+%Explicar detalladamente el algoritmo implementado. Elaborar podas y estrategias que permitan mejorar los tiempos de resolucion.
 
 Nuestro algoritmo recorre ordenadamente el conjunto de partes de V y por cada uno de ellos verifica que cumpla la funci\'on  \texttt{esIndependienteMaximal()}. La misma devuelve 0 si es falso, la cantidad de nodos en el conjunto en caso contrario.
 
 Es decir, se itera sobre los nodos y se pide el minimo conjunto independiente maximal considerando el nodo actual presente y ausente.\\
 
-En una variable se acumula la soluci\'on \'optima hasta el momento, la cual se actualiza cuando se encuentra un nuevo conjunto independiente maximal que tiene un cardinal menor al \'optimo actual.\\
+En una variable se acumula la soluci\'on \'optima hasta el momento, la cual se actualiza cuando se encuentra un nuevo conjunto independiente maximal que tiene un cardinal menor al \'optimo actual. En ella va a quedar la soluci\'on buscada luego de correr el algoritmo.\\
 
 Las podas que implementamos fueron \textcolor{red}{... completar}
 
@@ -18,27 +19,29 @@ Y las estrategias fueron \textcolor{red}{... completar}\\
 
 Poner el pseudocodigo...
 
-%\begin{algorithm}[h!]
-%\caption{zombieland}
+\begin{algorithm}[h!]
+\caption{algoritmo exacto}
 
-%\For{\emph{each} ciudad $\in$ pa\'is}{
-%	Calcular la cantidad de soldados extra necesarios y el costo de salvarla.\\
-%	Almacenar esta informaci\'on en un vector \emph{datos} mediante \textit{push_back()}
-%}
-%Ordena al vector \emph{datos} mediante \textit{sort()}\\
-%\While{pueda salvar}{
-%	\If{puede ser salvada}{
-%		Indicar cantidad de soldados extras enviados y actualizar el \texttt{presupuesto_actual}
-%	}
-%}
-%\While{haya ciudades insalvables}{
-%	cantidad de soldados extras enviados = 0
-%}
-%\end{algorithm}
+\textit{unsigned int} \textbf{calcularCIDM}(Matriz\& \textit{adyacencia}, unsigned int \textit{i}, vector$<$unsigned int$>$\& \textit{conjNodos}, vector$<$unsigned int$>$\& \textit{optimo})\{ 
+\newline
 
+\If{(conjNodos.esIndependienteMaximal())}{
+		optimo $\longleftarrow$ conjNodos;\\
+		\textbf{return} optimo.size();
+}
+\If{(i.estaEnRango())}{
+	\If{(conjNodos es m\'as grande que el optimo actual)}{
+		\textbf{return} 0;
+	}
+	siNoAgrego $\longleftarrow$ calcularCIDM(adyacencia, i+1, conjNodos, optimo);\\
+	agrego el nodo $i$ a conjNodos;\\
+	siAgrego $\longleftarrow$ calcularCIDM(adyacencia, i+1, conjNodos, optimo);\\
+	elimino el nodo $i$ de conjNodos;\\
+	\textbf{return} el mejor entre $siNoAgrego$ y $siAgrego$;
+}
+\textbf{return} 0;
+\end{algorithm}
 
-
-%Explicar detalladamente el algoritmo implementado. Elaborar podas y estrategias que permitan mejorar los tiempos de resolucion.
 \subsection{Complejidad Temporal}
 %Calcular el orden de complejidad temporal de peor caso del algoritmo.
 \subsection{Experimentaci\'on}
