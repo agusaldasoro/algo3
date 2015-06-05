@@ -21,7 +21,6 @@ def createOutput(matrix, nodes):
 	f = open(filename, 'w')
 	outString = ""
 	edges = 0
-	print matrix
 	for row in range(0,len(matrix)):
 		for col in range(0,len(matrix[row])):
 			if col+2 < len(matrix[row]) and row+1 < len(matrix):
@@ -38,6 +37,7 @@ def createOutput(matrix, nodes):
 				outString += str(matrix[row][col])+' '+str(matrix[row+2][col-1])+'\n'
 	f.write(str(nodes)+' '+str(edges)+'\n')
 	f.write(outString)
+	f.close()
 
 boardgen()
 
