@@ -9,7 +9,7 @@ Definimos entonces un \emph{conjunto independiente dominante} de $G$ como un con
 
 El problema de Conjunto Independiente Dominante M\'inimo (CIDM) consiste en hallar un conjunto independiente dominante de $G$ con m\'inima cardinalidad.
 
-\subsection{Paralelismo con ``El se\~nor de los caballos''}
+\subsection{Paralelismo con ``El se\~nor de los caballos''}\label{caballitos}
 
 \textcolor{red}{Aca va lo de Noriega y sus super scripts (?)}
 
@@ -25,17 +25,42 @@ Sean $G = (V, E)$ grafo simple, $I \subseteq V$ \emph{conjunto independiente max
 
 Quiero ver que $I$ es un \emph{conjunto dominante}: 
 
-Lo que es equivalente a:
-Para todo v\'ertice $v \in V$, o bien v pertenece a I, o bien alg\'un vecino de v pertenece a I.
-%($\forall$ v $\in$ V) (v $\in$ I $\vee$ $\exists$ w $\in$ adyacentes(v) tal que w $\in$ I)\\
-Como I es independiente, no existe ning\'un eje de E entre v\'ertices de I; por ser I maximal, no existe ning\'un v\'ertice w de V que no pertenezca a I, tal que w no sea adyacente a alguno de I.\\
-Entonces:
-\begin{itemize}
-\item si E = $\emptyset$, I = V y por lo tanto cada elemento de v pertenece a I trivialmente
-\item si E $\neq$ $\emptyset$, todos los v\'ertices v $in$ V que no pertenezcan a I, no lo hacen porque ya existe w $in$ I que verifica que el eje (v,w) $in$ E. Luego, cada u v\'ertice de V o bien pertenece a I, o bien es adyacente a alg\'un elemento de I. Por lo tanto I es un conjunto dominante.
-\end{itemize}
+Lo que es equivalente a probar que $(\forall $ $nodo$ $ v \in V)$ $((v \in I) \vee (\exists $ $nodo$ $ w \in adyacentes(v), w \in I))$\\
+
+\bigskip
+Supongo por el absurdo que: 
+$(\exists $ $nodo$ $ v \in V)$ $tq$ $((v\notin I)\wedge(\forall $ $nodo$ $w \in $ $adyacentes(v), w\notin I))$\\
+
+Considero a $adyacentes(I)$ como el conjunto que se obtiene de concatenar todos los vecinos de cada elemento de $I$. Por lo tanto, es equivalente decir $(\forall $ $nodo$ $w \in $ $adyacentes(v), w\notin I)$ y decir $( v \notin adyacentes(I))$.\\
+
+$\Rightarrow v\notin I \wedge v \notin adyacentes(I)$ 
+
+$\Rightarrow \exists$ conjunto independiente $J$: $J\subseteq V$ tq $J=I+\{v\}$
+
+$J$ es independiente porque $I$ lo era y al agregarle el nodo $v$ se mantiene esta propiedad ya que $v$ no pertenec\'ia a $I$ y adem\'as no estaba conectado a ning\'un nodo del conjunto $I$.
+
+$\Rightarrow \exists J$ conjunto independiente tq $I \subset J$. \textbf{Absurdo!}($I$ era un conjunto Independiente Maximal)\\
+
+El absurdo provino de suponer que $I$ era un conjunto independiente maximal, pero no dominante. Por lo tanto, $I$ debe ser un conjunto dominante.
+
+
+
+
+
+
+
+%Dado que el conjunto $I$ es independiente, $\nexists $ $eje$ $ e=(n_1,n_2) \in E$ $tq$ $(n_1 \in I \wedge n_2 \in I)$\\
+
+%Como $I$ es maximal, \textcolor{red}{No estoy segura de que esto valga (creo que ni lo entendi):} no existe ning\'un v\'ertice w de V que no pertenezca a I, tal que w no sea adyacente a alguno de I.\\
+
+
+%Entonces:
+%\begin{itemize}
+%\item si E = $\emptyset$, I = V y por lo tanto cada elemento de v pertenece a I trivialmente
+%\item si E $\neq$ $\emptyset$, todos los v\'ertices v $in$ V que no pertenezcan a I, no lo hacen porque ya existe w $in$ I que verifica que el eje (v,w) $in$ E. Luego, cada u v\'ertice de V o bien pertenece a I, o bien es adyacente a alg\'un elemento de I. Por lo tanto I es un conjunto dominante.
+%\end{itemize}
 \textcolor{blue}{se fijan que onda?}
-\textcolor{red}{Demostracion magica negra turbia}
+%\textcolor{red}{Demostracion magica negra turbia}
 
 \subsection{Situaciones de la vida real}
 

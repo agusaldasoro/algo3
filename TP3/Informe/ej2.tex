@@ -1,6 +1,43 @@
 \section{Algoritmo Exacto}
+De acuerdo a lo ya explicado en el inciso \ref{caballitos}, podemos establecer una analog\'ia con este problema y ``El se\~nor de los caballos''. Por lo tanto, la metodolog\'ia empleada para la implementaci\'on del algoritmo exacto tambi\'en fue la de \emph{Backtracking}.\\
+
+De este modo, nos vemos obligados a recorrer inteligentemente todos los conjuntos dentro del conjunto de partes del total de nodos $V$. Mediante el backtracking podemos realizar podas y estrategias para saltear algunas ramas de decisi\'on donde se predice que no se va a poder encontrar la soluci\'on \'optima all\'i.
+
 
 \subsection{Explicaci\'on y mejoras}
+
+Nuestro algoritmo recorre ordenadamente el conjunto de partes de V y por cada uno de ellos verifica que cumpla la funci\'on  \texttt{esIndependienteMaximal()}. La misma devuelve 0 si es falso, la cantidad de nodos en el conjunto en caso contrario.
+
+Es decir, se itera sobre los nodos y se pide el minimo conjunto independiente maximal considerando el nodo actual presente y ausente.\\
+
+En una variable se acumula la soluci\'on \'optima hasta el momento, la cual se actualiza cuando se encuentra un nuevo conjunto independiente maximal que tiene un cardinal menor al \'optimo actual.\\
+
+Las podas que implementamos fueron \textcolor{red}{... completar}
+
+Y las estrategias fueron \textcolor{red}{... completar}\\
+
+Poner el pseudocodigo...
+
+%\begin{algorithm}[h!]
+%\caption{zombieland}
+
+%\For{\emph{each} ciudad $\in$ pa\'is}{
+%	Calcular la cantidad de soldados extra necesarios y el costo de salvarla.\\
+%	Almacenar esta informaci\'on en un vector \emph{datos} mediante \textit{push_back()}
+%}
+%Ordena al vector \emph{datos} mediante \textit{sort()}\\
+%\While{pueda salvar}{
+%	\If{puede ser salvada}{
+%		Indicar cantidad de soldados extras enviados y actualizar el \texttt{presupuesto_actual}
+%	}
+%}
+%\While{haya ciudades insalvables}{
+%	cantidad de soldados extras enviados = 0
+%}
+%\end{algorithm}
+
+
+
 %Explicar detalladamente el algoritmo implementado. Elaborar podas y estrategias que permitan mejorar los tiempos de resolucion.
 \subsection{Complejidad Temporal}
 %Calcular el orden de complejidad temporal de peor caso del algoritmo.
