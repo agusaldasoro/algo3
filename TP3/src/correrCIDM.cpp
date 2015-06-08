@@ -3,6 +3,7 @@
 #include <unistd.h>	
 #include "exacto_clase.h"
 #include "greedy_clase.h"
+#include "local_clase.h"
 
 using namespace std;
 
@@ -35,7 +36,8 @@ int main(int argc, char const *argv[]){
 		cout << endl;
 		vector<unsigned int> conjNodos;
 		vector<unsigned int> optimo(cantNodos);
-		vector<unsigned int> optiGreedy;
+		vector<unsigned int> optiGreedy(0);
+		vector<unsigned int> optiLocal(0);
 		switch(opcion){
 			case '0':
 				exactoCIDM(adyacencia, 0, conjNodos, optimo);
@@ -46,6 +48,8 @@ int main(int argc, char const *argv[]){
 				mostrar(optiGreedy);
 				break;
 			case '2':
+				localCIDM(adyacencia, optiLocal);
+				mostrar(optiLocal);
 				break;
 			case '3':
 				break;

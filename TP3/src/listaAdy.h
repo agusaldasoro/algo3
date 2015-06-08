@@ -48,7 +48,7 @@ list<unsigned int>* listaAdy::dameVecinos(unsigned int nodo){
 void listaAdy::imprimirListaAdy(){
 	for (int i = 0; i < lista.size(); ++i)
 	{
-		cout << "nodo: " << i << " ";
+		cout << "nodo " << i << ": ";
 		for (list<unsigned int>::iterator it = lista[i].begin(); it != lista[i].end(); ++it)
 		{
 			cout << *it << " ";

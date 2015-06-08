@@ -4,7 +4,6 @@
 #include <iostream>
 #include <vector>
 #include "listaAdy.h"
-#include <list>
 #include <algorithm>
 
 
