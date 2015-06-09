@@ -8,8 +8,6 @@
 
 using namespace std;
 
-vector<bool> yaUsados;
-
 struct vecinosEnComun{
 	unsigned int nodoA;
 	unsigned int nodoB;
@@ -46,7 +44,7 @@ void dameParesVecinosComun(listaAdy& adyacencia, vector<unsigned int>& optimo, v
 }
 
 unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool greedy, bool vecindad){
-	yaUsados.resize(adyacencia.cantNodos());
+	vector<bool> yaUsados(adyacencia.cantNodos());
 	adyacencia.ordenar();
 	if(greedy){
 		vector<nodoGrado>grados(adyacencia.cantNodos());
