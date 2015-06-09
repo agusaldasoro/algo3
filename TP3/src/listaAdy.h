@@ -7,8 +7,7 @@
 
 using namespace std;
 
-class listaAdy
-{
+class listaAdy{
 public:
 	listaAdy(unsigned int cantNodos);
 	~listaAdy();
@@ -17,6 +16,7 @@ public:
 	unsigned int cantNodos();
 	list<unsigned int>* dameVecinos(unsigned int nodo);
 	bool sonVecinos(unsigned int a, unsigned int b);
+	void ordenar();
 	void imprimirListaAdy();
 private:
 	vector<list<unsigned int> > lista;
@@ -63,6 +63,12 @@ bool listaAdy::sonVecinos(unsigned int a, unsigned int b){
 			return true;
 	}
 	return false;
+}
+
+void listaAdy::ordenar(){
+	for (int i = 0; i < lista.size(); ++i){
+		lista[i].sort();
+	}
 }
 
 
