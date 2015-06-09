@@ -64,8 +64,11 @@ def instancegen():
 		f.close()
 	else:
 		for test in range(0, tests):
-			nodes = r.randint(0,nodeRange)
-			edges = r.randint(0,(nodes*(nodes-1))/2)
+			nodes = r.randint(1,nodeRange)
+			trivial = 0
+			if(nodes > 1):
+				trivial = 1
+			edges = r.randint(trivial,(nodes*(nodes-1))/2)
 			filename = "Instance-"+str(nodes)+"-"+str(edges)+".txt"
 			f = open(filename, 'w')
 			f.write(str(nodes)+' '+str(edges)+'\n')
