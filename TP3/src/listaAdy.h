@@ -7,6 +7,14 @@
 
 using namespace std;
 
+struct nodoGrado{
+	unsigned int nodo;
+	unsigned int grado;
+	bool operator< (const nodoGrado& otro) const{
+		return grado > otro.grado;
+	}
+};
+
 class listaAdy{
 public:
 	listaAdy(unsigned int cantNodos);

@@ -9,14 +9,6 @@
 
 using namespace std;
 
-struct nodoGrado{
-	unsigned int nodo;
-	unsigned int grado;
-	bool operator< (const nodoGrado& otro) const{
-		return grado > otro.grado;
-	}
-};
-
 unsigned int greedyCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo){
 	vector<nodoGrado>grados(adyacencia.cantNodos());
 	//completo un vector con el nodo y su grado
