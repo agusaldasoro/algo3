@@ -8,6 +8,8 @@
 
 using namespace std;
 
+vector<bool> yaUsados;
+
 struct vecinosEnComun{
 	unsigned int nodoA;
 	unsigned int nodoB;
@@ -45,6 +47,7 @@ void dameParesVecinosComun(listaAdy& adyacencia, vector<unsigned int>& optimo, v
 }
 
 unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo){
+	yaUsados.resize(adyacencia.cantNodos());
 	adyacencia.ordenar();
 	vector<unsigned int> nodos;
 	for (int i = 0; i < adyacencia.cantNodos(); ++i){
@@ -53,6 +56,7 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo){
 	for (vector<unsigned int>::iterator it = nodos.begin(); it != nodos.end(); ++it){
 		//asigno al optimo el primero no adyacente a uno ya agregado
 		optimo.push_back(*it);
+		yaUsados[*it] = true;
 		vector<unsigned int>::iterator iter = it;
 		//arranco a mirar desde el siguiente al que estoy parado para eliminar
 		iter++;
@@ -83,38 +87,50 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo){
 	while(hayCambiosHechos){
 		vector<vecinosEnComun> pares;
 		dameParesVecinosComun(adyacencia, optimo, pares);
+		if(pares.size() == 0)
+			hayCambiosHechos = false;
 		int i = 0;
 		while(i < pares.size()){
-			if(auxiliar.size() > 1){
-				vector<unsigned int>::iterator it = auxiliar.begin();
-				while(*it != pares[i].nodoB){
-					if(*it == pares[i].nodoA)
-						auxiliar.erase(it);
-					else
-						it++;
-				}
-				auxiliar.erase(it);
-				int j = 0;
-				bool esCID = false;
-				while(j < pares[i].vecinosComun.size() && !esCID){
-					auxiliar.push_back(pares[i].vecinosComun[j]);
+			vector<unsigned int> copiaDeSeguridad = auxiliar;
+			vector<unsigned int>::iterator it = auxiliar.begin();
+			while(*it != pares[i].nodoB){
+				if(*it == pares[i].nodoA)
+					auxiliar.erase(it);
+				else
+					it++;
+			}
+			auxiliar.erase(it);
+			int j = 0;
+			bool esCID = false;
+			while(j < pares[i].vecinosComun.size() && !esCID){
+				if(!yaUsados[pares[i].vecinosComun[j]]){
+					yaUsados[pares[i].vecinosComun[j]] = true;
+					vector<unsigned int>::iterator iter = auxiliar.begin();
+					while(iter != auxiliar.end() && *iter < pares[i].vecinosComun[j]){
+						iter++;
+					}
+					iter = auxiliar.insert(iter, pares[i].vecinosComun[j]);
 					esCID = esIndependienteMaximal(adyacencia, auxiliar);
 					if(!esCID){
-						auxiliar.pop_back();
+						auxiliar.erase(iter);
+						yaUsados[pares[i].vecinosComun[j]] = false;
 						j++;
 					}
 				}
-				if(j != pares[i].vecinosComun.size()){
-					optimo = auxiliar;
-					i = pares.size();
-					hayCambiosHechos = true;
+				else{
+					j++;
 				}
-				else
-					hayCambiosHechos = false;
+			}
+			if(j != pares[i].vecinosComun.size()){
+				optimo.assign(auxiliar.begin(), auxiliar.end());
+				i = pares.size();
+				hayCambiosHechos = true;
+			}
+			else{
+				auxiliar = copiaDeSeguridad;
+				hayCambiosHechos = false;
 				i++;
 			}
-			else
-				i = pares.size();
 		}
 	}
 	return optimo.size();
