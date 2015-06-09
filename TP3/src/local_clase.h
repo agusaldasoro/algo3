@@ -18,14 +18,13 @@ struct vecinosEnComun{
 
 void completarComunes(list<unsigned int>& vecinos, vector<unsigned int>& comun){
 	list<unsigned int>::iterator iter1 = vecinos.begin(), iter2 = vecinos.begin();
-	iter2++;
 	while(iter2 != vecinos.end()){
+		iter2++;
 		if(*iter1 == *iter2){
 			unsigned int copia = *iter1;
 			comun.push_back(copia);
 		}
 		iter1++;
-		iter2++;
 	}
 }
 

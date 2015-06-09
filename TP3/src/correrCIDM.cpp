@@ -35,7 +35,10 @@ int main(int argc, char const *argv[]){
 		cin >> opcion;
 		cout << endl;
 		vector<unsigned int> conjNodos;
-		vector<unsigned int> optimo(cantNodos);
+		vector<unsigned int> optimo;
+		for (int i = 0; i < cantNodos; ++i){
+			optimo.push_back(i);
+		}
 		vector<unsigned int> optiGreedy(0);
 		vector<unsigned int> optiLocal(0);
 		switch(opcion){
