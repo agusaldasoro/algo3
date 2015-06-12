@@ -14,31 +14,84 @@ struct vecinosEnComun{
 	vector<unsigned int> vecinosComun;
 };
 
-void completarComunes(list<unsigned int>& vecinos, vector<unsigned int>& comun){
-	list<unsigned int>::iterator iter1 = vecinos.begin(), iter2 = vecinos.begin();
-	while(iter2 != vecinos.end()){
-		iter2++;
-		if(*iter1 == *iter2){
-			unsigned int copia = *iter1;
-			comun.push_back(copia);
-		}
-		iter1++;
-	}
-}
+struct vecinasEnComun{
+	unsigned int nodoA;
+	unsigned int nodoB;
+	unsigned int nodoC;
+	vector<unsigned int> vecinosComun;
+};
 
 void dameParesVecinosComun(listaAdy& adyacencia, vector<unsigned int>& optimo, vector<vecinosEnComun>& pares){
 	for (int i = 0; i < optimo.size(); ++i){
 		for (int j = i+1; j < optimo.size(); ++j){
-			list<unsigned int> vecinos = *(adyacencia.dameVecinos(optimo[i]));
-			list<unsigned int> vecinosB = *(adyacencia.dameVecinos(optimo[j]));
-			vecinos.merge(vecinosB);
+			list<unsigned int>* vecinosA = adyacencia.dameVecinos(optimo[i]);
+			list<unsigned int>* vecinosB = adyacencia.dameVecinos(optimo[j]);
 			vecinosEnComun par;
 			par.nodoA = optimo[i];
 			par.nodoB = optimo[j];
-			par.vecinosComun;
-			completarComunes(vecinos, par.vecinosComun);
+			list<unsigned int>::iterator itVecinosA = vecinosA->begin(), itVecinosB = vecinosB->begin();
+			while(itVecinosA != vecinosA->end() && itVecinosB != vecinosB->end()){
+				if(*itVecinosA == *itVecinosB){
+					par.vecinosComun.push_back(*itVecinosA);
+					itVecinosA++;
+					itVecinosB++;
+				}
+				else{
+					if(*itVecinosA > *itVecinosB)
+						itVecinosB++;
+					else
+						itVecinosA++;
+				}
+			}
 			if(par.vecinosComun.size() > 0)
 				pares.push_back(par);
+		}
+	}
+}
+
+void dameTernasVecinasComun(listaAdy& adyacencia, vector<unsigned int>& optimo, vector<vecinasEnComun>& ternas){
+	for (int i = 0; i < optimo.size(); ++i){
+		for (int j = i+1; j < optimo.size(); ++j){
+			for (int k = j+1; k < optimo.size(); ++k){
+				list<unsigned int>* vecinosA = adyacencia.dameVecinos(optimo[i]);
+				list<unsigned int>* vecinosB = adyacencia.dameVecinos(optimo[j]);
+				list<unsigned int>* vecinosC = adyacencia.dameVecinos(optimo[k]);
+				vecinasEnComun terna;
+				terna.nodoA = optimo[i];
+				terna.nodoB = optimo[j];
+				terna.nodoC = optimo[k];
+				list<unsigned int>::iterator itVecinosA = vecinosA->begin(), itVecinosB = vecinosB->begin(), itVecinosC = vecinosC->begin();
+				while(itVecinosA != vecinosA->end() && itVecinosB != vecinosB->end() && itVecinosC != vecinosC->end()){
+					if(*itVecinosA == *itVecinosB && *itVecinosA == *itVecinosC){
+						terna.vecinosComun.push_back(*itVecinosA);
+						itVecinosA++;
+						itVecinosB++;
+						itVecinosC++;
+					}
+					else{
+						if(*itVecinosA == *itVecinosB && *itVecinosA > *itVecinosC)
+							itVecinosC++;
+						else if(*itVecinosA == *itVecinosC && *itVecinosA > *itVecinosB)
+							itVecinosB++;
+						else if(*itVecinosB == *itVecinosC && *itVecinosB > *itVecinosA)
+							itVecinosA++;
+						else if(*itVecinosC > *itVecinosA && *itVecinosC > *itVecinosB){
+							itVecinosA++;
+							itVecinosB++;
+						}
+						else if(*itVecinosB > *itVecinosA && *itVecinosB > *itVecinosC){
+							itVecinosA++;
+							itVecinosC++;
+						}
+						else{
+							itVecinosB++;
+							itVecinosC++;
+						}
+					}
+				}
+				if(terna.vecinosComun.size() > 0)
+					ternas.push_back(terna);
+			}
 		}
 	}
 }
@@ -166,7 +219,84 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool 
 		}
 		return optimo.size();
 	}
-
+	bool hayCambiosHechos = true;
+	//copio el optimo para modificarlo
+	vector<unsigned int> auxiliar = optimo;
+	//mientras encuentre un optimo mejor al anterior
+	while(hayCambiosHechos){
+		vector<vecinasEnComun> ternas;
+		//busco los nodos que tienen al menos un vecino en comun y cuales son esos vecinos
+		dameTernasVecinasComun(adyacencia, optimo, ternas);
+		//si no hay, no hay mas cambios posibles para optimo
+		if(ternas.size() == 0)
+			hayCambiosHechos = false;
+		int i = 0;
+		//mientras haya pares
+		while(i < ternas.size()){
+			//guardo una copia de auxuliar para volver atras si fui por un lugar equivocado
+			vector<unsigned int> copiaDeSeguridad = auxiliar;
+			vector<unsigned int>::iterator it = auxiliar.begin();
+			//elimino el par que estoy analizando que tienen al menos un vecino en comun
+			while(*it != ternas[i].nodoB){
+				if(*it == ternas[i].nodoA)
+					auxiliar.erase(it);
+				else
+					it++;
+			}
+			while(*it != ternas[i].nodoC){
+				if(*it == ternas[i].nodoB)
+					auxiliar.erase(it);
+				else
+					it++;
+			}
+			auxiliar.erase(it);
+			int j = 0;
+			bool esCID = false;
+			//mientras tenga vecinos en comun y no haya encontrado un CID
+			while(j < ternas[i].vecinosComun.size() && !esCID){
+				//si aun no use este vecino
+				if(!yaUsados[ternas[i].vecinosComun[j]]){
+					//lo marco usado
+					yaUsados[ternas[i].vecinosComun[j]] = true;
+					vector<unsigned int>::iterator iter = auxiliar.begin();
+					//lo agrego en forma ordenada
+					while(iter != auxiliar.end() && *iter < ternas[i].vecinosComun[j]){
+						iter++;
+					}
+					iter = auxiliar.insert(iter, ternas[i].vecinosComun[j]);
+					//me fijo si es CID
+					esCID = esIndependienteMaximal(adyacencia, auxiliar);
+					if(!esCID){
+						//si no es lo borro, lo desmarco como usado y reviso el siguiente vecino
+						auxiliar.erase(iter);
+						yaUsados[ternas[i].vecinosComun[j]] = false;
+						j++;
+					}
+				}
+				else{
+					//si lo use, miro el siguiente
+					j++;
+				}
+			}
+			if(esCID){
+				//si es CID, sera mejor que el optimo anterior, pues sacamos 2 y agregamos 1
+				optimo.assign(auxiliar.begin(), auxiliar.end());
+				//termino este ciclo
+				i = ternas.size();
+				//repito con el nuevo optimo
+				hayCambiosHechos = true;
+			}
+			else{
+				//si no, restauro auxiliar
+				auxiliar = copiaDeSeguridad;
+				//eventualmente termino el ciclo principal
+				hayCambiosHechos = false;
+				//avanzo en este ciclo
+				i++;
+			}
+		}
+	}
+	return optimo.size();
 }
 
 #endif

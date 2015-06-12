@@ -10,6 +10,7 @@
 using namespace std;
 
 unsigned int greedyCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, vector<bool>& yaUsados, unsigned int alpha){
+	if(alpha > 100) alpha = 100;
 	vector<nodoGrado>grados(adyacencia.cantNodos());
 	//completo un vector con el nodo y su grado
 	for (int i = 0; i < grados.size(); ++i){
@@ -19,7 +20,7 @@ unsigned int greedyCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, vect
 	//ordeno de mayor a menor
 	sort(grados.begin(), grados.end());
 	while(grados.size() > 0){
-		unsigned int eleccion = (grados.size()*alpha/100) + 1;
+		unsigned int eleccion = (grados.size()*alpha/100) + (alpha == 100 ? 0 : 1);
 		srand((unsigned) time(NULL));
 		unsigned int indice = rand() % eleccion;
 		unsigned int nodo = grados[indice].nodo;
