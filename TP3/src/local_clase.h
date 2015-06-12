@@ -43,35 +43,11 @@ void dameParesVecinosComun(listaAdy& adyacencia, vector<unsigned int>& optimo, v
 	}
 }
 
-unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool greedy, bool vecindad){
-	vector<bool> yaUsados(adyacencia.cantNodos());
+unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool greedy, bool vecindad, unsigned int alpha, vector<bool>& yaUsados){
+	//ordeno las listas de adyacencias
 	adyacencia.ordenar();
 	if(greedy){
-		vector<nodoGrado>grados(adyacencia.cantNodos());
-		//completo un vector con el nodo y su grado
-		for (int i = 0; i < grados.size(); ++i){
-			grados[i].nodo = i;
-			grados[i].grado = adyacencia.gradoDeNodo(i);
-		}
-		//ordeno de mayor a menor
-		sort(grados.begin(), grados.end());
-		//elijo el nodo de mayor grado, elimino a todos sus vecinos, hasta que no pueda elegir mas nodos
-		for (vector<nodoGrado>::iterator it = grados.begin(); it != grados.end(); ++it){
-			//asigno al optimo el no adyacente a uno ya agregado de grado maximo
-			optimo.push_back(it->nodo);
-			yaUsados[it->nodo] = true;
-			vector<nodoGrado>::iterator iter = it;
-			//arranco a mirar desde el siguiente al que estoy parado para eliminar
-			iter++;
-			while(iter != grados.end()){
-				//si es adyacente lo elimino
-				if(adyacencia.sonVecinos(it->nodo, iter->nodo))
-					//erase devuelve iterador al siguiente elemento, no hace falta sumar
-					iter = grados.erase(iter);
-				else
-					iter++;
-			}
-		}
+		greedyCIDM(adyacencia, optimo, yaUsados, alpha);
 	}
 	else{
 		vector<unsigned int> nodos;
@@ -96,8 +72,10 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool 
 		}
 	}
 
+	//si optimo tiene un solo elemento, es CIDM
 	if(optimo.size() == 1)
 		return 1;
+	//si tiene 2, tal vez puede tener uno solo, si existe lo devuelvo, sino es CIDM el de 2
 	if(optimo.size() == 2){
 		int i = 0;
 		while(i < adyacencia.cantNodos()){
@@ -109,19 +87,30 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool 
 		}
 		return 2;
 	}
+	//si n = optimo = adyacencia, entonces hay n componentes conexas, es CIDM
+	if(optimo.size() == adyacencia.cantNodos())
+		return optimo.size();
+
+	//sino, puedo analizar mejor la primera solucion y buscar CIDM a partir de la misma
 	if(vecindad){
 		bool hayCambiosHechos = true;
+		//copio el optimo para modificarlo
 		vector<unsigned int> auxiliar = optimo;
-		int x = 1;
+		//mientras encuentre un optimo mejor al anterior
 		while(hayCambiosHechos){
 			vector<vecinosEnComun> pares;
+			//busco los nodos que tienen al menos un vecino en comun y cuales son esos vecinos
 			dameParesVecinosComun(adyacencia, optimo, pares);
+			//si no hay, no hay mas cambios posibles para optimo
 			if(pares.size() == 0)
 				hayCambiosHechos = false;
 			int i = 0;
+			//mientras haya pares
 			while(i < pares.size()){
+				//guardo una copia de auxuliar para volver atras si fui por un lugar equivocado
 				vector<unsigned int> copiaDeSeguridad = auxiliar;
 				vector<unsigned int>::iterator it = auxiliar.begin();
+				//elimino el par que estoy analizando que tienen al menos un vecino en comun
 				while(*it != pares[i].nodoB){
 					if(*it == pares[i].nodoA)
 						auxiliar.erase(it);
@@ -131,42 +120,53 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool 
 				auxiliar.erase(it);
 				int j = 0;
 				bool esCID = false;
+				//mientras tenga vecinos en comun y no haya encontrado un CID
 				while(j < pares[i].vecinosComun.size() && !esCID){
+					//si aun no use este vecino
 					if(!yaUsados[pares[i].vecinosComun[j]]){
+						//lo marco usado
 						yaUsados[pares[i].vecinosComun[j]] = true;
 						vector<unsigned int>::iterator iter = auxiliar.begin();
+						//lo agrego en forma ordenada
 						while(iter != auxiliar.end() && *iter < pares[i].vecinosComun[j]){
 							iter++;
 						}
 						iter = auxiliar.insert(iter, pares[i].vecinosComun[j]);
+						//me fijo si es CID
 						esCID = esIndependienteMaximal(adyacencia, auxiliar);
 						if(!esCID){
+							//si no es lo borro, lo desmarco como usado y reviso el siguiente vecino
 							auxiliar.erase(iter);
 							yaUsados[pares[i].vecinosComun[j]] = false;
 							j++;
 						}
 					}
 					else{
+						//si lo use, miro el siguiente
 						j++;
 					}
 				}
-				if(j != pares[i].vecinosComun.size()){
+				if(esCID){
+					//si es CID, sera mejor que el optimo anterior, pues sacamos 2 y agregamos 1
 					optimo.assign(auxiliar.begin(), auxiliar.end());
+					//termino este ciclo
 					i = pares.size();
+					//repito con el nuevo optimo
 					hayCambiosHechos = true;
 				}
 				else{
+					//si no, restauro auxiliar
 					auxiliar = copiaDeSeguridad;
+					//eventualmente termino el ciclo principal
 					hayCambiosHechos = false;
+					//avanzo en este ciclo
 					i++;
 				}
 			}
 		}
 		return optimo.size();
 	}
-	else{
 
-	}
 }
 
 #endif

@@ -79,7 +79,6 @@ void listaAdy::ordenar(){
 	}
 }
 
-
 unsigned int esIndependienteMaximal(listaAdy& adyacencia, vector<unsigned int>& conjNodos){
 	vector<bool> maximal(adyacencia.cantNodos());
 	for (int i = 0; i < conjNodos.size(); ++i){
