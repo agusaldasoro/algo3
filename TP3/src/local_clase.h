@@ -68,26 +68,16 @@ void dameTernasVecinasComun(listaAdy& adyacencia, vector<unsigned int>& optimo, 
 						itVecinosB++;
 						itVecinosC++;
 					}
-					else{
-						if(*itVecinosA == *itVecinosB && *itVecinosA > *itVecinosC)
-							itVecinosC++;
-						else if(*itVecinosA == *itVecinosC && *itVecinosA > *itVecinosB)
-							itVecinosB++;
-						else if(*itVecinosB == *itVecinosC && *itVecinosB > *itVecinosA)
+					else if(*itVecinosA < *itVecinosB){
+						if(*itVecinosA < *itVecinosC)
 							itVecinosA++;
-						else if(*itVecinosC > *itVecinosA && *itVecinosC > *itVecinosB){
-							itVecinosA++;
-							itVecinosB++;
-						}
-						else if(*itVecinosB > *itVecinosA && *itVecinosB > *itVecinosC){
-							itVecinosA++;
+						else
 							itVecinosC++;
-						}
-						else{
-							itVecinosB++;
-							itVecinosC++;
-						}
 					}
+					else if(*itVecinosB < *itVecinosC)
+						itVecinosB++;
+					else
+						itVecinosC++;
 				}
 				if(terna.vecinosComun.size() > 0)
 					ternas.push_back(terna);
