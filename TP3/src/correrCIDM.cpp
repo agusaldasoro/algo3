@@ -19,6 +19,7 @@ void mostrar(vector<unsigned int>& optimo){
 
 int main(int argc, char const *argv[]){
 	chrono::time_point<chrono::system_clock> start, end;
+	chrono::duration<double> elapsed_seconds;
 	unsigned int cantNodos, cantEjes, uno, dos;
 	cin >> cantNodos >> cantEjes;
 	listaAdy adyacencia(cantNodos);
@@ -56,7 +57,7 @@ int main(int argc, char const *argv[]){
 				start = chrono::system_clock::now();
 				exactoCIDM(adyacencia, 0, conjNodos, optimo);
 				end = chrono::system_clock::now();
-				chrono::duration<double> elapsed_seconds = end-start;
+				elapsed_seconds = end-start;
 				cerr << elapsed_seconds.count() << endl;
 				mostrar(optimo);
 				break;
@@ -65,7 +66,7 @@ int main(int argc, char const *argv[]){
 				start = chrono::system_clock::now();
 				greedyCIDM(adyacencia, optiGreedy, yaUsados, alpha);
 				end = chrono::system_clock::now();
-				chrono::duration<double> elapsed_seconds = end-start;
+				elapsed_seconds = end-start;
 				cerr << elapsed_seconds.count() << endl;
 				mostrar(optiGreedy);
 				break;
@@ -75,7 +76,7 @@ int main(int argc, char const *argv[]){
 				start = chrono::system_clock::now();
 				localCIDM(adyacencia, optiLocal, greedy, vecindad, alpha, yaUsados);
 				end = chrono::system_clock::now();
-				chrono::duration<double> elapsed_seconds = end-start;
+				elapsed_seconds = end-start;
 				cerr << elapsed_seconds.count() << endl;
 				mostrar(optiLocal);
 				break;
@@ -86,7 +87,7 @@ int main(int argc, char const *argv[]){
 				start = chrono::system_clock::now();
 				localCIDM(adyacencia, optiLocal, greedy, vecindad, alpha, yaUsados);
 				end = chrono::system_clock::now();
-				chrono::duration<double> elapsed_seconds = end-start;
+				elapsed_seconds = end-start;
 				cerr << elapsed_seconds.count() << endl;
 				mostrar(optiLocal);
 				break;
@@ -96,7 +97,7 @@ int main(int argc, char const *argv[]){
 				start = chrono::system_clock::now();
 				localCIDM(adyacencia, optiLocal, greedy, vecindad, alpha, yaUsados);
 				end = chrono::system_clock::now();
-				chrono::duration<double> elapsed_seconds = end-start;
+				elapsed_seconds = end-start;
 				cerr << elapsed_seconds.count() << endl;
 				mostrar(optiLocal);
 				break;
@@ -107,7 +108,7 @@ int main(int argc, char const *argv[]){
 				start = chrono::system_clock::now();
 				localCIDM(adyacencia, optiLocal, greedy, vecindad, alpha, yaUsados);
 				end = chrono::system_clock::now();
-				chrono::duration<double> elapsed_seconds = end-start;
+				elapsed_seconds = end-start;
 				cerr << elapsed_seconds.count() << endl;
 				mostrar(optiLocal);
 				break;
@@ -118,7 +119,7 @@ int main(int argc, char const *argv[]){
 				start = chrono::system_clock::now();
 				graspCIDM(adyacencia, optimo, alpha, vecindad, yaUsados);
 				end = chrono::system_clock::now();
-				chrono::duration<double> elapsed_seconds = end-start;
+				elapsed_seconds = end-start;
 				cerr << elapsed_seconds.count() << endl;
 				mostrar(optimo);
 				break;
@@ -129,7 +130,7 @@ int main(int argc, char const *argv[]){
 				start = chrono::system_clock::now();
 				graspCIDM(adyacencia, optimo, alpha, vecindad, yaUsados);
 				end = chrono::system_clock::now();
-				chrono::duration<double> elapsed_seconds = end-start;
+				elapsed_seconds = end-start;
 				cerr << elapsed_seconds.count() << endl;
 				mostrar(optimo);
 				break;
