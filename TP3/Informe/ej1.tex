@@ -11,7 +11,17 @@ El problema de Conjunto Independiente Dominante M\'inimo (CIDM) consiste en hall
 
 \subsection{Paralelismo con ``El se\~nor de los caballos''}\label{caballitos}
 
-\textcolor{red}{Aca va lo de Noriega y sus super scripts (?)}
+El problema ``El se\~nor de los caballos'' es similar al problema de encontrar un Conjunto Independiente Dominante M\'inimo en la familia de grafos en la que cada nodo modela un casillero en un tablero de ajedrez, y cada eje modela las posiciones a las que un caballo puede moverse desde determinado casillero.
+
+\textcolor{red}{Insertar imagen del grafo tablero}
+
+La relación con nuestro problema es la siguiente:
+\begin{itemize}
+	\item ``El se\~nor de los caballos'' busca un conjunto dominante, dado que intenta ocupar el tablero, y para ello requiere que o bien cada casillero tenga un caballo, o bien que cada casillero sea amenazado por un caballo.
+	\item ``El se\~nor de los caballos'' busca un conjunto m\'inimo, es decir, que utilice la menor cantidad de caballos posibles.
+	\item ``El se\~nor de los caballos'' \textbf{NO} busca un conjunto independiente, dado que si fuese necesario, un caballo puede ubicarse en un casillero que estuviese siendo amenazado por otro caballo.
+	
+\end{itemize}
 
 \subsection{Todo conjunto independiente maximal es un conjunto dominante}
 
@@ -65,5 +75,10 @@ El absurdo provino de suponer que $I$ era un conjunto independiente maximal, per
 \subsection{Situaciones de la vida real}
 
 Situaciones de la vida real que puedan modelarse utilizando CIDM:
+
+\begin{itemize}
+	\item \textbf{Ubicación de estudiantes al momento de rendir un examen:} Encontrar la mejor manera de ubicar a todos los estudiantes en el aula, tal que ninguno este suficientemente cerca de otro como para copiarse, pero tal que entre la mayor cantidad de estudiantes posibles, es lo mismo a modelar el aula como un grafo donde cada asiento es un nodo, y donde cada asiento es adyacente a los asientos que estan a sus costados (en todas las direcciones), y buscar el CIDM de dicho grafo.
+	\item \textbf{Ubicación de servicios en ciudades:} Para minimizar costos, es probable que si se quiere situar centros de servicios (cualesquiera sean estos: hospitales, estaciones de servicio, distribuidoras, etc), se los situe de manera tal que tengan amplia cobertura, pero sin situar demasiados centros, es decir, situando la minima cantidad. Tampoco se querría que un centro cubra la misma zona que otro centro. Si se modela a la ciudad, tomando cada zona (arbitraria, como barrios, o manzanas, o conjunto de manzana) como un nodo, en los que cada nodo es adyacente al nodo que representa la zona vecina, entonces el problema de situar estos centros minimizando costos, es igual a encontrar un CIDM en el grafo mencionado.
+\end{itemize}
 
 \textcolor{red}{Otra vez Noriega salvando las papas del fuego..} lo del aula en el examen y eso
