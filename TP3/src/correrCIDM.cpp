@@ -5,6 +5,7 @@
 #include "greedy_clase.h"
 #include "local_clase.h"
 #include "grasp_clase.h"
+#include <chrono>
 
 using namespace std;
 
@@ -17,6 +18,8 @@ void mostrar(vector<unsigned int>& optimo){
 }
 
 int main(int argc, char const *argv[]){
+	chrono::time_point<chrono::system_clock> start, end;
+	chrono::duration<double> elapsed_seconds;
 	unsigned int cantNodos, cantEjes, uno, dos;
 	cin >> cantNodos >> cantEjes;
 	listaAdy adyacencia(cantNodos);
@@ -51,52 +54,84 @@ int main(int argc, char const *argv[]){
 		bool greedy, vecindad;
 		switch(opcion){
 			case '0':
+				start = chrono::system_clock::now();
 				exactoCIDM(adyacencia, 0, conjNodos, optimo);
+				end = chrono::system_clock::now();
+				elapsed_seconds = end-start;
+				cerr << elapsed_seconds.count() << endl;
 				mostrar(optimo);
 				break;
 			case '1':
 				alpha = 0;
+				start = chrono::system_clock::now();
 				greedyCIDM(adyacencia, optiGreedy, yaUsados, alpha);
+				end = chrono::system_clock::now();
+				elapsed_seconds = end-start;
+				cerr << elapsed_seconds.count() << endl;
 				mostrar(optiGreedy);
 				break;
 			case '2':
 				greedy = false;
 				vecindad = true;
+				start = chrono::system_clock::now();
 				localCIDM(adyacencia, optiLocal, greedy, vecindad, alpha, yaUsados);
+				end = chrono::system_clock::now();
+				elapsed_seconds = end-start;
+				cerr << elapsed_seconds.count() << endl;
 				mostrar(optiLocal);
 				break;
 			case '3':
 				greedy = true;
 				vecindad = true;
 				alpha = 0;
+				start = chrono::system_clock::now();
 				localCIDM(adyacencia, optiLocal, greedy, vecindad, alpha, yaUsados);
+				end = chrono::system_clock::now();
+				elapsed_seconds = end-start;
+				cerr << elapsed_seconds.count() << endl;
 				mostrar(optiLocal);
 				break;
 			case '4':
 				greedy = false;
 				vecindad = false;
+				start = chrono::system_clock::now();
 				localCIDM(adyacencia, optiLocal, greedy, vecindad, alpha, yaUsados);
+				end = chrono::system_clock::now();
+				elapsed_seconds = end-start;
+				cerr << elapsed_seconds.count() << endl;
 				mostrar(optiLocal);
 				break;
 			case '5':
 				greedy = true;
 				vecindad = false;
 				alpha = 0;
+				start = chrono::system_clock::now();
 				localCIDM(adyacencia, optiLocal, greedy, vecindad, alpha, yaUsados);
+				end = chrono::system_clock::now();
+				elapsed_seconds = end-start;
+				cerr << elapsed_seconds.count() << endl;
 				mostrar(optiLocal);
 				break;
 			case '6':
 				vecindad = true;
 				cout << "con que alpha? ";
 				cin >> alpha;
+				start = chrono::system_clock::now();
 				graspCIDM(adyacencia, optimo, alpha, vecindad, yaUsados);
+				end = chrono::system_clock::now();
+				elapsed_seconds = end-start;
+				cerr << elapsed_seconds.count() << endl;
 				mostrar(optimo);
 				break;
 			case '7':
 				vecindad = false;
 				cout << "con que alpha? ";
 				cin >> alpha;
+				start = chrono::system_clock::now();
 				graspCIDM(adyacencia, optimo, alpha, vecindad, yaUsados);
+				end = chrono::system_clock::now();
+				elapsed_seconds = end-start;
+				cerr << elapsed_seconds.count() << endl;
 				mostrar(optimo);
 				break;
 			case 'i':
