@@ -25,6 +25,7 @@ public:
 	list<unsigned int>* dameVecinos(unsigned int nodo);
 	bool sonVecinos(unsigned int a, unsigned int b);
 	void ordenar();
+	unsigned int esIndependienteMaximal(vector<unsigned int>& conjNodos);
 	void imprimirListaAdy();
 private:
 	vector<list<unsigned int> > lista;
@@ -66,6 +67,11 @@ void listaAdy::imprimirListaAdy(){
 }
 
 bool listaAdy::sonVecinos(unsigned int a, unsigned int b){
+	if(lista[a].size() > lista[b].size()){
+		unsigned int z = a;
+		a = b;
+		b = z;
+	}
 	for (list<unsigned int>::iterator it = lista[a].begin(); it != lista[a].end(); ++it){
 		if(*it == b)
 			return true;
@@ -79,21 +85,23 @@ void listaAdy::ordenar(){
 	}
 }
 
-unsigned int esIndependienteMaximal(listaAdy& adyacencia, vector<unsigned int>& conjNodos){
-	vector<bool> maximal(adyacencia.cantNodos());
+unsigned int listaAdy::esIndependienteMaximal(vector<unsigned int>& conjNodos){
+	vector<bool> maximal(lista.size());
+	unsigned int mirados = 0;
 	for (int i = 0; i < conjNodos.size(); ++i){
 		unsigned int nodo = conjNodos[i];
 		if(maximal[nodo])
 			return 0;
 		maximal[nodo] = true;
-		for (list<unsigned>::iterator it = adyacencia.dameVecinos(nodo)->begin(); it != adyacencia.dameVecinos(nodo)->end(); ++it){
+		mirados++;
+		for (list<unsigned int>::iterator it = lista[nodo].begin(); it != lista[nodo].end(); ++it){
+			if(!maximal[*it])
+				mirados++;
 			maximal[*it] = true;
 		}
 	}
-	for (int i = 0; i < maximal.size(); ++i){
-		if(!maximal[i])
-			return 0;
-	}
+	if(mirados < maximal.size())
+		return 0;
 	return conjNodos.size();
 }
 

@@ -134,6 +134,7 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool 
 	if(optimo.size() == adyacencia.cantNodos())
 		return optimo.size();
 
+	sort(optimo.begin(), optimo.end());
 	//sino, puedo analizar mejor la primera solucion y buscar CIDM a partir de la misma
 	if(vecindad){
 		bool hayCambiosHechos = true;
@@ -176,7 +177,7 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool 
 						}
 						iter = auxiliar.insert(iter, pares[i].vecinosComun[j]);
 						//me fijo si es CID
-						esCID = esIndependienteMaximal(adyacencia, auxiliar);
+						esCID = adyacencia.esIndependienteMaximal(auxiliar);
 						if(!esCID){
 							//si no es lo borro, lo desmarco como usado y reviso el siguiente vecino
 							auxiliar.erase(iter);
@@ -255,7 +256,7 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool 
 					}
 					iter = auxiliar.insert(iter, ternas[i].vecinosComun[j]);
 					//me fijo si es CID
-					esCID = esIndependienteMaximal(adyacencia, auxiliar);
+					esCID = adyacencia.esIndependienteMaximal(auxiliar);
 					if(!esCID){
 						//si no es lo borro, lo desmarco como usado y reviso el siguiente vecino
 						auxiliar.erase(iter);

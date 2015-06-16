@@ -9,7 +9,7 @@
 using namespace std;
 
 unsigned int exactoCIDM(listaAdy& adyacencia, unsigned int i, vector<unsigned int>& conjNodos, vector<unsigned int>& optimo){
-	unsigned int res = esIndependienteMaximal(adyacencia, conjNodos);
+	unsigned int res = adyacencia.esIndependienteMaximal(conjNodos);
 	//si res > 0 es indepte maximal pues sino res == 0
 	if (res > 0){
 		//modificamos el optimo, si llegamos aqui, es una mejor solucion que la anterior

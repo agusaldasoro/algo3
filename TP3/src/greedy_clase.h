@@ -34,7 +34,6 @@ unsigned int greedyCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, vect
 				iter++;
 		}
 	}
-	sort(optimo.begin(), optimo.end());
 	return optimo.size();
 }
 
