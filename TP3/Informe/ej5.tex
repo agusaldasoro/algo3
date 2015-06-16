@@ -1,8 +1,10 @@
 \section{Metaheur\'istica GRASP}
 \subsection{Explicaci\'on}
-La metaheur\'istica GRASP (Greedy Randomized Adaptive Search Procedure), es una mezcla de las dos heur\'isticas previas, dicho de manera simple, genera un punto de partida de forma golosa para el algoritmo de b\'usqueda local. Pero la distinci\'on se logra en como se construye "golosamente" la soluci\'on inicial:
+La metaheur\'istica \emph{Greedy Randomized Adaptive Search Procedure} (\textbf{GRASP}), es una mezcla de las dos heur\'isticas previas (vistas en \ref{ej3} y \ref{ej4}). Dicho de manera simple: genera un punto de partida de forma golosa para el algoritmo de b\'usqueda local.\\
 
-Como la sigla lo indica, es un Goloso Randomizado, es decir que se escogen candidatos a soluci\'on inicial de forma golosa, pero en vez de elegir al que mejor resultados nos pueda arrojar, elegimos alguno de los que mejor lo har\'a. Particularmente optamos por elegir un nodo entre los $\alpha$\% mejores.
+La distinci\'on de este algoritmo radica en cómo se construye ``\textit{golosamente}'' la soluci\'on inicial.\\
+
+Como la sigla lo indica, consiste en un algoritmo \textit{Goloso Randomnizado}. Es decir que se escogen candidatos a soluci\'on inicial de forma golosa, pero en vez de elegir al que mejor resultados nos pueda arrojar, elegimos alguno de los que mejor lo har\'a. Particularmente optamos por elegir un nodo entre los $\alpha$\% mejores.
 
 Entonces, si nuestro grafo tiene un nodo de grado m\'aximo mayor estricto a los dem\'as, no necesariamente lo elegiremos.
 
