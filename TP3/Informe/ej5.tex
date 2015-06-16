@@ -1,5 +1,21 @@
 \section{Metaheur\'istica GRASP}
 \subsection{Explicaci\'on}
+La metaheur\'istica GRASP (Greedy Randomized Adaptive Search Procedure), es una mezcla de las dos heur\'isticas previas, dicho de manera simple, genera un punto de partida de forma golosa para el algoritmo de b\'usqueda local. Pero la distinci\'on se logra en como se construye "golosamente" la soluci\'on inicial:
+
+Como la sigla lo indica, es un Goloso Randomizado, es decir que se escogen candidatos a soluci\'on inicial de forma golosa, pero en vez de elegir al que mejor resultados nos pueda arrojar, elegimos alguno de los que mejor lo har\'a. Particularmente optamos por elegir un nodo entre los $\alpha$\% mejores.
+
+Entonces, si nuestro grafo tiene un nodo de grado m\'aximo mayor estricto a los dem\'as, no necesariamente lo elegiremos.
+
+Luego se aplica el algoritmo de b\'usqueda local explicado en el inciso anterior sin modificaciones.
+
+Un aspecto tambi\'en diferencial de esta heur\'istica, es que no generamos una \'unica instancia inicial, sino que se toman un n\'umero arbitrario de ellas (seg\'un el criterio de parada) y guardamos la soluci\'on \'optima que encontramos, si en alg\'un momento se mejora, se actualiza.
+
+La RCL (Restricted Candidate List) var\'ia seg\'un el $alpha$ elegido (si se elige 0, ser\'a un greedy), a mayor $alpha$, mayor diversidad de candidatos iniciales.
+
+Las vecindades utilizadas son las mismas que se usan en la heur\'isitca de b\'usqueda local.
+
+El criterio de parada que adoptamos fue el de llegar a una determina cantidad de repeticiones del algoritmo, b\'usqueda de soluci]'on inicial y b\'usqueda local a partir de ella, tal que la respuesta \'optima encontrada, no se viera modificada durante todas ellas.
+
 %Explicar detalladamente el algoritmo implementado. Plantear distintos criterios de parada y de seleccion de la lista de candidatos (RCL) de la heurıstica golosa aleatorizada.
 \subsection{Experimentaci\'on}
 %Realizar una experimentacion que permita observar los tiempos de ejecucion y la calidad de las soluciones obtenidas. Se debe experimentar variando los valores de los parametros de la metaheurıstica (lista de candidatos, criterios de parada, etc.) y las vecindades utilizadas en la busqueda local. Elegir, si es posible, la configuracion que mejores resultados provea para el grupo de instancias utilizado.
