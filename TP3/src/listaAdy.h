@@ -86,7 +86,7 @@ void listaAdy::ordenar(){
 }
 
 unsigned int listaAdy::esIndependienteMaximal(vector<unsigned int>& conjNodos){
-	vector<bool> maximal(lista.size());
+	vector<bool> maximal(cantNodos());
 	unsigned int mirados = 0;
 	for (int i = 0; i < conjNodos.size(); ++i){
 		unsigned int nodo = conjNodos[i];
@@ -94,7 +94,7 @@ unsigned int listaAdy::esIndependienteMaximal(vector<unsigned int>& conjNodos){
 			return 0;
 		maximal[nodo] = true;
 		mirados++;
-		for (list<unsigned int>::iterator it = lista[nodo].begin(); it != lista[nodo].end(); ++it){
+		for (list<unsigned int>::iterator it = dameVecinos(nodo)->begin(); it != dameVecinos(nodo)->end(); ++it){
 			if(!maximal[*it])
 				mirados++;
 			maximal[*it] = true;
