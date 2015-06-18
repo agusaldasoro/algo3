@@ -8,11 +8,11 @@
 
 using namespace std;
 
-unsigned int graspCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, unsigned int alpha, bool vecindad, vector<bool>& yaUsados){
+unsigned int graspCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, unsigned int alpha, bool vecindad, vector<bool>& yaUsados, bool conAlpha){
 	int repeticiones = 0;
 	while(repeticiones < 5){
 		vector<unsigned int> optimoAux;
-		localCIDM(adyacencia, optimoAux, true, vecindad, alpha, yaUsados);
+		localCIDM(adyacencia, optimoAux, true, vecindad, alpha, yaUsados, conAlpha);
 		repeticiones++;
 		if(optimoAux.size() < optimo.size()){
 			optimo.assign(optimoAux.begin(), optimoAux.end());

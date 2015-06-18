@@ -1,5 +1,0 @@
-for i in {0..45..5}
-do
-	cat Instance-10-$i.txt | ../../.././main >> Instance-10-$i.res.out
-	echo "Instance-20-$i done!"
-done

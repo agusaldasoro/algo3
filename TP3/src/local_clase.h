@@ -86,11 +86,11 @@ void dameTernasVecinasComun(listaAdy& adyacencia, vector<unsigned int>& optimo, 
 	}
 }
 
-unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool greedy, bool vecindad, unsigned int alpha, vector<bool>& yaUsados){
+unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool greedy, bool vecindad, unsigned int alpha, vector<bool>& yaUsados, bool conAlpha){
 	//ordeno las listas de adyacencias
 	adyacencia.ordenar();
 	if(greedy){
-		greedyCIDM(adyacencia, optimo, yaUsados, alpha);
+		greedyCIDM(adyacencia, optimo, yaUsados, alpha, conAlpha);
 	}
 	else{
 		vector<unsigned int> nodos;
