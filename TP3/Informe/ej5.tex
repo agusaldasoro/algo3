@@ -1,23 +1,39 @@
 \section{Metaheur\'istica GRASP}
 \subsection{Explicaci\'on}
+
+%Explicar detalladamente el algoritmo implementado. Plantear distintos criterios de parada y de seleccion de la lista de candidatos (RCL) de la heurıstica golosa aleatorizada.
+
 La metaheur\'istica \emph{Greedy Randomized Adaptive Search Procedure} (\textbf{GRASP}), es una mezcla de las dos heur\'isticas previas (vistas en \ref{ej3} y \ref{ej4}). Dicho de manera simple: genera un punto de partida de forma golosa para el algoritmo de b\'usqueda local.\\
 
 La distinci\'on de este algoritmo radica en cómo se construye ``\textit{golosamente}'' la soluci\'on inicial.\\
 
-Como la sigla lo indica, consiste en un algoritmo \textit{Goloso Randomnizado}. Es decir que se escogen candidatos a soluci\'on inicial de forma golosa, pero en vez de elegir al que mejor resultados nos pueda arrojar, elegimos alguno de los que mejor lo har\'a.
+Como la sigla lo indica, consiste en un algoritmo \textit{Goloso Randomnizado}. Es decir que se escogen candidatos a soluci\'on inicial de una manera golosa ligeramente distinta a la ultilizada en la sección anterior. El método \emph{Greedy} de la sección \ref{ej3} escoge a los nodos que van a pertenecer al conjunto solución, de a uno siempre eligiendo al que tiene mayor grado. En cambio, en este caso por cada paso no se elige al nodo de mayor grado sino que se elige uno al azar entre los que ``mejor grado'' tienen.\\ 
 
-Esto da pie a la definici\'on de la RCL (Restricted Candidate List), que es el conjunto de candidatos elegibles para la soluci\'on base.
+Hablar de ``mejor grado'' nos obliga a dar un criterio  para ello, lo que da pie a la definici\'on de la \emph{Restricted Candidate List} (\textbf{RCL}), que es el conjunto de candidatos elegibles para la soluci\'on base.\\
 
-Se puede formar de varias maneras: elegir un nodo entre los $alpha$-\% mejores en cada etapa hasta completar una soluci\'on v\'alida; elegir uno entre los $alpha$ mejores; o bien uno entre los que cumplan en un $gamma$-\% alguna propiedad.\\
+La \emph{\textbf{solución inicial}} se puede formar de diversas maneras. En todos los casos, se añade de a un nodo al conjunto solución hasta que se forme una solución válida. Tres formas para determinar la elección por nodo son: 
 
-Luego se aplica el algoritmo de b\'usqueda local explicado en el inciso anterior sin modificaciones.\\
+\begin{itemize}
 
-Un aspecto tambi\'en diferencial de esta heur\'istica, es que no generamos una \'unica instancia inicial, sino que se toman un n\'umero arbitrario de ellas (seg\'un el criterio de parada) y guardamos la soluci\'on \'optima que encontramos, si en alg\'un momento se mejora, se actualiza.
+\item Elegir un nodo entre los $alpha\%$ nodos que tengan mayor grado hasta completar una soluci\'on v\'alida.
 
-Las vecindades utilizadas son las mismas que se usan en la heur\'isitca de b\'usqueda local.
+\item Elegir un nodo entre los $alpha$ nodos que tengan mayor grado hasta completar una soluci\'on v\'alida.
 
-El criterio de parada que adoptamos fue el de llegar a una determina cantidad de repeticiones del algoritmo, b\'usqueda de soluci\'on inicial y b\'usqueda local a partir de ella, tal que la respuesta \'optima encontrada, no se viera modificada durante todas ellas. Otra opci\'on podr\'ia haber sido correr un n\'umero fijo de veces y quedarnos con la mejor soluci\'on encontrada; o tambi\'en si conocieramos alguna cota, acercarnos a esta en un determinado porcentaje; o una combinaci\'on de todas.
+\item Elegir un nodo entre los nodos que cumplan determinada propiedad en un $alpha\%$ hasta completar una soluci\'on v\'alida (como por ej: ``Los nodos que tengan grado, a lo sumo, $alpha\%$ menor que el nodo de mayor grado'').
 
-%Explicar detalladamente el algoritmo implementado. Plantear distintos criterios de parada y de seleccion de la lista de candidatos (RCL) de la heurıstica golosa aleatorizada.
+\end{itemize}
+
+Optamos por implementar las primeras dos opciones para generar una solución inicial. Una vez obtenida la solución inicial bajo el método deseado, se aplica el algoritmo de \emph{b\'usqueda local} explicado en el inciso \ref{ej4} sin modificaciones.\\
+
+Un aspecto tambi\'en diferencial de esta heur\'istica, es que no generamos una \'unica instancia inicial, sino que se toma una determinada cantidad de ellas (acorde al criterio de parada). Se ejecuta el algoritmo para la primer instancia y se guarda la solución como \texttt{\'optima}, luego si en alguna ejecución futura se mejora (se obtiene otra solución con menor cantidad de nodos) se actualiza \texttt{\'optima}.\\
+
+Las \emph{\textbf{vecindades}} utilizadas son las mismas que se utilizaron en la heur\'isitca de b\'usqueda local (\ref{ej4}).\\
+
+El \emph{\textbf{criterio de parada}} que adoptamos fue contabilizar las ejecuciones que no produjeron mejora, de modo que sólo se ejecute una determinada cantidad de repeticiones ``malas''. Es decir, siempre que la ejecución otorgue una solución óptima con menos cantidad de nodos que la existente, se seguirá ejecutando. Pero si las ejecuciones no otorgan mejoras se suman al contador, de modo que al llegar a la cantidad indicada se terminará la ejecución.
+
+Otra opci\'on podr\'ia haber sido correr un n\'umero fijo de veces y quedarnos con la mejor soluci\'on encontrada; o tambi\'en si conocieramos alguna cota, acercarnos a esta en un determinado porcentaje; o bien una combinaci\'on de todas.
+
+
+\newpage
 \subsection{Experimentaci\'on}
 %Realizar una experimentacion que permita observar los tiempos de ejecucion y la calidad de las soluciones obtenidas. Se debe experimentar variando los valores de los parametros de la metaheurıstica (lista de candidatos, criterios de parada, etc.) y las vecindades utilizadas en la busqueda local. Elegir, si es posible, la configuracion que mejores resultados provea para el grupo de instancias utilizado.
