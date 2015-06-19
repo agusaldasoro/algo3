@@ -49,6 +49,22 @@ void dameParesVecinosComun(listaAdy& adyacencia, vector<unsigned int>& optimo, v
 	}
 }
 
+/**
+V,E
+2E = E(0) + E(1) + ... + E(V-1)
+(0,1) => E(0) + E(1)
+(0,2) => E(0) + E(2)
+...
+(0,V-1) => E(0) + E(V-1)
+(1,2) => E(1) + E(2)
+(1,3) => E(1) + E(3)
+...
+(1,V-1) => E(1) + E(V-1)
+E(0) * (V-1) + E(1) * (V-1) + ... + E(V-1) * (V-1) = 2E * (V-1) = o(EV) = o(V^3)
+
+
+**/
+
 void dameTernasVecinasComun(listaAdy& adyacencia, vector<unsigned int>& optimo, vector<vecinasEnComun>& ternas){
 	for (int i = 0; i < optimo.size(); ++i){
 		for (int j = i+1; j < optimo.size(); ++j){
@@ -141,21 +157,21 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool 
 		//copio el optimo para modificarlo
 		vector<unsigned int> auxiliar = optimo;
 		//mientras encuentre un optimo mejor al anterior
-		while(hayCambiosHechos){
+		while(hayCambiosHechos){ //O(V^5)
 			vector<vecinosEnComun> pares;
 			//busco los nodos que tienen al menos un vecino en comun y cuales son esos vecinos
-			dameParesVecinosComun(adyacencia, optimo, pares);
+			dameParesVecinosComun(adyacencia, optimo, pares); // o(EV)
 			//si no hay, no hay mas cambios posibles para optimo
 			if(pares.size() == 0)
 				hayCambiosHechos = false;
 			int i = 0;
 			//mientras haya pares
-			while(i < pares.size()){
+			while(i < pares.size()){ // O(V^4)
 				//guardo una copia de auxuliar para volver atras si fui por un lugar equivocado
 				vector<unsigned int> copiaDeSeguridad = auxiliar;
 				vector<unsigned int>::iterator it = auxiliar.begin();
 				//elimino el par que estoy analizando que tienen al menos un vecino en comun
-				while(*it != pares[i].nodoB){
+				while(*it != pares[i].nodoB){ // O(V)
 					if(*it == pares[i].nodoA)
 						auxiliar.erase(it);
 					else
@@ -165,7 +181,7 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool 
 				int j = 0;
 				bool esCID = false;
 				//mientras tenga vecinos en comun y no haya encontrado un CID
-				while(j < pares[i].vecinosComun.size() && !esCID){
+				while(j < pares[i].vecinosComun.size() && !esCID){ // O(V^2)
 					//si aun no use este vecino
 					if(!yaUsados[pares[i].vecinosComun[j]]){
 						//lo marco usado

@@ -1,6 +1,59 @@
 \section{Heur\'istica de B\'usqueda Local} \label{ej4}
+
+Un algoritmo de Búsqueda Local consiste en dos simples pasos: elegir una solución inicial y luego, \textcolor{red}{Aca explicarlo bien, esta horrible} iterar
+
+
+modificarla (``mejorandola''), reemplazándola paso a paso con distintas soluciones que pertenezcan a la vecindad de la misma.
+
+
+Para cada solución factible s $\epsilon$ S se define N(s) como el conjunto de
+``soluciones vecinas'' de s. Un procedimiento de busqueda local toma una solución inicial s e iterativamente la mejora reemplazándola por otra solución mejor del conjunto N(s), hasta llegar a un óptimo local.
+
+ Sea s $\epsilon$ S una solución inicial
+ 
+ Mientras exista s $\epsilon$ N(s) con f (s) $>$ f (s)
+ 
+ s $\leftarrow$ s
+
+
 \subsection{Explicaci\'on}
 %Explicar detalladamente el algoritmo implementado. Plantear al menos dos vecindades distintas para la busqueda y al menos dos soluciones iniciales.
+
+Considerando el problema a tratar, establecimos nuestros criterios para encontrar las soluciones iniciales y las vecindades.\\
+
+
+\subsubsection{Elección de Solución Inicial}
+
+Al momento de seleccionar la solución Inicial, determinamos dos criterios.
+
+\subsubsection*{Criterio I Solución Inicial: Golosa}
+
+Se realiza una ejecución del algoritmo Goloso de la Sección \ref{ej3}.\\
+
+Esto quiere decir, se ordenan los nodos por grado de manera decreciente. Se eligen los nodos de a uno (de mayor a menor), de modo que al elegir un nodo se descartan sus vecinos para sus futuras elecciones.
+
+\subsubsection*{Criterio II Solución Inicial: Secuencial}
+
+Los nodos al ser ingresados como parámetro del algoritmo tienen como identificador un número entre $0$ y $n-1$. El orden que vamos a utilizar para recorrerlos es el que haya sido dado cuando fueron ingresados como parámetro.\\
+
+Lo primero que realizamos es tomar al nodo $0$ y considerarlo parte de la solución. Se descartan todos los nodos vecinos a él y se continúa el proceso con el nodo que tenga menor número de \textit{id}.
+
+De este modo se forma un conjunto solución tal que en cada paso añade al nodo disponible que tenga su identificador número menor.
+
+\subsubsection{Elección de Solución Inicial}
+
+Al momento de seleccionar la solución Inicial, determinamos dos criterios.
+
+\subsubsection*{Criterio I Solución Inicial}
+
+\subsubsection*{Criterio I Solución Inicial}
+
+
+
+
+
+\textcolor{red}{poner cómo ejecutar cada uno ed los criterios}
+
 \subsection{Complejidad Temporal}
 %Calcular el orden de complejidad temporal de peor caso de una iteracion del algoritmo de busqueda local (para las vecindades planteadas). Si es posible, dar una cota superior para la cantidad de iteraciones de la heurıstica.
 \subsection{Experimentaci\'on}
