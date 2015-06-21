@@ -13,7 +13,16 @@ El problema de Conjunto Independiente Dominante M\'inimo (CIDM) consiste en hall
 
 El problema ``\emph{El se\~nor de los caballos}'' es similar al problema de encontrar un \emph{Conjunto Independiente Dominante M\'inimo} considerando solamente \textcolor{red}{al tablero inicial como vacío (?)} y una familia específica de grafos. Esta es la familia de grafos donde cada nodo modela un casillero de un tablero de ajedrez y sólo existe un eje entre dos nodos $v_1$ y $v_2$ si el movimiento desde $v_1$ a $v_2$ o \textit{viceversa} es un movimiento permitido para la pieza de un caballo.\\
 
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.4]{imagenes/tablero8x8.png}
+% 	\caption{}
+	\label{GrafoCompleto}
+   \end{center}
+ \end{figure}
+
 \textcolor{red}{Insertar imagen del grafo tablero}\\
+\textcolor{blue}{Insertada, espero que les guste}\\
 
 La relación con nuestro problema es la siguiente:
 \begin{itemize}
@@ -22,7 +31,7 @@ La relación con nuestro problema es la siguiente:
 	\item ``El se\~nor de los caballos'' \textbf{NO} busca un conjunto independiente, dado que si fuese necesario, un caballo puede ubicarse en un casillero que estuviese siendo amenazado por otro caballo.
 	
 \end{itemize}
-\newpage
+%\newpage
 \subsection{Todo conjunto independiente maximal es un conjunto dominante}
 
  Sea $G = (V, E)$ un grafo simple, un \emph{conjunto independiente} de $I \subseteq V$ se dice \emph{maximal} si no existe otro conjunto independiente $J \subseteq V$ tal que $I \subset J$, es decir que $I$ est\'a incluido estrictamente en $J$. \\

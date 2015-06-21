@@ -1,0 +1,268 @@
+% A simple graph with straight and bend arrows and loops
+% Stefan Kottwitz
+\documentclass{article}
+\usepackage{tikz}
+%%%<
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}%
+%%%>
+\begin{comment}
+:Title: Simple graph
+:Tags: Arrows;Diagrams;Graphs;Mathematics
+:Author: Stefan Kottwitz
+:Slug: graph
+
+A simple example of a graph with straight and bend arrows and loops.
+It has been posted as answer to the question
+http://tex.stackexchange.com/q/45734/213 of Ichibann.
+
+* Define styles for edges, arrows, and nodes
+* Place the main nodes
+* Draw edges with nodes for description
+* Use options `loop` and `bend` for loops and bent edges
+* Specify `left` and `right` for bend direction and node placement
+\end{comment}
+\usetikzlibrary{arrows}
+\begin{document}
+\begin{tikzpicture}[<->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (0) {0};
+  \node[main node] (1) [right of=0] {1};
+  \node[main node] (2) [right of=1] {2};
+  \node[main node] (3) [right of=2] {3};
+  \node[main node] (4) [right of=3] {4};
+  \node[main node] (5) [right of=4] {5};
+  \node[main node] (6) [right of=5] {6};
+  \node[main node] (7) [right of=6] {7};
+  \node[main node] (8) [below of=0] {8};
+  \node[main node] (9) [right of=8] {9};
+  \node[main node] (10) [right of=9] {10};
+  \node[main node] (11) [right of=10] {11};
+  \node[main node] (12) [right of=11] {12};
+  \node[main node] (13) [right of=12] {13};
+  \node[main node] (14) [right of=13] {14};
+  \node[main node] (15) [right of=14] {15};
+  \node[main node] (16) [below of=8] {16};
+  \node[main node] (17) [right of=16] {17};
+  \node[main node] (18) [right of=17] {18};
+  \node[main node] (19) [right of=18] {19};
+  \node[main node] (20) [right of=19] {20};
+  \node[main node] (21) [right of=20] {21};
+  \node[main node] (22) [right of=21] {22};
+  \node[main node] (23) [right of=22] {23};
+  \node[main node] (24) [below of=16] {24};
+  \node[main node] (25) [right of=24] {25};
+  \node[main node] (26) [right of=25] {26};
+  \node[main node] (27) [right of=26] {27};
+  \node[main node] (28) [right of=27] {28};
+  \node[main node] (29) [right of=28] {29};
+  \node[main node] (30) [right of=29] {30};
+  \node[main node] (31) [right of=30] {31};
+  \node[main node] (32) [below of=24] {32};
+  \node[main node] (33) [right of=32] {33};
+  \node[main node] (34) [right of=33] {34};
+  \node[main node] (35) [right of=34] {35};
+  \node[main node] (36) [right of=35] {36};
+  \node[main node] (37) [right of=36] {37};
+  \node[main node] (38) [right of=37] {38};
+  \node[main node] (39) [right of=38] {39};
+  \node[main node] (40) [below of=32] {40};
+  \node[main node] (41) [right of=40] {41};
+  \node[main node] (42) [right of=41] {42};
+  \node[main node] (43) [right of=42] {43};
+  \node[main node] (44) [right of=43] {44};
+  \node[main node] (45) [right of=44] {45};
+  \node[main node] (46) [right of=45] {46};
+  \node[main node] (47) [right of=46] {47};
+  \node[main node] (48) [below of=40] {48};
+  \node[main node] (49) [right of=48] {49};
+  \node[main node] (50) [right of=49] {50};
+  \node[main node] (51) [right of=50] {51};
+  \node[main node] (52) [right of=51] {52};
+  \node[main node] (53) [right of=52] {53};
+  \node[main node] (54) [right of=53] {54};
+  \node[main node] (55) [right of=54] {55};
+  \node[main node] (56) [below of=48] {56};
+  \node[main node] (57) [right of=56] {57};
+  \node[main node] (58) [right of=57] {58};
+  \node[main node] (59) [right of=58] {59};
+  \node[main node] (60) [right of=59] {60};
+  \node[main node] (61) [right of=60] {61};
+  \node[main node] (62) [right of=61] {62};
+  \node[main node] (63) [right of=62] {63};
+
+  \path[every node/.style={font=\sffamily\small}]
+    (0) edge node [left] {} (10)
+		edge node [left] {} (17)
+    (1) edge node [left] {} (16)
+		edge node [left] {} (18)
+		edge node [left] {} (11)
+    (2) edge node [left] {} (8)
+		edge node [left] {} (17)
+		edge node [left] {} (19)
+		edge node [left] {} (12)
+    (3) edge node [left] {} (9)
+		edge node [left] {} (18)
+		edge node [left] {} (20)
+		edge node [left] {} (13)
+    (4) edge node [left] {} (10)
+		edge node [left] {} (19)
+		edge node [left] {} (21)
+		edge node [left] {} (14)
+    (5) edge node [left] {} (11)
+		edge node [left] {} (20)
+		edge node [left] {} (22)
+		edge node [left] {} (15)
+    (6) edge node [left] {} (12)
+		edge node [left] {} (21)
+		edge node [left] {} (23)
+    (7) edge node [left] {} (13)
+		edge node [left] {} (22)
+    (8) 	edge node [left] {} (18)
+		edge node [left] {} (25)
+    (9) edge node [left] {} (19)
+		edge node [left] {} (24)
+		edge node [left] {} (26)
+    (10) edge node [left] {} (16)
+		edge node [left] {} (25)
+		edge node [left] {} (27)
+		edge node [left] {} (20)
+    (11) edge node [left] {} (17)
+		edge node [left] {} (26)
+		edge node [left] {} (28)
+		edge node [left] {} (21)
+    (12) edge node [left] {} (18)
+		edge node [left] {} (27)
+		edge node [left] {} (29)
+		edge node [left] {} (22)
+    (13) edge node [left] {} (19)
+		edge node [left] {} (28)
+		edge node [left] {} (30)
+		edge node [left] {} (23)
+    (14) edge node [left] {} (20)
+		edge node [left] {} (29)
+		edge node [left] {} (31)
+    (15) edge node [left] {} (21)
+		edge node [left] {} (30)
+    (16) edge node [left] {} (26)
+		edge node [left] {} (33)
+    (17) edge node [left] {} (27)
+		edge node [left] {} (32)
+		edge node [left] {} (34)
+    (18) edge node [left] {} (24)
+		edge node [left] {} (33)
+		edge node [left] {} (35)
+		edge node [left] {} (28)
+    (19) edge node [left] {} (25)
+		edge node [left] {} (34)
+		edge node [left] {} (36)
+		edge node [left] {} (29)
+    (20) edge node [left] {} (26)
+		edge node [left] {} (35)
+		edge node [left] {} (37)
+		edge node [left] {} (30)
+    (21) edge node [left] {} (27)
+		edge node [left] {} (36)
+		edge node [left] {} (38)
+		edge node [left] {} (31)
+    (22) edge node [left] {} (28)
+		edge node [left] {} (37)
+		edge node [left] {} (39)
+    (23) edge node [left] {} (29)
+		edge node [left] {} (38)
+    (24)	edge node [left] {} (41)
+		edge node [left] {} (34)
+    (25) edge node [left] {} (40)
+		edge node [left] {} (42)
+		edge node [left] {} (35)
+    (26) edge node [left] {} (32)
+		edge node [left] {} (41)
+		edge node [left] {} (43)
+		edge node [left] {} (36)
+    (27) edge node [left] {} (33)
+		edge node [left] {} (42)
+		edge node [left] {} (44)
+		edge node [left] {} (37)
+    (28) edge node [left] {} (34)
+		edge node [left] {} (43)
+		edge node [left] {} (45)
+		edge node [left] {} (38)
+    (29) edge node [left] {} (35)
+		edge node [left] {} (44)
+		edge node [left] {} (46)
+		edge node [left] {} (39)
+    (30) edge node [left] {} (36)
+		edge node [left] {} (45)
+		edge node [left] {} (47)
+    (31) edge node [left] {} (37)
+		edge node [left] {} (46)
+    (32)	edge node [left] {} (42)
+		edge node [left] {} (49)
+    (33) edge node [left] {} (48)
+		edge node [left] {} (50)
+		edge node [left] {} (43)
+    (34) edge node [left] {} (40)
+		edge node [left] {} (49)
+		edge node [left] {} (51)
+		edge node [left] {} (44)
+    (35) edge node [left] {} (41)
+		edge node [left] {} (50)
+		edge node [left] {} (52)
+		edge node [left] {} (45)
+    (36) edge node [left] {} (42)
+		edge node [left] {} (51)
+		edge node [left] {} (53)
+		edge node [left] {} (46)
+    (37) edge node [left] {} (43)
+		edge node [left] {} (52)
+		edge node [left] {} (54)
+		edge node [left] {} (47)
+    (38) edge node [left] {} (44)
+		edge node [left] {} (53)
+		edge node [left] {} (55)
+    (39) edge node [left] {} (45)
+		edge node [left] {} (54)
+    (40)	edge node [left] {} (50)
+		edge node [left] {} (57)
+    (41) edge node [left] {} (56)
+		edge node [left] {} (58)
+		edge node [left] {} (51)
+    (42) edge node [left] {} (48)
+		edge node [left] {} (57)
+		edge node [left] {} (59)
+		edge node [left] {} (52)
+    (43) edge node [left] {} (49)
+		edge node [left] {} (58)
+		edge node [left] {} (60)
+		edge node [left] {} (53)
+    (44) edge node [left] {} (50)
+		edge node [left] {} (59)
+		edge node [left] {} (61)
+		edge node [left] {} (54)
+    (45) edge node [left] {} (51)
+		edge node [left] {} (60)
+		edge node [left] {} (62)
+		edge node [left] {} (55)
+    (46) edge node [left] {} (52)
+		edge node [left] {} (61)
+		edge node [left] {} (63)
+    (47) edge node [left] {} (53)
+		edge node [left] {} (62)
+    (48)	edge node [left] {} (58)
+    (49) edge node [left] {} (59)
+    (50) edge node [left] {} (56)
+		edge node [left] {} (60)
+    (51) edge node [left] {} (57)
+		edge node [left] {} (61)
+    (52) edge node [left] {} (58)
+		edge node [left] {} (62)
+    (53) edge node [left] {} (59)
+		edge node [left] {} (63)
+    (54) edge node [left] {} (60)
+    (55) edge node [left] {} (61)
+		;
+\end{tikzpicture}
+\end{document}
