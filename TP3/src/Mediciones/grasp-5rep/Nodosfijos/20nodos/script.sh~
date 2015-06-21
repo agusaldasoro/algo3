@@ -1,6 +1,0 @@
-for i in 10 25 50 75 100; do
-	for f in *.txt; do
-		cat $f | ../../../../main $i 1>>$f.$i.out 2>>$f.$i.time;
-	done;
-done;
-
