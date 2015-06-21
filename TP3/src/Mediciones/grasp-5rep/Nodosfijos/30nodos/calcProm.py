@@ -17,5 +17,6 @@ for directory in listaDirs:
 					suma += float(line)
 				suma /= cant
 				f.write(str(suma))
+				f.write('\n')
 				g.close()
 				f.close()

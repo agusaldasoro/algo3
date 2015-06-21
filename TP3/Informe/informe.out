@@ -7,16 +7,20 @@
 \BOOKMARK [2][-]{subsection.2.1}{Explicaci\363n y mejoras}{section.2}% 7
 \BOOKMARK [2][-]{subsection.2.2}{Complejidad Temporal}{section.2}% 8
 \BOOKMARK [2][-]{subsection.2.3}{Experimentaci\363n}{section.2}% 9
-\BOOKMARK [1][-]{section.3}{Heur\355stica Constructiva Golosa}{}% 10
-\BOOKMARK [2][-]{subsection.3.1}{Explicaci\363n}{section.3}% 11
-\BOOKMARK [2][-]{subsection.3.2}{Complejidad Temporal}{section.3}% 12
-\BOOKMARK [2][-]{subsection.3.3}{Comparaci\363n de resultados con soluci\363n \363ptima}{section.3}% 13
-\BOOKMARK [2][-]{subsection.3.4}{Experimentaci\363n}{section.3}% 14
-\BOOKMARK [1][-]{section.4}{Heur\355stica de B\372squeda Local}{}% 15
-\BOOKMARK [2][-]{subsection.4.1}{Explicaci\363n}{section.4}% 16
-\BOOKMARK [2][-]{subsection.4.2}{Complejidad Temporal}{section.4}% 17
-\BOOKMARK [2][-]{subsection.4.3}{Experimentaci\363n}{section.4}% 18
-\BOOKMARK [1][-]{section.5}{Metaheur\355stica GRASP}{}% 19
-\BOOKMARK [2][-]{subsection.5.1}{Explicaci\363n}{section.5}% 20
-\BOOKMARK [2][-]{subsection.5.2}{Experimentaci\363n}{section.5}% 21
-\BOOKMARK [1][-]{section.6}{Comparaci\363n entre todos los m\351todos}{}% 22
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Mejor caso}{subsection.2.3}% 10
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Nodos fijos}{subsection.2.3}% 11
+\BOOKMARK [1][-]{section.3}{Heur\355stica Constructiva Golosa}{}% 12
+\BOOKMARK [2][-]{subsection.3.1}{Explicaci\363n}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.2}{Complejidad Temporal}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.3}{Comparaci\363n de resultados con soluci\363n \363ptima}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.4}{Experimentaci\363n}{section.3}% 16
+\BOOKMARK [1][-]{section.4}{Heur\355stica de B\372squeda Local}{}% 17
+\BOOKMARK [2][-]{subsection.4.1}{Explicaci\363n}{section.4}% 18
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Elecci\363n de Soluci\363n Inicial}{subsection.4.1}% 19
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Elecci\363n de Soluci\363n Inicial}{subsection.4.1}% 20
+\BOOKMARK [2][-]{subsection.4.2}{Complejidad Temporal}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.3}{Experimentaci\363n}{section.4}% 22
+\BOOKMARK [1][-]{section.5}{Metaheur\355stica GRASP}{}% 23
+\BOOKMARK [2][-]{subsection.5.1}{Explicaci\363n}{section.5}% 24
+\BOOKMARK [2][-]{subsection.5.2}{Experimentaci\363n}{section.5}% 25
+\BOOKMARK [1][-]{section.6}{Comparaci\363n entre todos los m\351todos}{}% 26
