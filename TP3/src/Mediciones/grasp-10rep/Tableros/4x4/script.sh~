@@ -1,0 +1,4 @@
+for i in 10 25 50 75 100; do
+	cat board | ../../../../main $i 1>board.$i.out 2>time_$i/board.$i.time;
+done;
+

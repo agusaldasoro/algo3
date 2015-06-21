@@ -1,0 +1,33 @@
+cd Completos
+./script.sh
+echo "c"
+cd ../Vacios
+./script.sh
+echo "v"
+cd ../Nodosfijos/10nodos
+./script.sh
+echo "1"
+cd ../20nodos
+./script.sh
+echo "2"
+cd ../30nodos
+./script.sh
+echo "3"
+cd ../../Ejesfijos/45ejes
+./script.sh
+echo "4"
+cd ../90ejes
+./script.sh
+echo "9"
+cd ../../Tableros/4x4
+./script.sh
+echo "4.2"
+cd ../5x5
+./script.sh
+echo "5"
+cd ../6x6
+./script.sh
+echo "6"
+cd ../..
+
+
