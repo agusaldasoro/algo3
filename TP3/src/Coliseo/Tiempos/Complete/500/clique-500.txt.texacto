@@ -1,0 +1,3 @@
+cat: Coliseo/Instancias/Complete/500: Is a directory
+./coliseo.sh: line 6:  5084 Exit 1                  cat $f
+      5085 Segmentation fault      (core dumped) | ./correrExacto
