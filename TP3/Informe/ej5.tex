@@ -33,20 +33,30 @@ El \emph{\textbf{criterio de parada}} que adoptamos fue contabilizar las ejecuci
 
 Otra opci\'on podr\'ia haber sido correr un n\'umero fijo de veces y quedarnos con la mejor soluci\'on encontrada; o tambi\'en si conocieramos alguna cota, acercarnos a esta en un determinado porcentaje; o bien una combinaci\'on de todas.
 
+\textcolor{red}{Poner como correr 6 7 8 9 y que correnc on q parametros}
 
 \newpage
 \subsection{Experimentaci\'on}
 
-Para analizar qu\'e combinaci\'on de vecindades de b\'usqueda local y elecci\'on de soluci\'on inicial, se acercan a encontrar el \'optimo en distintos escenarios, se experiment\'o con una serie de grafos seg\'un criterios:
+Para analizar qu\'e combinaci\'on de vecindades de b\'usqueda local y elecci\'on de soluci\'on inicial se acercan a encontrar el \'optimo en distintos escenarios, se experiment\'o con una serie de grafos seg\'un criterios:
 \begin{itemize}
 	\item Mantener los ejes fijos, variando la cantidad de nodos
 	\item Mantener los nodos fijos, variando la cantidad de ejes
-	\item Grafos Tablero (an\'alogos a los del ''Se\~nor de los Caballos'')
+	\item Grafos Tablero (an\'alogos a los del ``Se\~nor de los Caballos'')
 \end{itemize}
 
-Lo que realizamos fue obtener un promedio de la cantidad de nodos que requer\'ia la soluci\'on \'optima en cada ejecuci\'on del algoritmo. Luego, sabiendo cu\'antos hacen falta por el algoritmo exacto, divimos y obtuvimos en qu\'e porcentaje la heur\'istica falla en encontrar el \'optimo verdadero.\\
+\bigskip
+
+Se opt\'o por ejecutar el algoritmo \textcolor{red}{X cantidad de veces} y luego, con los tama\~nos de cada conjunto soluci\'on, sacar un promedio.
+
+Es decir, obtener un promedio de la cantidad de nodos que requer\'ia la soluci\'on \'optima en cada ejecuci\'on del algoritmo.\\
+
+
+Luego, sabiendo cu\'antos son los nodos que pertenecen a la soluci\'on \'optima (ejecutando el algoritmo exacto), divimos y obtuvimos en qu\'e porcentaje la heur\'istica falla en encontrar el \textit{\'optimo verdadero}.\\
 
 La siguiente tabla muestra los valores obtenidos, las columnas 2, 3 y 4 indican el criterio aplicado al grafo.\\
+
+\textcolor{red}{Sory, la tabla no la puedo corregir, no la entiendo bien}
 
 Vecindad 2x1 indica que la vecindad usada fue la de quitar dos nodos y agregar uno, vecindad 3x1 quitar tres y agregar uno.\\
 

@@ -1,14 +1,21 @@
 \section{Heur\'istica Constructiva Golosa} \label{ej3}
 \subsection{Explicaci\'on}
 La heurística constructiva golosa busca, dado un grafo, determinar un conjunto independiente dominante mínimo. 
-Para ello, el algoritmo ordena los nodos de acuerdo al grado de cada uno de ellos, de mayor a menor. Este orden se establece al comienzo de la ejecución y no se actualiza.
 
-Luego, recorre dichos nodos, y por cada uno de ellos, lo agrega al conjunto solución, y va eliminando a sus vecinos, hasta que no quedan más nodos.
+Para ello, el algoritmo ordena los nodos de acuerdo al grado de cada uno de ellos, de mayor a menor. Este orden se establece al comienzo de la ejecución y no se actualiza.\\
 
-De esta manera, el algoritmo siempre obtiene un conjunto independiente (dado que por cada nodo que toma, elimina a sus vecinos) y dominante (dado que por cada nodo que toma, lo agrega al conjunto, y elimina a sus vecinos, es decir, que estos son adyacentes a un nodo del conjunto), pero no puede asegurar que siempre sea mínimo. Eso dependerá del grafo.
+Luego, recorre dichos nodos, y por cada uno de ellos, lo agrega al conjunto solución, y va eliminando a sus vecinos, hasta que no quedan más nodos.\\
+
+De esta manera, el algoritmo siempre obtiene un conjunto independiente (dado que por cada nodo que toma, elimina a sus vecinos) y dominante (dado que por cada nodo que toma, lo agrega al conjunto, y elimina a sus vecinos, es decir, que estos son adyacentes a un nodo del conjunto), pero no puede asegurar que siempre sea mínimo. Eso dependerá del grafo.\\
+
+\textcolor{red}{Falta una explicacion mas detallada (un pseudocodigo, o algo), y aclarar que es goloso porque en cada paso elige la mejor opcion y nosostros definimos MEJOR como el mayor grado total}
 %Explicar detalladamente el algoritmo implementado.
+
+\newpage
 \subsection{Complejidad Temporal}
-En lo que respecta a la complejidad temporal, demostraremos a continuación que la misma es $O(n^{2})$.
+\textcolor{red}{Aca no me meto, todavia...}
+
+En lo que respecta a la complejidad temporal, demostraremos a continuación que la misma es $O(n^{2})$.\\
 
 Recordemos que el algoritmo toma los nodos con mayor grado, lo agrega al conjunto solución, y lo elimina junto a sus adyacentes.
 Dicho esto, definiremos a $f(a,b): \mathbb{N} \rightarrow \mathbb{N}$ como:

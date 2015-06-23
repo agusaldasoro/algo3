@@ -52,15 +52,15 @@ Al ser un algoritmo de $Backtracking$ o fuerza bruta, tiene una complejidad expo
 
 Se llega a dicha complejidad dado que para cada nodo, tenemos que preguntarnos qu\'e ocurre, tanto si lo agregamos al conjunto como si no.\\
 
-Dicho de otra forma, vamos a recorrer todos los conjuntos dentro del conjunto de partes del total de nodos de $V$. El cardinal de dicho conjunto de partes es $2^n$. \textcolor{red}{demostrar o no hace falta?}\\
+Dicho de otra forma, vamos a recorrer todos los conjuntos dentro del conjunto de partes del total de nodos de $V$. El cardinal de dicho conjunto de partes es $2^n$. \textcolor{red}{demostrar o no hace falta? Para mi es suficiente (AGUS)}\\
 
 Para cada uno de los subconjuntos, el algoritmo verifica si cumple la funci\'on \texttt{esIndependienteMaximal()}, la cual
-tiene una complejidad en peor caso de $O(n^2)$.	De esta forma, nuestro algoritmo tiene complejidad $O(2^n * n^2)$, lo que es igual a $O(2^n)$.\\
+tiene una complejidad en peor caso de $O(n^2)$.	De esta forma, nuestro algoritmo tiene complejidad $O(2^n * n^2)$, lo que es equivalente a $O(2^n)$.\\
 
 Al tener en cuenta la poda utilizada, se puede ver que la misma no disminuye la complejidad te\'orica planteada dado que en el peor caso, podr\'ia haber que recorrer completamente el conjunto de partes.
 De todas formas, dicha poda mejora notablemente los tiempos de ejecuci\'on del algoritmo, como veremos m\'as adelante, ya que descarta las soluciones peores que la \'optima hasta el momento.
 
-
+\newpage
 \subsection{Experimentaci\'on}
 %Realizar una experimentacion que permita observar los tiempos de ejecucion del algoritmo en funcion de los parametros de la entrada y de las podas y/o estrategias implementadas.
 Para realizar la experimentaci\'on, se genereron grafos espec\'ificos, que nos permitieron ver el funcionamiento de nuestro algoritmo.
@@ -71,7 +71,7 @@ Aquellas instancias que tardaban mucho m\'as tiempo, determinamos que los outlie
 
 \subsubsection{Mejor caso}
 De acuerdo a c\'omo fue planteado nuestro algoritmo, se puede ver que el mejor caso posible ser\'a cuando los grafos pasados por par\'ametro sean completos.
-Esto es as\'i debido a la poda implementada, ya que cuando considera el primer nodo, ya encuentra una posible soluci\'on y luego descarta r\'apidamente todas las dem\'as, ya que una soluci\'on con un solo nodo ya es una de las \'optimas.\\
+Esto es as\'i debido a la poda implementada: cuando considera al primer nodo, encuentra una posible soluci\'on y luego descarta r\'apidamente todas las dem\'as, ya que una soluci\'on con un solo nodo debe ser necesariamente una soluci\'on \'optima.\\
 
 \textcolor{red}{Tabla}
 
