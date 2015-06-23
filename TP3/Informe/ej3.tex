@@ -24,7 +24,7 @@ $f(i,n)$ = Cantidad de operaciones en el peor caso, teniendo $n$ nodos totales y
 Es decir,\par
 \begin{itemize}
 	\item$f(0,n) = c$, dado que no falta eliminar ningun nodo, el algoritmo termina, con $c$ alguna cantidad constante de operaciones.\par
-	\item $f(i,n) = h*(i-1) + f(i-1,n) + c$, con $h$ la cantidad de vecinos del nodo que estoy viendo, $c$ alguna cantidad constante de operaciones, y $f(i-1,n)$ es el llamado recursivo.\\
+	\item $(\forall i \in {1...n-1}) f(i,n) = h*(i-1) + f(i-1,n) + c$, con $h$ la cantidad de vecinos del nodo que estoy viendo, $c$ alguna cantidad constante de operaciones, y $f(i-1,n)$ es el llamado recursivo.\\
 \end{itemize}
 Expliquemos que significa cada monomio:
 \begin{itemize}
@@ -32,7 +32,7 @@ Expliquemos que significa cada monomio:
 	\item $f(i-1,n)$: En el peor de los casos, no hay nodos de la lista de adyacencia, que no hayan sido eliminados aún.
 	\item $c$: Alguna cantidad constante de operaciones.
 \end{itemize}
-Entonces, querremos demostrar que $(\forall i \in {1..n}) f(i,n) \leq k*i*n + c$ (con $k$ y $c$ alguna constante), pues al momento de ejecutar el algoritmo, se tienen $n$ nodos, y faltan eliminar $n$ nodos, siendo la complejidad del mismo, $O(f(n,n)) = O(n^{2})$; y dado que la cantidad de nodos por borrar no puede ser mayor que la cantidad total de nodos.\\
+Entonces, querremos demostrar que $(\forall i \in {1...n-1}) f(i,n) \leq k*i*n + c$ (con $k$ y $c$ alguna constante), pues al momento de ejecutar el algoritmo, se tienen $n$ nodos, y faltan eliminar $n$ nodos, siendo la complejidad del mismo, $O(f(n,n)) = O(n^{2})$; y dado que la cantidad de nodos por borrar no puede ser mayor que la cantidad total de nodos, es correcto pedir que $0 \leq i < n$.\\
 
 \newpage
 {\large\textbf{Teorema}}\\
@@ -40,10 +40,10 @@ Dado $f(i,n): \mathbb{N} \rightarrow \mathbb{N}$ definida como\\
 $f(i,n)$ = Cantidad de operaciones  en el peor caso, teniendo $n$ nodos totales y faltando eliminar $i$.\\
 $f(0,n) = c$\\
 $f(i,n) = h*(i-1) + f(i-1,n) + c$\\
-Luego, $(\forall i \in {1..n}) f(i,n) \leq k*i*n + c$.\\
+Luego, $(\forall i \in {1...n-1}) f(i,n) \leq k*i*n + c$.\\
 
 {\large\textbf{Demostración}}\\
-Sea $P(i) = f(i,n) \leq k*i*n + c$, demostraremos por inducción global, que $(\forall i \in {1..n}) P(i)$\\
+Sea $P(i) = f(i,n) \leq k*i*n + c$, demostraremos por inducción global, que $(\forall i \in {1...n-1}) P(i)$\\
 Entonces,\\
 \textbf{Caso base:}
 \begin{itemize}
