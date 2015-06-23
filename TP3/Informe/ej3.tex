@@ -1,7 +1,44 @@
 \section{Heur\'istica Constructiva Golosa} \label{ej3}
 \subsection{Explicaci\'on}
+La heurística constructiva golosa busca, dado un grafo, determinar un conjunto independiente dominante mínimo. 
+Para ello, el algoritmo ordena los nodos de acuerdo al grado de cada uno de ellos, de mayor a menor. Este orden se establece al comienzo de la ejecución y no se actualiza.
+
+Luego, recorre dichos nodos, y por cada uno de ellos, lo agrega al conjunto solución, y va eliminando a sus vecinos, hasta que no quedan más nodos.
+
+De esta manera, el algoritmo siempre obtiene un conjunto independiente (dado que por cada nodo que toma, elimina a sus vecinos) y dominante (dado que por cada nodo que toma, lo agrega al conjunto, y elimina a sus vecinos, es decir, que estos son adyacentes a un nodo del conjunto), pero no puede asegurar que siempre sea mínimo. Eso dependerá del grafo.
 %Explicar detalladamente el algoritmo implementado.
 \subsection{Complejidad Temporal}
+En lo que respecta a la complejidad temporal, demostraremos a continuación que la misma es $O(n^{2})$.
+
+Recordemos que el algoritmo toma los nodos con mayor grado, lo agrega al conjunto solución, y lo elimina junto a sus adyacentes.
+Dicho esto, definiremos a $f(a,b): \mathbb{N} \rightarrow \mathbb{N}$ como:
+
+$f(a,b)$ = Cantidad de operaciones en el peor caso, teniendo $b$ nodos y faltando eliminar $a$.\\
+Es decir,\\
+$f(a,b) = h*a + f(a-h,b)$, con $h$ la cantidad de vecinos del nodo que estoy viendo, y $f(i-h,b)$ es el llamado recursivo, habiendo tachado dichos $h$ vecinos. Esto esta bien definido pues en el peor de los casos, debo recorrer la l
+
+Entonces, querremos demostrar que $f(a,b) = a*b + k$ (con $k$ alguna constante), pues al momento de ejecutar el algoritmo, se tienen $n$ nodos, y faltan eliminar $n$ nodos, en cuyo caso, la complejidad del mismo será $O(f(n,n)) = O(n^{2})$.\\
+
+\textbf{Teorema}\\
+Dado $f(a,b): \mathbb{N} \rightarrow \mathbb{N}$.\\
+$f(a,b)$ = Cantidad de operaciones teniendo $b$ nodos y faltando eliminar $a$.\\
+Luego, $f(a,b) = a*b + k$.\\
+
+\textbf{Demostración}
+Realizaremos la demostración por inducción en la cantidad de nodos que falta eliminar.
+Luego,\\
+\textbf{Casos base:}
+\begin{itemize}
+	\item[•] $f(0,b) = k$ \flushleft{Dado que tengo $b$ nodos, y ya no me quedan más por eliminar, el algoritmo terminó. $k$ es alguna cantidad constante de operaciones.}
+    \item[•] $f(1,b) = k$ \flushleft{Dado que tengo $b$ nodos, y solo falta eliminar uno $k$ es alguna cantidad constante de operaciones para eliminar el nodo y finalizar el algoritmo.}
+    \item[•] $f(2,b) = h + k$ \flushleft{Dado que tengo $b$ nodos, y me falta eliminar 2. Tomo uno, y recorro su lista de adyacencia, que en este casos tendra $h$ elementos.}    
+\end{itemize}
+\textbf{Paso inductivo:}\\
+Supongamos que $f(r,b) = r*b$, con $r \leq a-1$, queremos ver que $f(i,b) = i*b$.\\
+$f(i,b) = h*b + f(i-h,b)$, donde $h$ es la cantidad de adyacentes al nodo que estoy viendo, y $f(i-h,b)$ es la llamada recursiva luego de haber eliminado los $h$ vecinos.\\
+$\Rightarrow f(i,b) = h*b + f(i-h,n) \stackrel{HI}{=} h*b + (i-h)*b = (h + i -h)*b = i*b \square$
+
+
 %Calcular el orden de complejidad temporal de peor caso del algoritmo.
 \subsection{Comparaci\'on de resultados con soluci\'on \'optima}
 %Describir instancias de CIDM para las cuales la heuristica no proporciona una solucion optima. Indicar que tan mala puede ser la solucion obtenida respecto de la solucion optima.
