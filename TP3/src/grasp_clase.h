@@ -10,7 +10,7 @@ using namespace std;
 
 unsigned int graspCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, unsigned int alpha, bool vecindad, vector<bool>& yaUsados, bool conAlpha){
 	int repeticiones = 0;
-	while(repeticiones < 5){
+	while(repeticiones < 10){
 		vector<unsigned int> optimoAux;
 		localCIDM(adyacencia, optimoAux, true, vecindad, alpha, yaUsados, conAlpha);
 		repeticiones++;
