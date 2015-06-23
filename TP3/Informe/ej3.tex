@@ -47,23 +47,23 @@ Sea $P(i) = f(i,n) \leq k*i*n + c$, demostraremos por inducción global, que $(\
 Entonces,\\
 \textbf{Caso base:}
 \begin{itemize}
-    \item[•] $f(1,n) = k \leq c*1*n + k$\\
+    \item[•] $f(1,n) = h*(1-1) + c = k \leq k*1*n + c$\\
     Dado que tengo $n$ nodos, y solo falta eliminar uno. $k$ es alguna cantidad constante de operaciones para eliminar el nodo y finalizar el algoritmo.
 \end{itemize}
 \textbf{Paso inductivo:}\\
 
 $\underbrace{P(1) \wedge P(2) \wedge ... \wedge P(m-1)}_{\text{Hipótesis inductiva}} \Rightarrow \underbrace{P(m)}_{\text{Tesis inductiva}}$\\
 
-Es decir, que por hipótesis inductiva, podemos suponer que vale $f(r,n) \leq c*r*n + k$, con $r \leq m-1$, y queremos ver que $f(m,n) \leq c*m*n + k$.\\
+Es decir, que por hipótesis inductiva, podemos suponer que vale $f(r,n) \leq k*r*n + c$, con $r \leq m-1$, y queremos ver que $f(m,n) \leq k*m*n + c$.\\
 Luego,
 \begin{align*}
-f(m,n) & = h*(m-1) + f(m-1,n) + k \\
- \stackrel{HI}{\Longrightarrow} f(m,n) & \leq h*(m-1) + n*(m-1) + k \\
+f(m,n) & = h*(m-1) + f(m-1,n) + c \\
+ \stackrel{HI}{\Longrightarrow} f(m,n) & \leq h*(m-1) + n*(m-1) + c \\
  \intertext{Dado que la cantidad de vecinos adyacentes esta acotada por la cantidad de nodos totales, $0 \leq h < n$, luego}
- & \leq n*(m-1)+n*(m-1) + k\\
- & \leq n*m + n*m + k\\
- & = 2*n*m + k\\
- & \leq \underbrace{c*n*m + k}_{\text{Tesis inductiva}} \text{       En particular, con $c = 2$ en este caso}
+ & \leq n*(m-1)+n*(m-1) + c\\
+ & \leq n*m + n*m + c\\
+ & = 2*n*m + c\\
+ & \leq \underbrace{k*n*m + c}_{\text{Tesis inductiva}} \text{       En particular, con $k = 2$ en este caso}
 \end{align*}
 \hfill $\blacksquare$
 
