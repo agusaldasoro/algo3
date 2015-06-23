@@ -45,9 +45,10 @@ Luego, $(\forall i \in {1...n-1}) f(i,n) \leq k*i*n + c$.\\
 {\large\textbf{Demostración}}\\
 Sea $P(i) = f(i,n) \leq k*i*n + c$, demostraremos por inducción global, que $(\forall i \in {1...n-1}) P(i)$\\
 Entonces,\\
-\textbf{Caso base:}
+\textbf{Casos base:}
 \begin{itemize}
-    \item[•] $f(1,n) = h*(1-1) + c = k \leq k*1*n + c$\\
+    \item[•] $f(0,n) = c$
+    \item[•] $f(1,n) = h*(1-1) + c = c \leq k*1*n + c$\\
     Dado que tengo $n$ nodos, y solo falta eliminar uno. $k$ es alguna cantidad constante de operaciones para eliminar el nodo y finalizar el algoritmo.
 \end{itemize}
 \textbf{Paso inductivo:}\\
@@ -74,6 +75,16 @@ También es adecuado decir, que el algoritmo tiene complejidad $\Omega(n*log(n))
 
 %Calcular el orden de complejidad temporal de peor caso del algoritmo.
 \subsection{Comparaci\'on de resultados con soluci\'on \'optima}
+La heurística constructiva golosa fallará en encontrar la solución óptima para todos los casos.
+Particularmente, existen grafos para los cuales la heurística fallará siempre.
+Algunos de ellos son:
+\textcolor{red}{Insertar nodo radial}
+
+En este ejemplo, el greedy tomará como primer nodo, al nodo del centro, y eliminará a todos sus adyacentes. Luego, tomará todas las componentes conexas restantes.
+El resultado final será una solución con $(m-2)*m$ versus $m$ de la solución óptima.
+
+\textcolor{red}{Insertar mas ejemplos... Ayuda...}
+
 %Describir instancias de CIDM para las cuales la heuristica no proporciona una solucion optima. Indicar que tan mala puede ser la solucion obtenida respecto de la solucion optima.
 \subsection{Experimentaci\'on}
 %Realizar una experimentacion que permita observar la performance del algoritmo en terminos de tiempo de ejecucion en funcion de los parametros de la entrada.
