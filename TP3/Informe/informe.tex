@@ -80,6 +80,11 @@
 
 
 \textcolor{red}{Resumen va aqu\'i}
+El c\'odigo de este trabajo pr\'actico presenta una funci\'on main que permite correr cualquiera de los algoritmos desarrollados bajo el mismo input e incluso hacerlo veces consecutivas. Cada uno recibe par\'ametros necesarios para reutilizar el cod\'igo. B\'usqueda Local utiliza Greedy para generar instancias iniciales, GRASP aprovecha a la b\'usqueda local y una adaptaci\'on del greedy. \textcolor{blue}{ver anexo como se hace?}\\
+
+Para compilar se usa g++ -o main correrCIDM.cpp -std=c++11\\
+
+Esta flag se utiliza para poder utilizar funciones de medici\'on de tiempos de ejecuci\'on para la experimentaci\'on.
 
 
 \end{abstract}
@@ -106,6 +111,25 @@
 \newpage
 \input{ej6.tex}
 \newpage
+
+\section{Anexo}
+Para correr las heur\'isticas:
+
+\begin{itemize}
+\item 0: Algortimo Exacto;
+\item 1: Heur\'istica Greedy (con par\'ametros alpha = 0, conAlpha = true);
+\item 2: Heur\'istica B\'usqueda local (soluci\'on inicial por orden de nomenclatura (greedy = false), vecindad 2x1 (vecindad = true));
+\item 3: Heur\'istica B\'usqueda local (soluci\'on inicial greedy (greedy = true), vecindad 2x1 (vecindad = true), alpha = 0);
+\item 4: Heur\'istica B\'usqueda local (soluci\'on inicial por orden de nomenclatura (greedy = false), vecindad 3x1 (vecindad = false));
+\item 5: Heur\'istica B\'usqueda local (soluci\'on inicial greedy (greedy = true), vecindad 3x1 (vecindad = false), alpha = 0);
+\item 6: Heur\'istica GRASP (soluci\'on inicial por pocentaje de mejores (conAlpha = true), vecindad 2x1 (vecindad = true), alpha = input);
+\item 7: Heur\'istica GRASP (soluci\'on inicial por pocentaje de mejores (conAlpha = true), vecindad 3x1 (vecindad = false), alpha = input);
+\item 8: Heur\'istica GRASP (soluci\'on inicial por cantidad de mejores (conAlpha = false), vecindad 2x1 (vecindad = true), alpha = input);
+\item 9: Heur\'istica GRASP (soluci\'on inicial por cantidad de mejores (conAlpha = false), vecindad 3x1 (vecindad = false), alpha = input);
+\item i: Imprime la lista de adyacencia del grafo pasado por input;
+\item q: Finaliza la ejecuci\'on;
+\end{itemize}
+
 
 % \section{Objetivos generales}
 
