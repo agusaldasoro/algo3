@@ -77,14 +77,13 @@
 \thispagestyle{empty}
 \vfill
 \begin{abstract}
+El objetivo de este trabajo es plantear soluciones a la problem\'atica de \emph{Conjunto Independiente Dominante M\'inimo}, para lo cual se desarrolla un algoritmo exacto que calcula la soluci\'on \'optima y tambi\'en heur\'isticas con el fin de abordar la misma problem\'atica.
 
+El c\'odigo de este trabajo pr\'actico presenta una funci\'on \texttt{main} que permite correr cualquiera de los algoritmos desarrollados bajo el mismo input e incluso hacerlo veces consecutivas. Cada uno recibe par\'ametros necesarios para reutilizar el cod\'igo. B\'usqueda Local utiliza Greedy para generar instancias iniciales, GRASP aprovecha a la b\'usqueda local y una adaptaci\'on del greedy. Ver secci\'on \ref{anexo}.\\
 
-\textcolor{red}{Resumen va aqu\'i}
-El c\'odigo de este trabajo pr\'actico presenta una funci\'on main que permite correr cualquiera de los algoritmos desarrollados bajo el mismo input e incluso hacerlo veces consecutivas. Cada uno recibe par\'ametros necesarios para reutilizar el cod\'igo. B\'usqueda Local utiliza Greedy para generar instancias iniciales, GRASP aprovecha a la b\'usqueda local y una adaptaci\'on del greedy. \textcolor{blue}{ver anexo como se hace?}\\
+Para compilar se usa \texttt{g++ -o main correrCIDM.cpp -std=c++11}
 
-Para compilar se usa g++ -o main correrCIDM.cpp -std=c++11\\
-
-Esta flag se utiliza para poder utilizar funciones de medici\'on de tiempos de ejecuci\'on para la experimentaci\'on.
+Esta flag se a\~nade con el fin de poder utilizar funciones de medici\'on para los tiempos de ejecuci\'on dentro de la experimentaci\'on.
 
 
 \end{abstract}
@@ -112,22 +111,22 @@ Esta flag se utiliza para poder utilizar funciones de medici\'on de tiempos de e
 \input{ej6.tex}
 \newpage
 
-\section{Anexo}
-Para correr las heur\'isticas:
+\section{Anexo}\label{anexo}
+Al momento de ejecutar el \texttt{main} se le deben pasar los siguientes par\'ametros acorde a lo deseado:
 
 \begin{itemize}
-\item 0: Algortimo Exacto;
-\item 1: Heur\'istica Greedy (con par\'ametros alpha = 0, conAlpha = true);
-\item 2: Heur\'istica B\'usqueda local (soluci\'on inicial por orden de nomenclatura (greedy = false), vecindad 2x1 (vecindad = true));
-\item 3: Heur\'istica B\'usqueda local (soluci\'on inicial greedy (greedy = true), vecindad 2x1 (vecindad = true), alpha = 0);
-\item 4: Heur\'istica B\'usqueda local (soluci\'on inicial por orden de nomenclatura (greedy = false), vecindad 3x1 (vecindad = false));
-\item 5: Heur\'istica B\'usqueda local (soluci\'on inicial greedy (greedy = true), vecindad 3x1 (vecindad = false), alpha = 0);
-\item 6: Heur\'istica GRASP (soluci\'on inicial por pocentaje de mejores (conAlpha = true), vecindad 2x1 (vecindad = true), alpha = input);
-\item 7: Heur\'istica GRASP (soluci\'on inicial por pocentaje de mejores (conAlpha = true), vecindad 3x1 (vecindad = false), alpha = input);
-\item 8: Heur\'istica GRASP (soluci\'on inicial por cantidad de mejores (conAlpha = false), vecindad 2x1 (vecindad = true), alpha = input);
-\item 9: Heur\'istica GRASP (soluci\'on inicial por cantidad de mejores (conAlpha = false), vecindad 3x1 (vecindad = false), alpha = input);
-\item i: Imprime la lista de adyacencia del grafo pasado por input;
-\item q: Finaliza la ejecuci\'on;
+\item \textbf{0}: \emph{Algortimo Exacto};
+\item \textbf{1}: \emph{Heur\'istica Greedy} (con par\'ametros alpha = 0, conAlpha = true);
+\item \textbf{2}: \emph{Heur\'istica B\'usqueda local} (soluci\'on inicial por orden de nomenclatura (greedy = false), vecindad 2x1 (vecindad = true));
+\item \textbf{3}: \emph{Heur\'istica B\'usqueda local} (soluci\'on inicial greedy (greedy = true), vecindad 2x1 (vecindad = true), alpha = 0);
+\item \textbf{4}: \emph{Heur\'istica B\'usqueda local} (soluci\'on inicial por orden de nomenclatura (greedy = false), vecindad 3x1 (vecindad = false));
+\item \textbf{5}: \emph{Heur\'istica B\'usqueda local} (soluci\'on inicial greedy (greedy = true), vecindad 3x1 (vecindad = false), alpha = 0);
+\item \textbf{6}: \emph{Heur\'istica GRASP} (soluci\'on inicial por pocentaje de mejores (conAlpha = true), vecindad 2x1 (vecindad = true), alpha = input);
+\item \textbf{7}:\emph{ Heur\'istica GRASP} (soluci\'on inicial por pocentaje de mejores (conAlpha = true), vecindad 3x1 (vecindad = false), alpha = input);
+\item \textbf{8}:\emph{ Heur\'istica GRASP }(soluci\'on inicial por cantidad de mejores (conAlpha = false), vecindad 2x1 (vecindad = true), alpha = input);
+\item \textbf{9}: \emph{Heur\'istica GRASP} (soluci\'on inicial por cantidad de mejores (conAlpha = false), vecindad 3x1 (vecindad = false), alpha = input);
+\item \textbf{i}: \emph{Imprime} la lista de adyacencia del grafo pasado por input;
+\item \textbf{q}: \emph{Finaliza} la ejecuci\'on;
 \end{itemize}
 
 
