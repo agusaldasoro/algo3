@@ -215,13 +215,42 @@ Se ejecuta otro while, mientras haya pares sin ser visitados (de los obtenidos).
 
 Como lo que se quiere hacer es borrar nodos del conjunto solucion, se hace en una copia porque a priori no se sabe si conducir\'a a un conjunto que sea solucion. 
 
-Se borra del conjunto solucion al par actual (i,j). Esto tiene un costo de O(n) ya que itera la soluci\'on hasta que encuentre i y j. Se borra con el operador \texttt{erase} de iterador.\\
+Se borra del conjunto solucion al par actual (i,j) por el modo en que armamos los pares siempre se cumple que $i<j$. Esto tiene un costo de O(n) ya que itera la soluci\'on hasta que encuentre j y en el medio elimina i. Se borra con el operador \texttt{erase} de iterador (\textcolor{red}{Poner complejidad}).\\
 
-Ahora resta ver si al agregar alg\'un nodo en com\'un se forma un conjunto soluci\'on que sea Independiente Maximal. Lo que tendr\'a un costo de $O(n^2)$.
+Ahora resta ver si al agregar alg\'un nodo en com\'un se forma un conjunto soluci\'on que sea Independiente Maximal. Recorreremos la lista de nodos que tienen en com\'un i y j para ver si al agregar alguno de ellos al conjunto soluci\'on, el conjunto obtenido cumple ser Independiente Dominante M\'inimo. Es decir, se itera la lista de vecinos hasta encontrar un nodo que al insertarlo cumpla ser un conjunto soluci\'on v\'alido o hasta que termine sin haber podido formar un conjunto Independiente Dominante M\'inimo.
 
-\textcolor{red}{No entiendo que hace YaUsados ni esto: if(!yaUsados[pares[i].vecinosComun[j]])}
+ Lo que tendr\'a un costo de $O(n^2)$.
 
-Bueno, maniana lo sigo...
+Primero se fija que esta combinaci\'on de quitar los nodos (i,j) y agregar el nodo actual no se haya probado ya, si es asi se agrega el nodo actual de la lista al conjunto soluci\'on de manera ordenada. Se itera el vector hasta la posici\'on donde se debe insertar lo que tiene costo de O(n) ya que en peor caso en la soluci\'on original hab\'ia n-1, se sacaron i y j por lo que el vector qued\'o de un tama\~	no n-2. Si el nodo a insertar debe hacerse al final, recorre todos.
+
+iterator::insert
+
+Ahora con el conjunto formado se invoca a la funci\'on lisAdy::esIndependienteMaximal la que tiene una complejidad \textcolor{red}{Completar complejidad y fijarse si esta en una seccion anterior explicado poner referencia }.
+
+Si el conjunto armado hasta el momento no es Independiente Maximal, vamos a querer borrar el nodo a\~nadido \'ultimo por lo que se itera de nuevo el vector hasta encontrarlo y borrarlo con iterator::erase (\textcolor{red}{Complejidad erase}) con un costo total de O(n).
+
+Este c\'odigo si al momento de quitar dos nodos (i,j) puede a\~nadir diversos nodos y con cualquiera resulta un conjunto Independiente Maximal, s\'olo considera al primero que logre cumplir ser un conjunto Independiente Maximal.
+
+Si al quitar dos nodos y agregar uno se logr\'o un conjunto soluci\'on v\'alido se actualiza el vecotr soluci\'on \texttt{optimo}. 
+
+
+El ciclo mayor iterar\'a hasta que no se hagan m\'as cambios. Esto va a pasar cuando haya probado todos los pares de nodos posibles y por cada uno probado a\~nadir otro.
+
+Es decir, en el peor caso se comenz\'o con una soluci\'on inicial de n-1 nodos y, se quitaron dos y a\~nadi\'o uno hasta que la soluci\'on final quede de tama\~no 1. Es decir, el while m\'as grande iterar\'a en peor caso n veces.
+
+
+
+Por cada par de nodos iterar\'a $n^2$ veces y la cantidad de pares posibles en peor caso ser\'a de $O(n^2)$.
+
+
+Por lo tanto el costo de cada iteraci\'on del ciclo mayor ser\'a de $O(n^4)$, iter\'andola n veces dar\'a un costo total del algoritmo de $O(n^5)$ \textcolor{red}{Creo que falta sumar comllejidad de esindependientemaximal}. 
+
+\bigskip	
+
+En los casos de \textbf{ejecuci\'on 4 y 5}, el procedimiento ser\'a similar.
+
+Primero buscar\'a ternas con vecinos en com\'un (\texttt{dameTernasVecinasComun}) con un costo de $O(n^4)$. 
+
 
 \newpage
 \subsection{Experimentaci\'on}
