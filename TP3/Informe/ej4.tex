@@ -60,29 +60,168 @@ Se consideran todas las combinaciones posibles de grupos de tres nodos dentro de
 
 \textcolor{red}{Las opciones que elegimos son: 2, 3, 4 y 5 y son BLABALLABLA}
 
-
+\newpage
 \subsection{Complejidad Temporal}
 %Calcular el orden de complejidad temporal de peor caso de una iteracion del algoritmo de busqueda local (para las vecindades planteadas). Si es posible, dar una cota superior para la cantidad de iteraciones de la heurıstica.
 
-	\begin{codesnippet}
-	\begin{verbatim}
-/**
-V,E
-2E = E(0) + E(1) + ... + E(V-1)
-(0,1) => E(0) + E(1)
-(0,2) => E(0) + E(2)
-...
-(0,V-1) => E(0) + E(V-1)
-(1,2) => E(1) + E(2)
-(1,3) => E(1) + E(3)
-...
-(1,V-1) => E(1) + E(V-1)
-E(0) * (V-1) + E(1) * (V-1) + ... + E(V-1) * (V-1) = 2E * (V-1) = o(EV) = o(V^3)
+\subsubsection{dameParesVecinosComun}\label{vec1}
+
+Funciones usadas:
+listaAd::dameVecinos
+push_back
+size
 
 
-**/
-	\end{verbatim}
-\end{codesnippet}
+Dado un conjunto de nodos, se buscan todas las combinaciones de pares de nodos posibles. 
+Luego, para cada par de nodos (i,j) se recorren: la lista de adyacencia de i y la de j. 
+Por cada elemento que pertenezca a las dos listas, se a\~nade al vector \texttt{vecinosEnComun} dentro de la estructura pares.
+
+(Insertar como es estructura vecinosEnComun)
+
+
+(aca va el pseudo)
+
+Para elegir todos los pares posibles de nodos en el conjunto \texttt{optimo}, se recorre mediante dos \emph{for}s.
+El primero itera i desde 0 hasta el \'ultimo elemento y el segundo desde i hasta el \'ultimo elemento. 
+De este modo, cada par de nodos se recorre una \'unica vez. Ya que es lo mismo el par (i.j) que (j,i).
+
+Dentro de los \emph{for}s anidados, se crea una estructura \texttt{vecinosEnComun} \textbf{par} donde el nodoA es i y el nodoB es j. 
+Para poder armar la lista vecinosComun (miembro de la estructura vecinosEnComun), se iteran las listas de adyacencia con itVecinosA (i) e itVecinosB (j).
+Como ambas listas fueron ordenadas antes de invocar a la funci\'on dameParesVecinosComun, es posible encontrar elementos en com\'un recorriendolas secuencialmente de manera simult\'anea.
+Se procede de manera simple, si nodo(itVecinosA) es igual a nodo(itVecinosB) entonces se a\~nade el nodo actual a la lista vecinosComun.
+En caso contrario, se avanza el iterador que sea menor.
+
+Si conclu\'ida la iteraci\'on de las dos listas de adyacencia, la lista vecinosEnComun posee al menos un elemento; entonces se agrega \textbf{par} a la soluci\'on.
+
+
+Dado un par (i,j), la complejidad de recorrer ambas listas de adyacencia es de: $O(grado(i)+grado(j))$.
+Cada par se recorre una \'unica vez. Por lo tanto, los dos \emph{for}s anidados van a iterar (considerando a (n-1) como el \'ultimo nodo'):
+
+Cuando sea el par de nodos (0,1) : grado(0)+grado(1) \\
+Cuando sea el par de nodos (0,2) : grado(0)+grado(2) \\
+...\\
+Cuando sea el par de nodos (0,n-1) : grado(0)+grado(n-1)\\
+Cuando sea el par de nodos (1,2) : grado(1)+grado(2)\\
+Cuando sea el par de nodos (1,3) : grado(1)+grado(3)\\
+...\\
+Cuando sea el par de nodos (1,n-1) : grado(1)+grado(n-1)\\
+...\\
+Cuando sea el par de nodos (n-2,n-1) : grado(n-2)+grado(n-1)\\
+\\
+Se puede apreciar que el grado de cada nodo se suma (n-1) veces. Por lo tanto, al sumar las complejidades da un total de:
+
+grado(0)*(n-1) + grado(1)*(n-1) + ... + grado(n-1)*(n-1)
+
+lo que es equivalente a:
+
+[grado(0)+grado(1)+ ... + grado(n-1)]*(n-1)
+
+La complejidad en peor caso se obtiene cuando los grados de todos los nodos son maximos, por lo tanto se trata de un grafo completo.
+Donde vale que 2*\#ejes = grado(0)+grado(1)+ ... grado(n-1).
+
+Por consecuencia, la complejidad de esta funci\'on es de:
+
+O(2*\#ejes*(n-1)) lo que equivale a O(\#ejes*n) que pertenece a O($n^3$) ya que la mayor cantidad de ejes que puede tener un grafo es ((n-1)n)/2
+
+
+\subsubsection{dameTernasVecinasComun}\label{vec2}
+
+Funciones usadas:
+listaAd::dameVecinos
+push_back
+size
+
+La funci\'on dameTernasVecinasComun funciona de manera an\'aloga a la descripta en el inciso \ref{vec1}.
+
+	Se va a encargar de armar tomar de todas las maneras posibles tres nodos del conjunto pasado por par\'ametro y luego, 
+	obtener los nodos (si existe) que sean vecinos de los tres.
+
+	De esta manera, recorre el conjunto con tres \emph{for}s tal que cada tupla la recorre una sola vez.
+
+	En este caso el c\'alculo de cada iteraci\'on, dada la tupla (i,j,k), ser\'a de grado(i)+grado(j)+grado(k).
+
+	Dada la tupla (0,1,2) el costo ser\'a: grado(0)+grado(1)+grado(2)\\
+	Dada la tupla (0,1,3) el costo ser\'a: grado(0)+grado(1)+grado(3)\\
+	...\\
+	Dada la tupla (0,1,n-1) el costo ser\'a: grado(0)+grado(1)+grado(n-1)\\
+	Dada la tupla (0,2,3) el costo ser\'a: grado(0)+grado(2)+grado(3)\\
+	...\\
+	Dada la tupla (0,n-2,n-1) el costo ser\'a: grado(0)+grado(n-1)+grado(n-2)\\
+	Dada la tupla (1,2,3) el costo ser\'a: grado(1)+grado(2)+grado(3)\\
+	...\\
+	Dada la tupla (n-3,n-2,n-1) el costo ser\'a: grado(n-3)+grado(n-2)+grado(n-1)\\
+	\\
+
+	En el peor caso, el grado de todos los nodos es de n (grafo completo). Por lo tanto, el costo de cada iteraci\'on es de O(3n).
+
+	La cantidad de ternas que se pueden formar es de $(n(n-1)(n-2))/6$, equivale a decir que va a iterar $O(n^3)$ veces con costo $O(3n)$ cada vez.
+
+	Dando una complejidad de $O(n^4)$.
+	
+	
+
+\newpage
+\subsubsection{localCIDM}
+Como primera medida, ordena todas las listas de adyacencia: listaAd::ordenar
+
+Para las \textbf{ejecuciones 3 y 5}, el parametro greedy esta en true, por lo tanto comienza con una solucion inicial golosa. Por lo tanto invoca a la funcion greedyCIDM() la cual tiene complejidad \textcolor{red}{Completar!} explicado en \ref{ej3}.\\
+
+\bigskip
+
+Para las \textbf{ejecuciones 2 y 4}, la solucion inicial es secuencial. Esto quiere decir que para obtener una primera soluci\'on al problema se arma un vector \texttt{nodos} con la cantidad de nodos, donde en la posici\'on i se encuentra el nodo i.
+	Se recorre secuencialmente este arreglo (desde la posici\'on cero) de modo que se a\~nade el nodo actual a la soluci\'on y se elimina del vector \texttt{nodos}.
+	Luego, se borran tambi\'en del vector a los vecinos del nodo actual.
+
+	En la siguiente iteraci\'on se tienen $n-1-(grado(0))$ elementos en el vector \texttt{nodos}.
+	Lo cual, en el peor caso, ser\'ia n-1 donde grado(0)=0.
+
+	Considero la notaci\'on vecinos(i) como la cantidad de nodos pertenecientes al vector \texttt{nodos} durante la iteraci\'on i que sean adyacentes al nodo i.
+	En la iteraci\'on i, el vector va a contener $n-1-grado(0)- ... -1-vecinos(i)$
+
+	Donde en el peor caso, tambi\'en, deber\'a ser vecinos(i) con valor m\'inimo. Por consecuente, el peor caso es un grafo donde cada nodo es una componente conexa.
+	Es decir, no existen ejes.
+	
+	En el peor caso, itera n veces ya que el tama\~no del vector disminuye s\'olo en una unidad por iteraci\'on.
+
+	El costo de las operaciones por iteraci\'on es $O(n)$. 
+	Las funciones usadas son push_back, listaAdy::sonVecinos (costo O(n))
+
+	Por lo tanto esta seccion es del orden de O($n^2$)
+
+\bigskip
+
+A continuaci\'on, se ejecutan dos optimizaciones del algoritmo.
+
+\begin{itemize}
+\item En primer lugar, si la soluci\'on \'optima actual posee tama\~no 1 no va a encontrarse una soluci\'on mejor, por consiguiente se devuelve. (Costo $O(1)$)
+\item En segundo lugar, si la soluci\'on \'optima actual posee taman\~no 2 la \'unica soluci\'on que puede ser mejor es la que posee un s\'olo nodo. Se chequea si existe una soluci\'on con un s\'olo nodo (costo $O(n)$). Si existe, la soluci\'on \'optima es la de un s\'olo nodo y se devuelve sino era la soluci\'on con dos nodos. Funciones usadas: assign, listaAdy::gradoDeNodo y listaAdy::cantNodos
+\item En tercer lugar, si la soluci\'on \'optima actual posee tama\~no n debe ser la soluci\'on que se retorne. Ya que la \'unica manera de que todos los nodos sean parte del conjunto soluci\'on al problema es que cada uno sea una componente conexa, es decir no existan ejes. A continuaci\'on, debe ser la soluci\'on devuelta.
+\end{itemize}
+
+Si la ejecuci\'on del algoritmo no entr\'o en ninguno de los casos citados, se prosigue ordenando al vector de soluci\'on \'optima. (Costo sort)\\
+
+Ahora se prosigue con las iteraciones por vecindades.\\
+
+En los casos de \textbf{ejecuci\'on 2 y 3}, se pasa por par\'ametro el valor de vecindad==true. Se ejecuta la funci\'on dameParesVecinosComun (vista en \ref{vec1}), es decir por cada iteraci\'on se querr\'a tomar un par de nodos tal que sea posible quitarlos y agregar un vecino de ambos al conjunto soluci\'on y se obtenga una soluci\'on con un nodo menos.\\
+
+Se iterar\'a en un while hasta que la variable hayCambiosHechas sea false.
+
+
+Lo primero que se hace es ejecutar \texttt{dameParesVecinosComun()} (complejidad $O(n^3)$).
+
+Si esta funci\'on no devolvi\'o ning\'un par, se debe salir del ciclo.
+
+Se ejecuta otro while, mientras haya pares sin ser visitados (de los obtenidos).
+
+Como lo que se quiere hacer es borrar nodos del conjunto solucion, se hace en una copia porque a priori no se sabe si conducir\'a a un conjunto que sea solucion. 
+
+Se borra del conjunto solucion al par actual (i,j). Esto tiene un costo de O(n) ya que itera la soluci\'on hasta que encuentre i y j. Se borra con el operador \texttt{erase} de iterador.\\
+
+Ahora resta ver si al agregar alg\'un nodo en com\'un se forma un conjunto soluci\'on que sea Independiente Maximal. Lo que tendr\'a un costo de $O(n^2)$.
+
+\textcolor{red}{No entiendo que hace YaUsados ni esto: if(!yaUsados[pares[i].vecinosComun[j]])}
+
+Bueno, maniana lo sigo...
 
 \newpage
 \subsection{Experimentaci\'on}
