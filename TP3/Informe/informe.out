@@ -1,36 +1,16 @@
-\BOOKMARK [1][-]{section.1}{Introducci\363n al problema}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{Conjunto Independiente Dominante M\355nimo \(CIDM\)}{section.1}% 2
-\BOOKMARK [2][-]{subsection.1.2}{Paralelismo con ``El se\361or de los caballos''}{section.1}% 3
-\BOOKMARK [2][-]{subsection.1.3}{Todo conjunto independiente maximal es un conjunto dominante}{section.1}% 4
-\BOOKMARK [2][-]{subsection.1.4}{Situaciones de la vida real}{section.1}% 5
-\BOOKMARK [1][-]{section.2}{Algoritmo Exacto}{}% 6
-\BOOKMARK [2][-]{subsection.2.1}{Explicaci\363n y mejoras}{section.2}% 7
-\BOOKMARK [2][-]{subsection.2.2}{Complejidad Temporal}{section.2}% 8
-\BOOKMARK [2][-]{subsection.2.3}{Experimentaci\363n}{section.2}% 9
-\BOOKMARK [3][-]{subsubsection.2.3.1}{Mejor caso}{subsection.2.3}% 10
-\BOOKMARK [3][-]{subsubsection.2.3.2}{Nodos fijos}{subsection.2.3}% 11
-\BOOKMARK [3][-]{subsubsection.2.3.3}{Ejes fijos}{subsection.2.3}% 12
-\BOOKMARK [3][-]{subsubsection.2.3.4}{Sin ejes}{subsection.2.3}% 13
-\BOOKMARK [1][-]{section.3}{Heur\355stica Constructiva Golosa}{}% 14
-\BOOKMARK [2][-]{subsection.3.1}{Explicaci\363n}{section.3}% 15
-\BOOKMARK [2][-]{subsection.3.2}{Complejidad Temporal}{section.3}% 16
-\BOOKMARK [2][-]{subsection.3.3}{Comparaci\363n de resultados con soluci\363n \363ptima}{section.3}% 17
-\BOOKMARK [2][-]{subsection.3.4}{Experimentaci\363n}{section.3}% 18
-\BOOKMARK [1][-]{section.4}{Heur\355stica de B\372squeda Local}{}% 19
-\BOOKMARK [2][-]{subsection.4.1}{Explicaci\363n}{section.4}% 20
-\BOOKMARK [3][-]{subsubsection.4.1.1}{Elecci\363n de Soluci\363n Inicial}{subsection.4.1}% 21
-\BOOKMARK [3][-]{subsubsection.4.1.2}{Elecci\363n de Vecindad}{subsection.4.1}% 22
-\BOOKMARK [2][-]{subsection.4.2}{Complejidad Temporal}{section.4}% 23
-\BOOKMARK [3][-]{subsubsection.4.2.1}{dameParesVecinosComun}{subsection.4.2}% 24
-\BOOKMARK [3][-]{subsubsection.4.2.2}{dameTernasVecinasComun}{subsection.4.2}% 25
-\BOOKMARK [3][-]{subsubsection.4.2.3}{localCIDM}{subsection.4.2}% 26
-\BOOKMARK [2][-]{subsection.4.3}{Experimentaci\363n}{section.4}% 27
-\BOOKMARK [3][-]{subsubsection.4.3.1}{An\341lisis de tiempos de ejecuci\363n}{subsection.4.3}% 28
-\BOOKMARK [3][-]{subsubsection.4.3.2}{Contrastaci\363n emp\355rica de la complejidad}{subsection.4.3}% 29
-\BOOKMARK [3][-]{subsubsection.4.3.3}{Comparaci\363n soluciones Local vs Exacto}{subsection.4.3}% 30
-\BOOKMARK [3][-]{subsubsection.4.3.4}{Elecci\363n de versi\363n \363ptima}{subsection.4.3}% 31
-\BOOKMARK [1][-]{section.5}{Metaheur\355stica GRASP}{}% 32
-\BOOKMARK [2][-]{subsection.5.1}{Explicaci\363n}{section.5}% 33
-\BOOKMARK [2][-]{subsection.5.2}{Experimentaci\363n}{section.5}% 34
-\BOOKMARK [1][-]{section.6}{Comparaci\363n entre todos los m\351todos}{}% 35
-\BOOKMARK [1][-]{section.7}{Anexo}{}% 36
+\BOOKMARK [1][-]{section.1}{Heur\355stica de B\372squeda Local}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Explicaci\363n}{section.1}% 2
+\BOOKMARK [3][-]{subsubsection.1.1.1}{Elecci\363n de Soluci\363n Inicial}{subsection.1.1}% 3
+\BOOKMARK [3][-]{subsubsection.1.1.2}{Elecci\363n de Vecindad}{subsection.1.1}% 4
+\BOOKMARK [2][-]{subsection.1.2}{Complejidad Temporal}{section.1}% 5
+\BOOKMARK [3][-]{subsubsection.1.2.1}{dameParesVecinosComun}{subsection.1.2}% 6
+\BOOKMARK [3][-]{subsubsection.1.2.2}{dameTernasVecinasComun}{subsection.1.2}% 7
+\BOOKMARK [3][-]{subsubsection.1.2.3}{localCIDM}{subsection.1.2}% 8
+\BOOKMARK [2][-]{subsection.1.3}{Experimentaci\363n}{section.1}% 9
+\BOOKMARK [3][-]{subsubsection.1.3.1}{An\341lisis de tiempos de ejecuci\363n}{subsection.1.3}% 10
+\BOOKMARK [3][-]{subsubsection.1.3.2}{Contrastaci\363n emp\355rica de la complejidad}{subsection.1.3}% 11
+\BOOKMARK [3][-]{subsubsection.1.3.3}{Comparaci\363n soluciones Local vs Exacto}{subsection.1.3}% 12
+\BOOKMARK [3][-]{subsubsection.1.3.4}{Elecci\363n de versi\363n \363ptima}{subsection.1.3}% 13
+\BOOKMARK [1][-]{section.2}{Anexo}{}% 14
+\BOOKMARK [2][-]{subsection.2.1}{Ejecuci\363n de los m\351todos}{section.2}% 15
+\BOOKMARK [2][-]{subsection.2.2}{Generaci\363n de casos de test}{section.2}% 16
