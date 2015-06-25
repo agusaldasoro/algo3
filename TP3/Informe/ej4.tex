@@ -203,6 +203,40 @@ Dando una complejidad de $O(n^4)$.
 
 \newpage
 \subsubsection{localCIDM}
+
+\begin{algorithm}[h!]
+optimo = genero_instancia_inicial();\\
+\eIf{cae_en_optimizacion(optimo)}{
+	return optimizacion(optimo);
+	}{
+	optimo.sort();\\
+	\While{hay cambios posibles}{
+		vector$<$vecinosEnComun$>$ vecinos = encontrar_vecinos_en_comun(optimo);\\
+		\eIf{no hay vecinos}{
+			salir del ciclo
+			}{
+			\While{hay vecinos}{
+				eliminar par o terna con vecino en comun;\\
+				\For{cada vecino en comun}{
+					lo agrego al optimo;\\
+					veo si es CID;\\
+					\If{no lo es}{
+						restauro y miro el siguiente vecino;
+					}
+				}
+			}
+			\eIf{es CID}{
+				lo asigno al optimo;\\
+				vuelvo al ciclo principal;
+			}{
+				restauro optimo;\\
+				veo la siguiente tupla o termino;
+			}
+		}
+	}
+}
+\end{algorithm}
+
 Como primera medida, ordena todas las listas de adyacencia: listaAd::ordenar, esto toma $O(n^2.log(n))$, para cada nodo ($n$) ordenar su lista de adyacencia (en el caso del grafo completo, tendr\'an ($n-1$) vecinos, y ordenarlos toma $O(n.log(n))$)\\
 
 Para las \textbf{ejecuciones 3 y 5}, el parametro greedy esta en true, por lo tanto comienza con una solucion inicial golosa. Por lo tanto invoca a la funcion greedyCIDM() la cual tiene complejidad $O(n^2)$ explicada en el inciso \ref{ej3}.\\
