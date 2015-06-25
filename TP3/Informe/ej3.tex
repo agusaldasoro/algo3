@@ -78,7 +78,16 @@ También es adecuado decir, que el algoritmo tiene complejidad $\Omega(n*log(n))
 La heurística constructiva golosa fallará en encontrar la solución óptima para todos los casos.
 Particularmente, existen grafos para los cuales la heurística fallará siempre.\\
 Algunos de ellos son:
-\textcolor{red}{Insertar nodo radial}
+
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.4]{imagenes/maloGreedy.png}
+% 	\caption{}
+	\label{GrafoCompleto}
+   \end{center}
+ \end{figure}
+
+\textcolor{blue}{Insertado}
 
 En este ejemplo, el greedy tomará como primer nodo, al nodo del centro, y eliminará a todos sus adyacentes. Luego, tomará todas las componentes conexas restantes.
 El resultado final será una solución con $(m-2)*m$ versus $m$ de la solución óptima.
