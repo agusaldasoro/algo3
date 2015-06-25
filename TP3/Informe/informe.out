@@ -9,23 +9,28 @@
 \BOOKMARK [2][-]{subsection.2.3}{Experimentaci\363n}{section.2}% 9
 \BOOKMARK [3][-]{subsubsection.2.3.1}{Mejor caso}{subsection.2.3}% 10
 \BOOKMARK [3][-]{subsubsection.2.3.2}{Nodos fijos}{subsection.2.3}% 11
-\BOOKMARK [1][-]{section.3}{Heur\355stica Constructiva Golosa}{}% 12
-\BOOKMARK [2][-]{subsection.3.1}{Explicaci\363n}{section.3}% 13
-\BOOKMARK [2][-]{subsection.3.2}{Complejidad Temporal}{section.3}% 14
-\BOOKMARK [2][-]{subsection.3.3}{Comparaci\363n de resultados con soluci\363n \363ptima}{section.3}% 15
-\BOOKMARK [2][-]{subsection.3.4}{Experimentaci\363n}{section.3}% 16
-\BOOKMARK [1][-]{section.4}{Heur\355stica de B\372squeda Local}{}% 17
-\BOOKMARK [2][-]{subsection.4.1}{Explicaci\363n}{section.4}% 18
-\BOOKMARK [3][-]{subsubsection.4.1.1}{Elecci\363n de Soluci\363n Inicial}{subsection.4.1}% 19
-\BOOKMARK [3][-]{subsubsection.4.1.2}{Elecci\363n de Vecindad}{subsection.4.1}% 20
-\BOOKMARK [2][-]{subsection.4.2}{Complejidad Temporal}{section.4}% 21
-\BOOKMARK [2][-]{subsection.4.3}{Experimentaci\363n}{section.4}% 22
-\BOOKMARK [3][-]{subsubsection.4.3.1}{An\341lisis de tiempos de ejecuci\363n}{subsection.4.3}% 23
-\BOOKMARK [3][-]{subsubsection.4.3.2}{Contrastaci\363n emp\355rica de la complejidad}{subsection.4.3}% 24
-\BOOKMARK [3][-]{subsubsection.4.3.3}{Comparaci\363n soluciones Local vs Exacto}{subsection.4.3}% 25
-\BOOKMARK [3][-]{subsubsection.4.3.4}{Elecci\363n de versi\363n \363ptima}{subsection.4.3}% 26
-\BOOKMARK [1][-]{section.5}{Metaheur\355stica GRASP}{}% 27
-\BOOKMARK [2][-]{subsection.5.1}{Explicaci\363n}{section.5}% 28
-\BOOKMARK [2][-]{subsection.5.2}{Experimentaci\363n}{section.5}% 29
-\BOOKMARK [1][-]{section.6}{Comparaci\363n entre todos los m\351todos}{}% 30
-\BOOKMARK [1][-]{section.7}{Anexo}{}% 31
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Ejes fijos}{subsection.2.3}% 12
+\BOOKMARK [3][-]{subsubsection.2.3.4}{Sin ejes}{subsection.2.3}% 13
+\BOOKMARK [1][-]{section.3}{Heur\355stica Constructiva Golosa}{}% 14
+\BOOKMARK [2][-]{subsection.3.1}{Explicaci\363n}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.2}{Complejidad Temporal}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.3}{Comparaci\363n de resultados con soluci\363n \363ptima}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.4}{Experimentaci\363n}{section.3}% 18
+\BOOKMARK [1][-]{section.4}{Heur\355stica de B\372squeda Local}{}% 19
+\BOOKMARK [2][-]{subsection.4.1}{Explicaci\363n}{section.4}% 20
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Elecci\363n de Soluci\363n Inicial}{subsection.4.1}% 21
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Elecci\363n de Vecindad}{subsection.4.1}% 22
+\BOOKMARK [2][-]{subsection.4.2}{Complejidad Temporal}{section.4}% 23
+\BOOKMARK [3][-]{subsubsection.4.2.1}{dameParesVecinosComun}{subsection.4.2}% 24
+\BOOKMARK [3][-]{subsubsection.4.2.2}{dameTernasVecinasComun}{subsection.4.2}% 25
+\BOOKMARK [3][-]{subsubsection.4.2.3}{localCIDM}{subsection.4.2}% 26
+\BOOKMARK [2][-]{subsection.4.3}{Experimentaci\363n}{section.4}% 27
+\BOOKMARK [3][-]{subsubsection.4.3.1}{An\341lisis de tiempos de ejecuci\363n}{subsection.4.3}% 28
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Contrastaci\363n emp\355rica de la complejidad}{subsection.4.3}% 29
+\BOOKMARK [3][-]{subsubsection.4.3.3}{Comparaci\363n soluciones Local vs Exacto}{subsection.4.3}% 30
+\BOOKMARK [3][-]{subsubsection.4.3.4}{Elecci\363n de versi\363n \363ptima}{subsection.4.3}% 31
+\BOOKMARK [1][-]{section.5}{Metaheur\355stica GRASP}{}% 32
+\BOOKMARK [2][-]{subsection.5.1}{Explicaci\363n}{section.5}% 33
+\BOOKMARK [2][-]{subsection.5.2}{Experimentaci\363n}{section.5}% 34
+\BOOKMARK [1][-]{section.6}{Comparaci\363n entre todos los m\351todos}{}% 35
+\BOOKMARK [1][-]{section.7}{Anexo}{}% 36
