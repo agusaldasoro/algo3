@@ -306,21 +306,51 @@ Pero el costo de cada iteraci\'on del ciclo mayor ser\'a de $O(n^4)$, por lo exp
 \subsection{Experimentaci\'on}
 %Realizar una experimentacion que permita observar la performance del algoritmo comparando los tiempos de ejecucion y la calidad de las soluciones obtenidas, en funcion de las vecindades y las soluciones iniciales utilizadas y elegir, si es posible, la configuracion que mejores resultados provea para el grupo de instancias utilizado.
 
-\subsubsection{An\'alisis de tiempos de ejecuci\'on}
+El objetivo de esta secci\'on es comparar los cuatro m\'etodos implementados bajo el paradigma de \emph{B\'usqueda Local} entre s\'i, respecto de su tiempo de ejecuci\'on y del conjunto soluci\'on resultante.
 
+Adem\'as, las soluciones obtenidas por los cuatro m\'etodos se constrastan con la soluci\'on \'optima resultante de ejecutar el algoritmo exacto para las mismas instancias.\\
+
+Todas las instancias utilizadas fueron generadas con el generador de instancias detallado en la Secci\'on \ref{instacegen}.
+
+\subsubsection{An\'alisis de tiempos de ejecuci\'on}\label{tiempos}
+
+En primera instancia, contrastamos tiempos de ejecuci\'on entre los cuatro m\'etodos. Como as\'i tambi\'en el crecimiento de la curva de tiempos de ejecuci\'on acorde var\'ian los ejes y los nodos dejando fijo nodos y ejes respectivamente.
+
+\subsubsection*{Ejes Fijos}
+
+Con el generador de instancias se armaron grupos de grafos con 100, 500, 2000 y 4000 ejes variando la cantidad de nodos. Se ejecutaron los cuatro m\'etodos para todos los casos generados.\\
+
+Se midieron los tiempos de ejecuci\'on y se exponen a continuaci\'on:
 
   \begin{figure}[h!]
    \begin{center}
- 	\includegraphics[scale=0.17]{imagenes/local/tiempos/100ejes.png}
+ 	\includegraphics[scale=0.55]{imagenes/local/tiempos/100ejes.png}
 % 	\caption{}
 %	\label{10Nodos}
    \end{center}
  \end{figure}
  
-
   \begin{figure}[h!]
    \begin{center}
- 	\includegraphics[scale=0.5]{imagenes/local/tiempos/500ejes.png}
+ 	\includegraphics[scale=0.08]{imagenes/local/tiempos/100ejes2.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure}
+
+  \newpage  
+ 
+En el primer gr\'afico se puede apreciar que cuando la cantidad de nodos comienza a ser mayor, los m\'etodos con la segunda vecindad (\textbf{4} y \textbf{5}) presentan una curva que posee un crecimiento mayor que las otras dos. Este comportamiento se condice con la complejidad te\'orica calculada ya que los m\'etodos 3 y 4 tienen una complejidad de \textcolor{red}{$O(n^6)$ (?} mientras que los primeros dos tienen \textcolor{red}{$O(n^5)$ (?}.\\
+
+En el segundo gr\'afico lo que se quiso hacer es mostrar con detalle cada m\'etodo ya que en el primero, al tener cantidades de tiempo variadas, no se puede apreciar con detalle el comportamiento de todas las curvas por s\'i solas.
+
+De este modo, se puede apreciar que los cuatro m\'etodos tienen un comportamiento que asemeja a una funci\'on \textcolor{red}{polinomial (? es asi?? nunca me acuerdo eso!)} aunque a simple vista no se podr\'ia acertar que sean las mismas funciones nombradas como complejidad.
+
+\bigskip  
+  
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/tiempos/500ejes.png}
 % 	\caption{}
 %	\label{10Nodos}
    \end{center}
@@ -328,41 +358,79 @@ Pero el costo de cada iteraci\'on del ciclo mayor ser\'a de $O(n^4)$, por lo exp
  
    \begin{figure}[h!]
    \begin{center}
- 	\includegraphics[scale=0.5]{imagenes/local/tiempos/2000ejes.png}
+ 	\includegraphics[scale=0.08]{imagenes/local/tiempos/500ejes2.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure}
+
+Al realizar el mismo procedimiento pero ahora con 500 ejes fijos lo que se puede apreciar es que, si bien los m\'etodos 3 y 4 se mantienen en las mediciones de tiempos mayores, la curva del \textbf{M\'etodo 4} se aleja notablemente de los dem\'as.\\
+
+En las ampliaciones de los m\'etodos, desde una perspectiva amplia, se puede notar que poseen un comportamiento que asimila \textcolor{red}{polinomial} al igual que en el caso anterior. Se podr\'ia decir que la causa de que las gr\'aficas no sean estr\'ictamente creciente se debe a la complejidad $O(n^5)$ y $O(n^6)$.
+
+\newpage
+
+   \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/tiempos/2000ejes.png}
 % 	\caption{}
 %	\label{10Nodos}
    \end{center}
  \end{figure}
  
- \newpage
   \begin{figure}[h!]
    \begin{center}
- 	\includegraphics[scale=0.5]{imagenes/local/tiempos/4000ejes.png}
+ 	\includegraphics[scale=0.55]{imagenes/local/tiempos/4000ejes.png}
 % 	\caption{}
 %	\label{10Nodos}
    \end{center}
  \end{figure}
   
+Al plantear la misma experimentaci\'on con cantidad de ejes mayor, se puede apreciar un comportamiento an\'alogo donde el \textbf{m\'etodo 4} posee un tiempo de ejecuci\'on notablemente mayor al resto y el \textbf{m\'etodo 3} permanece siendo el de menor tiempo de ejecuci\'on.  
+  
+ \newpage  
+  
+\subsubsection*{Nodos Fijos}
+
+En esta instancia, se contrastar\'an grupos de grafos que posean cantidad de nodos fijos: 200, 300, 500, 600 y 700 variando en cada caso la cantidad de ejes. Se comparan los tiempos de ejecuci\'on entre los cuatro m\'etodos planteados en los casos generados. 
+
   \begin{figure}[h!]
    \begin{center}
- 	\includegraphics[scale=0.5]{imagenes/local/tiempos/200nodos.png}
+ 	\includegraphics[scale=0.55]{imagenes/local/tiempos/200nodos.png}
 % 	\caption{}
 %	\label{10Nodos}
    \end{center}
  \end{figure}
  
-  \begin{figure}[h!]
+Dando una observaci\'on general sobre este gr\'afico, se puede apreciar que para todos los m\'etodos el tiempo de ejecuci\'on disminuye al aumentar la cantidad de ejes. \\
+
+A simple vista podr\'ia sonar un poco absurdo, sin embargo la causa de este comportamiento  est\'a ligada a que al existir mayor cantidad de ejes (manteniendo la cantidad de nodos) aumenta el grado de los nodos. Por lo tanto\textcolor{red}{, al igual que el algoritmo Goloso(?), } cuando se arma una soluci\'on inicial se inserta el nodo de mayor grado. Luego, se descartan todos los nodos vecinos ya que no ser\'an candidatos al conjunto soluci\'on.
+
+Si bien, para descartar nodos vecinos, se debe recorrer la lista de adyacencia completa; ese tiempo es compensado al tener menos nodos en la siguiente iteraci\'on para recorrer.\\
+
+En cuanto a la parte del algoritmo que consiste en la b\'usqueda local, \textcolor{red}{Completar algo aca...}
+
+   \begin{figure}[h!]
    \begin{center}
- 	\includegraphics[scale=0.5]{imagenes/local/tiempos/300nodos.png}
+ 	\includegraphics[scale=0.08]{imagenes/local/tiempos/200nodos2.png}
 % 	\caption{}
 %	\label{10Nodos}
    \end{center}
  \end{figure}
  
- \newpage
+ Haciendo hincapie en cada m\'etodo por separado, se observa un comportamiento distinguible.\\
+ 
+ Si bien las curvas de los cuatro m\'etodos oscilan notablemente, si uno observa bajo un punto de vista general se puede apreciar que los m\'etodos 4 y 5 tienen un comportamiento notablemente decreciente similar al de una curva \textcolor{red}{polinomial (?}. Ambos m\'etodos utilizan la segunda vecindad, lo que indicar\'ia que el comportamiento es causado por \textcolor{red}{completar!!!}.\\
+ 
+ Por otro lado, los m\'etodos 3 y 4 poseen un crecimiento abrupto con una cantidad de ejes menor y despu\'es sus curvas oscilan de manera, se podr\'ia decir que, constante. Como ambas manejan la misma vecindad, un potencial causante de dicho comportamiento corresponde a ... \textcolor{red}{COMPLETAR}\\
+
+\bigskip
+
+Ejecutamos la misma experimentaci\'on, pero en esta ocasi\'on fijando la cantidad de nodos en 300, 500 y 600. 
+ 
   \begin{figure}[h!]
    \begin{center}
- 	\includegraphics[scale=0.5]{imagenes/local/tiempos/500nodos.png}
+ 	\includegraphics[scale=0.55]{imagenes/local/tiempos/300nodos.png}
 % 	\caption{}
 %	\label{10Nodos}
    \end{center}
@@ -370,22 +438,85 @@ Pero el costo de cada iteraci\'on del ciclo mayor ser\'a de $O(n^4)$, por lo exp
  
    \begin{figure}[h!]
    \begin{center}
- 	\includegraphics[scale=0.5]{imagenes/local/tiempos/600nodos.png}
+ 	\includegraphics[scale=0.08]{imagenes/local/tiempos/300nodos2.png}
 % 	\caption{}
 %	\label{10Nodos}
    \end{center}
  \end{figure}
 
+
+
   \begin{figure}[h!]
    \begin{center}
- 	\includegraphics[scale=0.5]{imagenes/local/tiempos/700nodos.png}
+ 	\includegraphics[scale=0.55]{imagenes/local/tiempos/500nodos.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure}
+ 
+\newpage 
+ 
+   \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/tiempos/600nodos.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure}
+
+La conclusi\'on que se puede sacar de este \'ultimo set de gr\'aficos es que, si se fija la cantidad de nodos, no importa en qu\'e valor, los tiempos de ejecuci\'on de los m\'etodos poseen un comportamiento similar al explicado en el inciso anterior.
+
+Donde el \textbf{M\'etodo 4} permanece siendo quien tiene mayores tiempos de ejecuci\'on sin importar la cantidad de nodos y ejes. As\'i mismo, el \textbf{M\'etodo 3} se mantiene con los tiempos de ejecuci\'on menores.
+
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/tiempos/700nodos.png}
 % 	\caption{}
 %	\label{10Nodos}
    \end{center}
  \end{figure} 
  
+   \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.08]{imagenes/local/tiempos/700nodos2.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure} 
+ 
+Nos pareci\'o un caso notable de distinci\'on el de 700 nodos fijos, cuando se analizan los m\'etodos por separado. 
+
+Si bien a ciencia cierta no se puede asignar a qu\'e funci\'on pertenece cada curva, pero se pueden notar las \textcolor{red}{ra\'ices (?} que poseen las curvas. De modo que se aprecia un comportamiento no estrictamente creciente. 
+
+ \newpage
 \subsubsection{Contrastaci\'on emp\'irica de la complejidad}
 
+Se quiso linealizar los tiempos de ejecuci\'on con el fin de poder contrastar de manera \'optima las complejidades emp\'iricas con las te\'oricas. Sin embargo, esto no fue posible debido a que los tiempos de ejecuci\'on son muy peque\~nos y al dividirlos por la cantidad de nodos los resultados obtenidos no generan gr\'aficos de real inter\'es.\\
+
+A continuaci\'on se exponen los tiempos de ejecuci\'on para los distintos m\'etodos, considerando grafos Ciclo y grafos Completos:
+
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/tiempos/ciclos.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure} 
+ 
+Los tiempos de ejecuci\'on para grafos Ciclos se condicen con los gr\'aficos de la secci\'on \ref{tiempos}. Esto significa que los \textbf{m\'etodos 4} y \textbf{5} poseen mayor tiempo de ejecuci\'on y finalmente, el \textbf{m\'etodo 2} preserva el menor.
+
+Todas las curvas presentan un comportamiento que se asemeja a un valor cuadr\'atico  o c\'ubico, ya que si bien la complejidad te\'orica es de \textcolor{red}{$O(n^5)$ (?)} al tener s\'olo dos vecinos cada nodo las listas de adyacencia se recorren en $O(2)\subseteq O(1)$.
+ 
+   \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/tiempos/completos.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure} 
+ 
+\textcolor{red}{Los grafos completos son... } 
+ 
 \newpage
 \subsubsection{Comparaci\'on soluciones Local vs Exacto}
 
@@ -431,6 +562,7 @@ Pero el costo de cada iteraci\'on del ciclo mayor ser\'a de $O(n^4)$, por lo exp
    \end{center}
  \end{figure} 
  
+ \newpage
   \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.55]{imagenes/local/exacto/tableros.png}
@@ -442,5 +574,81 @@ Pero el costo de cada iteraci\'on del ciclo mayor ser\'a de $O(n^4)$, por lo exp
 \newpage 
  
 \subsubsection{Elecci\'on de versi\'on \'optima}
+
+\subsubsection*{Ejes Fijos}
+
+
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/resultados/100ejes.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure}
+ 
+
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/resultados/500ejes.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure}
+ 
+   \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/resultados/2000ejes.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure}
+ 
+  
+\newpage  
+  
+\subsubsection*{Nodos Fijos}
+
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/resultados/200nodos.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure}
+ 
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/resultados/300nodos.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure}
+ 
+
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/resultados/500nodos.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure}
+ 
+ \newpage
+   \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/resultados/600nodos.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure}
+
+  \begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.55]{imagenes/local/resultados/700nodos.png}
+% 	\caption{}
+%	\label{10Nodos}
+   \end{center}
+ \end{figure} 
+
 
 \newpage
