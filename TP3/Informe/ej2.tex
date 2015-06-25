@@ -90,7 +90,7 @@ ser\'a necesariamente una soluci\'on \'optima.\\
  \end{figure}
 
 Se puede ver que el gr\'afico no tiene una tendencia exponencial, lo que era esperable ya que encontrar\'a la soluci\'on en el primer nodo, pero luego deber\'a descartar los siguientes $n$ nodos,
-teniendo una complejidad de $O(n^2)$.\\
+teniendo una complejidad en peor caso de $O(n^2)$.\\
 
 \newpage
 
@@ -131,7 +131,7 @@ En esta secci\'on podremos ver el comportamiento exponencial del ejercicio, ya q
 Los resultados de los tiempos de ejecucion, con 45 y 90 ejes fijos fueron:\\
 \textcolor{red}{TABLA}
 
-   \begin{figure}[h!]
+ \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.7]{imagenes/exacto/45Ejes.png}
 % 	\caption{}
@@ -139,7 +139,7 @@ Los resultados de los tiempos de ejecucion, con 45 y 90 ejes fijos fueron:\\
    \end{center}
  \end{figure}
  
-    \begin{figure}[h!]
+ \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.7]{imagenes/exacto/90Ejes.png}
 % 	\caption{}
@@ -150,7 +150,17 @@ Los resultados de los tiempos de ejecucion, con 45 y 90 ejes fijos fueron:\\
 Como preve\'iamos, se puede ver que los valores van aumentando exponencialmente en ambos casos, lo cual nos indica que la complejidad temporal depende directamente de la cantidad de nodos que tenga
 el grafo.
 De todas formas, en algunos casos es posible ver el efecto que tiene la poda, ya que el tiempo de ejecuci\'on no aument\'o exponencialmente, por ejemplo, entre los casos con 32 y 34 nodos, con 45 ejes fijos.
-Veremos que esto no ocurre en el peor caso.\\
+Veremos luego que esto no ocurre en el peor caso.\\
+
+Para mostrar m\'as claramente el aspecto exponencial de la funci\'on en los casos m\'as chicos, haremos zoom en el gr\'afico:\\
+
+\begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.7]{imagenes/exacto/45Ejes(zoom).png}
+% 	\caption{}
+%	\label{45Ejes}
+   \end{center}
+ \end{figure}
 
 \subsubsection{Sin ejes}
 El peor caso para nuestro algoritmo se da cuando el grafo pasado por par\'ametro no cuenta con ning\'un eje. Esto es as\'i porque deber\'a revisar todos los posibles conjuntos dentro del conjunto de partes,
@@ -167,5 +177,15 @@ Los tiempos de ejecuci\'on para los distintos grafos sin ejes fueron:\\
 %	\label{Vacio}
    \end{center}
  \end{figure}
+ 
+Para ver m\'as claramente el aspecto del gr\'afico para los casos m\'as chicos, haremos zoom en el gr\'afico:\\
 
-Aqu\'i se ve claramente que los tiempos aumentan exponencialmente en cada paso, lo que confirma nuestra complejidad temporal te\'orica de $O(2^n)$.
+\begin{figure}[h!]
+   \begin{center}
+ 	\includegraphics[scale=0.7]{imagenes/exacto/Vacio(zoom).png}
+% 	\caption{}
+%	\label{45Ejes}
+   \end{center}
+ \end{figure}
+
+Aqu\'i se ve claramente que los tiempos aumentan exponencialmente en cada paso, lo que confirma nuestra complejidad temporal te\'orica de $O(2^n)$.\\
