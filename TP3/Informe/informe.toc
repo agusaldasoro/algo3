@@ -23,15 +23,15 @@
 \contentsline {subsubsection}{\numberline {4.1.2}Elecci\IeC {\'o}n de Vecindad}{22}{subsubsection.4.1.2}
 \contentsline {subsection}{\numberline {4.2}Complejidad Temporal}{24}{subsection.4.2}
 \contentsline {subsubsection}{\numberline {4.2.1}dameParesVecinosComun}{24}{subsubsection.4.2.1}
-\contentsline {subsubsection}{\numberline {4.2.2}dameTernasVecinasComun}{24}{subsubsection.4.2.2}
-\contentsline {subsubsection}{\numberline {4.2.3}localCIDM}{26}{subsubsection.4.2.3}
-\contentsline {subsection}{\numberline {4.3}Experimentaci\'on}{28}{subsection.4.3}
-\contentsline {subsubsection}{\numberline {4.3.1}An\'alisis de tiempos de ejecuci\'on}{28}{subsubsection.4.3.1}
-\contentsline {subsubsection}{\numberline {4.3.2}Contrastaci\'on emp\'irica de la complejidad}{30}{subsubsection.4.3.2}
-\contentsline {subsubsection}{\numberline {4.3.3}Comparaci\'on soluciones Local vs Exacto}{31}{subsubsection.4.3.3}
-\contentsline {subsubsection}{\numberline {4.3.4}Elecci\'on de versi\'on \'optima}{33}{subsubsection.4.3.4}
-\contentsline {section}{\numberline {5}Metaheur\'istica GRASP}{34}{section.5}
-\contentsline {subsection}{\numberline {5.1}Explicaci\'on}{34}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Experimentaci\'on}{35}{subsection.5.2}
-\contentsline {section}{\numberline {6}Comparaci\'on entre todos los m\'etodos}{46}{section.6}
-\contentsline {section}{\numberline {7}Anexo}{47}{section.7}
+\contentsline {subsubsection}{\numberline {4.2.2}dameTernasVecinasComun}{26}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.3}localCIDM}{27}{subsubsection.4.2.3}
+\contentsline {subsection}{\numberline {4.3}Experimentaci\'on}{30}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}An\'alisis de tiempos de ejecuci\'on}{30}{subsubsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.2}Contrastaci\'on emp\'irica de la complejidad}{32}{subsubsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.3.3}Comparaci\'on soluciones Local vs Exacto}{33}{subsubsection.4.3.3}
+\contentsline {subsubsection}{\numberline {4.3.4}Elecci\'on de versi\'on \'optima}{35}{subsubsection.4.3.4}
+\contentsline {section}{\numberline {5}Metaheur\'istica GRASP}{36}{section.5}
+\contentsline {subsection}{\numberline {5.1}Explicaci\'on}{36}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Experimentaci\'on}{37}{subsection.5.2}
+\contentsline {section}{\numberline {6}Comparaci\'on entre todos los m\'etodos}{48}{section.6}
+\contentsline {section}{\numberline {7}Anexo}{49}{section.7}
