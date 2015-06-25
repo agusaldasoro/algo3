@@ -1,25 +1,23 @@
 \section{Heur\'istica de B\'usqueda Local} \label{ej4}
-
-Un algoritmo de Búsqueda Local consiste en dos simples pasos: elegir una solución inicial y luego, \textcolor{red}{Aca explicarlo bien, esta horrible} iterar
-
-
-modificarla (``mejorandola''), reemplazándola paso a paso con distintas soluciones que pertenezcan a la vecindad de la misma.
-
+Un algoritmo de Búsqueda Local consiste de dos pasos: elegir una solución inicial y luego, visitar soluciones parecidas hasta encontrar la mejor posible.\\
 
 Para cada solución factible s $\epsilon$ S se define N(s) como el conjunto de
-``soluciones vecinas'' de s. Un procedimiento de busqueda local toma una solución inicial s e iterativamente la mejora reemplazándola por otra solución mejor del conjunto N(s), hasta llegar a un óptimo local.
+``soluciones vecinas'' de s. Un procedimiento de busqueda local toma una solución inicial s e iterativamente la mejora reemplazándola por otra solución mejor del conjunto N(s), hasta llegar a un óptimo local.\\
 
- Sea s $\epsilon$ S una solución inicial
+Sea s $\epsilon$ S una solución inicial\\
  
- Mientras exista s $\epsilon$ N(s) con f (s) $>$ f (s)
+Mientras exista s' $\epsilon$ N(s) con f(s) $>$ f(s')\\
  
- s $\leftarrow$ s
+s $\leftarrow$ s'\\
 
+Donde $f: s \rightarrow \mathbb{N}$ es una funci\'on que mapea soluciones factibles del problema a Naturales. Nuestra funci\'on devuelve el cardinal de s.\\
+
+Nuestro objetivo es minimizar $f$, por lo tanto nuestras vecindades planteadas son de la forma, $f(s) - 1 == f(s')$ o bien $f(s) - 2 == f(s')$, es decir que cada conjunto de N(s) tiene cardinal $s - 1$ o bien $s - 2$.
 
 \subsection{Explicaci\'on}
 %Explicar detalladamente el algoritmo implementado. Plantear al menos dos vecindades distintas para la busqueda y al menos dos soluciones iniciales.
 
-Considerando el problema a tratar, establecimos nuestros criterios para encontrar las soluciones iniciales y las vecindades.\\
+Considerando el problema a tratar, establecimos nuestros criterios para encontrar las soluciones iniciales y las vecindades.
 
 
 \subsubsection{Elección de Solución Inicial}
@@ -56,8 +54,6 @@ El segundo criterio es similar al anterior, s\'olo que ahora consideramos quitar
 
 Se consideran todas las combinaciones posibles de grupos de tres nodos dentro del conjunto soluci\'on inicial y se prueba con los nodos que sean vecinos de todos ellos si forman un conjunto soluci\'on.\\
 
-\textcolor{red}{Las opciones que elegimos son: 2, 3, 4 y 5 y son BLABALLABLA}
-
 \newpage
 \subsection{Complejidad Temporal}
 %Calcular el orden de complejidad temporal de peor caso de una iteracion del algoritmo de busqueda local (para las vecindades planteadas). Si es posible, dar una cota superior para la cantidad de iteraciones de la heurıstica.
@@ -78,7 +74,7 @@ Por cada elemento que pertenezca a las dos listas, se a\~nade al vector \texttt{
 struct vecinosEnComun\{\\
 	unsigned int nodoA;\\	
 	unsigned int nodoB;\\
-	vector<unsigned int> vecinosComun;\\
+	vector$<$unsigned int$>$ vecinosComun;\\
 \};
 \end{algorithm}
 
