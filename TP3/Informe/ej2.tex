@@ -7,7 +7,7 @@ De este modo, nos vemos obligados a recorrer inteligentemente todos los conjunto
 \subsection{Explicaci\'on y mejoras}
 %Explicar detalladamente el algoritmo implementado. Elaborar podas y estrategias que permitan mejorar los tiempos de resolucion.
 
-Nuestro algoritmo recorre ordenadamente el conjunto de partes de V y por cada uno de ellos verifica que cumpla la funci\'on  \texttt{esIndependienteMaximal()}. La misma devuelve 0 si es falso, la cantidad de nodos en el conjunto en caso contrario.
+Nuestro algoritmo recorre ordenadamente el conjunto de partes de V y por cada uno de ellos verifica que cumpla la funci\'on  \texttt{esIndependienteMaximal()}. La misma devuelve 0 si es falso, la cantidad de nodos en el conjunto en caso contrario.\\
 
 Es decir, se itera sobre los nodos y, considerando el nodo actual como presente o como ausente, termina encontrando el m\'inimo conjunto independiente maximal.\\
 
@@ -20,11 +20,12 @@ tan buena como la que ya ten\'iamos, por lo que no nos resulta \'util contemplar
 
 Otra poda posible consist\'ia en separar cada una de las componentes conexas del grafo y, para cada una de ellas, buscar el m\'inimo conjunto independiente maximal.
 Luego, uniendo todos estos resultados, se obtiene el conjunto deseado del grafo.\\
-\textcolor{red}{... completar}
 
 Una estrategia podr\'ia ser verificar si agregar el nodo actual me va a resultar \'util. Es decir, por ejemplo, si estoy agregando un vecino de un nodo que ya se encuentra en el conjunto, este no ser\'a \'util ya que
 la soluci\'on no ser\'ia maximal. De esta forma, podr\'iamos evitar revisar aquellos conjuntos.\\
-\textcolor{red}{... completar}\\
+
+\textcolor{blue}{Estas dos optimizaciones no se implementaron porque requer\'ian un manejo distinto de estructuras y nos pareci\'o que hubieran empeorado los tiempos de ejecuci\'on.}\\
+\textcolor{red}{est\'a bien as\'i? o es super choto?. no sabr\'ia que m\'as poner sino :/}
 
 \newpage
 \begin{algorithm}[h!]
@@ -54,9 +55,9 @@ la soluci\'on no ser\'ia maximal. De esta forma, podr\'iamos evitar revisar aque
 %Calcular el orden de complejidad temporal de peor caso del algoritmo.
 Al ser un algoritmo de $Backtracking$ o fuerza bruta, tiene una complejidad exponencial. En este caso, la misma es de $O(2^n)$, siendo $n$ la cantidad de nodos del grafo. \\
 
-Se llega a dicha complejidad dado que para cada nodo, tenemos que preguntarnos qu\'e ocurre, tanto si lo agregamos al conjunto como si no.\\
+Se llega a dicha complejidad dado que para cada nodo, tenemos que preguntarnos qu\'e ocurre tanto si lo agregamos al conjunto, como si no.\\
 
-Dicho de otra forma, vamos a recorrer todos los conjuntos dentro del conjunto de partes del total de nodos de $V$. El cardinal de dicho conjunto de partes es $2^n$. \textcolor{red}{demostrar o no hace falta? Para mi es suficiente (AGUS)}\\
+Dicho de otra forma, vamos a recorrer todos los conjuntos dentro del conjunto de partes del total de nodos de $V$. El cardinal de dicho conjunto de partes es $2^n$.\\
 
 Para cada uno de los subconjuntos, el algoritmo verifica si cumple la funci\'on \texttt{esIndependienteMaximal()}, la cual
 tiene una complejidad en peor caso de $O(n^2)$.	De esta forma, nuestro algoritmo tiene complejidad $O(2^n * n^2)$, lo que es equivalente a $O(2^n)$.\\
@@ -71,7 +72,7 @@ Para realizar la experimentaci\'on, se genereron grafos espec\'ificos, que nos p
 Las conexiones entre los nodos de cada grafo son aleatorias, pero respetando la cantidad de ejes que nosotros definamos previamente.\\
 
 Las instancias con tiempos de ejecuci\'on bajos fueron corridas 100 veces, obteni\'endo luego un promedio de todas, con el fin de eliminar outliers.
-Aquellas instancias que tardaban mucho m\'as tiempo, determinamos que los outliers no modificaban en forma considerable, por lo que no nos pareci\'o necesario realizarlas reiteradas veces.\\
+Aquellas instancias que tardaban mucho m\'as tiempo, determinamos que los outliers no modificaban en forma considerable, por lo que no nos pareci\'o necesario realizarlas reiteradas veces.
 
 \subsubsection{Mejor caso}
 De acuerdo a c\'omo fue planteado nuestro algoritmo, se puede ver que el mejor caso posible ser\'a cuando los grafos pasados por par\'ametro sean completos.
@@ -94,7 +95,8 @@ teniendo una complejidad de $O(n^2)$.\\
 \newpage
 
 \subsubsection{Nodos fijos}
-Para continuar viendo el comportamiento del algoritmo, decidimos realizar experimentos fij\'ando la cantidad de nodos y variando la cantidad de ejes.\\
+Para continuar viendo el comportamiento del algoritmo, decidimos realizar experimentos fijando la cantidad de nodos y variando la cantidad de ejes.\\
+
 Los tiempos de ejecuci\'on para nodos fijos en 10, 20 y 30 fueron los siguientes:\\
 \textcolor{red}{TABLA}
 
@@ -153,7 +155,9 @@ Veremos que esto no ocurre en el peor caso.\\
 \subsubsection{Sin ejes}
 El peor caso para nuestro algoritmo se da cuando el grafo pasado por par\'ametro no cuenta con ning\'un eje. Esto es as\'i porque deber\'a revisar todos los posibles conjuntos dentro del conjunto de partes,
 intentando encontrar uno mejor que el que utiliza todos los nodos. Claramente esto no es posible, ya que al no contar con ejes, aquella es la \'unica soluci\'on posible.\\
+
 Los tiempos de ejecuci\'on para los distintos grafos sin ejes fueron:\\
+
 \textcolor{red}{TABLA}
 
    \begin{figure}[h!]
