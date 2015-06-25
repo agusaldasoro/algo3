@@ -13,37 +13,15 @@ En estos gr\'aficos, vamos a buscar, para cada cambio en los ejes, cu\'al fue el
 
 Mostraremos los gr\'aficos con 100, 300, 600 y 900 nodos fijos:
 
- \begin{figure}[h!]
-   \begin{center}
- 	\includegraphics[scale=0.7]{imagenes/6/100NodosFijos.png}
-% 	\caption{}
-%	\label{}
-   \end{center}
- \end{figure}
+\begin{center}
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/6/100NodosFijos.png}
+
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/6/300NodosFijos.png}
  
-  \begin{figure}[h!]
-   \begin{center}
- 	\includegraphics[scale=0.7]{imagenes/6/300NodosFijos.png}
-% 	\caption{}
-%	\label{}
-   \end{center}
- \end{figure}
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/6/600NodosFijos.png}
  
-  \begin{figure}[h!]
-   \begin{center}
- 	\includegraphics[scale=0.7]{imagenes/6/600NodosFijos.png}
-% 	\caption{}
-%	\label{}
-   \end{center}
- \end{figure}
- 
-  \begin{figure}[h!]
-   \begin{center}
- 	\includegraphics[scale=0.7]{imagenes/6/900NodosFijos.png}
-% 	\caption{}
-%	\label{}
-   \end{center}
- \end{figure}
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/6/900NodosFijos.png}
+\end{center}
  
 Analizando estos gr\'aficos, podemos ver r\'apidamente que el algoritmo Greedy nos devuelve en todos los casos una soluci\'on peor que los otros dos, ya que utiliza mayor cantidad de nodos.\\
 Por otra parte, se puede ver cierta ventaja del Grasp para los casos m\'as chicos (100, 300 nodos), pero para los casos grandes (600, 900 nodos), se ve que el Local es mejor en casi todos los casos.\\
@@ -56,35 +34,34 @@ cada algoritmo. Los resultados fueron los siguientes:\\
 Estos promedios confirman los datos que se pod\'ian apreciar en los gr\'aficos, es decir, que el Greedy utiliza siempre mayor cantidad de nodos que los otros, que Grasp es mejor en los casos chicos y
 que a medida que crece la cantidad de nodos, es preferible el Local.\\
 
+También se analizaron los tiempos de ejecución en las mismas instancias, cuyos resultados fueron los siguientes:
+
+\begin{center}
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Fixnode/100.png}
+
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Fixnode/300.png}
+
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Fixnode/600.png}
+
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Fixnode/900.png}
+\end{center}
+
+Se puede observar, que los algoritmos empeoran a mayor cantidad de nodos, pero debe notarse, que en general, Local y Greedy permanecen más bien constantes, mientras que Grasp empeora a mayor cantidad de ejes tiene, en grafos más grandes. 
+Por lo tanto, y conforme al análisis anterior, queda aún más claro que para casos grandes, Local es la mejor alternativa al momento de fijar nodos y variar ejes, sea por tiempos de ejecución, como por mejor resultado.
+
 \subsubsection{Ejes Fijos}
 Para continuar, realizamos los mismos tests, pero manteniendo los ejes fijos y variando la cantidad de nodos. Los tests realizados fueron con ejes fijos desde 0 hasta 1000 y para cada instancia,
 los nodos var\'ian de 50 a 1000.\\
 
 Mostraremos los resultados obtenidos con 300, 600 y 900 ejes fijos:\\
 
-  \begin{figure}[h!]
    \begin{center}
- 	\includegraphics[scale=0.7]{imagenes/6/300EjesFijos.png}
-% 	\caption{}
-%	\label{}
-   \end{center}
- \end{figure}
- 
-   \begin{figure}[h!]
-   \begin{center}
- 	\includegraphics[scale=0.7]{imagenes/6/600EjesFijos.png}
-% 	\caption{}
-%	\label{}
-   \end{center}
- \end{figure}
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/6/300EjesFijos.png}
 
-   \begin{figure}[h!]
-   \begin{center}
- 	\includegraphics[scale=0.7]{imagenes/6/900EjesFijos.png}
-% 	\caption{}
-%	\label{}
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/6/600EjesFijos.png}
+
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/6/900EjesFijos.png}
    \end{center}
- \end{figure}
  
 A primera vista, se puede ver que para casi todas las instancias el algoritmo de B\'usqueda Local es el que menos nodos utiliza en su soluci\'on. 
 En cuanto al Greedy y el Grasp, las diferencias son chicas y alternadas con 300 ejes, pero con 600 y 900 ejes, Greedy aparenta ser el peor.\\
@@ -94,3 +71,51 @@ Para corroborar estos datos, tomamos nuevamente el promedio de todas las solucio
 \textcolor{red}{Tabla con promedios}
 
 Como preve\'iamos, estos promedios confirman nuestro an\'alisis.
+
+Nuevamente, para fortalecer nuestra conclusión, se analizaron los tiempos de ejecución en las mismas instancias, cuyos resultados fueron los siguientes:
+
+\begin{center}
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Fixedge/0.png}
+
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Fixedge/300.png}
+
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Fixedge/600.png}
+
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Fixedge/900.png}
+\end{center}
+
+Como era esperado, Grasp insume mayor tiempo que Local y Greedy para cualquier caso.
+Considerando los resultados y los tiempos de ejecución, concluímos que Local es la mejor alternativa, si se mantienen ejes y se varían nodos.
+
+\subsection{Familias específicas}
+\subsubsection{Grafo completo}
+
+\textcolor{red}{Diganme si vale la pena hablar sobre grafos completos. Onda, la respuesta es trivial, y los tiempos son meh}
+
+\subsubsection{Grafo bipartito completo}
+
+\textcolor{red}{Brian contandonos un poco los resultados del bipartito completo}
+
+Analizando también los tiempos de ejecución sobre las mismas instancias, se obtuvieron los siguientes resultados:
+
+\begin{center}
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Bipartite1.png}
+
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Bipartite2.png}
+\end{center}
+
+Para el segundo gráfico, se omitió la ejecución del Grasp, dado que los tiempos de ejecución del mismo para los grafos bipartitos completos de esa magnitud, eran demasiado altos \textcolor{red}{Y Ezequiel nos cuenta como esto se debe a los pares de nodos que agarra}.
+
+Dado que los tres algoritmos siempre obtienen la solución óptima para la familia de grafos bipartitos completos, concluímos que el Greedy es el mejor de los tres para estos casos, ya que es el que menor tiempo insume. 
+
+\subsubsection{Ciclo simple}
+
+\textcolor{red}{Brian contandonos un poco los resultados del ciclo simple}
+
+A su vez, los tiempos de ejecucion sobre las mismas instancias, se obtuvieron los siguientes resultados:
+
+\begin{center}
+ 	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Cicle.png}
+\end{center}
+
+\textcolor{red}{Coronar esto diciendo quien es mejor (es decir, el que menos tarda entre los que obtienen mejores resultados en promedio)}
