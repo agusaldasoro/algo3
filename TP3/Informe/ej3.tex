@@ -12,10 +12,10 @@ De esta manera, el algoritmo siempre obtiene un conjunto independiente (dado que
 %Explicar detalladamente el algoritmo implementado.
 
 \newpage
-\subsection{Complejidad Temporal}
+\subsection{Complejidad Temporal}\label{compej3}
 \textcolor{red}{Aca no me meto, todavia...}
 
-En lo que respecta a la complejidad temporal, demostraremos a continuación que la misma es $O(n^{2})$.\\
+En lo que respecta a la complejidad temporal, demostraremos a continuación que la misma es $O(n^{2})$ en la cantidad de nodos del grafo.\\
 
 Recordemos que el algoritmo ordena los nodos de mayor grado a menor grado, luego toma el primero de dicha lista, lo agrega al conjunto solución, y lo elimina de la lista junto a sus adyacentes. Luego repite el proceso, tomando el siguiente nodo de la lista de nodos restantes.\\
 Dicho esto, definiremos a $f(i,n): \mathbb{N} \rightarrow \mathbb{N}$ como:
@@ -76,7 +76,7 @@ También es adecuado decir, que el algoritmo tiene complejidad $\Omega(n*log(n))
 %Calcular el orden de complejidad temporal de peor caso del algoritmo.
 \subsection{Comparaci\'on de resultados con soluci\'on \'optima}
 La heurística constructiva golosa fallará en encontrar la solución óptima para todos los casos.
-Particularmente, existen grafos para los cuales la heurística fallará siempre.
+Particularmente, existen grafos para los cuales la heurística fallará siempre.\\
 Algunos de ellos son:
 \textcolor{red}{Insertar nodo radial}
 
@@ -88,3 +88,30 @@ El resultado final será una solución con $(m-2)*m$ versus $m$ de la solución 
 %Describir instancias de CIDM para las cuales la heuristica no proporciona una solucion optima. Indicar que tan mala puede ser la solucion obtenida respecto de la solucion optima.
 \subsection{Experimentaci\'on}
 %Realizar una experimentacion que permita observar la performance del algoritmo en terminos de tiempo de ejecucion en funcion de los parametros de la entrada.
+Para la experimentación, se realizaron experimentos sobre grafos generados de manera aleatoria, fijando nodos y variando ejes, y viceversa.
+
+A continuación se adjuntan los gráficos con los resultados:
+
+\includegraphics[width=15cm,keepaspectratio=yes]{imagenes/greedy/fixedge.png}
+
+Como se puede observar, los tiempos aumentan a medida que disminuyen la cantidad de ejes. Esto se debe a que a menor cantidad de ejes, menor cantidad de nodos se eliminan de la lista de nodos que itera el algoritmo.
+
+\includegraphics[width=15cm,keepaspectratio=yes]{imagenes/greedy/fixnode.png}
+
+En este gráfico, se puede ver que si bien la cantidad de ejes (como fue mencionado en el gráfico anterior) afecta los tiempos, a mayor cantidad de ejes se puede observar que el verdadero limitante es la cantidad de nodos. Aquí se aprecia que la complejidad teórica se corresponde, en cuanto a que depende de la cantidad de nodos, y no de la cantidad de ejes.
+
+\includegraphics[width=15cm,keepaspectratio=yes]{imagenes/greedy/worst1.png}
+
+Resultó interesante graficar, a su vez, algún caso en el que se refleje la complejidad algorítmica.
+Para ello, se tomo el grafo sin ejes, es decir, todas componentes conexas, puesto que el algoritmo deberá recorrer, por cada nodo, el resto de todos los nodos preguntando si son vecinos.
+Aquí se puede apreciar que efectivamente, los tiempos incrementan de manera cuadrática.
+
+\includegraphics[width=15cm,keepaspectratio=yes]{imagenes/greedy/worst2.png}
+
+Para asegurarnos de que efectivamente la función corresponde a la familia de funciones cuadráticas y no a otra, se procedió a dividir los resultados por el tamaño de la entrada.
+Se puede apreciar que el gráfico se aproxima a una función lineal.
+
+\includegraphics[width=15cm,keepaspectratio=yes]{imagenes/greedy/worst3.png}
+
+Finalmente, se procedió a dividir los resultados (ya divididos) por el tamaño de la entrada nuevamente.
+Efectivamente, el resultado tiende a una constante, lo que termina demostrando de manera empírica, la complejidad teórica explicada.
