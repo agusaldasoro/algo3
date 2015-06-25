@@ -1,0 +1,61 @@
+% A simple graph with straight and bend arrows and loops
+% Stefan Kottwitz
+\documentclass{article}
+\usepackage{tikz}
+%%%<
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}%
+%%%>
+\begin{comment}
+:Title: Simple graph
+:Tags: Arrows;Diagrams;Graphs;Mathematics
+:Author: Stefan Kottwitz
+:Slug: graph
+
+A simple example of a graph with straight and bend arrows and loops.
+It has been posted as answer to the question
+http://tex.stackexchange.com/q/45734/213 of Ichibann.
+
+* Define styles for edges, arrows, and nodes
+* Place the main nodes
+* Draw edges with nodes for description
+* Use options `loop` and `bend` for loops and bent edges
+* Specify `left` and `right` for bend direction and node placement
+\end{comment}
+\usetikzlibrary{arrows}
+\begin{document}
+\begin{tikzpicture}[<->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (0) {4};
+  \node[main node] (1) [above of=0] {3};
+  \node[main node] (2) [right of=0] {3};
+  \node[main node] (3) [below of=0] {3};
+  \node[main node] (4) [left of=0] {3};
+  \node[main node] (5) [above right of=1] {1};
+  \node[main node] (6) [above left of=1] {1};
+  \node[main node] (7) [below right of=2] {1};
+  \node[main node] (8) [above right of=2] {1};
+  \node[main node] (9) [below right of=3] {1};
+  \node[main node] (10) [below left of=3] {1};
+  \node[main node] (11) [below left of=4] {1};
+  \node[main node] (12) [above left of=4] {1};
+
+  \path[every node/.style={font=\sffamily\small}]
+    (0) edge node [left] {} (1)
+		edge node [left] {} (2)
+		edge node [left] {} (3)
+		edge node [left] {} (4)
+    (1) edge node [left] {} (5)
+		edge node [left] {} (6)
+    (2) edge node [left] {} (7)
+		edge node [left] {} (8)
+    (3) edge node [left] {} (9)
+		edge node [left] {} (10)
+    (4) edge node [left] {} (11)
+		edge node [left] {} (12)
+		;
+\end{tikzpicture}
+\end{document}
