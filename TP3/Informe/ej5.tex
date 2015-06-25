@@ -23,17 +23,15 @@ La \emph{\textbf{solución inicial}} se puede formar de diversas maneras. En tod
 
 \end{itemize}
 
-Optamos por implementar las primeras dos opciones para generar una solución inicial. Una vez obtenida la solución inicial bajo el método deseado, se aplica el algoritmo de \emph{b\'usqueda local} explicado en el inciso \ref{ej4} sin modificaciones.\\
+Optamos por implementar las primeras dos opciones para generar una solución inicial. Una vez obtenida bajo el método deseado, se aplica el algoritmo de \emph{b\'usqueda local} explicado en el inciso \ref{ej4} sin modificaciones.\\
 
 Un aspecto tambi\'en diferencial de esta heur\'istica, es que no generamos una \'unica instancia inicial, sino que se toma una determinada cantidad de ellas (acorde al criterio de parada). Se ejecuta el algoritmo para la primer instancia y se guarda la solución como \texttt{\'optima}, luego si en alguna ejecución futura se mejora (se obtiene otra solución con menor cantidad de nodos) se actualiza \texttt{\'optima}.\\
 
 Las \emph{\textbf{vecindades}} utilizadas son las mismas que se utilizaron en la heur\'isitca de b\'usqueda local (\ref{ej4}).\\
 
-El \emph{\textbf{criterio de parada}} que adoptamos fue contabilizar las ejecuciones que no produjeron mejora, de modo que sólo se ejecute una determinada cantidad de repeticiones ``malas''. Es decir, siempre que la ejecución otorgue una solución óptima con menos cantidad de nodos que la existente, se seguirá ejecutando. Pero si las ejecuciones no otorgan mejoras se suman al contador, de modo que al llegar a la cantidad indicada se terminará la ejecución.
+El \emph{\textbf{criterio de parada}} que adoptamos fue contabilizar las ejecuciones que no produjeron mejora, de modo que sólo se ejecute una determinada cantidad de repeticiones ``malas''. Es decir, siempre que la ejecución otorgue una solución óptima con menos cantidad de nodos que la existente, se seguirá ejecutando. Pero si las ejecuciones no otorgan mejoras se suman al contador, de modo que al llegar a la cantidad indicada se terminará la ejecución.\\
 
 Otra opci\'on podr\'ia haber sido correr un n\'umero fijo de veces y quedarnos con la mejor soluci\'on encontrada; o tambi\'en si conocieramos alguna cota, acercarnos a esta en un determinado porcentaje; o bien una combinaci\'on de todas.
-
-\textcolor{red}{Poner como correr 6 7 8 9 y que correnc on q parametros}
 
 \newpage
 \subsection{Experimentaci\'on}
@@ -47,22 +45,13 @@ Para analizar qu\'e combinaci\'on de vecindades de b\'usqueda local y elecci\'on
 
 \bigskip
 
-Se opt\'o por ejecutar el algoritmo 30 veces y luego, con los tama\~nos de cada conjunto soluci\'on, sacar un promedio.
+Se opt\'o por ejecutar el algoritmo 30 veces y luego, con los tama\~nos de cada conjunto soluci\'on, sacar un promedio.\\
 
 Es decir, obtener un promedio de la cantidad de nodos que requer\'ia la soluci\'on \'optima en cada ejecuci\'on del algoritmo.\\
 
-
 Luego, sabiendo cu\'antos son los nodos que pertenecen a la soluci\'on \'optima (ejecutando el algoritmo exacto), divimos y obtuvimos en qu\'e porcentaje la heur\'istica falla en encontrar el \textit{\'optimo verdadero}.\\
 
-La siguiente tabla muestra los valores obtenidos, las columnas 2, 3 y 4 indican el criterio aplicado al grafo.\\
-
-\textcolor{red}{Sory, la tabla no la puedo corregir, no la entiendo bien}
-
-Vecindad 2x1 indica que la vecindad usada fue la de quitar dos nodos y agregar uno, vecindad 3x1 quitar tres y agregar uno.\\
-
-N representa el alfa elegido.\\
-
-N mejores indica que como criterio de b\'usqueda de soluci\'on inicial, se tom\'o uno entre los N mejores seg\'un el criterio greedy establecido, N\% mejores indica seleccionar uno entre los que pertenezcan al N\% de los mejores\\
+Las siguientes tabla muestra los valores obtenidos, las columnas 2, 3 y 4 indican el criterio aplicado al grafo; vecindad 2x1 indica que la vecindad usada fue la de quitar dos nodos y agregar uno, vecindad 3x1 quitar tres y agregar uno; n representa el alfa elegido; n mejores indica que como criterio de b\'usqueda de soluci\'on inicial, se tom\'o uno entre los n mejores seg\'un el criterio greedy establecido, n\% mejores indica seleccionar uno entre los que pertenezcan al n\% de los mejores.\\
 
 La diferencia en las dos tablas radica en el criterio de parada, para la primera, se tom\'o la decisi\'on de no seguir buscando si no se modific\'o el \'optimo luego de 5 iteraciones, para la segunda, si no se lo modific\'o luego de 10.\\
 
@@ -128,7 +117,9 @@ Para seleccionar la mejor combinaci\'on de par\'ametros de la heur\'istica, resp
 
 Esto nos lleva a que la combinaci\'on \'optima es: Vecindad 2x1 10\% mejores con 10 iteraciones consecutivas sin ver modificaciones en el \'optimo hallado hasta ese momento. Con un error promedio del 4,5\%.\\
 
-Para analizar tiempos de ejecuci\'on, se tomaron tiempos de los mismas instancias para las que analizamos el porcentaje de acierto del \'optimo.\\
+Adem\'as nos interesa ver que sucede con los tiempos de ejecuci\'on, para ver si existe alguna configuraci\'on que convenga aplicar por esta m\'etrica.
+
+Para esto, se tomaron tiempos de los mismas instancias para las que analizamos el porcentaje de acierto del \'optimo.\\
 
 En primer lugar analizamos grafos completos y vac\'ios, esperamos que sus gr\'aficos sean par\'abolas cuadr\'aticas, ya que tienen una \'unica soluci\'on posible en cu\'anto a la cantidad de nodos de la misma. Recordando que GRASP ejecuta una adaptaci\'on del algortimo Greedy de costo $O(n^2)$ y sabiendo que el algoritmo de b\'usqueda local retorna en tiempo constante si la soluci\'on hallada es o bien un nodo (grafo completo), o bien todos los nodos del grafo (grafo vac\'io, todas componentes conexas triviales), podemos argumentar por qu\'e esperamos encontrar esa curva particular.\\
 
@@ -149,7 +140,7 @@ En primer lugar analizamos grafos completos y vac\'ios, esperamos que sus gr\'af
  \end{figure}
 \newpage
 
-Estos dos gr\'aficos verifican la curvatura que esper\'abamos para el caso del grafo completo, como tambi\'en que no importa que vecindad se ejecute, pues nunca se intenta mejor la soluci\'on inicial dado que sabemos que es \'optima por sus caracter\'isticas.
+Estos dos gr\'aficos verifican la curvatura que esper\'abamos para el caso del grafo completo, como tambi\'en que no importa que vecindad se ejecute, pues nunca se intenta mejorar la soluci\'on inicial dado que sabemos que es \'optima por sus caracter\'isticas. Adem\'as se aprecia que el alpha elegido no genera oscilaciones significativas al ejecutarse bajo la misma instancia.
 
   \begin{figure}[h!]
    \begin{center}
@@ -185,6 +176,7 @@ El anterior permite vislumbrar que efectivamente los criterios de parada afectan
    \end{center}
  \end{figure}
 \newpage
+
 Estos 3 gr\'aficos de grafos vac\'ios se pueden analizar del mismo modo que a los de grafos completos y verificar que cumplen con las mismas caracter\'iticas, pues son m\'inimas en su conjunto de vecindades asociados.
 
   \begin{figure}[h!]
@@ -195,7 +187,10 @@ Estos 3 gr\'aficos de grafos vac\'ios se pueden analizar del mismo modo que a lo
    \end{center}
  \end{figure}
 \newpage
-Este gr\'afico y el siguiente muestran que al agregar nodos al grafo completo, y modificando las aristas de lugar, sin agregar otras, los tiempos de ejecuci\'on aumentan. Esto se debe a que hay m\'as nodos que revisar, es decir, no tendremos una soluci\'on trivial como en los casos anteriores, entonces el algoritmo comienza a revisar la vecindad de la soluci\'on inicial. C\'omo el m\'etodo para generarla es randomnizado, a priori no sabemos cu\'antas veces actualizar\'a su \'optimo, y esto explica los altos y bajos para algunas ejecuciones de la misma instancia para distintos alphas y vecindades; no obstante se observa que se mantiene una marcada relaci\'on instancia-tiempo de ejecuci\'on m\'as all\'a de la vecindad seleccionada.
+
+Este gr\'afico y el siguiente muestran lo analizado en las secciones de las heur\'isticas anteriores, los tiempos de ejecuci\'on dependen de la cantidad de nodos que posea el grafo.\\
+
+Mantener la cantidad de ejes fija y modificar la cantidad de nodos implica que no tendremos una soluci\'on trivial como en los casos anteriores, entonces el algoritmo comienza a revisar la vecindad de la soluci\'on inicial. C\'omo el m\'etodo para generarla es randomnizado, a priori no sabemos cu\'antas veces actualizar\'a su \'optimo, y esto explica los altos y bajos para algunas ejecuciones de la misma instancia para distintos alphas y vecindades; no obstante se observa que se mantiene una marcada relaci\'on instancia-tiempo de ejecuci\'on m\'as all\'a de la vecindad seleccionada.\\
 
   \begin{figure}[h!]
    \begin{center}
@@ -213,8 +208,8 @@ Este gr\'afico y el siguiente muestran que al agregar nodos al grafo completo, y
    \end{center}
  \end{figure}
 \newpage
-Nuevamente, como en los casos Completo y Vac\'io, la tendencia de que parar luego de 10 iteraciones duplique a parar a las 5, se mantiene vigente.
 
+Nuevamente, como en los casos Completo y Vac\'io, la tendencia de que parar luego de 10 iteraciones duplique a parar a las 5, se mantiene vigente.
 
   \begin{figure}[h!]
    \begin{center}
@@ -250,9 +245,11 @@ Nuevamente, como en los casos Completo y Vac\'io, la tendencia de que parar lueg
  \end{figure}
 \newpage
 
-Para los grafos con 20 nodos fijos, en la zona izquierda se ven tiempos de ejecuci\'on bajos, que aumentan acorde a la cantidad de ejes, esto es porque al aumentar los ejes, la heur\'istica greedy puede generar varias soluciones iniciales distintas y esto conlleva a un paseo por la vecindad que requiere mayor tiempo. En la zona media, los tiempos son similares entre s\'i, los grafos tambi\'en lo son, manteniendo la cantidad de nodos fija, agregar algunos ejes no modifica radicalmente el comportamiento de las heur\'isticas. Aqu\'i se presentan muchos picos y la mayor variaci\'on entre los distintos alphas. Pero en la zona derecha se ve que al acercarse al grafo completo, los tiempos son menores que en la zona media, pero mayores que en la izquierda, y similares entre s\'i a pesar del alpha elegido, al acercarse al completo, la soluci\'on inicial tiene menos nodos, entonces, se tiene que revisar un conjunto mucho m\'as chico de pares o ternas que en las instancias con menos ejes.\\
+Estos \'ultimos cuatro gr\'aficos tiene la caracter\'istica de tener un tiempo de ejecuci\'on aproximadamente igual. No obstante en la zona media hay oscilaciones en funci\'on del alpha elegido que no se presentan en los extremos izquierdo y derecho.\\
 
-Comparando los tiempos hallados, viendo que las fluctuaciones, entre el alpha elegido, la vecindad tomada, conclu\'imos que salvo para el caso de alpha igual a 100\%, las ejecuciones tardar\'an lo mismo.\\
+Esto se debe a que el primer caso es el grafo vac\'io (soluci\'on trivial) y los siguentes poseen muchos nodos aunque no todos, haciendo que la vecindad tarde m\'as en recorrerse completamente.\\
+
+Comparando los tiempos hallados, viendo que las fluctuaciones, entre el alpha elegido y la vecindad tomada no presentan aumentos descomunales en los tiempos de ejecuci\'on, conclu\'imos que salvo para el caso de alpha igual a 100\%, las ejecuciones son de tiempos semejantes.\\
 
 Por lo tanto decidimos que la mejor configuraci\'on para ejecutar la heuer\'istica GRASP es la que mejor resultados provee en cu\'anto a qu\'e tan cerca del \'optimo est\'a. Que como se mencion\'o anteriormente es con alpha = 10\%, y la vecindad 2x1.
 
