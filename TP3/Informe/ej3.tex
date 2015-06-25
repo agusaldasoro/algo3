@@ -1,62 +1,98 @@
 \section{Heur\'istica Constructiva Golosa} \label{ej3}
 \subsection{Explicaci\'on}
-La heurística constructiva golosa busca, dado un grafo, determinar un conjunto independiente dominante mínimo. 
+La heurística constructiva golosa busca, dado un grafo, determinar un conjunto independiente dominante mínimo, eligiendo en cada iteraci\'on, la mejor opci\'on seg\'un el criterio definido\\
 
-Para ello, el algoritmo ordena los nodos de acuerdo al grado de cada uno de ellos, de mayor a menor. Este orden se establece al comienzo de la ejecución y no se actualiza.\\
+Nuestro criterio se basa en el grado de los nodos. Dado que el grafo nunca se modifica, podemos ordenar un conjunto con todos los nodos del grafo en funci\'on de su grado al comienzo del algoritmo.\\
 
-Luego, recorre dichos nodos, y por cada uno de ellos, lo agrega al conjunto solución, y va eliminando a sus vecinos, hasta que no quedan más nodos.\\
+Luego, haremos un ciclo iterando este conjunto, el primer nodo siempre ser\'a agregado al conjunto soluci\'on, y luego se procede a eliminarlo junto a sus vecinos.
+
+Esto se traduce en elegir en cada paso el nodo de mayor grado que a\'un no haya sido dominado por otro con grado superior.\\
 
 De esta manera, el algoritmo siempre obtiene un conjunto independiente (dado que por cada nodo que toma, elimina a sus vecinos) y dominante (dado que por cada nodo que toma, lo agrega al conjunto, y elimina a sus vecinos, es decir, que estos son adyacentes a un nodo del conjunto), pero no puede asegurar que siempre sea mínimo. Eso dependerá del grafo.\\
 
-\textcolor{red}{Falta una explicacion mas detallada (un pseudocodigo, o algo), y aclarar que es goloso porque en cada paso elige la mejor opcion y nosostros definimos MEJOR como el mayor grado total}
+\begin{algorithm}[h!]
+\caption{heur\'istica greedy}
+vector$<$nodoGrado$>$grados(adyacencia.cantNodos());\\
+\For{\textit{int} i = 0; i$ < $grados.size(); ++i\\}{
+	grados[i].nodo = i;\\
+	grados[i].grado = adyacencia.gradoDeNodo(i);
+}
+sort(grados.begin(), grados.end());\\
+\While{grados.size()$ > $0}{
+	\textit{unsigned int} nodo = grados[0].nodo;\\
+	optimo.push_back(nodo);\\
+	\textit{vector$<$nodoGrado$>$::iterator} iter = grados.begin();\\
+	\While{iter != grados.end()}{
+		\eIf{adyacencia.sonVecinos(nodo, iter-$>$nodo) or nodo == iter-$>$nodo}
+			{iter = grados.erase(iter);}
+			{iter++;	}
+	}
+}
+\end{algorithm}
+
 %Explicar detalladamente el algoritmo implementado.
 
 \newpage
 \subsection{Complejidad Temporal}\label{compej3}
-\textcolor{red}{Aca no me meto, todavia...}
-
-En lo que respecta a la complejidad temporal, demostraremos a continuación que la misma es $O(n^{2})$ en la cantidad de nodos del grafo.\\
+En lo que respecta a la complejidad temporal, demostraremos a continuación que la misma es $O(n^{2})$, con n la cantidad de nodos del grafo.\\
 
 Recordemos que el algoritmo ordena los nodos de mayor grado a menor grado, luego toma el primero de dicha lista, lo agrega al conjunto solución, y lo elimina de la lista junto a sus adyacentes. Luego repite el proceso, tomando el siguiente nodo de la lista de nodos restantes.\\
-Dicho esto, definiremos a $f(i,n): \mathbb{N} \rightarrow \mathbb{N}$ como:
+
+Dicho esto, definiremos a $f(i,n): \mathbb{N} \rightarrow \mathbb{N}$ como:\\
 
 $f(i,n)$ = Cantidad de operaciones en el peor caso, teniendo $n$ nodos totales y faltando eliminar $i$.\\
+
 Es decir,\par
+
 \begin{itemize}
 	\item$f(0,n) = c$, dado que no falta eliminar ningun nodo, el algoritmo termina, con $c$ alguna cantidad constante de operaciones.\par
-	\item $(\forall i \in {1...n-1}) f(i,n) = h*(i-1) + f(i-1,n) + c$, con $h$ la cantidad de vecinos del nodo que estoy viendo, $c$ alguna cantidad constante de operaciones, y $f(i-1,n)$ es el llamado recursivo.\\
+	\item $(\forall i \in {1...n-1}) f(i,n) = h*(i-1) + f(i-1,n) + c$, con $h$ la cantidad de vecinos del nodo que estoy viendo, $c$ alguna cantidad constante de operaciones, y $f(i-1,n)$ es el llamado recursivo.
 \end{itemize}
+
 Expliquemos que significa cada monomio:
 \begin{itemize}
 	\item $h*(i-1)$: En el peor de los casos, recorre por cada nodo de la lista de adyacencia del nodo tomado, a los demas nodos sin marcar (sin incluir el nodo tomado).
 	\item $f(i-1,n)$: En el peor de los casos, no hay nodos de la lista de adyacencia, que no hayan sido eliminados aún.
 	\item $c$: Alguna cantidad constante de operaciones.
 \end{itemize}
+
 Entonces, querremos demostrar que $(\forall i \in {1...n-1}) f(i,n) \leq k*i*n + c$ (con $k$ y $c$ alguna constante), pues al momento de ejecutar el algoritmo, se tienen $n$ nodos, y faltan eliminar $n$ nodos, siendo la complejidad del mismo, $O(f(n,n)) = O(n^{2})$; y dado que la cantidad de nodos por borrar no puede ser mayor que la cantidad total de nodos, es correcto pedir que $0 \leq i < n$.\\
 
 \newpage
 {\large\textbf{Teorema}}\\
+
 Dado $f(i,n): \mathbb{N} \rightarrow \mathbb{N}$ definida como\\
+
 $f(i,n)$ = Cantidad de operaciones  en el peor caso, teniendo $n$ nodos totales y faltando eliminar $i$.\\
+
 $f(0,n) = c$\\
+
 $f(i,n) = h*(i-1) + f(i-1,n) + c$\\
+
 Luego, $(\forall i \in {1...n-1}) f(i,n) \leq k*i*n + c$.\\
 
 {\large\textbf{Demostración}}\\
+
 Sea $P(i) = f(i,n) \leq k*i*n + c$, demostraremos por inducción global, que $(\forall i \in {1...n-1}) P(i)$\\
+
 Entonces,\\
+
 \textbf{Casos base:}
+
 \begin{itemize}
     \item[•] $f(0,n) = c$
     \item[•] $f(1,n) = h*(1-1) + c = c \leq k*1*n + c$\\
     Dado que tengo $n$ nodos, y solo falta eliminar uno. $k$ es alguna cantidad constante de operaciones para eliminar el nodo y finalizar el algoritmo.
 \end{itemize}
+
 \textbf{Paso inductivo:}\\
 
 $\underbrace{P(1) \wedge P(2) \wedge ... \wedge P(m-1)}_{\text{Hipótesis inductiva}} \Rightarrow \underbrace{P(m)}_{\text{Tesis inductiva}}$\\
 
 Es decir, que por hipótesis inductiva, podemos suponer que vale $f(r,n) \leq k*r*n + c$, con $r \leq m-1$, y queremos ver que $f(m,n) \leq k*m*n + c$.\\
+
 Luego,
+
 \begin{align*}
 f(m,n) & = h*(m-1) + f(m-1,n) + c \\
  \stackrel{HI}{\Longrightarrow} f(m,n) & \leq h*(m-1) + n*(m-1) + c \\
@@ -77,8 +113,6 @@ También es adecuado decir, que el algoritmo tiene complejidad $\Omega(n*log(n))
 \subsection{Comparaci\'on de resultados con soluci\'on \'optima}
 La heurística constructiva golosa fallará en encontrar la solución óptima para todos los casos.
 Particularmente, existen grafos para los cuales la heurística fallará siempre.\\
-Algunos de ellos son:
-
   \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.4]{imagenes/maloGreedy.png}
@@ -87,17 +121,13 @@ Algunos de ellos son:
    \end{center}
  \end{figure}
 
-\textcolor{blue}{Insertado}
-
 En este ejemplo, el greedy tomará como primer nodo, al nodo del centro, y eliminará a todos sus adyacentes. Luego, tomará todas las componentes conexas restantes.
-El resultado final será una solución con $(m-2)*m$ versus $m$ de la solución óptima.
-
-\textcolor{red}{Insertar mas ejemplos... Ayuda...}
+El resultado final será una solución con $(m-2)*m$ versus $m$ de la solución óptima, con m igual al grado del nodo central.
 
 %Describir instancias de CIDM para las cuales la heuristica no proporciona una solucion optima. Indicar que tan mala puede ser la solucion obtenida respecto de la solucion optima.
 \subsection{Experimentaci\'on}
 %Realizar una experimentacion que permita observar la performance del algoritmo en terminos de tiempo de ejecucion en funcion de los parametros de la entrada.
-Para la experimentación, se realizaron experimentos sobre grafos generados de manera aleatoria, fijando nodos y variando ejes, y viceversa.
+Para la experimentación, se realizaron experimentos sobre grafos generados de manera aleatoria, fijando nodos y variando ejes, y viceversa.\\
 
 A continuación se adjuntan los gráficos con los resultados:
 
