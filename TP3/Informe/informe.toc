@@ -10,23 +10,28 @@
 \contentsline {subsection}{\numberline {2.3}Experimentaci\'on}{9}{subsection.2.3}
 \contentsline {subsubsection}{\numberline {2.3.1}Mejor caso}{9}{subsubsection.2.3.1}
 \contentsline {subsubsection}{\numberline {2.3.2}Nodos fijos}{10}{subsubsection.2.3.2}
-\contentsline {section}{\numberline {3}Heur\'istica Constructiva Golosa}{11}{section.3}
-\contentsline {subsection}{\numberline {3.1}Explicaci\'on}{11}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Complejidad Temporal}{12}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Comparaci\'on de resultados con soluci\'on \'optima}{12}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Experimentaci\'on}{12}{subsection.3.4}
-\contentsline {section}{\numberline {4}Heur\'istica de B\'usqueda Local}{13}{section.4}
-\contentsline {subsection}{\numberline {4.1}Explicaci\'on}{13}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}Elecci\IeC {\'o}n de Soluci\IeC {\'o}n Inicial}{13}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}Elecci\IeC {\'o}n de Vecindad}{13}{subsubsection.4.1.2}
-\contentsline {subsection}{\numberline {4.2}Complejidad Temporal}{14}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Experimentaci\'on}{15}{subsection.4.3}
-\contentsline {subsubsection}{\numberline {4.3.1}An\'alisis de tiempos de ejecuci\'on}{15}{subsubsection.4.3.1}
-\contentsline {subsubsection}{\numberline {4.3.2}Contrastaci\'on emp\'irica de la complejidad}{17}{subsubsection.4.3.2}
-\contentsline {subsubsection}{\numberline {4.3.3}Comparaci\'on soluciones Local vs Exacto}{18}{subsubsection.4.3.3}
-\contentsline {subsubsection}{\numberline {4.3.4}Elecci\'on de versi\'on \'optima}{20}{subsubsection.4.3.4}
-\contentsline {section}{\numberline {5}Metaheur\'istica GRASP}{21}{section.5}
-\contentsline {subsection}{\numberline {5.1}Explicaci\'on}{21}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Experimentaci\'on}{22}{subsection.5.2}
-\contentsline {section}{\numberline {6}Comparaci\'on entre todos los m\'etodos}{25}{section.6}
-\contentsline {section}{\numberline {7}Anexo}{26}{section.7}
+\contentsline {subsubsection}{\numberline {2.3.3}Ejes fijos}{11}{subsubsection.2.3.3}
+\contentsline {subsubsection}{\numberline {2.3.4}Sin ejes}{11}{subsubsection.2.3.4}
+\contentsline {section}{\numberline {3}Heur\'istica Constructiva Golosa}{13}{section.3}
+\contentsline {subsection}{\numberline {3.1}Explicaci\'on}{13}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Complejidad Temporal}{14}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Comparaci\'on de resultados con soluci\'on \'optima}{16}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Experimentaci\'on}{16}{subsection.3.4}
+\contentsline {section}{\numberline {4}Heur\'istica de B\'usqueda Local}{22}{section.4}
+\contentsline {subsection}{\numberline {4.1}Explicaci\'on}{22}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Elecci\IeC {\'o}n de Soluci\IeC {\'o}n Inicial}{22}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Elecci\IeC {\'o}n de Vecindad}{22}{subsubsection.4.1.2}
+\contentsline {subsection}{\numberline {4.2}Complejidad Temporal}{24}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}dameParesVecinosComun}{24}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}dameTernasVecinasComun}{24}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.3}localCIDM}{26}{subsubsection.4.2.3}
+\contentsline {subsection}{\numberline {4.3}Experimentaci\'on}{28}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}An\'alisis de tiempos de ejecuci\'on}{28}{subsubsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.2}Contrastaci\'on emp\'irica de la complejidad}{30}{subsubsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.3.3}Comparaci\'on soluciones Local vs Exacto}{31}{subsubsection.4.3.3}
+\contentsline {subsubsection}{\numberline {4.3.4}Elecci\'on de versi\'on \'optima}{33}{subsubsection.4.3.4}
+\contentsline {section}{\numberline {5}Metaheur\'istica GRASP}{34}{section.5}
+\contentsline {subsection}{\numberline {5.1}Explicaci\'on}{34}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Experimentaci\'on}{35}{subsection.5.2}
+\contentsline {section}{\numberline {6}Comparaci\'on entre todos los m\'etodos}{46}{section.6}
+\contentsline {section}{\numberline {7}Anexo}{47}{section.7}
