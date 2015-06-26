@@ -12,7 +12,7 @@ s $\leftarrow$ s'\\
 
 Donde $f: s \rightarrow \mathbb{N}$ es una funci\'on que mapea soluciones factibles del problema a Naturales. Nuestra funci\'on devuelve el cardinal de s.\\
 
-Nuestro objetivo es minimizar $f$, por lo tanto nuestras vecindades planteadas son de la forma, $f(s) - 1 == f(s')$ o bien $f(s) - 2 == f(s')$, es decir que cada conjunto de N(s) tiene cardinal $s - 1$ o bien $s - 2$.
+Nuestro objetivo es minimizar $f$, por lo tanto nuestras vecindades planteadas son de la forma, $f(s) - 1 == f(s')$ o bien $f(s) - 2 == f(s')$, es decir que cada conjunto de N(s) tiene cardinal $s - 1$ o bien $s - 2$. Al avanzar a un conjunto vecino, s\'olo se puede decrementar en uno o en dos (depende la vecindad elegida) la cantidad de nodos.
 
 \subsection{Explicaci\'on}
 %Explicar detalladamente el algoritmo implementado. Plantear al menos dos vecindades distintas para la busqueda y al menos dos soluciones iniciales.
@@ -24,19 +24,19 @@ Considerando el problema a tratar, establecimos nuestros criterios para encontra
 
 Al momento de seleccionar la solución Inicial, determinamos dos criterios.
 
-\subsubsection*{Criterio I Solución Inicial: Golosa}
+\subsubsection*{Criterio I Solución Inicial: Secuencial}
+
+Los nodos al ser ingresados como parámetro del algoritmo tienen de identificador un número entre $0$ y $n-1$. El orden que vamos a utilizar para recorrerlos es el que haya sido dado cuando fueron ingresados como parámetro.\\
+
+Lo primero que realizamos es tomar al nodo $0$ y considerarlo parte de la solución. Se descartan todos los nodos vecinos a él y se continúa el proceso con el nodo que tenga menor número de \textit{id} entre los nodos no dominados o parte del conjunto soluci\'on.
+
+De este modo se forma un conjunto solución tal que en cada paso añade al nodo disponible que tenga su identificador número menor.
+
+\subsubsection*{Criterio II Solución Inicial: Golosa}
 
 Se realiza una ejecución del algoritmo Goloso de la Sección \ref{ej3}.\\
 
 Esto quiere decir, se ordenan los nodos por grado de manera decreciente. Se eligen los nodos de a uno (de mayor a menor), de modo que al elegir un nodo se descartan sus vecinos para sus futuras elecciones.
-
-\subsubsection*{Criterio II Solución Inicial: Secuencial}
-
-Los nodos al ser ingresados como parámetro del algoritmo tienen como identificador un número entre $0$ y $n-1$. El orden que vamos a utilizar para recorrerlos es el que haya sido dado cuando fueron ingresados como parámetro.\\
-
-Lo primero que realizamos es tomar al nodo $0$ y considerarlo parte de la solución. Se descartan todos los nodos vecinos a él y se continúa el proceso con el nodo que tenga menor número de \textit{id}.
-
-De este modo se forma un conjunto solución tal que en cada paso añade al nodo disponible que tenga su identificador número menor.
 
 \subsubsection{Elección de Vecindad}
 
@@ -54,6 +54,17 @@ El segundo criterio es similar al anterior, s\'olo que ahora consideramos quitar
 
 Se consideran todas las combinaciones posibles de grupos de tres nodos dentro del conjunto soluci\'on inicial y se prueba con los nodos que sean vecinos de todos ellos si forman un conjunto soluci\'on.\\
 
+\subsubsection{M\'etodos elegidos}
+
+Implementamos cuatro m\'etodos:
+
+\begin{itemize}
+\item[•] \textbf{M\'etodo 2}: Ejecutando este m\'etodo se utiliza el \textit{criterio de soluci\'on inicial} Secuencial (\textbf{I}) y el \textit{criterio de vecindad} que quita dos nodos y agrega uno (\textbf{I}).
+\item[•] \textbf{M\'etodo 3}: Ejecutando este m\'etodo se utiliza el \textit{criterio de soluci\'on inicial} Golosa (\textbf{II}) y el \textit{criterio de vecindad} que quita dos nodos y agrega uno (\textbf{I}).
+\item[•] \textbf{M\'etodo 4}: Ejecutando este m\'etodo se utiliza el \textit{criterio de soluci\'on inicial} Secuencial (\textbf{I}) y el \textit{criterio de vecindad} que quita tres nodos y agrega uno (\textbf{II}).
+\item[•] \textbf{M\'etodo 5}: Ejecutando este m\'etodo se utiliza el \textit{criterio de soluci\'on inicial} Golosa (\textbf{II}) y el \textit{criterio de vecindad} que quita tres nodos y agrega uno (\textbf{II}).
+\end{itemize}
+
 \newpage
 \subsection{Complejidad Temporal}
 %Calcular el orden de complejidad temporal de peor caso de una iteracion del algoritmo de busqueda local (para las vecindades planteadas). Si es posible, dar una cota superior para la cantidad de iteraciones de la heurıstica.
@@ -61,22 +72,20 @@ Este algoritmo llama, seg\'un la vecindad a ejecutar, a una de las siguiente dos
 
 \subsubsection{dameParesVecinosComun}\label{vec1}
 
-Funciones usadas:\\
-listaAd::dameVecinos\\
-push_back\\
-size\\
-
 Dado un conjunto de nodos, se buscan todas las combinaciones de pares de nodos posibles. 
 Luego, para cada par de nodos (i,j) se recorren: la lista de adyacencia de i y la de j. 
-Por cada elemento que pertenezca a las dos listas, se a\~nade al vector \texttt{vecinosEnComun} dentro de la estructura pares.
+Por cada elemento que pertenezca a las dos listas, se a\~nade al vector par dentro de la estructura \texttt{vecinosEnComun}.
 
-\begin{algorithm}[h!]
+
+	\begin{codesnippet}
+	\begin{verbatim}
 struct vecinosEnComun\{\\
-	unsigned int nodoA;\\	
-	unsigned int nodoB;\\
-	vector$<$unsigned int$>$ vecinosComun;\\
+    unsigned int nodoA;\\	
+    unsigned int nodoB;\\
+    vector<unsigned int> vecinosComun;\\
 \};
-\end{algorithm}
+	\end{verbatim}
+	\end{codesnippet}
 
 \begin{algorithm}[h!]
 	\For{int i = 0; i $<$ optimo.size(); ++i}{
@@ -107,44 +116,51 @@ struct vecinosEnComun\{\\
 	}
 \end{algorithm}
 
-Para elegir todos los pares posibles de nodos en el conjunto \texttt{\'optimo}, se recorre mediante dos \emph{for}s.\\
-El primero itera i desde 0 hasta el \'ultimo elemento y el segundo desde i hasta el \'ultimo elemento.\\
+Funciones usadas:\\
+listaAd::dameVecinos\textcolor{red}{Explicar la complejidad de esto}\\
+push_back()\footnote{http://www.cplusplus.com/reference/vector/vector/push_back/}\\
+size()\footnote{http://www.cplusplus.com/reference/vector/vector/size/}\\
+
+\newpage
+Para elegir todos los pares posibles de nodos en el conjunto \texttt{\'optimo}, se recorre mediante dos \emph{for}s. El primero itera i desde 0 hasta el \'ultimo elemento y el segundo desde i hasta el \'ultimo elemento.
+
 De este modo, cada par de nodos se recorre una \'unica vez. Ya que es lo mismo el par (i,j) que (j,i).\\
 
 Dentro de los \emph{for}s anidados, se crea una estructura \texttt{vecinosEnComun} \textbf{par} donde el nodoA es i y el nodoB es j.\\
 
-Para poder armar la lista vecinosComun (miembro de la estructura vecinosEnComun), se iteran las listas de adyacencia con itVecinosA (i) e itVecinosB (j).\\
+Para poder armar la lista vecinosComun (miembro de la estructura vecinosEnComun), se iteran las listas de adyacencia con itVecinosA (i) e itVecinosB (j).
 
 Como ambas listas fueron ordenadas antes de invocar a la funci\'on dameParesVecinosComun, es posible encontrar elementos en com\'un recorriendolas secuencialmente de manera simult\'anea.\\
 
-Se procede de manera simple, si nodo(itVecinosA) es igual a nodo(itVecinosB) entonces se a\~nade el nodo actual a la lista vecinosComun.\\
+Se procede de manera simple, si nodo(itVecinosA) es igual a nodo(itVecinosB) entonces se a\~nade el nodo actual a la lista vecinosComun. En caso contrario, se avanza el iterador que sea menor.\\
 
-En caso contrario, se avanza el iterador que sea menor.\\
+Si conclu\'ida la iteraci\'on de las dos listas de adyacencia, la lista vecinosEnComun posee al menos un elemento; entonces se agrega \textbf{par} a la soluci\'on.\\
 
-Si conclu\'ida la iteraci\'on de las dos listas de adyacencia, la lista vecinosEnComun posee al menos un elemento; entonces se agrega \textbf{par} a la soluci\'on.
+\bigskip
 
-Dado un par (i,j), la complejidad de recorrer ambas listas de adyacencia es de: $O(grado(i)+grado(j))$.
-Cada par se recorre una \'unica vez. Por lo tanto, los dos \emph{for}s anidados van a iterar (considerando a (n-1) como el \'ultimo nodo'):\\
+Dado un par (i,j), la complejidad de recorrer ambas listas de adyacencia es de: $O(grado(i)+grado(j))$. Cada par se recorre una \'unica vez. 
 
-Cuando sea el par de nodos (0,1) : grado(0)+grado(1) \\
+Por lo tanto, considerando a $(n-1)$ como el \'ultimo nodo, los dos \emph{for}s anidados van a iterar:\\
 
-Cuando sea el par de nodos (0,2) : grado(0)+grado(2) \\
+\texttt{Cuando sea el par de nodos (0,1) : grado(0)+grado(1)}\\
 
-...\\
+\texttt{Cuando sea el par de nodos (0,2) : grado(0)+grado(2)}\\
 
-Cuando sea el par de nodos (0,n-1) : grado(0)+grado(n-1)\\
+\texttt{...}\\
 
-Cuando sea el par de nodos (1,2) : grado(1)+grado(2)\\
+\texttt{Cuando sea el par de nodos (0,n-1) : grado(0)+grado(n-1)}\\
 
-Cuando sea el par de nodos (1,3) : grado(1)+grado(3)\\
+\texttt{Cuando sea el par de nodos (1,2) : grado(1)+grado(2)}\\
 
-...\\
+\texttt{Cuando sea el par de nodos (1,3) : grado(1)+grado(3)}\\
 
-Cuando sea el par de nodos (1,n-1) : grado(1)+grado(n-1)\\
+\texttt{...}\\
 
-...\\
+\texttt{Cuando sea el par de nodos (1,n-1) : grado(1)+grado(n-1)}\\
 
-Cuando sea el par de nodos (n-2,n-1) : grado(n-2)+grado(n-1)\\
+\texttt{...}\\
+
+\texttt{Cuando sea el par de nodos (n-2,n-1) : grado(n-2)+grado(n-1)}\\
 
 
 Se puede apreciar que el grado de cada nodo se suma (n-1) veces. Por lo tanto, al sumar las complejidades da un total de:\\
@@ -160,46 +176,46 @@ Donde vale que 2*\#ejes = grado(0)+grado(1)+ ... grado(n-1).\\
 
 Por consecuencia, la complejidad de esta funci\'on es de:\\
 
-O(2*\#ejes*(n-1)) lo que equivale a O(\#ejes*n) que pertenece a O($n^3$) ya que la mayor cantidad de ejes que puede tener un grafo es ((n-1)n)/2
+O(2*\#ejes*(n-1)) lo que equivale a O(\#ejes*n) que pertenece a \textbf{O($n^3$)} ya que la mayor cantidad de ejes que puede tener un grafo es ((n-1)n)/2.\\
 
+\bigskip
 
 \subsubsection{dameTernasVecinasComun}\label{vec2}
 
-La funci\'on dameTernasVecinasComun funciona de manera an\'aloga a la descripta en el inciso \ref{vec1}.\\
+La funci\'on \texttt{dameTernasVecinasComun} funciona de manera an\'aloga a la descripta en el inciso \ref{vec1}.\\
 
-Se va a encargar de armar tomar de todas las maneras posibles tres nodos del conjunto pasado por par\'ametro.\\
-
-Luego, obtener los nodos (si existe) que sean vecinos de los tres.\\
+Se va a encargar de armar todas las combinaciones posibles al tomar tres nodos del conjunto pasado por par\'ametro. Luego, obtener los nodos (si existen) que sean vecinos de los tres.\\
 
 De esta manera, recorre el conjunto con tres \emph{for}s tal que cada tupla la recorre una sola vez.\\
 
-En este caso el c\'alculo de cada iteraci\'on, dada la tupla (i,j,k), ser\'a de grado(i)+grado(j)+grado(k).\\
+En este caso el c\'alculo de cada iteraci\'on, dada la tupla (i,j,k), ser\'a de grado(i)+grado(j)+grado(k):\\
 
-Dada la tupla (0,1,2) el costo ser\'a: grado(0)+grado(1)+grado(2)\\
+\texttt{Dada la tupla (0,1,2) el costo ser\'a: grado(0)+grado(1)+grado(2)}\\
 
-Dada la tupla (0,1,3) el costo ser\'a: grado(0)+grado(1)+grado(3)\\
+\texttt{Dada la tupla (0,1,3) el costo ser\'a: grado(0)+grado(1)+grado(3)}\\
 
-...\\
+\texttt{...}\\
 
-Dada la tupla (0,1,n-1) el costo ser\'a: grado(0)+grado(1)+grado(n-1)\\
+\texttt{Dada la tupla (0,1,n-1) el costo ser\'a: grado(0)+grado(1)+grado(n-1)}\\
 
-Dada la tupla (0,2,3) el costo ser\'a: grado(0)+grado(2)+grado(3)\\
+\texttt{Dada la tupla (0,2,3) el costo ser\'a: grado(0)+grado(2)+grado(3)}\\
 
-...\\
+\texttt{...}\\
 
-Dada la tupla (0,n-2,n-1) el costo ser\'a: grado(0)+grado(n-1)+grado(n-2)\\
+\texttt{Dada la tupla (0,n-2,n-1) el costo ser\'a: grado(0)+grado(n-1)+grado(n-2)}\\
 
-Dada la tupla (1,2,3) el costo ser\'a: grado(1)+grado(2)+grado(3)\\
+\texttt{Dada la tupla (1,2,3) el costo ser\'a: grado(1)+grado(2)+grado(3)}\\
 
-...\\
+\texttt{...}\\
 
-Dada la tupla (n-3,n-2,n-1) el costo ser\'a: grado(n-3)+grado(n-2)+grado(n-1)\\
+\texttt{Dada la tupla (n-3,n-2,n-1) el costo ser\'a: grado(n-3)+grado(n-2)+grado(n-1)}\\
 
+\bigskip
 En el peor caso, el grado de todos los nodos es de n (grafo completo). Por lo tanto, el costo de cada iteraci\'on es de O(3n).\\
 
 La cantidad de ternas que se pueden formar es de $(n(n-1)(n-2))/6$, equivale a decir que va a iterar $O(n^3)$ veces con costo $O(3n)$ cada vez.\\
 
-Dando una complejidad de $O(n^4)$.
+Dando una complejidad de\textbf{$O(n^4)$}.
 
 \newpage
 \subsubsection{localCIDM}
@@ -323,7 +339,7 @@ Por cada par de nodos iterar\'a $n^2$ veces y la cantidad de pares posibles en p
 
 Por lo tanto el costo de cada iteraci\'on del ciclo mayor ser\'a de $O(n^4)$, iter\'andola n veces dar\'a un costo total del algoritmo de $O(n^5)$.\\
 
-\bigskip	
+\newpage
 
 En los casos de \textbf{ejecuci\'on 4 y 5}, el procedimiento ser\'a similar.\\
 
