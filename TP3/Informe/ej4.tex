@@ -79,11 +79,11 @@ Por cada elemento que pertenezca a las dos listas, se a\~nade al vector par dent
 
 	\begin{codesnippet}
 	\begin{verbatim}
-struct vecinosEnComun\{\\
-    unsigned int nodoA;\\	
-    unsigned int nodoB;\\
-    vector<unsigned int> vecinosComun;\\
-\};
+struct vecinosEnComun{
+    unsigned int nodoA;	
+    unsigned int nodoB;
+    vector<unsigned int> vecinosComun;
+};
 	\end{verbatim}
 	\end{codesnippet}
 
@@ -117,7 +117,7 @@ struct vecinosEnComun\{\\
 \end{algorithm}
 
 Funciones usadas:\\
-listaAd::dameVecinos\textcolor{red}{Explicar la complejidad de esto}\\
+listaAd::dameVecinos\footnote{Complejidad constante. Ver sección \ref{listaAdy}}\\
 push_back()\footnote{http://www.cplusplus.com/reference/vector/vector/push_back/}\\
 size()\footnote{http://www.cplusplus.com/reference/vector/vector/size/}\\
 
@@ -386,11 +386,11 @@ Se midieron los tiempos de ejecuci\'on y se exponen a continuaci\'on:
 
   \newpage  
  
-En el primer gr\'afico se puede apreciar que cuando la cantidad de nodos comienza a ser mayor, los m\'etodos con la segunda vecindad (\textbf{4} y \textbf{5}) presentan una curva que posee un crecimiento mayor que las otras dos. Este comportamiento se condice con la complejidad te\'orica calculada ya que los m\'etodos 3 y 4 tienen una complejidad de \textcolor{red}{$O(n^6)$ (?} mientras que los primeros dos tienen \textcolor{red}{$O(n^5)$ (?}.\\
+En el primer gr\'afico se puede apreciar que cuando la cantidad de nodos comienza a ser mayor, los m\'etodos con la segunda vecindad (\textbf{4} y \textbf{5}) presentan una curva que posee un crecimiento mayor que las otras dos. Este comportamiento se condice con la complejidad te\'orica calculada, si bien los cuatro métodos poseen complejidad $O(n^5)$, resulta intuitivo que las constantes de los m\'etodos 3 y 4 sean mayores ya que se fija todas las combinaciones que resultan de quitar tres nodos.\\
 
 En el segundo gr\'afico lo que se quiso hacer es mostrar con detalle cada m\'etodo ya que en el primero, al tener cantidades de tiempo variadas, no se puede apreciar con detalle el comportamiento de todas las curvas por s\'i solas.
 
-De este modo, se puede apreciar que los cuatro m\'etodos tienen un comportamiento que asemeja a una funci\'on \textcolor{red}{polinomial (? es asi?? nunca me acuerdo eso!)} aunque a simple vista no se podr\'ia acertar que sean las mismas funciones nombradas como complejidad.
+De este modo, se puede apreciar que los cuatro m\'etodos tienen un comportamiento que asemeja a una funci\'on polinomial aunque a simple vista no se podr\'ia acertar que sean las mismas funciones nombradas como complejidad.
 
 \bigskip  
   
@@ -412,7 +412,7 @@ De este modo, se puede apreciar que los cuatro m\'etodos tienen un comportamient
 
 Al realizar el mismo procedimiento pero ahora con 500 ejes fijos lo que se puede apreciar es que, si bien los m\'etodos 3 y 4 se mantienen en las mediciones de tiempos mayores, la curva del \textbf{M\'etodo 4} se aleja notablemente de los dem\'as.\\
 
-En las ampliaciones de los m\'etodos, desde una perspectiva amplia, se puede notar que poseen un comportamiento que asimila \textcolor{red}{polinomial} al igual que en el caso anterior. Se podr\'ia decir que la causa de que las gr\'aficas no sean estr\'ictamente creciente se debe a la complejidad $O(n^5)$ y $O(n^6)$.
+En las ampliaciones de los m\'etodos, desde una perspectiva amplia, se puede notar que poseen un comportamiento que asimila polinomial al igual que en el caso anterior. Se podr\'ia decir que la causa de que las gr\'aficas no sean estr\'ictamente creciente se debe a la complejidad $O(n^5)$.
 
 \newpage
 
@@ -450,11 +450,11 @@ En esta instancia, se contrastar\'an grupos de grafos que posean cantidad de nod
  
 Dando una observaci\'on general sobre este gr\'afico, se puede apreciar que para todos los m\'etodos el tiempo de ejecuci\'on disminuye al aumentar la cantidad de ejes. \\
 
-A simple vista podr\'ia sonar un poco absurdo, sin embargo la causa de este comportamiento  est\'a ligada a que al existir mayor cantidad de ejes (manteniendo la cantidad de nodos) aumenta el grado de los nodos. Por lo tanto\textcolor{red}{, al igual que el algoritmo Goloso(?), } cuando se arma una soluci\'on inicial se inserta el nodo de mayor grado. Luego, se descartan todos los nodos vecinos ya que no ser\'an candidatos al conjunto soluci\'on.
+A simple vista podr\'ia sonar un poco absurdo, sin embargo la causa de este comportamiento  est\'a ligada a que al existir mayor cantidad de ejes (manteniendo la cantidad de nodos) aumenta el grado de los nodos. Por lo tanto, al igual que el algoritmo Goloso, cuando se arma una soluci\'on inicial se inserta el nodo de mayor grado. Luego, se descartan todos los nodos vecinos ya que no ser\'an candidatos al conjunto soluci\'on.
 
 Si bien, para descartar nodos vecinos, se debe recorrer la lista de adyacencia completa; ese tiempo es compensado al tener menos nodos en la siguiente iteraci\'on para recorrer.\\
 
-En cuanto a la parte del algoritmo que consiste en la b\'usqueda local, \textcolor{red}{Completar algo aca...}
+En cuanto a la parte del algoritmo que consiste en la b\'usqueda local, los métodos que quitan de a tres nodos tienen una curva que decrece ya que al tener más ejes van a existir una mayor cantidad de tuplas que tengan ejes vecinos en común. Si bien también aumenta la cantidad de pares, al quitar nodos de a tres se realiza en un tiempo de ejecución menor la cantidad total de iteraciones. 
 
    \begin{figure}[h!]
    \begin{center}
@@ -466,9 +466,9 @@ En cuanto a la parte del algoritmo que consiste en la b\'usqueda local, \textcol
  
  Haciendo hincapie en cada m\'etodo por separado, se observa un comportamiento distinguible.\\
  
- Si bien las curvas de los cuatro m\'etodos oscilan notablemente, si uno observa bajo un punto de vista general se puede apreciar que los m\'etodos 4 y 5 tienen un comportamiento notablemente decreciente similar al de una curva \textcolor{red}{polinomial (?}. Ambos m\'etodos utilizan la segunda vecindad, lo que indicar\'ia que el comportamiento es causado por \textcolor{red}{completar!!!}.\\
+ Si bien las curvas de los cuatro m\'etodos oscilan notablemente, si uno observa bajo un punto de vista general se puede apreciar que los m\'etodos 4 y 5 tienen un comportamiento notablemente decreciente similar al de una curva polinomial. Ambos m\'etodos utilizan la segunda vecindad, lo que indicar\'ia que el comportamiento es causado por disminuir en cada iteración de a dos nodos en vez de uno y reducir así el tiempo de ejecución.\\
  
- Por otro lado, los m\'etodos 3 y 4 poseen un crecimiento abrupto con una cantidad de ejes menor y despu\'es sus curvas oscilan de manera, se podr\'ia decir que, constante. Como ambas manejan la misma vecindad, un potencial causante de dicho comportamiento corresponde a ... \textcolor{red}{COMPLETAR}\\
+ Por otro lado, los m\'etodos 2 y 3 poseen un crecimiento abrupto con una cantidad de ejes menor y despu\'es sus curvas oscilan de manera, se podr\'ia decir que, constante. Como ambas manejan la misma vecindad, un potencial causante de dicho comportamiento corresponde a que necesitan una cantidad lineal de iteraciones del algoritmo para reducir la misma cantidad de nodos del conjunto solución ya que sólo se elimina de a un nodo.\\
 
 \bigskip
 
@@ -514,6 +514,7 @@ La conclusi\'on que se puede sacar de este \'ultimo set de gr\'aficos es que, si
 
 Donde el \textbf{M\'etodo 4} permanece siendo quien tiene mayores tiempos de ejecuci\'on sin importar la cantidad de nodos y ejes. As\'i mismo, el \textbf{M\'etodo 3} se mantiene con los tiempos de ejecuci\'on menores.
 
+\newpage
   \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.55]{imagenes/local/tiempos/700nodos.png}
@@ -532,7 +533,7 @@ Donde el \textbf{M\'etodo 4} permanece siendo quien tiene mayores tiempos de eje
  
 Nos pareci\'o un caso notable de distinci\'on el de 700 nodos fijos, cuando se analizan los m\'etodos por separado. 
 
-Si bien a ciencia cierta no se puede asignar a qu\'e funci\'on pertenece cada curva, pero se pueden notar las \textcolor{red}{ra\'ices (?} que poseen las curvas. De modo que se aprecia un comportamiento no estrictamente creciente. 
+Si bien a ciencia cierta no se puede asignar a qu\'e funci\'on pertenece cada curva, pero se pueden notar las ra\'ices que poseen las curvas. De modo que se aprecia un comportamiento no estrictamente creciente. 
 
  \newpage
 \subsubsection{Contrastaci\'on emp\'irica de la complejidad}
@@ -551,7 +552,7 @@ A continuaci\'on se exponen los tiempos de ejecuci\'on para los distintos m\'eto
  
 Los tiempos de ejecuci\'on para grafos Ciclos se condicen con los gr\'aficos de la secci\'on \ref{tiempos}. Esto significa que los \textbf{m\'etodos 4} y \textbf{5} poseen mayor tiempo de ejecuci\'on y finalmente, el \textbf{m\'etodo 2} preserva el menor.
 
-Todas las curvas presentan un comportamiento que se asemeja a un valor cuadr\'atico  o c\'ubico, ya que si bien la complejidad te\'orica es de \textcolor{red}{$O(n^5)$ (?)} al tener s\'olo dos vecinos cada nodo las listas de adyacencia se recorren en $O(2)\subseteq O(1)$.
+Todas las curvas presentan un comportamiento que se asemeja a un valor cuadr\'atico  o c\'ubico, ya que si bien la complejidad te\'orica es de $O(n^5)$ al tener s\'olo dos vecinos cada nodo las listas de adyacencia se recorren en $O(2)\subseteq O(1)$.
  
    \begin{figure}[h!]
    \begin{center}
@@ -561,10 +562,34 @@ Todas las curvas presentan un comportamiento que se asemeja a un valor cuadr\'at
    \end{center}
  \end{figure} 
  
-\textcolor{red}{Los grafos completos son... } 
+Los grafos completos poseen un tiempo de ejecución con una curva muy similar a la lineal, ya que con un sólo nodo ya se obtiene la solución.\\
+
+Si se ejecuta la Solución Inicial I, sólo se añade el nodo 0 y se recorre a todos sus vecinos para marcarlos como dominados.
+
+Si se ejecuta la Solución Inicial II, primero se ordenarán los nodos por grado (lo que costará un tiempo innecesario) lo que dará como resultado un conjunto de nodos en un orden indistinto ya que todos tienen el mismo grado. Luego agarrará el que figure primero y marcará a todos sus vecinos como dominados.\\
+
+Sin importar cómo haya sido obtenida la solución inicial, el algoritmo comprueba que la solución inicial tiene un sólo nodo por lo tanto no sigue ejecutando ya que es consciente de que no existe una solución con un cardinal menor que uno.\\
+
+El funcionamiento de los métodos explica porque los métodos 3 y 5 poseen la misma curva entre sí, al igual que los métodos 2 y 4.
+
+Los que poseen una curva con valores más altos son los métodos que utilizan de Solución Inicial el algoritmo Goloso.
  
 \newpage
 \subsubsection{Comparaci\'on soluciones Local vs Exacto}
+
+
+Habiendo comparado los tiempos de ejecuci\'on entre los distintos m\'etodos, resta ver qu\'e tan lejanas son estas heur\'isticas de la soluci\'on \'optima.
+
+Por este motivo, se crearon lotes de grafos con 10, 20 y 30 nodos fijos (variando la cantidad de ejes) as\'i como tambi\'en con 45 y 90 ejes fijos (variando la cantidad de nodos). Con el objetivo de comparar los conjuntos solución devueltos por los cuatro métodos contra la solución óptima real (que pudimos obtener ejecutando el Algoritmo Exacto).
+
+Por \'ultimo, se evaluaron los conjuntos soluci\'on de las heur\'isticas locales bajo el contexto de tableros del ``Se\~nor de los Caballos'' respecto de la soluci\'on \'optima real.\\
+
+Teniendo en cuenta la soluci\'on \'optima real para cada instancia, lo que muestra el gr\'afico es el porcentaje de error que posee la soluci\'on devuelta por las heur\'isticas de B\'usqueda Local. \\
+
+\bigskip
+
+En los primeros casos, por cada cantidad de ejes tomada, se grafica en barras verticales el porcentaje de error de cada M\'etodo. Mientras que las l\'ineas horizontales representan al porcentaje de error promedio para la cantidad de nodos fijos impuesta.
+
 
   \begin{figure}[h!]
    \begin{center}
@@ -573,6 +598,14 @@ Todas las curvas presentan un comportamiento que se asemeja a un valor cuadr\'at
 %	\label{10Nodos}
    \end{center}
  \end{figure}
+
+En primera instancia, para una cantidad chica de nodos no es posible establecer un criterio específico respecto de la variación del error ya que son casos muy acotados.\\
+
+Sin embargo, es atinado remarcar que los promedios de error para los \textbf{métodos 2} y \textbf{3} fue nula.
+
+\newpage
+
+Se repitió el proceso fijando la cantidad de nodos en 20 y 30.
 
   \begin{figure}[h!]
    \begin{center}
@@ -590,7 +623,19 @@ Todas las curvas presentan un comportamiento que se asemeja a un valor cuadr\'at
    \end{center}
  \end{figure}
 
+En ambos casos, se pueden apreciar picos muy notorios. Sin embargo, los márgenes de error promedio se mantienen por debajo del 30\% en todos los métodos para ambos casos siendo un promedio de error bastante notable.
+
+Dado que los grafos fueron armados de manera aleatoria, no contamos con ninguna hipótesis respecto a la relación que tienen los ejes con los nodos (ya sea que posea subgrafos ciclos, cliques o etc.).\\
+
+También se observa que el porcentaje de error aumenta, acorde la cantidad de odos también lo hace. Inclusive el porcentaje de error del Método 3 (el de menor margen error en todos los casos) aumenta para una cantidad mayor de nodos. El principal motivo de este comportamiento se lo podría atribuir a que al ser un grafo con mayor cantidad de nodos, existe una mayor cantidad de conjuntos independientes maximales (que es lo que devuelven como resultado las heurísticas).\\
+
+Podemos concluir que, para los casos testeados y sin importar cómo varía la cantidad de ejes en un grafo, el porcentaje de error va a ser siempre menor empleando el \textbf{Método 3}.  
+
 \newpage
+
+En segunda instancia, se generaron lotes de grafos primero con 45 ejes fijos y luego con 90.
+
+Al igual que en la etapa anterior, las barras verticales representan el porcentaje de error por método mientras que las líneas horizontales indican el promedio de error para cada uno.
 
   \begin{figure}[h!]
    \begin{center}
@@ -600,6 +645,10 @@ Todas las curvas presentan un comportamiento que se asemeja a un valor cuadr\'at
    \end{center}
  \end{figure} 
  
+ Al contrario del caso anterior, se puede apreciar como el margen de error disminuye acorde aumenta la cantidad de nodos. Si bien en el caso anterior no era intuitivo (ya que se media el aumento de ejes conjunto al de nodos), en esta instancia si lo será.
+ 
+ Esto se debe a que al dejar la cantidad de ejes fija y agregar nodos, el grafo queda cada vez ``más no-conexo'' por lo tanto mayor cantidad de nodos deberá pertenecer al conjunto solución. Y aún más existirá una menor cantidad de conjuntos Independientes Maximales, por lo cual tendrá una mayor probabilidad de devolver el que tenga un tamaño óptimo.
+ 
   \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.7]{imagenes/local/exacto/90ejes.png}
@@ -608,7 +657,16 @@ Todas las curvas presentan un comportamiento que se asemeja a un valor cuadr\'at
    \end{center}
  \end{figure} 
  
- \newpage
+Cuando contamos con 90 ejes fijos sucede un comportamiento análogo. Al tener poca cantidad de nodos, se trabaja con grafos ``muy conexos'' por lo que basta con pocos nodos para hallar al conjunto solución óptima. Y aún más, aquí también la cantidad de conjuntos Independientes Maximales posibles será menor.   
+ 
+\bigskip
+
+Una vez más, la experimentación muestra que el Método 3 es quien otorga resultados más cercanos a la Solución Óptima.\\
+
+ \bigskip
+
+Por último, se decidió aplicar las heurísticas desarrolladas a grafos que sean del aspecto del tablero ``El señor de los Caballos''. 
+ 
   \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.55]{imagenes/local/exacto/tableros.png}
@@ -617,9 +675,25 @@ Todas las curvas presentan un comportamiento que se asemeja a un valor cuadr\'at
    \end{center}
  \end{figure} 
  
+El comportamiento a observar es que las Heurísticas Golosas no poseen margen de error al tener tableros más pequeños. Al revés es en el caso que optan por la solución inicial propuesta I, quienes el mayor margen de error lo tienen en tableros más pequeños.\\
+
+Esta situación se puede explicar con la base de que empezando con una solución \textit{para nada buena}, resulta imposible avanzar mediante vecindades a una solución mejor ya que no se encuentran dos nodos que se puedan quitar a cambio de añadir otro, más aún quitar tres para añadir uno.  
+ 
 \newpage 
  
 \subsubsection{Elecci\'on de versi\'on \'optima}
+
+Si bien ya comparamos las soluciones obtenidas por las heurísticas locales contra las soluciones otorgadas por el algoritmo exacto, nos pareció de importancia comparar entre heurísticas solamente.
+
+De este modo, pudimos testear una mayor cantidad de casos y más grandes que hubiera resultado muy excesivo aplicarles el algoritmo de Backtracking debido a su tiempo de ejecución.\\
+
+En los siguientes gráficos se abordan grafos primero dejando una cantidad de ejes fija: 100, 500 y 2000; luego dejando una cantidad de nodos fija: 200, 300, 500, 600 y 700. Los lotes utilizados para comparar resultados a continuación son los mismos que figuraron en la comparación de tiempos (Sección: \ref{tiempos}).\\
+
+Los gráficos están diseñados de la siguiente manera: como no tenemos un parámetro de cuál es la verdadera solución óptima; de las cuatro obtenidas para una misma instancia, a la menor se la considera como solución óptima.\\
+
+Por lo tanto, los porcentajes de error de los gráficos en las barras verticales marcan el error cometido respecto de la respuesta de menor cardinal en el conjunto.
+
+Así mismo, las líneas horizontales marcan el promedio del porcentaje de error. 
 
 \subsubsection*{Ejes Fijos}
 
@@ -641,6 +715,8 @@ Todas las curvas presentan un comportamiento que se asemeja a un valor cuadr\'at
    \end{center}
  \end{figure}
  
+\newpage 
+ 
    \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.55]{imagenes/local/resultados/2000ejes.png}
@@ -649,10 +725,20 @@ Todas las curvas presentan un comportamiento que se asemeja a un valor cuadr\'at
    \end{center}
  \end{figure}
  
+En los tres casos, en mayor o menor medida, se puede apreciar como el porcentaje de error disminuye a mayor cantidad de nodos para los cuatro métodos.
+
+Si bien este decrecimiento no es estricto (al menos para 500 y 2000), analizando el gráfico a gran escala esta apreciación es válida.\\
+
+Es válido destacar que, al dejar la cantidad de ejes fija y aumentar la cantidad de nodos, se obtiene un grafo \textit{menos conexo} por lo que la cantidad de Conjuntos Independientes Dominantes decrece, debido a que cada nodo ``domina'' a una cantidad baja.\\
+
+A simple vista se observa que el promedio de error del método 3 es casi nulo, por lo que indicaría que en la mayoría de los casos fue quien otorgó la solución de menor cardinal. 
+ 
   
 \newpage  
   
 \subsubsection*{Nodos Fijos}
+
+Los gráficos a continuación indican lo mismo que los de la sección anterior, solamente que se decidió graficar linealmente en vez de barras para una mayor comprensión del comportamiento.
 
   \begin{figure}[h!]
    \begin{center}
@@ -695,6 +781,26 @@ Todas las curvas presentan un comportamiento que se asemeja a un valor cuadr\'at
 %	\label{10Nodos}
    \end{center}
  \end{figure} 
+
+Sin importar la cantidad en que se fijen los nodos, todos los gráficos revelan un comportamiento similar.\\
+
+Ningún metodo ofrece una muestra de percentiles que obedezca a una función suave, sin embargo las oscilaciones que muestran parecen tener un comportamiento específico tal que varían siempre entre los mismos valores. 
+
+El \textbf{Método 3} es quien se mantiene siempre por debajo, indicando que es quien obtuvo el conjunto solución de menor cardinal. Y concluyendo las observaciones hechas hasta el momento, el \textbf{Método 4 }es quien peores resultados arroja. \\
+
+Resulta intuitivo que comenzar con una solución Golosa es mejor que con una solución Secuencial, ya que se espera que la solución Golosa sea mejor. Si bien esto no se puede probar teóricamente, los datos empíricos obtenidos arrojan resultados que validan esta hipótesis.
+
+\newpage
+
+\subsubsection*{Heurística Local Óptima}
+
+Como conclusión de la experimentación definimos que la Heurística Local con Vecindad y Solución Óptima es la implementada bajo el Método 3.
+
+Utiliza la Solución Inicial II (construcción Golosa) y la vecindad I (quita dos nodos y agrega uno).\\
+
+Este Método es quien arrojó siempre mejores resultados en cuanto a tiempos y respecto del cardinal de su conjunto solución. Siempre se mantuvo con menores tiempos de ejecución y menores márgenes de error.\\
+
+Podemos definir que la Heurística Local a utilizar en la Sección \ref{ej6} será la del \textbf{Método 3}.
 
 
 \newpage

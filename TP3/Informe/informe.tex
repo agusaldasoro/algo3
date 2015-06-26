@@ -96,7 +96,7 @@ Esta flag se a\~nade con el fin de poder utilizar funciones de medici\'on para l
 \newpage
 
 
-%\normalsize
+\normalsize
 \newpage
 \input{ej1.tex}
 \newpage
@@ -134,7 +134,23 @@ Al momento de ejecutar el \texttt{main} se le deben pasar los siguientes par\'am
 
 \subsection{Generaci\'on de casos de test}\label{instacegen}
 
-\textcolor{red}{Aca hablar un poco de como generamos los grafos para analizar y bla, no hace falta poner codigo ni nada... pero por lo menos contar que hace el generador de instancias. Asi en cada seccion de experimentacion se cita esta seccion}
+A la hora de desarrollar las experimentaciones, partimos de crear distintas instancias de grafos con un generador que armamos en Python.\\
+
+Mediante este script, se podían generar instancias:
+
+\begin{itemize}
+\item Un grafo con n nodos y a aristas.
+\item Conjunto de k grafos todos con n nodos y variando cantidad de aristas.
+\item Conjunto de k grafos todos con a aristas y variando cantidad de nodos.
+\item Un grafo Bipartito con n nodos en V1 y m nodos en V2.
+\item Un grafo completo de n nodos.
+\item Un grafo ciclo de n nodos.
+\item Un tablero de p casilleros de ancho.
+\end{itemize}
+
+Es importante destacar que en las instancias que se generaban conjuntos de grafos todos los grafos eran independientes entre sí, generados aleatoriamente.\\
+
+Si bien se tiene una noción fuerte de las características de los grafos, cuando se arman grafos de n nodos y a aristas (ya sea en las ejecuciones de conjunto o individuales), se crean las n aristas y los ejes se arman al azar.
 
 \subsection{Clase ListaAdy} \label{listaAdy}
 

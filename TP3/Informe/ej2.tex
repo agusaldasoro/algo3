@@ -96,6 +96,8 @@ Para continuar viendo el comportamiento del algoritmo, decidimos realizar experi
 
 Los tiempos de ejecuci\'on para nodos fijos en 10 fueron los siguientes:\\
 
+  \begin{figure}[h!]
+   \begin{center}
 \begin{tabular}{| l | l |}
   \hline
   Ejes & Tiempo \\ \hline
@@ -110,7 +112,9 @@ Los tiempos de ejecuci\'on para nodos fijos en 10 fueron los siguientes:\\
   40 & 0.00003069 \\ \hline
   45 & 0.00002226 \\ \hline
 \end{tabular}
-
+   \end{center}
+ \end{figure}
+ 
   \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.7]{imagenes/exacto/10Nodos.png}
@@ -119,7 +123,11 @@ Los tiempos de ejecuci\'on para nodos fijos en 10 fueron los siguientes:\\
    \end{center}
  \end{figure}
 
+\newpage
  Tiempos para 20 nodos: \\
+
+  \begin{figure}[h!]
+   \begin{center}
  \begin{tabular}{| l | l |}
  \hline
   Ejes & Tiempo \\ \hline
@@ -143,6 +151,8 @@ Los tiempos de ejecuci\'on para nodos fijos en 10 fueron los siguientes:\\
   170 & 0.0001313739 \\ \hline
   180 & 0.000095395 \\ \hline
  \end{tabular}
+   \end{center}
+ \end{figure}
 
   \begin{figure}[h!]
    \begin{center}
@@ -152,7 +162,10 @@ Los tiempos de ejecuci\'on para nodos fijos en 10 fueron los siguientes:\\
    \end{center}
  \end{figure}
  
+ \newpage
  Para 30 nodos: \\
+   \begin{figure}[h!]
+   \begin{center}
 \begin{tabular}{| l | l |}
   \hline
   Ejes & Tiempo \\ \hline
@@ -180,8 +193,8 @@ Los tiempos de ejecuci\'on para nodos fijos en 10 fueron los siguientes:\\
   105 & 0.15861015 \\ \hline
   110 & 0.4207426 \\ \hline
 \end{tabular}
-
-
+   \end{center}
+ \end{figure}
 
    \begin{figure}[h!]
    \begin{center}
@@ -197,7 +210,8 @@ A medida que se van agregando ejes, los tiempos van decreciendo ya que gracias a
 \subsubsection{Ejes fijos}
 En esta secci\'on podremos ver el comportamiento exponencial del ejercicio, ya que se mantuvo fija la cantidad de ejes, pero fue aumentando la cantidad de nodos.
 Los resultados de los tiempos de ejecucion, con 45 ejes fijos fueron:\\
-
+ \begin{figure}[h!]
+   \begin{center}
 \begin{tabular}{| l | l |}
 \hline
  Nodos & Tiempo  \\ \hline
@@ -217,6 +231,8 @@ Los resultados de los tiempos de ejecucion, con 45 ejes fijos fueron:\\
 36 & 7641.97 \\ \hline
 38 & 49532.4333333333 \\ \hline
 \end{tabular}
+   \end{center}
+ \end{figure}
 
 
  \begin{figure}[h!]
@@ -227,7 +243,11 @@ Los resultados de los tiempos de ejecucion, con 45 ejes fijos fueron:\\
    \end{center}
  \end{figure}
  
+\newpage 
  Para 90 ejes: \\
+ 
+ \begin{figure}[h!]
+   \begin{center}
  \begin{tabular}{| l | l |}
   \hline
 Nodos & Tiempo \\ \hline
@@ -242,7 +262,8 @@ Nodos & Tiempo \\ \hline
 31 & 9.9156506667 \\ \hline
 33 & 24.44762 \\ \hline
  \end{tabular}
-
+   \end{center}
+ \end{figure}
  
  
  \begin{figure}[h!]
@@ -272,9 +293,12 @@ Para mostrar m\'as claramente el aspecto exponencial de la funci\'on en los caso
 El peor caso para nuestro algoritmo se da cuando el grafo pasado por par\'ametro no cuenta con ning\'un eje. Esto es as\'i porque deber\'a revisar todos los posibles conjuntos dentro del conjunto de partes,
 intentando encontrar uno mejor que el que utiliza todos los nodos. Claramente esto no es posible, ya que al no contar con ejes, aquella es la \'unica soluci\'on posible.\\
 
+\newpage
 Los tiempos de ejecuci\'on para los distintos grafos sin ejes fueron:\\
 
-\begin{tabular}{| l | l |}
+   \begin{figure}[h!]
+   \begin{center}
+ 	\begin{tabular}{| l | l |}
  \hline
 Nodos & Tiempo \\ \hline
 2 & 5.4496E-006 \\ \hline
@@ -291,7 +315,9 @@ Nodos & Tiempo \\ \hline
 24 &  53.82 \\ \hline
 26 &  229.522 \\ \hline
 \end{tabular}
-
+\end{center}
+ \end{figure}
+ 
 
    \begin{figure}[h!]
    \begin{center}
@@ -300,6 +326,8 @@ Nodos & Tiempo \\ \hline
 %	\label{Vacio}
    \end{center}
  \end{figure}
+ 
+\newpage 
  
 Para ver m\'as claramente el aspecto del gr\'afico para los casos m\'as chicos, haremos zoom en el gr\'afico:\\
 
