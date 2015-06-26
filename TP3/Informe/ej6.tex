@@ -76,7 +76,6 @@ En cuanto al Greedy y el Grasp, las diferencias son chicas y alternadas con 300 
 
 Para corroborar estos datos, tomamos nuevamente el promedio de todas las soluciones:\\
 
-\textcolor{red}{Tabla con promedios}
 \begin{tabular}{| l | l | l | l |}
    \hline
    Nodos & Grasp & Local & Greedy\\ \hline
@@ -103,14 +102,8 @@ Nuevamente, para fortalecer nuestra conclusión, se analizaron los tiempos de ej
 Como era esperado, Grasp insume mayor tiempo que Local y Greedy para cualquier caso.
 Considerando los resultados y los tiempos de ejecución, concluímos que Local es la mejor alternativa, si se mantienen ejes y se varían nodos.
 
-\subsection{Familias específicas}
-\subsubsection{Grafo completo}
-
-\textcolor{red}{Diganme si vale la pena hablar sobre grafos completos. Onda, la respuesta es trivial, y los tiempos son meh}
-
 \subsubsection{Grafo bipartito completo}
 
-\textcolor{red}{Brian contandonos un poco los resultados del bipartito completo}
 Dado que los resultados siempre son \'optimos, se omitieron los gr\'aficos de resultados para este caso.
 
 Analizando los tiempos de ejecución sobre instancias de 100, 300, 600 y 900 nodos, se obtuvieron los siguientes resultados:
@@ -121,8 +114,6 @@ Analizando los tiempos de ejecución sobre instancias de 100, 300, 600 y 900 nod
  	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Bipartite2.png}
 \end{center}
 
-\textcolor{red}{Y Ezequiel nos cuenta como esto se debe a los pares de nodos que agarra}.
-
 Para el segundo gráfico, se omitió la ejecución del Grasp, dado que los tiempos de ejecución del mismo para los grafos bipartitos completos de esa magnitud, eran demasiado altos, 
 lo cual era predecible pues debe ejecutar la b\'usqueda local 10 veces, es decir que su ejecuci\'on consume \textit{10x(tiempo de b\'usqueda local)}.
 
@@ -131,7 +122,6 @@ Dado que los tres algoritmos siempre obtienen la solución óptima para la famil
 
 \subsubsection{Ciclo simple}
 
-\textcolor{red}{Brian contandonos un poco los resultados del ciclo simple}
 Por \'ultimo, analizaremos qu\'e ocurre cuando el grafo de entrada es un ciclo. Para ello fuimos generando distintos ciclos, comenzando con 100 nodos y aumentando de a 100 hasta 1000 nodos.\\
 Los resultados obtenidos fueron:\\
 
@@ -147,6 +137,5 @@ A su vez, los tiempos de ejecucion sobre las mismas instancias, se obtuvieron lo
  	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Cicle.png}
 \end{center}
 
-\textcolor{red}{Coronar esto diciendo quien es mejor (es decir, el que menos tarda entre los que obtienen mejores resultados en promedio)}
 Analizando tanto tiempos como resultados obtenidos, concluimos que el algoritmo Local es el m\'as conveniente cuando el grafo es un ciclo, ya que obtiene resultados mucho mejores al Greedy a pesar
 de ser un poco m\'as lento. Adem\'as, es mejor que Grasp tanto en tiempo de ejecuci\'on como en el resultado.
