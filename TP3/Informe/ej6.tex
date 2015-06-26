@@ -1,9 +1,124 @@
 \section{Comparaci\'on entre todos los m\'etodos} \label{ej6}
 
-Una vez elegidos los mejores valores de configuracion para cada heurıstica implementada (si fue posible), realizar una experimentacion sobre un conjunto nuevo de instancias para observar la performance
-de los metodos comparando nuevamente la calidad de las soluciones obtenidas y los tiempos de ejecucion en funcion de los parametros de la entrada. 
-Para los casos que sea posible, comparar tambien los resultados del algoritmo exacto implementado.
-Presentar todos los resultados obtenidos mediante graficos adecuados y discutir al respecto de los mismos.
+\subsection{Comparaci\'on}
+Aqu\'i compararemos todos los algoritmos contra el exacto, que es el que nos da la soluci\'on \'optima en todos los casos y veremos cu\'al es la diferencia existente.\\
+
+Comenzando con 45 ejes fijos y variando los nodos, los resultados fueron:\\
+
+\begin{tabular}{| l | l | l | l | l |}
+ \hline
+Nodos&Exacto&Local&Grasp&Greedy \\ \hline
+10&1&1&1&1 \\ \hline
+12&2&2&2&2 \\ \hline
+14&2&2&2&2 \\ \hline
+16&3&3&3&3 \\ \hline
+18&4&4&4&4 \\ \hline
+20&5&7&7&7 \\ \hline
+22&5&5&5&5 \\ \hline
+24&7&7&7&7 \\ \hline
+26&7&8&8&9 \\ \hline
+28&9&10&10&11 \\ \hline
+30&12&14&14&14 \\ \hline
+\end{tabular}
+
+Reci\'en pueden empezar a notarse las diferencias cuando la cantidad de nodos es mayor que 26.\\
+
+Continuamos con 90 ejes fijos:
+
+\begin{tabular}{| l | l | l | l | l |}
+ \hline
+Nodos&Exacto&Local&Grasp&Greedy \\ \hline
+15&1&1&1&2 \\ \hline
+17&2&2&2&2 \\ \hline
+19&3&3&3&3 \\ \hline
+21&3&3&4&4 \\ \hline
+23&4&4&4&5 \\ \hline
+25&3&3&4&6 \\ \hline
+27&5&5&5&8 \\ \hline
+29&6&7&8&7 \\ \hline
+31&6&9&8&9 \\ \hline
+33&7&8&8&9 \\ \hline
+\end{tabular}
+
+Nuevamente, los algoritmos suelen coincidir con el exacto cuando la cantidad de nodos es baja, pero luego comienzan a verse disparidades.\\
+
+Ahora fijaremos los nodos y variaremos la cantidad de ejes.\\
+
+Con 10 nodos fijos:\\
+\begin{tabular}{| l | l | l | l | l |}
+ \hline
+Ejes&Exacto&Local&Grasp&Greedy \\ \hline
+0&10&10&10&10 \\ \hline
+5&6&6&6&6 \\ \hline
+10&4&4&4&5 \\ \hline
+15&3&3&3&4 \\ \hline
+20&3&3&3&3 \\ \hline
+25&2&2&2&3 \\ \hline
+30&2&2&2&3 \\ \hline
+35&2&2&2&2 \\ \hline
+40&1&1&1&1 \\ \hline
+45&1&1&1&1 \\ \hline
+\end{tabular}
+
+Como la cantidad de nodos es baja, era bastante probable que los algoritmos consigan la respuesta \'optima. De todas formas, podemos ver que el Greedy falla en algunos casos.\\
+
+Con 20 nodos fijos:\\
+\begin{tabular}{| l | l | l | l | l |}
+ \hline
+Ejes&Exacto&Local&Grasp&Greedy \\ \hline
+0&20&20&20&20 \\ \hline
+5&15&15&15&15 \\ \hline
+10&11&11&11&11 \\ \hline
+15&10&12&10&12 \\ \hline
+20&8&8&8&8 \\ \hline
+25&8&8&8&8 \\ \hline
+30&6&7&7&8 \\ \hline
+35&6&6&6&7 \\ \hline
+40&5&6&6&6 \\ \hline
+45&5&6&6&6 \\ \hline
+50&4&4&4&5 \\ \hline
+55&5&5&5&5 \\ \hline
+60&4&4&4&4 \\ \hline
+65&5&5&5&5 \\ \hline
+70&3&3&3&3 \\ \hline
+75&3&3&3&4 \\ \hline
+\end{tabular}
+
+Con 30 nodos fijos:
+\begin{tabular}{| l | l | l | l | l |}
+ \hline
+Ejes&Exacto&Local&Grasp&Greedy \\ \hline
+0&30&30&30&30 \\ \hline
+5&25&25&25&25 \\ \hline
+10&21&21&22&21 \\ \hline
+15&17&19&20&19 \\ \hline
+20&16&16&19&16 \\ \hline
+25&16&15&15&15 \\ \hline
+30&13&12&12&12 \\ \hline
+35&10&12&13&13 \\ \hline
+40&10&12&12&12 \\ \hline
+45&10&10&10&11 \\ \hline
+50&11&11&13&12 \\ \hline
+55&9&9&11&10 \\ \hline
+60&8&11&11&11 \\ \hline
+65&9&10&10&10 \\ \hline
+70&8&9&9&10 \\ \hline
+75&7&9&9&10 \\ \hline
+80&6&6&6&6 \\ \hline
+85&6&7&7&8 \\ \hline
+90&6&7&7&7 \\ \hline
+95&5&7&7&9 \\ \hline
+100&5&7&7&7 \\ \hline
+105&5&6&6&6 \\ \hline
+110&5&6&6&8 \\ \hline
+115&5&5&5&6 \\ \hline
+120&5&5&5&5 \\ \hline
+\end{tabular}
+
+
+
+
+
 \subsection{Resultados}
 \subsubsection{Nodos fijos}
 Aqu\'i se comparan los resultados de los 3 algoritmos (Grasp, Greedy y Local), manteniendo los nodos fijos. Nuestros tests fueron con nodos fijos desde 100 hasta 1000 y para cada una de esas instancias,
