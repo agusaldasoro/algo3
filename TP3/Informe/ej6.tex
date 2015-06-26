@@ -29,7 +29,15 @@ Por otra parte, se puede ver cierta ventaja del Grasp para los casos m\'as chico
 No podemos distinguir claramente cu\'al es la mejor opci\'on entre estos dos, ya que los valores son bastante cambiantes a lo largo de los 4 gr\'aficos, por lo que buscamos el promedio de nodos que utiliza
 cada algoritmo. Los resultados fueron los siguientes:\\
 
-\textcolor{red}{Tabla con promedios}
+\begin{tabular}{| l | l | l | l |}
+   \hline
+   Nodos & Grasp & Local & Greedy\\ \hline
+   100 & 6 & 6.55 & 7.65 \\ \hline
+   300 & 46.59 & 47.25 & 53.65 \\ \hline
+   600 & 149.255 & 145.65 & 164.3 \\ \hline
+   900 & 289.925 & 277.95 & 307.55 \\
+   \hline
+\end{tabular}
 
 Estos promedios confirman los datos que se pod\'ian apreciar en los gr\'aficos, es decir, que el Greedy utiliza siempre mayor cantidad de nodos que los otros, que Grasp es mejor en los casos chicos y
 que a medida que crece la cantidad de nodos, es preferible el Local.\\
@@ -69,6 +77,14 @@ En cuanto al Greedy y el Grasp, las diferencias son chicas y alternadas con 300 
 Para corroborar estos datos, tomamos nuevamente el promedio de todas las soluciones:\\
 
 \textcolor{red}{Tabla con promedios}
+\begin{tabular}{| l | l | l | l |}
+   \hline
+   Nodos & Grasp & Local & Greedy\\ \hline
+   300 & 337.61 & 332 & 338.15 \\ \hline
+   600 & 256.165 & 250.4 & 261.8 \\ \hline
+   900 & 207.44 & 203.1 & 217.9 \\
+   \hline
+\end{tabular}
 
 Como preve\'iamos, estos promedios confirman nuestro an\'alisis.
 
@@ -95,8 +111,9 @@ Considerando los resultados y los tiempos de ejecución, concluímos que Local e
 \subsubsection{Grafo bipartito completo}
 
 \textcolor{red}{Brian contandonos un poco los resultados del bipartito completo}
+Dado que los resultados siempre son \'optimos, se omitieron los gr\'aficos de resultados para este caso.
 
-Analizando también los tiempos de ejecución sobre las mismas instancias, se obtuvieron los siguientes resultados:
+Analizando los tiempos de ejecución sobre instancias de 100, 300, 600 y 900 nodos, se obtuvieron los siguientes resultados:
 
 \begin{center}
  	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Bipartite1.png}
@@ -104,12 +121,11 @@ Analizando también los tiempos de ejecución sobre las mismas instancias, se ob
  	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Bipartite2.png}
 \end{center}
 
-<<<<<<< HEAD
-Para el segundo gráfico, se omitió la ejecución del Grasp, dado que los tiempos de ejecución del mismo para los grafos bipartitos completos de esa magnitud, eran demasiado altos 
 \textcolor{red}{Y Ezequiel nos cuenta como esto se debe a los pares de nodos que agarra}.
-=======
-Para el segundo gráfico, se omitió la ejecución del Grasp, dado que los tiempos de ejecución del mismo para los grafos bipartitos completos de esa magnitud, eran demasiado altos, esto era predecible, pues debe ejecutar la b\'usqueda local 10 veces, es decir que su ejecuci\'on consume \textit{10x(tiempo de b\'usqueda local)}.
->>>>>>> 8e16beb30cc5e5a85853803ffadc91069733de28
+
+Para el segundo gráfico, se omitió la ejecución del Grasp, dado que los tiempos de ejecución del mismo para los grafos bipartitos completos de esa magnitud, eran demasiado altos, 
+lo cual era predecible pues debe ejecutar la b\'usqueda local 10 veces, es decir que su ejecuci\'on consume \textit{10x(tiempo de b\'usqueda local)}.
+
 
 Dado que los tres algoritmos siempre obtienen la solución óptima para la familia de grafos bipartitos completos, concluímos que el Greedy es el mejor de los tres para estos casos, ya que es el que menor tiempo insume. 
 
