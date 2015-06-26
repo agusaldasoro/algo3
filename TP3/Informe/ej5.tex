@@ -56,56 +56,56 @@ Las siguientes tabla muestra los valores obtenidos, las columnas 2, 3 y 4 indica
 La diferencia en las dos tablas radica en el criterio de parada, para la primera, se tom\'o la decisi\'on de no seguir buscando si no se modific\'o el \'optimo luego de 5 iteraciones, para la segunda, si no se lo modific\'o luego de 10.\\
 
 \begin{table}[h!]
-	\begin{tabular}[c]{|l|l|l|l|}
-	\hline & Ejes Fijos & Nodos Fijos & Tableros \\
-	\hline Vecindad 2x1 3 mejores & 0.1444444444 & 0.0443696313 & 0 \\
-	\hline Vecindad 2x1 5 mejores & 0.0873015873 & 0.0878199237 & 0.7916666667 \\
-	\hline Vecindad 2x1 7 mejores & 0.1272510823 & 0.0897730705 & 0.8083333333 \\
-	\hline Vecindad 2x1 10 mejores & 0.0977272727 & 0.1190627034 & 0.75 \\
-	\hline Vecindad 2x1 12 mejores & 0.1186147186 & 0.1041559051 & 0.4583333333 \\
-	\hline Vecindad 3x1 3 mejores & 0.278466811 & 0.151036013 & 0.0833333333 \\
-	\hline Vecindad 3x1 5 mejores & 0.1813888889 & 0.2439944838 & 0.5416666667 \\
-	\hline Vecindad 3x1 7 mejores & 0.2068867244 & 0.2352629853 & 0.8083333333 \\
-	\hline Vecindad 3x1 10 mejores & 0.2764466089 & 0.2326181999 & 0.8333333333 \\
-	\hline Vecindad 3x1 12 mejores & 0.258968254 & 0.2521559379 & 0.1666666667 \\
-	\hline Vecindad 2x1 10\% & 0.086468254 & 0.0821545316 & 0 \\
-	\hline Vecindad 2x1 25\% & 0.1322474747 & 0.0895125969 & 0.4583333333 \\
-	\hline Vecindad 2x1 50\% & 0.1164862915 & 0.0996809898 & 0.7416666667 \\
-	\hline Vecindad 2x1 75\% & 0.1488816739 & 0.1212623738 & 1.075 \\
-	\hline Vecindad 2x1 100\% & 0.0852272727 & 0.0990432947 & 1.0333333333 \\
-	\hline Vecindad 3x1 10\% & 0.2001839827 & 0.1837163913 & 0 \\
-	\hline Vecindad 3x1 25\% & 0.1706132756 & 0.1460248135 & 0.1666666667 \\
-	\hline Vecindad 3x1 50\% & 0.2624531025 & 0.203697747 & 0.4833333333 \\
-	\hline Vecindad 3x1 75\% & 0.2133477633 & 0.2416739045 & 0.9416666667 \\
-	\hline Vecindad 3x1 100\% & 0.2849206349 & 0.2945727019 & 0.4833333333 \\
+	\begin{tabular}[c]{|l|l|l|l|l|}
+	\hline & Ejes Fijos & Nodos Fijos & Tableros & Porcentaje de error \\
+	\hline Vecindad 2x1 3 mejores & 0.1444444444 & 0.0443696313 & 0 & 6.29380252333333\% \\
+	\hline Vecindad 2x1 5 mejores & 0.0873015873 & 0.0878199237 & 0.7916666667 & 32.22627259\% \\
+	\hline Vecindad 2x1 7 mejores & 0.1272510823 & 0.0897730705 & 0.8083333333 & 34.17858287\% \\
+	\hline Vecindad 2x1 10 mejores & 0.0977272727 & 0.1190627034 & 0.75 & 32.2263325366667\% \\
+	\hline Vecindad 2x1 12 mejores & 0.1186147186 & 0.1041559051 & 0.4583333333 & 22.7034652333333\% \\
+	\hline Vecindad 3x1 3 mejores & 0.278466811 & 0.151036013 & 0.0833333333 & 17.0945385766667\% \\
+	\hline Vecindad 3x1 5 mejores & 0.1813888889 & 0.2439944838 & 0.5416666667 & 32.2350013133333\% \\
+	\hline Vecindad 3x1 7 mejores & 0.2068867244 & 0.2352629853 & 0.8083333333 & 41.6827681\% \\
+	\hline Vecindad 3x1 10 mejores & 0.2764466089 & 0.2326181999 & 0.8333333333 & 44.7466047366667\% \\
+	\hline Vecindad 3x1 12 mejores & 0.258968254 & 0.2521559379 & 0.1666666667 & 22.59302862\% \\
+	\hline Vecindad 2x1 10\% & 0.086468254 & 0.0821545316 & 0 & 5.62075952\% \\
+	\hline Vecindad 2x1 25\% & 0.1322474747 & 0.0895125969 & 0.4583333333 & 22.6697801633333\% \\
+	\hline Vecindad 2x1 50\% & 0.1164862915 & 0.0996809898 & 0.7416666667 & 31.9277982666667\% \\
+	\hline Vecindad 2x1 75\% & 0.1488816739 & 0.1212623738 & 1.075 & 44.8381349233333\% \\
+	\hline Vecindad 2x1 100\% & 0.0852272727 & 0.0990432947 & 1.0333333333 & 40.58679669\% \\
+	\hline Vecindad 3x1 10\% & 0.2001839827 & 0.1837163913 & 0 & 12.7966791333333\% \\
+	\hline Vecindad 3x1 25\% & 0.1706132756 & 0.1460248135 & 0.1666666667 & 16.1101585266667\% \\
+	\hline Vecindad 3x1 50\% & 0.2624531025 & 0.203697747 & 0.4833333333 & 31.64947276\% \\
+	\hline Vecindad 3x1 75\% & 0.2133477633 & 0.2416739045 & 0.9416666667 & 46.5562778166667\% \\
+	\hline Vecindad 3x1 100\% & 0.2849206349 & 0.2945727019 & 0.4833333333 & 35.42755567\% \\
 	\hline
 	\end{tabular}
 \caption{Promedio de porcentajes de error de GRASP con respecto al algoritmo exacto para cada vecindad y cada selecci\'on de soluci\'on inicial. Con criterio de parada fijado en 5 repeticiones sin mejorar la mejor soluci\'on hallada}
 \end{table}
  
 \begin{table}[h!]
-	\begin{tabular}[c]{|l|l|l|l|}
-	\hline & Ejes Fijos & Nodos Fijos & Tableros \\
-	\hline Vecindad 2x1 3 mejores & 0.1823232323 & 0.0716093318 & 0.3333333333 \\
-	\hline Vecindad 2x1 5 mejores & 0.1201370851 & 0.0936978155 & 0.4166666667 \\
-	\hline Vecindad 2x1 7 mejores & 0.1566738817 & 0.0903101931 & 0.3333333333 \\
-	\hline Vecindad 2x1 10 mejores & 0.1187950938 & 0.124087402 & 0.6166666667 \\
-	\hline Vecindad 2x1 12 mejores & 0.0911976912 & 0.1113699446 & 0.6166666667 \\
-	\hline Vecindad 3x1 3 mejores & 0.2596572872 & 0.1778930085 & 0.55 \\
-	\hline Vecindad 3x1 5 mejores & 0.2637698413 & 0.2698233628 & 0.6333333333 \\
-	\hline Vecindad 3x1 7 mejores & 0.3213239538 & 0.2286797787 & 0.55 \\
-	\hline Vecindad 3x1 10 mejores & 0.2844047619 & 0.2735979587 & 0.4833333333 \\
-	\hline Vecindad 3x1 12 mejores & 0.2242460317 & 0.269319628 & 0.2833333333 \\
-	\hline Vecindad 2x1 10\% & 0.0830808081 & 0.0538074353 & 0 \\
-	\hline Vecindad 2x1 25\% & 0.1161616162 & 0.0841469551 & 0 \\
-	\hline Vecindad 2x1 50\% & 0.218989899 & 0.1268513858 & 0.325 \\
-	\hline Vecindad 2x1 75\% & 0.2454076479 & 0.126309841 & 0.3333333333 \\
-	\hline Vecindad 2x1 100\% & 0.2024242424 & 0.1329405378 & 0.8333333333 \\
-	\hline Vecindad 3x1 10\% & 0.1853138528 & 0.1630435123 & 0 \\
-	\hline Vecindad 3x1 25\% & 0.2839177489 & 0.2205421872 & 0.1666666667 \\
-	\hline Vecindad 3x1 50\% & 0.2687914863 & 0.212152652 & 0.45 \\
-	\hline Vecindad 3x1 75\% & 0.3088888889 & 0.1862762984 & 0.5916666667 \\
-	\hline Vecindad 3x1 100\% & 0.3076803752 & 0.2703141941 & 0.9666666667 \\
+	\begin{tabular}[c]{|l|l|l|l|l|}
+	\hline & Ejes Fijos & Nodos Fijos & Tableros & Porcentaje de error \\
+	\hline Vecindad 2x1 3 mejores & 0.1823232323 & 0.0716093318 & 0.3333333333 & 19.5755299133333\% \\
+	\hline Vecindad 2x1 5 mejores & 0.1201370851 & 0.0936978155 & 0.4166666667 & 21.01671891\% \\
+	\hline Vecindad 2x1 7 mejores & 0.1566738817 & 0.0903101931 & 0.3333333333 & 19.3439136033333\% \\
+	\hline Vecindad 2x1 10 mejores & 0.1187950938 & 0.124087402 & 0.6166666667 & 28.65163875\% \\
+	\hline Vecindad 2x1 12 mejores & 0.0911976912 & 0.1113699446 & 0.6166666667 & 27.3078100833333\% \\
+	\hline Vecindad 3x1 3 mejores & 0.2596572872 & 0.1778930085 & 0.55 & 32.91834319\% \\
+	\hline Vecindad 3x1 5 mejores & 0.2637698413 & 0.2698233628 & 0.6333333333 & 38.8975512466667\% \\
+	\hline Vecindad 3x1 7 mejores & 0.3213239538 & 0.2286797787 & 0.55 & 36.6667910833333\% \\
+	\hline Vecindad 3x1 10 mejores & 0.2844047619 & 0.2735979587 & 0.4833333333 & 34.7112017966667\% \\
+	\hline Vecindad 3x1 12 mejores & 0.2242460317 & 0.269319628 & 0.2833333333 & 25.8966331\% \\
+	\hline Vecindad 2x1 10\% & 0.0830808081 & 0.0538074353 & 0 & 4.56294144666667\% \\
+	\hline Vecindad 2x1 25\% & 0.1161616162 & 0.0841469551 & 0 & 6.67695237666667\% \\
+	\hline Vecindad 2x1 50\% & 0.218989899 & 0.1268513858 & 0.325 & 22.36137616\% \\
+	\hline Vecindad 2x1 75\% & 0.2454076479 & 0.126309841 & 0.3333333333 & 23.5016940733333\% \\
+	\hline Vecindad 2x1 100\% & 0.2024242424 & 0.1329405378 & 0.8333333333 & 38.9566037833333\% \\
+	\hline Vecindad 3x1 10\% & 0.1853138528 & 0.1630435123 & 0 & 11.61191217\% \\
+	\hline Vecindad 3x1 25\% & 0.2839177489 & 0.2205421872 & 0.1666666667 & 22.37088676\% \\
+	\hline Vecindad 3x1 50\% & 0.2687914863 & 0.212152652 & 0.45 & 31.0314712766667\% \\
+	\hline Vecindad 3x1 75\% & 0.3088888889 & 0.1862762984 & 0.5916666667 & 36.2277284666667\% \\
+	\hline Vecindad 3x1 100\% & 0.3076803752 & 0.2703141941 & 0.9666666667 & 51.4887078666667\% \\
 	\hline
 	\end{tabular}
 \caption{Promedio de porcentajes de error de GRASP con respecto al algoritmo exacto para cada vecindad y cada selecci\'on de soluci\'on inicial. Con criterio de parada fijado en 10 repeticiones sin mejorar la mejor soluci\'on hallada}
@@ -117,7 +117,9 @@ Para seleccionar la mejor combinaci\'on de par\'ametros de la heur\'istica, resp
 
 Esto nos lleva a que la combinaci\'on \'optima es: Vecindad 2x1 10\% mejores con 10 iteraciones consecutivas sin ver modificaciones en el \'optimo hallado hasta ese momento. Con un error promedio del 4,5\%.\\
 
-Adem\'as nos interesa ver que sucede con los tiempos de ejecuci\'on, para ver si existe alguna configuraci\'on que convenga aplicar por esta m\'etrica.
+Vale tambi\'en para las ejecuciones con 5 iteraciones sin modificar el \'optimo que la misma configuraci\'on es la de menor error promedio (5,6\%).\\
+
+Adem\'as nos interesa ver que sucede con los tiempos de ejecuci\'on, para ver si existe alguna configuraci\'on que convenga aplicar por esta m\'etrica.\\
 
 Para esto, se tomaron tiempos de los mismas instancias para las que analizamos el porcentaje de acierto del \'optimo.\\
 
@@ -252,5 +254,7 @@ Esto se debe a que el primer caso es el grafo vac\'io (soluci\'on trivial) y los
 Comparando los tiempos hallados y viendo que las fluctuaciones, entre el alpha elegido y la vecindad tomada no presentan aumentos descomunales en los tiempos de ejecuci\'on, conclu\'imos que salvo para el caso de alpha igual a 100\%, las ejecuciones son de tiempos semejantes.\\
 
 Por lo tanto decidimos que la mejor configuraci\'on para ejecutar la heuer\'istica GRASP es la que mejor resultados provee en cu\'anto a qu\'e tan cerca del \'optimo est\'a. Que como se mencion\'o anteriormente es con alpha = 10\%, y la vecindad 2x1.
+
+La distinci\'on entre que itere 5 o 10 veces sin modificar el \'optimo, si bien aqu\'i se concluy\'o que duplica el tiempo de ejecuci\'on, decidimos mantenerlo   en 10 para el experimento del inciso \ref{ej6}. Esto es para poder medir la  diferencia en la soluci\'on hallada por esta heur\'istica en contraposici\'on con la de b\'usqueda local, con una cantidad razonable de instancias iniciales con alta probabilidad de ser distintas entre s\'i.
 
 %Realizar una experimentacion que permita observar los tiempos de ejecucion y la calidad de las soluciones obtenidas. Se debe experimentar variando los valores de los parametros de la metaheurıstica (lista de candidatos, criterios de parada, etc.) y las vecindades utilizadas en la busqueda local. Elegir, si es posible, la configuracion que mejores resultados provea para el grupo de instancias utilizado.
