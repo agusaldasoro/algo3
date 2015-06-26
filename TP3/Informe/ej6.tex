@@ -104,13 +104,22 @@ Analizando también los tiempos de ejecución sobre las mismas instancias, se ob
  	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Bipartite2.png}
 \end{center}
 
-Para el segundo gráfico, se omitió la ejecución del Grasp, dado que los tiempos de ejecución del mismo para los grafos bipartitos completos de esa magnitud, eran demasiado altos \textcolor{red}{Y Ezequiel nos cuenta como esto se debe a los pares de nodos que agarra}.
+Para el segundo gráfico, se omitió la ejecución del Grasp, dado que los tiempos de ejecución del mismo para los grafos bipartitos completos de esa magnitud, eran demasiado altos 
+\textcolor{red}{Y Ezequiel nos cuenta como esto se debe a los pares de nodos que agarra}.
 
 Dado que los tres algoritmos siempre obtienen la solución óptima para la familia de grafos bipartitos completos, concluímos que el Greedy es el mejor de los tres para estos casos, ya que es el que menor tiempo insume. 
 
 \subsubsection{Ciclo simple}
 
 \textcolor{red}{Brian contandonos un poco los resultados del ciclo simple}
+Por \'ultimo, analizaremos qu\'e ocurre cuando el grafo de entrada es un ciclo. Para ello fuimos generando distintos ciclos, comenzando con 100 nodos y aumentando de a 100 hasta 1000 nodos.\\
+Los resultados obtenidos fueron:\\
+
+\begin{center}
+ \includegraphics[width=13cm, keepaspectratio=yes]{imagenes/6/Ciclos.png}
+\end{center}
+
+Se aprecia r\'apidamente que el Greedy es el peor de los 3 y que los resultados entre el Grasp y Local son muy parejos, siendo Local un poco mejor en los casos m\'as grandes.\\
 
 A su vez, los tiempos de ejecucion sobre las mismas instancias, se obtuvieron los siguientes resultados:
 
@@ -119,3 +128,5 @@ A su vez, los tiempos de ejecucion sobre las mismas instancias, se obtuvieron lo
 \end{center}
 
 \textcolor{red}{Coronar esto diciendo quien es mejor (es decir, el que menos tarda entre los que obtienen mejores resultados en promedio)}
+Analizando tanto tiempos como resultados obtenidos, concluimos que el algoritmo Local es el m\'as conveniente cuando el grafo es un ciclo, ya que obtiene resultados mucho mejores al Greedy a pesar
+de ser un poco m\'as lento. Adem\'as, es mejor que Grasp tanto en tiempo de ejecuci\'on como en el resultado.
