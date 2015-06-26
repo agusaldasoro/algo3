@@ -1,6 +1,6 @@
 \section{Heur\'istica Constructiva Golosa} \label{ej3}
 \subsection{Explicaci\'on}
-La heurística constructiva golosa busca, dado un grafo, determinar un conjunto independiente dominante mínimo, eligiendo en cada iteraci\'on, la mejor opci\'on seg\'un el criterio definido\\
+La heurística constructiva golosa busca, dado un grafo, determinar un Conjunto Independiente Dominante Mínimo, eligiendo en cada iteraci\'on, la mejor opci\'on seg\'un el criterio definido\\
 
 Nuestro criterio se basa en el grado de los nodos. Dado que el grafo nunca se modifica, podemos ordenar un conjunto con todos los nodos del grafo en funci\'on de su grado al comienzo del algoritmo.\\
 
@@ -126,6 +126,8 @@ Otro caso donde fallará, en la mayoría de los casos, es en los ciclos simples.
 
 Alternativamente, el greedy siempre encontrará la solución óptima para los grafos completos y los grafos $0-regulares$ (pues la misma es trivial); pero más interesante aún, siempre encontrará la solución óptima para los grafos bipartitos completos (en los que la misma, es la partición más pequeña del bipartito).
 %Describir instancias de CIDM para las cuales la heuristica no proporciona una solucion optima. Indicar que tan mala puede ser la solucion obtenida respecto de la solucion optima.
+
+\newpage
 \subsection{Experimentaci\'on}
 %Realizar una experimentacion que permita observar la performance del algoritmo en terminos de tiempo de ejecucion en funcion de los parametros de la entrada.
 Para la experimentación, se realizaron experimentos sobre grafos generados de manera aleatoria, fijando nodos y variando ejes, y viceversa.\\

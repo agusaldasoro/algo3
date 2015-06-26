@@ -1,4 +1,4 @@
-\section{Comparaci\'on entre todos los m\'etodos}
+\section{Comparaci\'on entre todos los m\'etodos} \label{ej6}
 
 Una vez elegidos los mejores valores de configuracion para cada heurıstica implementada (si fue posible), realizar una experimentacion sobre un conjunto nuevo de instancias para observar la performance
 de los metodos comparando nuevamente la calidad de las soluciones obtenidas y los tiempos de ejecucion en funcion de los parametros de la entrada. 
@@ -104,8 +104,12 @@ Analizando también los tiempos de ejecución sobre las mismas instancias, se ob
  	\includegraphics[width=13cm, keepaspectratio=yes]{imagenes/coliseo/Bipartite2.png}
 \end{center}
 
+<<<<<<< HEAD
 Para el segundo gráfico, se omitió la ejecución del Grasp, dado que los tiempos de ejecución del mismo para los grafos bipartitos completos de esa magnitud, eran demasiado altos 
 \textcolor{red}{Y Ezequiel nos cuenta como esto se debe a los pares de nodos que agarra}.
+=======
+Para el segundo gráfico, se omitió la ejecución del Grasp, dado que los tiempos de ejecución del mismo para los grafos bipartitos completos de esa magnitud, eran demasiado altos, esto era predecible, pues debe ejecutar la b\'usqueda local 10 veces, es decir que su ejecuci\'on consume \textit{10x(tiempo de b\'usqueda local)}.
+>>>>>>> 8e16beb30cc5e5a85853803ffadc91069733de28
 
 Dado que los tres algoritmos siempre obtienen la solución óptima para la familia de grafos bipartitos completos, concluímos que el Greedy es el mejor de los tres para estos casos, ya que es el que menor tiempo insume. 
 
