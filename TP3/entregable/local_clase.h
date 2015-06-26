@@ -151,7 +151,7 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool 
 		while(hayCambiosHechos){
 			vector<vecinosEnComun> pares;
 			//busco los nodos que tienen al menos un vecino en comun y cuales son esos vecinos
-			dameParesVecinosComun(adyacencia, optimo, pares); // o(EV)
+			dameParesVecinosComun(adyacencia, optimo, pares); 
 			//si no hay, no hay mas cambios posibles para optimo
 			if(pares.size() == 0)
 				hayCambiosHechos = false;
@@ -172,7 +172,7 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool 
 				int j = 0;
 				bool esCID = false;
 				//mientras tenga vecinos en comun y no haya encontrado un CID
-				while(j < pares[i].vecinosComun.size() && !esCID){ // O(V^2)
+				while(j < pares[i].vecinosComun.size() && !esCID){ 
 					//si aun no use este vecino
 					if(!yaUsados[pares[i].vecinosComun[j]]){
 						//lo marco usado
@@ -231,7 +231,7 @@ unsigned int localCIDM(listaAdy& adyacencia, vector<unsigned int>& optimo, bool 
 		int i = 0;
 		//mientras haya pares
 		while(i < ternas.size()){
-			//guardo una copia de auxliar para volver atras si fui por un lugar equivocado
+			//guardo una copia de auxiliar para volver atras si fui por un lugar equivocado
 			vector<unsigned int> copiaDeSeguridad = auxiliar;
 			vector<unsigned int>::iterator it = auxiliar.begin();
 			//elimino la terna que estoy analizando que tienen al menos un vecino en comun
