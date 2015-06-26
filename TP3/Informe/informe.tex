@@ -136,6 +136,82 @@ Al momento de ejecutar el \texttt{main} se le deben pasar los siguientes par\'am
 
 \textcolor{red}{Aca hablar un poco de como generamos los grafos para analizar y bla, no hace falta poner codigo ni nada... pero por lo menos contar que hace el generador de instancias. Asi en cada seccion de experimentacion se cita esta seccion}
 
+\subsection{Clase ListaAdy} \label{listaAdy}
+
+Esta clase se implement\'o con el fin de abstraer el grafo pasado como input en una lista de adyacencias. Es decir que el grafo G=(V,E), consta de un arreglo de tama\~no $\#(V)$, de listas enlazadas, donde la posici\'on $i$ representa al nodo con numeraci\'on arbitraria $i$ y su lista asociada tendr\'a tantos elementos como vecinos tenga este nodo, siendo cada elemento, el n\'umero del nodo.\\
+
+El primer recuadro muestra la estructura de la clase y los siguientes, los m\'etodos que implementa con su respectiva complejidad.
+
+\begin{algorithm}[h!]
+	vector$<$list$<$unsigned int$> >$ lista;
+\end{algorithm}
+
+\begin{algorithm}[h!]
+listaAdy::listaAdy(unsigned int cantNodos)\{\\
+	lista = vector$<$list$<$unsigned int$> >$(cantNodos);\\
+\}\\
+Costo $O(n)$.
+\end{algorithm}
+
+
+\begin{algorithm}[h!]
+unsigned int listaAdy::gradoDeNodo(unsigned int nodo)\{\\
+	return lista[nodo].size();\\
+\}\\
+Costo $O(1)$.
+\end{algorithm}
+
+
+\begin{algorithm}[h!]
+void listaAdy::agregarEje(unsigned int a, unsigned int b)\{\\
+	lista[a].push_back(b);\\
+	lista[b].push_back(a);\\
+\}\\
+Costo $O(n)$ amortizado.
+\end{algorithm}
+
+\begin{algorithm}[h!]
+unsigned int listaAdy::cantNodos()\{\\
+	return lista.size();\\
+\}\\
+Costo $O(1)$
+\end{algorithm}
+
+\begin{algorithm}[h!]
+list$<$unsigned int$>$* listaAdy::dameVecinos(unsigned int nodo)\{\\
+	return \&lista[nodo];\\
+\}\\
+Costo $O(1)$
+\end{algorithm}
+
+\begin{algorithm}[h!]
+bool listaAdy::sonVecinos(unsigned int a, unsigned int b)\{\\
+	\If{lista[a].size() $>$ lista[b].size()}{
+		unsigned int z = a;\\
+		a = b;\\
+		b = z;
+	}
+	\For{list$<$unsigned int$>$::iterator it = lista[a].begin(); it != lista[a].end(); ++it}{
+		\If{*it == b}{
+			return true;
+		}
+	}
+	return false;\\
+\}\\
+Costo $O(n)$
+\end{algorithm}
+
+\begin{algorithm}[h!]
+void listaAdy::ordenar()\{\\
+	\For{int i = 0; i $<$ lista.size(); ++i}{
+		lista[i].sort();
+	}
+\}\\
+Costo $O(n^2.log(n))$
+\end{algorithm}
+
+\newpage
+
 % \section{Objetivos generales}
 
 % El objetivo de este Trabajo Práctico es ...
