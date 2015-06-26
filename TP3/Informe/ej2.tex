@@ -80,6 +80,7 @@ ser\'a necesariamente una soluci\'on \'optima.\\
 
 \textcolor{red}{Tabla}
 
+
   \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.7]{imagenes/exacto/Completos.png}
@@ -96,8 +97,22 @@ teniendo una complejidad en peor caso de $O(n^2)$.\\
 \subsubsection{Nodos fijos}
 Para continuar viendo el comportamiento del algoritmo, decidimos realizar experimentos fijando la cantidad de nodos y variando la cantidad de ejes.\\
 
-Los tiempos de ejecuci\'on para nodos fijos en 10, 20 y 30 fueron los siguientes:\\
-\textcolor{red}{TABLA}
+Los tiempos de ejecuci\'on para nodos fijos en 10 fueron los siguientes:\\
+
+\begin{tabular}{| l | l |}
+  \hline
+  Ejes & Tiempo \\ \hline
+  0 & 0.00183446 \\ \hline
+  5 & 0.00144151 \\ \hline
+  10 & 0.00109473 \\ \hline
+  15 & 0.00016757 \\ \hline
+  20 & 0.00026461 \\ \hline
+  25 & 0.00002951 \\ \hline
+  30 & 0.00002110 \\ \hline
+  35 & 0.00002912 \\ \hline
+  40 & 0.00003069 \\ \hline
+  45 & 0.00002226 \\ \hline
+\end{tabular}
 
   \begin{figure}[h!]
    \begin{center}
@@ -107,6 +122,31 @@ Los tiempos de ejecuci\'on para nodos fijos en 10, 20 y 30 fueron los siguientes
    \end{center}
  \end{figure}
 
+ Tiempos para 20 nodos: \\
+ \begin{tabular}{| l | l |}
+ \hline
+  Ejes & Tiempo \\ \hline
+  0 & 2.711875 \\ \hline
+  10 & 2.0401455 \\ \hline
+  20 & 1.3764805 \\ \hline
+  30 & 0.076818295 \\ \hline
+  40 & 0.05422746 \\ \hline
+  50 & 0.009414217 \\ \hline
+  60 & 0.025866655 \\ \hline
+  70 & 0.0009003714 \\ \hline
+  80 & 0.0049536455 \\ \hline
+  90 & 0.0019486415 \\ \hline
+  100 & 0.0037668155 \\ \hline
+  110 & 0.000811313 \\ \hline
+  120 & 0.001422941 \\ \hline
+  130 & 0.0001214862 \\ \hline
+  140 & 0.0001463258 \\ \hline
+  150 & 9.03317E-005 \\ \hline
+  160 & 0.0001304291 \\ \hline
+  170 & 0.0001313739 \\ \hline
+  180 & 0.000095395 \\ \hline
+ \end{tabular}
+
   \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.7]{imagenes/exacto/20Nodos.png}
@@ -114,6 +154,38 @@ Los tiempos de ejecuci\'on para nodos fijos en 10, 20 y 30 fueron los siguientes
 %	\label{20Nodos}
    \end{center}
  \end{figure}
+ 
+ Para 30 nodos: \\
+\begin{tabular}{| l | l |}
+  \hline
+  Ejes & Tiempo \\ \hline
+  0 & 3854.93 \\ \hline
+  5 & 3004.21 \\ \hline
+  10 & 3035.02 \\ \hline
+  15 & 2276.72 \\ \hline
+  20 & 2423.98 \\ \hline
+  25 & 2026.34 \\ \hline
+  30 & 645.834 \\ \hline
+  35 & 173.097 \\ \hline
+  40 & 199.783 \\ \hline
+  45 & 93.6673 \\ \hline
+  50 & 285.263 \\ \hline
+  55 & 37.6866 \\ \hline
+  60 & 46.629645 \\ \hline
+  65 & 33.144255 \\ \hline
+  70 & 11.19414 \\ \hline
+  75 & 15.869275 \\ \hline
+  80 & 7.440072 \\ \hline
+  85 & 1.420106 \\ \hline
+  90 & 3.3511875 \\ \hline
+  95 & 1.2927065 \\ \hline
+  100 & 1.0168595 \\ \hline
+  105 & 0.15861015 \\ \hline
+  110 & 0.4207426 \\ \hline
+\end{tabular}
+
+
+
    \begin{figure}[h!]
    \begin{center}
  	\includegraphics[scale=0.7]{imagenes/exacto/30Nodos.png}
@@ -127,8 +199,28 @@ A medida que se van agregando ejes, los tiempos van decreciendo ya que gracias a
 
 \subsubsection{Ejes fijos}
 En esta secci\'on podremos ver el comportamiento exponencial del ejercicio, ya que se mantuvo fija la cantidad de ejes, pero fue aumentando la cantidad de nodos.
-Los resultados de los tiempos de ejecucion, con 45 y 90 ejes fijos fueron:\\
-\textcolor{red}{TABLA}
+Los resultados de los tiempos de ejecucion, con 45 ejes fijos fueron:\\
+
+\begin{tabular}{| l | l |}
+\hline
+ Nodos & Tiempo  \\ \hline
+10 & 6.974115E-005 \\ \hline
+12 & 0.0001912309 \\ \hline
+14 & 0.0001047463 \\ \hline
+16 & 0.010293569 \\ \hline
+18 & 0.013017305 \\ \hline
+20 & 0.023726705 \\ \hline
+22 & 0.13164895 \\ \hline
+24 & 0.4864227 \\ \hline
+26 & 20.211575 \\ \hline
+28 & 44.99018 \\ \hline
+30 & 344.1135 \\ \hline
+32 & 3090.602 \\ \hline
+34 & 2977.318 \\ \hline
+36 & 7641.97 \\ \hline
+38 & 49532.4333333333 \\ \hline
+\end{tabular}
+
 
  \begin{figure}[h!]
    \begin{center}
@@ -137,6 +229,24 @@ Los resultados de los tiempos de ejecucion, con 45 y 90 ejes fijos fueron:\\
 %	\label{45Ejes}
    \end{center}
  \end{figure}
+ 
+ Para 90 ejes: \\
+ \begin{tabular}{| l | l |}
+  \hline
+Nodos & Tiempo \\ \hline
+15 & 6.50116E-005 \\ \hline
+17 & 0.0004393166 \\ \hline
+19 & 0.0006342648 \\ \hline
+21 & 0.033956355 \\ \hline
+23 & 0.02623205 \\ \hline
+25 & 0.042124215 \\ \hline
+27 & 0.11144235 \\ \hline
+29 & 0.75794095 \\ \hline
+31 & 9.9156506667 \\ \hline
+33 & 24.44762 \\ \hline
+ \end{tabular}
+
+ 
  
  \begin{figure}[h!]
    \begin{center}
@@ -167,7 +277,24 @@ intentando encontrar uno mejor que el que utiliza todos los nodos. Claramente es
 
 Los tiempos de ejecuci\'on para los distintos grafos sin ejes fueron:\\
 
-\textcolor{red}{TABLA}
+\begin{tabular}{| l | l |}
+ \hline
+Nodos & Tiempo \\ \hline
+2 & 5.4496E-006 \\ \hline
+4 & 3.91842E-005 \\ \hline
+6 & 0.0002040706 \\ \hline
+8 & 0.0006613658 \\ \hline
+10 &  0.002856698 \\ \hline
+12 &  0.00857044 \\ \hline
+14 &  0.03590956 \\ \hline
+16 &  0.1578688 \\ \hline
+18 &  0.681332 \\ \hline
+20 &  2.930954 \\ \hline
+22 &  12.58866 \\ \hline
+24 &  53.82 \\ \hline
+26 &  229.522 \\ \hline
+\end{tabular}
+
 
    \begin{figure}[h!]
    \begin{center}
